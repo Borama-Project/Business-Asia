@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
-use Request;
 use App\Http\Controllers\Controller;
-use App\Collection\Product;
-use Validator;
+
 class UserController extends Controller
 {
     /**
@@ -14,25 +12,71 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-   public function __construct()
-   {
-       //parent::__construct();
-      $this->middleware('guest');
-   }
+//    public function __construct()
+//    {
+//        parent::__construct();
+//        $this->viewFolder = $this->viewFolder.".user";
+//    }
 
     public function getIndex()
     {
-        // $users = DB::collection('product')->get();
-        // $users = Product::all()->$_id;
-        $users = Product::find('56834a407f8b9ab6775da7d6');
-        dd($users['id']);
-        //return view('index');
+        return view('index');
     }
 
-    public function postIndex(Request $Request){
-        // dd(Input::all());
-        
+    public function postIndex(){
+        $array = array();
+        for($i=1;$i<21;$i++){
+            $array[] = array(
+                "id"        =>  $i,
+                "name"      =>  "name".$i,
+                "price"     =>  "price".$i,
+                "color"     =>  "color".$i,
+                "qlt"       =>  "qlt".$i,
+                "action"    =>  "action".$i,
+            );
+        }
+        return $array;
+    }
+    public function getInfo()
+    {
+
+        return view('user.info');
+    }
+
+    public function postInfo(){
+        $array = array();
+        for($i=1;$i<21;$i++){
+            $array[] = array(
+                "id"        =>  $i,
+                "name"      =>  "name".$i,
+                "price"     =>  "price".$i,
+                "color"     =>  "color".$i,
+                "qlt"       =>  "qlt".$i,
+                "action"    =>  "action".$i,
+            );
+        }
+        return $array;
     }
 
 
+    public function getAbout()
+    {
+
+        return view('user.about');
+    }
+
+    public function postAbout(){
+        $array = array();
+        for($i=1;$i<21;$i++){
+            $array[] = array(
+                "id"        =>  $i,
+                "name"      =>  "name".$i,
+                "price"     =>  "price".$i,
+                "color"     =>  "color".$i,
+                "qlt"       =>  "qlt".$i,
+                "action"    =>  "action".$i,
+            );
+        }
+        return $array;
+    }
 }

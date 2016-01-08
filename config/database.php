@@ -26,8 +26,7 @@ return [
     |
     */
 
-    // 'default' => env('DB_CONNECTION', 'mysql'),
-    'default' => env('DB_CONNECTION', 'mongodb'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,17 +51,6 @@ return [
             'database' => database_path('database.sqlite'),
             'prefix'   => '',
         ],
-        'mongodb' => array(
-            'driver'   => 'mongodb',
-            'host'     => env('DB_HOST', '192.168.1.122'),
-            'port'     => env('DB_PORT', 27017),
-            'database' => env('DB_DATABASE', 'bussinuss_asia'),
-            'username' => env('DB_USERNAME', ''),
-            'password' => env('DB_PASSWORD', ''),
-            'options' => array(
-                'db' => 'admin' // sets the authentication database required by mongo 3
-            )
-        ),
 
         'mysql' => [
             'driver'    => 'mysql',

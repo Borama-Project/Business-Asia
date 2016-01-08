@@ -156,10 +156,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // Mongodb
-        Jenssegers\Mongodb\MongodbServiceProvider::class,
-        
-
     ],
 
     /*
@@ -205,7 +201,6 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Moloquent'       => 'Jenssegers\Mongodb\Model',
 
     ],
 
