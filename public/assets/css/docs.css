@@ -19,3 +19,7 @@
 .no-right{
 	border-right: none;
 }
+#contentCenter {
+	margin: 0 auto !important;
+	width: 300px;
+}

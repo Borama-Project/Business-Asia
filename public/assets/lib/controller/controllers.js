@@ -16,8 +16,7 @@ app.controller('ngApp', function ($scope,$http) {
 });
 app.controller('ngCategory', function ($scope,$http) {
 
-    $scope.submit = function(){
-
+    $scope.list = function(){
         $http({
             method: 'POST',
             url:  '/business/save',
