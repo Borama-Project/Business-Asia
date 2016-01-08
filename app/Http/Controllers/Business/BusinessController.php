@@ -24,9 +24,8 @@ class BusinessController extends Controller
      return view('business.viewCategory');
     }
 
-    public function postIndex(){
-
-
+    public function postSave(Request $request){
+        print_r($request);
     }
 
     public function getCategory()

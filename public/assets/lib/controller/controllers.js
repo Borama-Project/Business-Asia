@@ -16,13 +16,15 @@ app.controller('ngApp', function ($scope,$http) {
 });
 app.controller('ngCategory', function ($scope,$http) {
 
-    $scope.list = function(){
+    $scope.submit = function(){
+
         $http({
             method: 'POST',
-            url:  '/business/index',
-            data: '',
+            url:  '/business/save',
+            data: $.param($scope.products),
             dataType: "json"
         }).success(function(response) {
+            console.log(response);
             $scope.products = response;
         }).error(function(response) {
             console.log(response);
