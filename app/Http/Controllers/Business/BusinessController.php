@@ -29,5 +29,13 @@ class BusinessController extends Controller
 
     }
 
+    public function getCategory()
+    {
+        return view('business.category');
+    }
 
+    public function getBusinessType()
+    {
+        return view('business.businessType');
+    }
 }
