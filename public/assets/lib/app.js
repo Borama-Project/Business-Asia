@@ -32,7 +32,7 @@ app.config(function ($routeProvider) {
         .when('/category',
             {
                 controller: 'ngCategory',
-                templateUrl: '/category'
+                templateUrl: '/business/category'
             })
         .when('/business',
             {
@@ -42,7 +42,7 @@ app.config(function ($routeProvider) {
         .when('/businessType',
             {
                 controller: 'ngBusinessType',
-                templateUrl: '/businessType'
+                templateUrl: '/business/business-type'
             })
         .when('/mainCategory',
             {

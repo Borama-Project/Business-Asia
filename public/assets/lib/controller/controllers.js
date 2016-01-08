@@ -4,6 +4,9 @@
 
 app.controller('ngApp', function ($scope,$http) {
 
+    $scope.save = function(){
+        $
+    }
     //I like to have an init() for controllers that need to perform some initialization. Keeps things in
     //one place...not required though especially in the simple example below
     init();
@@ -19,6 +22,19 @@ app.controller('ngCategory', function ($scope,$http) {
     function init() {
        console.log('ngCategory');
     }
+
+    $scope.list = function(){
+        $http({
+            method: 'POST',
+            url:  '/business/index',
+            data: '',
+            dataType: "json"
+        }).success(function(response) {
+            $scope.products = response;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
 });
 
 app.controller('ngBusiness', function ($scope,$http) {
