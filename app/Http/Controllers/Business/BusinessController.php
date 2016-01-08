@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Business;
 
+use Illuminate\Support\Facades\Input;
 use Request;
 use App\Http\Controllers\Controller;
 use Validator;
@@ -25,7 +26,13 @@ class BusinessController extends Controller
     }
 
     public function postSave(Request $request){
-        print_r($request);
+
+        $businessId   = Input::get('businessId');
+        $userId       = Input::get('userId');
+        $categoryName = Input::get('categoryName');
+
+         return($businessId);
+
     }
 
     public function getCategory()
@@ -37,4 +44,12 @@ class BusinessController extends Controller
     {
         return view('business.businessType');
     }
+
+    public function postSaveBusinessType()
+    {
+        $name = Input::get('name');
+        return $name;
+    }
+
+
 }
