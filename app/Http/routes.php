@@ -58,7 +58,15 @@ Route::get('promotion', function(){
 Route::controllers([
     'user' => 'User\UserController',
 ]);
-
+Route::controllers([
+    'Auth' => 'User\AuthController',
+]);
 Route::group(['middleware' => ['web']], function () {
     //
+});
+
+
+Route::get('home', function () {
+    // Retrieve a piece of data from the session...
+    
 });

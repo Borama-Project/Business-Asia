@@ -6,6 +6,7 @@ use Request;
 use App\Http\Controllers\Controller;
 use App\Collection\Product;
 use Validator;
+use App\Model\Auth;
 class UserController extends Controller
 {
     /**
@@ -34,5 +35,9 @@ class UserController extends Controller
         
     }
 
-
+    public function authUser(Request $Request){
+      $request->session()->put('zeProfile', 'sothearit');
+      $sessionAuth = session('key');
+      var_dump($sessionAuth);
+    }
 }
