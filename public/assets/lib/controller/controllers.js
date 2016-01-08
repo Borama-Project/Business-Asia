@@ -63,7 +63,6 @@ app.controller('ngApp', [
          Facebook.login(function(response) {
           if (response.status == 'connected') {
             $scope.logged = true;
-
           }
         
         },{scope: 'public_profile,email'});
@@ -159,25 +158,19 @@ app.controller('ngApp', [
             $scope.contentType ='Twitter';
         });
       }
-    }
   ]);
 app.controller('ngCategory', function ($scope,$http) {
 
-    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
-    //one place...not required though especially in the simple example below
-    init();
-    function init() {
-       console.log('ngCategory');
-    }
+    $scope.submit = function(){
 
-    $scope.list = function(){
         $http({
             method: 'POST',
-            url:  '/business/index',
-            data: '',
+            url:  '/business/save',
+            data:$scope.globalVirable,
             dataType: "json"
         }).success(function(response) {
-            $scope.products = response;
+            //console.log(response);
+            //$scope.products = response;
         }).error(function(response) {
             console.log(response);
         });
@@ -195,12 +188,20 @@ app.controller('ngBusiness', function ($scope,$http) {
 });
 app.controller('ngBusinessType', function ($scope,$http) {
 
-    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
-    //one place...not required though especially in the simple example below
-    init();
-    function init() {
-       console.log('businessType');
-    }
+    $scope.submit = function(){
+
+        $http({
+            method: 'POST',
+            url:  '/business/save-business-type',
+            data:$scope.globalVirable,
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            //$scope.products = response;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
 });
 
 
