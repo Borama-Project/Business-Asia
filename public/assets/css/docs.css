@@ -1,0 +1,21 @@
+#contentLeft{
+  width: 250px;
+  float: left;
+}
+#contentRight{
+  float: right;
+  width: 890px;
+}
+
+
+.appContent {
+	border: 1px solid #ddd;
+	min-height: 600px;
+	padding: 20px 0px;
+}
+.no-left{
+	border-left: none;
+}
+.no-right{
+	border-right: none;
+}
