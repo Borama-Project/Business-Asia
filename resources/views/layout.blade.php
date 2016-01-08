@@ -31,8 +31,9 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
     <script src="{{asset('/assets/lib/angular-route.js')}}"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
-
+    <script src="{{asset('/assets/lib/angular-facebook.js')}}"></script>
     <script src="{{asset('/assets/lib/app.js')}}"></script>
     <script src="{{asset('/assets/lib/controller/controllers.js')}}"></script>
+
     </body>
 </html>

@@ -39,3 +39,7 @@ Route::controllers([
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+Route::controllers([
+    'Auths' => 'User\FormController',
+]);
