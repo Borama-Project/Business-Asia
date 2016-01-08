@@ -63,6 +63,7 @@ app.controller('ngApp', [
          Facebook.login(function(response) {
           if (response.status == 'connected') {
             $scope.logged = true;
+
           }
         
         },{scope: 'public_profile,email'});
@@ -144,33 +145,26 @@ app.controller('ngApp', [
         
         
       });
-    //  google api
-      $scope.gapi = function(){
-        checkAuth();
-        // $scope.contentType ='google';
-        // console.log(result);
-      }
-
-      $scope.TwitterApi = function(){
-        $http.get("../../public/api/api.php?method=TwitterApi")
-        .success(function (response) {
-            openWin(response);
-            $scope.contentType ='Twitter';
-        });
-      }
+    
+    }
   ]);
 app.controller('ngCategory', function ($scope,$http) {
 
-    $scope.submit = function(){
+    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
+    //one place...not required though especially in the simple example below
+    init();
+    function init() {
+       console.log('ngCategory');
+    }
 
+    $scope.list = function(){
         $http({
             method: 'POST',
-            url:  '/business/save',
-            data:$scope.globalVirable,
+            url:  '/business/index',
+            data: '',
             dataType: "json"
         }).success(function(response) {
-            //console.log(response);
-            //$scope.products = response;
+            $scope.products = response;
         }).error(function(response) {
             console.log(response);
         });
@@ -188,20 +182,12 @@ app.controller('ngBusiness', function ($scope,$http) {
 });
 app.controller('ngBusinessType', function ($scope,$http) {
 
-    $scope.submit = function(){
-
-        $http({
-            method: 'POST',
-            url:  '/business/save-business-type',
-            data:$scope.globalVirable,
-            dataType: "json"
-        }).success(function(response) {
-            console.log(response);
-            //$scope.products = response;
-        }).error(function(response) {
-            console.log(response);
-        });
-    };
+    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
+    //one place...not required though especially in the simple example below
+    init();
+    function init() {
+       console.log('businessType');
+    }
 });
 
 
