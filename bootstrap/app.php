@@ -41,6 +41,9 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+
+$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

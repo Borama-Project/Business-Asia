@@ -12,10 +12,11 @@
 */
 
 //
-Route::get('/', function(){
-    return view('index');
-});
+//Route::get('/', function(){
+//    return view('index');
+//});
 
+Route::get('/', 'User\UserController@getIndex');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -28,6 +29,7 @@ Route::get('/', function(){
 */
 Route::controllers([
     'user' => 'User\UserController',
+    'product' => 'BackEnd\Product\ProductController',
 ]);
 
 Route::group(['middleware' => ['web']], function () {
