@@ -52,5 +52,14 @@ class BusinessController extends Controller
         return $name;
     }
 
+    public function getRegisterBusiness()
+    {
+        return view('business.business');
+    }
+
+    public function getBusinessTag(){
+
+        return view('business.businessTag');
+    }
 
 }
