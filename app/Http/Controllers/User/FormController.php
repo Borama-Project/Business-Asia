@@ -28,7 +28,7 @@ class FormController extends Controller
             'displayName' => 'user',
         );
         // Session::put('zeAccessKey', $dataRequest);
-        return view('Auth.auth');
+        return view('jsonView');
     }
 
     public function postIndex(Request $Request){

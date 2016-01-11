@@ -70,7 +70,7 @@ class AuthController extends Controller
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest);
         // var_dump($zeProfile);
         
-        
+        Session::put('zeAccessKey', $zeSocialBusinessResult);
         return view('jsonView',['datas' => $zeSocialBusinessResult]);
 
     }

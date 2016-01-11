@@ -1,6 +1,4 @@
 <?php
-
-Session::flash('zeAccessKey', $datas);
 if (Session::has('zeAccessKey'))
 {
     $data =  json_encode($datas);
