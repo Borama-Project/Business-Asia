@@ -62,4 +62,5 @@ class BusinessController extends Controller
         return view('business.businessTag');
     }
 
+    
 }

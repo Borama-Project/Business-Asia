@@ -21,5 +21,10 @@
 }
 #contentCenter {
 	margin: 0 auto !important;
-	width: 300px;
+	width: 200px;
+	margin-top: 10% !important;
+	text-align: center;
+}
+#fbLogin {
+	cursor: pointer;
 }

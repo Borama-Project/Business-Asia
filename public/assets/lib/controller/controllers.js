@@ -80,10 +80,13 @@ app.controller('ngApp', [
 
              // console.log(response);
             $scope.$apply(function() {
-                console.log(response);
+                // console.log(response);
                 var data = $.param({
-                    fName: response.first_name,
-                    lName: response.last_name
+                    socialId: response.id,
+                    firstName: response.first_name,
+                    lastName: response.last_name,
+                    avatar: response.picture.data.url,
+                    displayName: response.name
                 });
             
                 var config = {
@@ -92,16 +95,18 @@ app.controller('ngApp', [
                     }
                 }
 
-                // $http.post('/Auth', data, config)
-                // .success(function (data, status, headers, config) {
-                //     $scope.PostDataResponse = data;
-                // })
-                // .error(function (data, status, header, config) {
-                //     $scope.ResponseDetails = "Data: " + data +
-                //         "<hr />status: " + status +
-                //         "<hr />headers: " + header +
-                //         "<hr />config: " + config;
-                // });
+                $http.post('/Auth', data, config)
+                .success(function (data, status, headers, config) {
+                    
+                    console.log(data);
+                    // window.location = "http://asianbusiness.dev/";
+                })
+                .error(function (data, status, header, config) {
+                    $scope.ResponseDetails = "Data: " + data +
+                        "<hr />status: " + status +
+                        "<hr />headers: " + header +
+                        "<hr />config: " + config;
+                });
             });
             
           });
@@ -142,8 +147,6 @@ app.controller('ngApp', [
             }, 2000)
           });
         }
-        
-        
       });
     
     }
@@ -214,3 +217,12 @@ app.controller('ngPromotion', function ($scope,$http) {
 });
 
 
+app.controller('ngHome', function ($scope,$http) {
+
+    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
+    //one place...not required though especially in the simple example below
+    init();
+    function init() {
+       console.log('ngHome');
+    }
+});

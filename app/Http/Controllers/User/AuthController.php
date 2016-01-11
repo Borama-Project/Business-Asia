@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\User;
 
-use Request;
-use Session;
-use App\Http\Controllers\Controller;
+
+
 use App\Collection\Product;
+use Illuminate\Support\Facades\Input;
+use Request;
+use App\Http\Controllers\Controller;
 use Validator;
-use App\Model\Auth;
-use Input;
-use File;
+use App\Models\ZeSocialBusinessModel;
+use Session;
 class AuthController extends Controller
 {
     /**
@@ -26,49 +27,78 @@ class AuthController extends Controller
 
     public function getIndex()
     {
+      // dd(Session::all());
         
-        $value = Session::get('zeProfile');
-        if($value){
+        $value = Session::get('zeAccessKey');
+        // if($value){
+        //   var_dump($value);
+        // }
+      if (Session::has('zeAccessKey'))
+      {
           var_dump($value);
-        }
+      }else{
+        
         return view('Auth.auth');
+      }
         
     }
 
     public function postIndex(){
         
         // Session::put('zeProfile', 'value');
-        echo "dat";
-        dd(Input::all());
+     
+        // dd(Input::all());
+         
+        $method = 'profile/login';
+
+        // $dataRequest = array('socialId'=>Input::get('socialId'),'socialType'=>1,'firstName'=>Input::get('firstName'),
+        //   'lastName'=>Input::get('lastName'),
+        //   'avatar'=> Input::get('avatar'),
+        //   'displayName'=>Input::get('displayName'));
+
+        $dataRequest = array(
+            'socialId'    => Input::get('socialId'),
+            'socialType'  => 1,
+            'firstName'   => Input::get('firstName'),
+            'lastName'    => Input::get('lastName'),
+            'avatar'      => Input::get('avatar'),
+            'displayName' => Input::get('avatar'),
+        );
+        
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest);
+        // var_dump($zeProfile);
+        
+        Session::put('zeAccessKey', $zeSocialBusinessResult);
+        return view('jsonView',['datas' => $zeSocialBusinessResult]);
+
     }
 
-
     public function getAdminProfile(){
-        $html = '<div class="col-lg-12"> 
-              <form action="/Auths" method="post">
-                <div class="panel panel-info">
-                  <div class="panel-body">
-                    Products
+      // if (Session::has('zeAccessKey'))
+      // {
+          
+          $html = '<div class="container" >
+                <div id="contentCenter">
+                  <div class="col-lg-12"> 
+                    <form>
+                      <div class="form-group col-xs-12">
+                          <img src="../assets/img/logo.png">
+                      </div>
+                      <div class="form-group col-xs-12">
+                          <img src="../assets/img/f.png" data-ng-click="IntentLogin()" id="fbLogin">
+                      </div>
+                    </form>
                   </div>
                 </div>
-                <div class="form-group col-xs-6">
-                    <label for="exampleInputEmail1">Name *</label>
-                    <input type="text" class="form-control"  name="name" placeholder="Name">
-                </div>
-                <div class="form-group col-xs-6">
-                    <label for="exampleInputEmail1">Icon</label>
-                    <input type="text" class="form-control"  name="name" placeholder="Name">
-                </div>
-                
-                <div class="form-group col-xs-12">
-                  <button type="submit" class="btn btn-default">Submit</button>
-                </div>
-                  
-              </form>
-              </div>
-
-';
+              </div>';
+      // }else{
+      //   $html='';
+      // }
+      
         return $html;
+        
     }
     public function postAdminProfile(){
       // dd(Input::all());
