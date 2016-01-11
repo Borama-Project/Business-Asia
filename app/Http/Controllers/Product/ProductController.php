@@ -30,5 +30,10 @@ class ProductController extends Controller
 
     }
 
+    public function getPromotion(){
+
+        return view('promotion.promotion');
+    }
+
 
 }

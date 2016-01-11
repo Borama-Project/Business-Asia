@@ -31,7 +31,8 @@ class BusinessController extends Controller
         $userId       = Input::get('userId');
         $categoryName = Input::get('categoryName');
 
-         return($businessId);
+        $data = array($businessId,$userId,$categoryName);
+         return($data);
 
     }
 
@@ -51,6 +52,15 @@ class BusinessController extends Controller
         return $name;
     }
 
+    public function getRegisterBusiness()
+    {
+        return view('business.business');
+    }
+
+    public function getBusinessTag(){
+
+        return view('business.businessTag');
+    }
 
     
 }

@@ -9,13 +9,13 @@
 		    Social Business
 		  </a>
 		  <a href="#/category" class="list-group-item">Add Category</a>
-		  <a href="#/businessType" class="list-group-item">business Type</a>
 		  <a href="#/business" class="list-group-item">Register Business</a>
+		  <a href="#/businessType" class="list-group-item">business Type</a>
 		  <!-- <a href="#/mainCategory" class="list-group-item">mainCategory</a> -->
-		  <a href="#/businessTage" class="list-group-item">business Tage</a>
+		  <a href="#/businessTag" class="list-group-item">business Tag</a>
 		  <a href="#/product" class="list-group-item">Add Product</a>
 		  <a href="#/promotion" class="list-group-item">Promotion</a>
-		  <a href="#/businessTage" class="list-group-item">business Tage</a>
+
 
 		  
 		</div>

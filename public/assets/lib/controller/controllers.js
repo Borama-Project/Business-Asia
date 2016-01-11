@@ -153,21 +153,14 @@ app.controller('ngApp', [
   ]);
 app.controller('ngCategory', function ($scope,$http) {
 
-    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
-    //one place...not required though especially in the simple example below
-    init();
-    function init() {
-       console.log('ngCategory');
-    }
-
-    $scope.list = function(){
+    $scope.submit = function(){
         $http({
             method: 'POST',
-            url:  '/business/index',
-            data: '',
+            url:  '/business/save',
+            data: $scope.globalVirable,
             dataType: "json"
         }).success(function(response) {
-            $scope.products = response;
+
         }).error(function(response) {
             console.log(response);
         });
@@ -190,6 +183,36 @@ app.controller('ngBusinessType', function ($scope,$http) {
     init();
     function init() {
        console.log('businessType');
+    }
+});
+
+app.controller('ngBusinessTag', function ($scope,$http) {
+
+    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
+    //one place...not required though especially in the simple example below
+    init();
+    function init() {
+        console.log('businessTag');
+    }
+});
+
+app.controller('ngProduct', function ($scope,$http) {
+
+    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
+    //one place...not required though especially in the simple example below
+    init();
+    function init() {
+        console.log('ngProduct');
+    }
+});
+
+app.controller('ngPromotion', function ($scope,$http) {
+
+    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
+    //one place...not required though especially in the simple example below
+    init();
+    function init() {
+        console.log('ngPromotion');
     }
 });
 

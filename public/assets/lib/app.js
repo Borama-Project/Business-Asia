@@ -52,7 +52,7 @@ app.config(function ($routeProvider) {
         .when('/business',
             {
                 controller: 'ngBusiness',
-                templateUrl: '/business'
+                templateUrl: '/business/register-business'
             })
         .when('/businessType',
             {
@@ -64,20 +64,20 @@ app.config(function ($routeProvider) {
                 controller: 'ngBusinessType',
                 templateUrl: '/mainCategory'
             })
-        .when('/businessTage',
+        .when('/businessTag',
             {
-                controller: 'ngBusinessType',
-                templateUrl: '/businessTage'
+                controller: 'ngBusinessTag',
+                templateUrl: '/business/business-tag'
             })
         .when('/product',
             {
-                controller: 'ngBusinessType',
+                controller: 'ngProduct',
                 templateUrl: '/product'
             })
         .when('/promotion',
             {
-                controller: 'ngBusinessType',
-                templateUrl: '/promotion'
+                controller: 'ngPromotion',
+                templateUrl: '/product/promotion'
             })
         
         
