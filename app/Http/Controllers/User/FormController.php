@@ -8,6 +8,13 @@ use App\Collection\Product;
 use Validator;
 class FormController extends Controller
 {
+
+    public function __construct()
+    {
+       //parent::__construct();
+        $this->middleware('guest');
+    }
+
 	public function getIndex()
     {
         
