@@ -17,17 +17,17 @@ class ZeSocialBusinessModel
     protected $USER_PASS=  'ZB@Us3RWeb';
 
 
-    public function zeSocialRequest($method,$param=null){
+    public function zeSocialRequest($method, $param=null, $method= null){
         $url = sprintf($this->REDIRECT_URL,$method);
         if($param ==null){
             $result = $this->curlConnect($url);
         }else{
-            $result = $this->curlConnect($url,$param);
+            $result = $this->curlConnect($url,$param,$method);
         }
         return $result;
     }
 
-    public function curlResponse ($url, $fields = array(),$method= null) {
+    public function curlResponse ($url, $fields = array(), $method= null) {
         //username and password header
         $username = $this->USER_NAME;
         $password = $this->USER_PASS;
@@ -45,7 +45,6 @@ class ZeSocialBusinessModel
             curl_setopt($ch, CURLOPT_HTTPGET, 1);
         }else{
             curl_setopt($ch, CURLOPT_POST, count($fields));
-
             curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars);
         }
         curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
@@ -56,9 +55,9 @@ class ZeSocialBusinessModel
         curl_close($ch);
         return $result;
     }
-    public function curlConnect ($url,  $fields = array()) {
+    public function curlConnect ($url,  $fields = array(), $method= null) {
 
-        $respon = $this->curlResponse($url, $fields);
+        $respon = $this->curlResponse($url, $fields, $method);
         if($respon == null){
             exit(view('errors.curl-data-error'));
         }

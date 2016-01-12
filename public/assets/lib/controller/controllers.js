@@ -80,7 +80,7 @@ app.controller('ngApp', [
 
              // console.log(response);
             $scope.$apply(function() {
-                // console.log(response);
+                console.log(response);
                 var data = $.param({
                     socialId: response.id,
                     firstName: response.first_name,

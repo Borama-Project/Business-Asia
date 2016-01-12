@@ -1,16 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
-
-
+use Validator;
 use App\Collection\Product;
 use Illuminate\Support\Facades\Input;
-use Request;
 use App\Http\Controllers\Controller;
-use Validator;
+use Illuminate\Support\Facades\Session;
+use Request;
 use App\Models\ZeSocialBusinessModel;
-use Session;
+
 class AuthController extends Controller
 {
     /**
@@ -27,18 +25,13 @@ class AuthController extends Controller
 
     public function getIndex()
     {
-      // dd(Session::all());
-        
-        $value = Session::get('zeAccessKey');
-        // if($value){
-        //   var_dump($value);
-        // }
       if (Session::has('zeAccessKey'))
       {
           var_dump($value);
-      }else{
-        
-        return view('Auth.auth');
+          return view('Auth.auth');
+      }
+      else{
+          return view('Auth.auths');
       }
         
     }
@@ -48,7 +41,7 @@ class AuthController extends Controller
         // Session::put('zeProfile', 'value');
      
         // dd(Input::all());
-         
+      
         $method = 'profile/login';
 
         // $dataRequest = array('socialId'=>Input::get('socialId'),'socialType'=>1,'firstName'=>Input::get('firstName'),
@@ -67,11 +60,13 @@ class AuthController extends Controller
         
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
 
-        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest);
+        // $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest,'post');
         // var_dump($zeProfile);
-        
-        Session::put('zeAccessKey', $zeSocialBusinessResult);
-        return view('jsonView',['datas' => $zeSocialBusinessResult]);
+        // $request->session()->put('zeAccessKey', $zeSocialBusinessResult);
+        // Session::put('zeAccessKey', $zeSocialBusinessResult);
+        // $data = $request->session()->all();
+        // return view('jsonView',['datas' => $zeSocialBusinessResult]);
+        return json_encode($dataRequest);
 
     }
 
@@ -80,7 +75,7 @@ class AuthController extends Controller
       // {
           
           $html = '<div class="container" >
-                <div id="contentCenter">
+                <div id="contentCenter" ng-controller="ngApp">
                   <div class="col-lg-12"> 
                     <form>
                       <div class="form-group col-xs-12">
@@ -100,8 +95,10 @@ class AuthController extends Controller
         return $html;
         
     }
-    public function postAdminProfile(){
+    public function getAdminSess(Request $request){
       // dd(Input::all());
-      echo "string";
+
+      // $value = $request->session()->pull('key', 'default');
+      return "string";
     }
 }
