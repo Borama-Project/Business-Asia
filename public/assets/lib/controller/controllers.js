@@ -153,6 +153,20 @@ app.controller('ngApp', [
   ]);
 app.controller('ngCategory', function ($scope,$http) {
 
+    $scope.list = function(){
+        $http({
+            method: 'POST',
+            url:  '/business/list',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.categorys = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.list();
+
     $scope.submit = function(){
         $http({
             method: 'POST',

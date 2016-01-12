@@ -17,14 +17,17 @@ class ZeSocialBusinessModel
     protected $USER_PASS=  'ZB@Us3RWeb';
 
 
-    public function zeSocialRequest($method,$param){
-    	
+    public function zeSocialRequest($method,$param=null){
         $url = sprintf($this->REDIRECT_URL,$method);
-        $result = $this->curlConnect($url,$param);
+        if($param ==null){
+            $result = $this->curlConnect($url);
+        }else{
+            $result = $this->curlConnect($url,$param);
+        }
         return $result;
     }
 
-    public function curlResponse ($url, $fields = array()) {
+    public function curlResponse ($url, $fields = array(),$method= null) {
         //username and password header
         $username = $this->USER_NAME;
         $password = $this->USER_PASS;
@@ -38,8 +41,13 @@ class ZeSocialBusinessModel
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_FAILONERROR, 1);
-        curl_setopt($ch, CURLOPT_POST, count($fields));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars);
+        if($method == null){
+            curl_setopt($ch, CURLOPT_HTTPGET, 1);
+        }else{
+            curl_setopt($ch, CURLOPT_POST, count($fields));
+
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars);
+        }
         curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
