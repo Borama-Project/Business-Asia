@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Product;
 
+use Illuminate\Support\Facades\Input;
 use Request;
 use App\Http\Controllers\Controller;
 use Validator;
+use App\Models\ZeSocialBusinessModel;
 class ProductController extends Controller
 {
     /**
@@ -25,9 +27,23 @@ class ProductController extends Controller
         return view('product.product');
     }
 
-    public function postIndex(){
+    public function postSaveProduct(){
 
+//        $data = json_decode(file_get_contents("data.json"));
+//        dd($data);
+//        $businessId   = Input::get('businessId');
 
+    }
+    public function getList(){
+
+        $method = 'POST';
+        $function = 'product/get_product';
+        $dataRequest = array(
+            'accessKey'    => 'NTY4ZjgzMjE3ZjhiOWFjZjA5OGI0NTc1MjAxNi0wMS0wOCAwOTozNjozM1NvY2lhbEJ1c2luZXNz',
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
     }
 
     public function getPromotion(){
