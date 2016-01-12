@@ -212,12 +212,27 @@ app.controller('ngBusinessTag', function ($scope,$http) {
 
 app.controller('ngProduct', function ($scope,$http) {
 
-    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
-    //one place...not required though especially in the simple example below
-    init();
-    function init() {
-        console.log('ngProduct');
-    }
+    $scope.list = function(){
+        $http({
+            method: 'GET',
+            url:  '/product/list',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.products = response;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.list();
+
+    $scope.submit = function(){
+
+        $http.get('C:/wamp/www/AsianBusiness/public/content.json').success(function(response) {
+            return response.data;
+        });
+    };
+
 });
 
 app.controller('ngPromotion', function ($scope,$http) {
