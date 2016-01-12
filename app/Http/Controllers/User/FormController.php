@@ -6,15 +6,9 @@ use Request;
 use App\Http\Controllers\Controller;
 use App\Collection\Product;
 use Validator;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 class FormController extends Controller
 {
-
-    public function __construct()
-    {
-       //parent::__construct();
-        $this->middleware('guest');
-    }
-
 	public function getIndex()
     {
         
@@ -34,14 +28,15 @@ class FormController extends Controller
             'avatar'      => '',
             'displayName' => 'user',
         );
-        // Session::put('zeAccessKey', $dataRequest);
-        return view('jsonView');
+
+        Session::put('zeAccessKey', $dataRequest);
+        return view('jsonView',['datas' => $dataRequest]);
     }
 
-    public function postIndex(Request $Request){
+    public function getData(){
         
         // Session::put('zeProfile', 'value');
-        echo "dat";
+        return view('jsonView');
         // dd(Input::all());
     }
     

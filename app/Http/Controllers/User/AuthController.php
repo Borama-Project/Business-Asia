@@ -1,12 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\User;
+use Closure;
 use Validator;
 use App\Collection\Product;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
-use Request;
+// use Illuminate\Support\Facades\Session;
+
+// use Request;
+use Illuminate\Http\Request;
+use Session;
+// use Illuminate\Session\Middleware\StartSession;
 use App\Models\ZeSocialBusinessModel;
 
 class AuthController extends Controller
@@ -95,10 +100,33 @@ class AuthController extends Controller
         return $html;
         
     }
-    public function getAdminSess(Request $request){
+    public function getAdminSess(){
+      return view('session');
+    }
+    public function postAdminSess(Request $request){
       // dd(Input::all());
 
       // $value = $request->session()->pull('key', 'default');
-      return "string";
+      Session::put('zeAccessKey', Input::all());
+      // $request->session() = 'data';
+      dd($request);
+      // return 'data';
+    }
+
+    public function postProfile(Request $request)
+    {
+        $value = $request->session()->flush('key');
+        return $request;
+        //
+    }
+    public function getProfile(Request $request,Session $Session)
+    {
+        // $value = $request->session()->flush('key');
+
+      Session::put('zeAccessKey','sothearit');
+      $value = Session::get('zeAccessKey');
+        var_dump($value);
+        dd($request);
+        //
     }
 }

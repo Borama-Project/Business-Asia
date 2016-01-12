@@ -36,6 +36,7 @@ Route::controllers([
 Route::controllers([
     'Auth' => 'User\AuthController',
 ]);
+
 Route::group(['middleware' => ['web']], function () {
     //
 });
@@ -43,3 +44,16 @@ Route::group(['middleware' => ['web']], function () {
 Route::controllers([
     'Auths' => 'User\FormController',
 ]);
+
+Route::get('home', function () {
+    // Retrieve a piece of data from the session...
+    $value = session('key');
+
+    // Store a piece of data in the session...
+    session(['key' => 'value']);
+    var_dump(session::All());
+});
+
+Route::get('home', ['middleware' => 'web', function () {
+    // $data = $request->session()->all();
+}]);

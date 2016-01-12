@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
-use Request;
+// use Request;
+// use App\Http\Controllers\Controller;
+// use App\Collection\Product;
+// use Validator;
+use Closure;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Collection\Product;
-use Validator;
-
 
 class UserController extends Controller
 {
@@ -41,6 +43,18 @@ class UserController extends Controller
       $request->session()->put('zeProfile', 'sothearit');
       $sessionAuth = session('key');
       var_dump($sessionAuth);
+    }
+    public function postProfile(Request $request)
+    {
+        $value = $request->session()->flush('key');
+        return $request;
+        //
+    }
+    public function getProfile(Request $request)
+    {
+        $value = $request->session()->flush('key');
+        return $request;
+        //
     }
 
 }
