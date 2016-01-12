@@ -99,7 +99,7 @@ app.controller('ngApp', [
                 .success(function (data, status, headers, config) {
                     
                     console.log(data);
-                    // window.location = "http://asianbusiness.dev/";
+                    window.location = "http://asianbusiness.dev/";
                 })
                 .error(function (data, status, header, config) {
                     $scope.ResponseDetails = "Data: " + data +

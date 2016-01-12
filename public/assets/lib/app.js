@@ -41,7 +41,7 @@ app.config(function ($routeProvider) {
     $routeProvider
         .when('/',
             {
-                controller: 'ngApp',
+                controller: 'ngCategory',
                 templateUrl: '/Auth/admin-profile'
             })
         .when('/category',
