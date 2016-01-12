@@ -80,7 +80,7 @@ app.controller('ngApp', [
 
              // console.log(response);
             $scope.$apply(function() {
-                // console.log(response);
+                console.log(response);
                 var data = $.param({
                     socialId: response.id,
                     firstName: response.first_name,
@@ -99,7 +99,7 @@ app.controller('ngApp', [
                 .success(function (data, status, headers, config) {
                     
                     console.log(data);
-                    window.location = "http://asianbusiness.dev/";
+                    // window.location = "http://asianbusiness.dev/";
                 })
                 .error(function (data, status, header, config) {
                     $scope.ResponseDetails = "Data: " + data +

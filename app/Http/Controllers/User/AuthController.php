@@ -60,12 +60,13 @@ class AuthController extends Controller
         
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
 
-        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest,'post');
+        // $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest,'post');
         // var_dump($zeProfile);
         // $request->session()->put('zeAccessKey', $zeSocialBusinessResult);
-        Session::put('zeAccessKey', $zeSocialBusinessResult);
+        // Session::put('zeAccessKey', $zeSocialBusinessResult);
         // $data = $request->session()->all();
-        return view('jsonView',['datas' => $zeSocialBusinessResult]);
+        // return view('jsonView',['datas' => $zeSocialBusinessResult]);
+        return json_encode($dataRequest);
 
     }
 
