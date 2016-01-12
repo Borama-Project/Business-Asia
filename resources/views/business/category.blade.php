@@ -24,7 +24,7 @@
 	</div>
 
 </form>
-<div ng-controller="ngCategory">
+{{--<div ng-controller="ngCategory">--}}
 		<table class="table">
 			<thead>
 			<tr>
@@ -43,6 +43,6 @@
 		</table>
 
 
-</div>
+{{--</div>--}}
 </div>
 
