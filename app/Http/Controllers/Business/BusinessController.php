@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Input;
 use Request;
 use App\Http\Controllers\Controller;
 use Validator;
+use App\Models\ZeSocialBusinessModel;
 class BusinessController extends Controller
 {
     /**
@@ -22,7 +23,16 @@ class BusinessController extends Controller
 
     public function getIndex()
     {
-     return view('business.viewCategory');
+        return view('business.viewCategory');
+    }
+
+    public function postList(){
+
+        $method = 'category/get_all_categories';
+        $dataRequest = '';
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest);
+        return ($zeSocialBusinessResult);
     }
 
     public function postSave(Request $request){
