@@ -17,8 +17,8 @@ class ZeSocialBusinessModel
     protected $USER_PASS=  'ZB@Us3RWeb';
 
 
-    public function zeSocialRequest($method, $param=null, $method= null){
-        $url = sprintf($this->REDIRECT_URL,$method);
+    public function zeSocialRequest($function, $param=null, $method= null){
+        $url = sprintf($this->REDIRECT_URL,$function);
         if($param ==null){
             $result = $this->curlConnect($url);
         }else{
@@ -27,7 +27,7 @@ class ZeSocialBusinessModel
         return $result;
     }
 
-    public function curlResponse ($url, $fields = array(), $method= null) {
+    public function curlResponse ($url, $fields = array(), $method = null) {
         //username and password header
         $username = $this->USER_NAME;
         $password = $this->USER_PASS;

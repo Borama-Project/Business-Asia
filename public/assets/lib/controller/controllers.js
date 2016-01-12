@@ -155,7 +155,7 @@ app.controller('ngCategory', function ($scope,$http) {
 
     $scope.list = function(){
         $http({
-            method: 'POST',
+            method: 'GET',
             url:  '/business/list',
             dataType: "json"
         }).success(function(response) {
@@ -170,11 +170,11 @@ app.controller('ngCategory', function ($scope,$http) {
     $scope.submit = function(){
         $http({
             method: 'POST',
-            url:  '/business/save',
+            url:  '/business/save-category',
             data: $scope.globalVirable,
             dataType: "json"
         }).success(function(response) {
-
+            $scope.list();
         }).error(function(response) {
             console.log(response);
         });

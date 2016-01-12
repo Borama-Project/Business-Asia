@@ -26,7 +26,7 @@ class BusinessController extends Controller
         return view('business.viewCategory');
     }
 
-    public function postList(){
+    public function getList(){
 
         $method = 'category/get_all_categories';
         $dataRequest = '';
@@ -35,7 +35,7 @@ class BusinessController extends Controller
         return ($zeSocialBusinessResult);
     }
 
-    public function postSave(Request $request){
+    public function postSaveCategory(Request $request){
 
         $businessId   = Input::get('businessId');
         $userId       = Input::get('userId');

@@ -1,5 +1,5 @@
 <div class="col-lg-12">
-<form action="/">
+<form ng-submit="submit()">
 	<div class="panel panel-info">
 	  <div class="panel-body">
 	   Add Category
@@ -20,15 +20,29 @@
 
 
 	<div class="form-group col-xs-12">
-		<button class="btn btn-default" ng-click="submit()">Submit</button>
+		<button type="submit" class="btn btn-default">Save</button>
 	</div>
 
 </form>
-<div ng-controller="ngCategory">
-	<div ng-repeat="category in categorys">
-		<h6>@{{ category.name }}</h6>
-	</div>
+{{--<div ng-controller="ngCategory">--}}
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Category</th>
+				<th>Type</th>
 
-</div>
+			</tr>
+			</thead>
+			<tbody>
+
+				<tr ng-repeat="category in categorys">
+					<td>@{{ category.name }}</td>
+					<td>@{{ category.type }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+{{--</div>--}}
 </div>
 
