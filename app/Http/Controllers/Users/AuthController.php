@@ -43,6 +43,10 @@ class AuthController extends Controller
         Session::flush();
       }
     }
+    public function getInfo(){
+      return view('form');
+
+    }
     public function postIndex(){
         $method = 'profile/login';
 
@@ -53,15 +57,15 @@ class AuthController extends Controller
             'firstName'   => Input::get('firstName'),
             'lastName'    => Input::get('lastName'),
             'avatar'      => Input::get('avatar'),
-            'displayName' => Input::get('avatar'),
+            'displayName' => Input::get('displayName'),
         );
         
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
 
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest,'post');
 
-        Session::put('zeAccessKey',json_decode($zeSocialBusinessResult));
-        return $zeSocialBusinessResult;
+        Session::put('zeAccessKey',json_decode($zeSocialBusinessResult)->data->accessKey);
+        return json_decode($zeSocialBusinessResult)->data->accessKey;
 
     }
 

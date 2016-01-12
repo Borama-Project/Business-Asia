@@ -17,16 +17,14 @@
 		  <a href="/Auth/log-out" class="list-group-item">Log Out</a>
 		  <?php
 
-$value = Session::get('zeAccessKey');
-        
+			$value = Session::get('zeAccessKey');
+			        
 
-if (Session::has('zeAccessKey'))
-{	
-	// $dt = json_decode($value);
- //    echo ($dt->data->accessKey);
-	var_dump($value);
-}
-?>
+			if (Session::has('zeAccessKey'))
+			{	
+				var_dump($value);
+			}
+			?>
 		  
 		</div>
 	</div>
