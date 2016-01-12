@@ -151,6 +151,10 @@ app.controller('ngApp', [
     
     }
   ]);
+
+app.controller('ngHome', function ($scope,$http){
+
+});
 app.controller('ngCategory', function ($scope,$http) {
 
     $scope.list = function(){
