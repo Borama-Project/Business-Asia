@@ -11,12 +11,22 @@
 		  <a href="#/category" class="list-group-item">Add Category</a>
 		  <a href="#/business" class="list-group-item">Register Business</a>
 		  <a href="#/businessType" class="list-group-item">business Type</a>
-		  <!-- <a href="#/mainCategory" class="list-group-item">mainCategory</a> -->
 		  <a href="#/businessTag" class="list-group-item">business Tag</a>
 		  <a href="#/product" class="list-group-item">Add Product</a>
 		  <a href="#/promotion" class="list-group-item">Promotion</a>
+		  <a href="/Auth/log-out" class="list-group-item">Log Out</a>
+		  <?php
 
+$value = Session::get('zeAccessKey');
+        
 
+if (Session::has('zeAccessKey'))
+{	
+	// $dt = json_decode($value);
+ //    echo ($dt->data->accessKey);
+	var_dump($value);
+}
+?>
 		  
 		</div>
 	</div>

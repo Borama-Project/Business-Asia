@@ -35,10 +35,15 @@ class AuthController extends Controller
       }
         
     }
+    public function getLogOut(){
 
+      $value = Session::get('zeAccessKey');
+      if (Session::has('zeAccessKey'))
+      { 
+        Session::flush();
+      }
+    }
     public function postIndex(){
-        
-      
         $method = 'profile/login';
 
         
@@ -55,8 +60,7 @@ class AuthController extends Controller
 
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest,'post');
 
-        Session::put('zeAccessKey', $zeSocialBusinessResult);
-        // $value = Session::all();
+        Session::put('zeAccessKey',json_decode($zeSocialBusinessResult));
         return $zeSocialBusinessResult;
 
     }
@@ -64,7 +68,7 @@ class AuthController extends Controller
     public function getAdminProfile(){
       if (Session::has('zeAccessKey'))
       {
-          $html='';
+          $html="";
       }else{
         $html = '<div class="container" >
                 <div id="contentCenter" ng-controller="ngApp">
