@@ -52,7 +52,7 @@ app.config(function ($routeProvider) {
         .when('/business',
             {
                 controller: 'ngBusiness',
-                templateUrl: '/business/register-business'
+                templateUrl: '/business/business'
             })
         .when('/businessType',
             {

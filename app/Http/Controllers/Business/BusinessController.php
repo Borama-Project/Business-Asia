@@ -45,14 +45,24 @@ class BusinessController extends Controller
         return ($zeSocialBusinessResult);
     }
 
-    public function postSaveCategory(Request $request){
+    public function postSaveCategory( ){
 
         $businessId   = Input::get('businessId');
         $userId       = Input::get('userId');
         $categoryName = Input::get('categoryName');
 
-        $data = array($businessId,$userId,$categoryName);
-         return($data);
+        $function = 'business/add_category';
+        $method = 'POST';
+        $dataRequest = array(
+
+            'accessKey'=>'NTY5MzY4YWE3ZjhiOWE0YjBkNDllZjMxMjAxNi0wMS0xMSAwODozMjo0MlNvY2lhbEJ1c2luZXNz',
+            'categoryName' => Input::get('categoryName'),
+            'businessId'   =>Input::get('businessId')
+
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+
 
     }
 
@@ -72,10 +82,16 @@ class BusinessController extends Controller
         return $name;
     }
 
-    public function getRegisterBusiness()
+    public function getBusiness()
     {
         return view('business.business');
     }
+
+    public function getRegisterBusiness()
+    {
+
+    }
+
 
     public function getBusinessTag(){
 
