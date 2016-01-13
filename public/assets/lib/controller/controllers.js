@@ -187,12 +187,47 @@ app.controller('ngCategory', function ($scope,$http) {
 
 app.controller('ngBusiness', function ($scope,$http) {
 
-    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
-    //one place...not required though especially in the simple example below
-    init();
-    function init() {
-       console.log('ngBusiness');
-    }
+    $scope.listBusinessTag = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-business-tag',
+            dataType: "json"
+        }).success(function(response) {
+            //console.log(response);
+            $scope.businessTag = response.data;
+
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.listBusinessTag();
+
+    $scope.listBusinessType = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-business-type',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.businessType = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.listBusinessType();
+
+    $scope.submit = function(){
+        $http({
+            method: 'POST',
+            url:  '/business/register-business',
+            data: $scope.globalVirable,
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response)
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
 });
 app.controller('ngBusinessType', function ($scope,$http) {
 

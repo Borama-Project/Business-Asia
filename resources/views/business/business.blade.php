@@ -1,5 +1,5 @@
 <div class="col-lg-12"> 
-<form>
+<form ng-submit="submit()">
 	<div class="panel panel-info">
 	  <div class="panel-body">
 	    Business Register
@@ -7,47 +7,38 @@
 	</div>
 	<div class="form-group col-xs-6">
 	    <label for="exampleInputEmail1">Business Name </label>
-	    <input type="text" class="form-control"  name="name" ng-model="businessName" placeholder="businessName">
+	    <input type="text" class="form-control"  name="" ng-model="globalVirable.name" placeholder="businessName">
 	</div>
 	<div class="form-group col-xs-6">
 	    <label for="exampleInputEmail1">Phone Number</label>
-	    <input type="number" class="form-control"  name="name" placeholder="Name">
+	    <input type="number" class="form-control"  name="" ng-model="globalVirable.phoneNumber" placeholder="Name">
 	</div>
 	<div class="form-group col-xs-6">
 		<label for="exampleInputEmail1">Email</label>
-		<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-	</div>
-	<div class="form-group col-xs-6">
-		<label for="exampleInputEmail1">Company Logo</label>
-		<input type="file" class="form-control" id="" placeholder="">
-	</div>
-	<div class="form-group col-xs-6">
-		<label for="exampleInputEmail1">Image cover</label>
-		<input type="file" class="form-control" id="" placeholder="">
+		<input type="email" class="form-control" id="" ng-model="globalVirable.email" placeholder="Email">
 	</div>
 	<div class="form-group col-xs-12">
 		<label for="exampleInputEmail1">Business Type</label>
-		<select class="form-control">
-				<option></option>
+		<select class="form-control" ng-model="globalVirable.businessType">
+			<option ng-repeat="businessTypes in businessType">@{{ businessTypes.name }}</option>
 		</select>
 	</div>
+
 	<div class="form-group col-xs-12">
 		<label for="exampleInputEmail1">Business Tag</label>
-		<select class="form-control">
-			<option></option>
+		<select class="form-control" ng-model="globalVirable.businessTag">
+			<optgroup ng-repeat="businessTags in businessTag" label="@{{ businessTags.name }}">
+			 <option ng-repeat="tag in businessTags.tag">@{{ tag.name }}</option>
+			</optgroup>
 		</select>
 	</div>
 	<div class="form-group col-xs-12">
 		<label for="exampleInputEmail1">Address</label>
-		<textarea class="form-control" name="searchBusiness" placeholder="Address"></textarea>
+		<textarea class="form-control" name="searchBusiness" ng-model="globalVirable.address" placeholder="Address"></textarea>
 	</div>
 	<div class="form-group col-xs-12">
-		<label for="exampleInputEmail1">Discription</label>
-		<textarea class="form-control" name="searchBusiness" placeholder="Discription"></textarea>
-	</div>
-	<div class="form-group col-xs-12">
-		<label for="exampleInputEmail1">location</label>
-		...............................................
+		<label for="exampleInputEmail1">Description</label>
+		<textarea class="form-control" name="searchBusiness" ng-model="globalVirable.description" placeholder="Discription"></textarea>
 	</div>
 	<div class="form-group col-xs-6">
 		<button type="submit" class="btn btn-default">Submit</button>

@@ -38,10 +38,10 @@ class BusinessController extends Controller
 
     public function getList(){
 
-        $method = 'category/get_all_categories';
+        $function = 'category/get_all_categories';
         $dataRequest = '';
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
-        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest);
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest);
         return ($zeSocialBusinessResult);
     }
 
@@ -87,15 +87,47 @@ class BusinessController extends Controller
         return view('business.business');
     }
 
-    public function getRegisterBusiness()
+    public function postRegisterBusiness()
     {
-
+        $function = 'business/register_business';
+        $dataRequest = array(
+            'accessKey' => 'NTY4ZjgzMjE3ZjhiOWFjZjA5OGI0NTc1MjAxNi0wMS0wOCAwOTozNjozM1NvY2lhbEJ1c2luZXNz',
+            'name' => Input::get('name'),
+            'description' => Input::get('description'),
+            'phoneNumber' => Input::get('phoneNumber'),
+            'address' => Input::get('address'),
+            'email' => Input::get('email'),
+            'businessTag' => Input::get('businessTag'),
+            'businessType' => Input::get('businessType'),
+        );
+        $method = 'POST';
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return($zeSocialBusinessResult);
     }
 
 
     public function getBusinessTag(){
 
         return view('business.businessTag');
+    }
+
+    public function getListBusinessTag(){
+
+        $function = 'businessTag/get_all_business_tags';
+        $dataRequest = '';
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest);
+        return ($zeSocialBusinessResult);
+    }
+
+    public function getListBusinessType(){
+
+        $function = 'category/get_business_category';
+        $dataRequest = '';
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest);
+        return ($zeSocialBusinessResult);
     }
 
 }
