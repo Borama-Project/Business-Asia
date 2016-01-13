@@ -43,7 +43,12 @@
 	<div class="form-group col-xs-6">
 		<button type="submit" class="btn btn-default">Submit</button>
 	</div>
-  	
+
+	<div class="form-group col-xs-6">
+		<div>@{{ success }}</div>
+	</div>
 </form>
+
+
 </div>
 

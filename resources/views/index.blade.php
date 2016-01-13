@@ -5,16 +5,17 @@
 
 	<div class="col-lg-3 appContent no-right">
 		<div class="list-group">
-		  <a href="javascript:void(0)" class="list-group-item active">
-		    Social Business
-		  </a>
-		  <a href="#/category" class="list-group-item">Add Category</a>
-		  <a href="#/business" class="list-group-item">Register Business</a>
-		  <a href="#/businessType" class="list-group-item">business Type</a>
-		  <a href="#/businessTag" class="list-group-item">business Tag</a>
-		  <a href="#/product" class="list-group-item">Add Product</a>
-		  <a href="#/promotion" class="list-group-item">Promotion</a>
-		  <a href="/Auth/log-out" class="list-group-item">Log Out</a>
+			  <a href="javascript:void(0)" class="list-group-item active">
+				Social Business
+			  </a>
+			  <A ng-href="#/category" class="list-group-item">Add Category</A>
+			  <A ng-href="#/business" class="list-group-item">Register Business</A>
+			  <A ng-href="#/businessType" class="list-group-item">business Type</A>
+			  <A ng-href="#/businessTag" class="list-group-item">business Tag</A>
+			  <A ng-href="#/product" class="list-group-item">Add Product</A>
+			  <A ng-href="#/promotion" class="list-group-item">Promotion</A>
+			  <A ng-href="#/list-all-business" class="list-group-item" >List All Business</A>
+			  <A ng-href="/Auth/log-out" class="list-group-item">Log Out</A>
 		  <?php
 
 			$value = Session::get('zeAccessKey');

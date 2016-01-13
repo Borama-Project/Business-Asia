@@ -223,7 +223,11 @@ app.controller('ngBusiness', function ($scope,$http) {
             data: $scope.globalVirable,
             dataType: "json"
         }).success(function(response) {
-            console.log(response)
+            var success = response.code;
+            console.log(success);
+            if(success == 1){
+                $scope.success = 'You has create new business success!';
+            }
         }).error(function(response) {
             console.log(response);
         });

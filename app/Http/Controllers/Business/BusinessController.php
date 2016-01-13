@@ -91,14 +91,14 @@ class BusinessController extends Controller
     {
         $function = 'business/register_business';
         $dataRequest = array(
-            'accessKey' => 'NTY4ZjgzMjE3ZjhiOWFjZjA5OGI0NTc1MjAxNi0wMS0wOCAwOTozNjozM1NvY2lhbEJ1c2luZXNz',
+            'accessKey' => Session::get('zeAccessKey'),
             'name' => Input::get('name'),
             'description' => Input::get('description'),
             'phoneNumber' => Input::get('phoneNumber'),
             'address' => Input::get('address'),
             'email' => Input::get('email'),
-            'businessTag' => Input::get('businessTag'),
-            'businessType' => Input::get('businessType'),
+            'businessTag' => array(Input::get('businessTag')),
+            'businessType' => array([Input::get('businessType')]),
         );
         $method = 'POST';
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
