@@ -38,21 +38,31 @@ class BusinessController extends Controller
 
     public function getList(){
 
-        $method = 'category/get_all_categories';
+        $function = 'category/get_all_categories';
         $dataRequest = '';
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
-        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest);
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest);
         return ($zeSocialBusinessResult);
     }
 
-    public function postSaveCategory(Request $request){
+    public function postSaveCategory( ){
 
         $businessId   = Input::get('businessId');
         $userId       = Input::get('userId');
         $categoryName = Input::get('categoryName');
 
-        $data = array($businessId,$userId,$categoryName);
-         return($data);
+        $function = 'business/add_category';
+        $method = 'POST';
+        $dataRequest = array(
+
+            'accessKey'=>'NTY5MzY4YWE3ZjhiOWE0YjBkNDllZjMxMjAxNi0wMS0xMSAwODozMjo0MlNvY2lhbEJ1c2luZXNz',
+            'categoryName' => Input::get('categoryName'),
+            'businessId'   =>Input::get('businessId')
+
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+
 
     }
 
@@ -72,14 +82,52 @@ class BusinessController extends Controller
         return $name;
     }
 
-    public function getRegisterBusiness()
+    public function getBusiness()
     {
         return view('business.business');
     }
 
+    public function postRegisterBusiness()
+    {
+        $function = 'business/register_business';
+        $dataRequest = array(
+            'accessKey' => Session::get('zeAccessKey'),
+            'name' => Input::get('name'),
+            'description' => Input::get('description'),
+            'phoneNumber' => Input::get('phoneNumber'),
+            'address' => Input::get('address'),
+            'email' => Input::get('email'),
+            'businessTag' => array(Input::get('businessTag')),
+            'businessType' => array([Input::get('businessType')]),
+        );
+        $method = 'POST';
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return($zeSocialBusinessResult);
+    }
+
+
     public function getBusinessTag(){
 
         return view('business.businessTag');
+    }
+
+    public function getListBusinessTag(){
+
+        $function = 'businessTag/get_all_business_tags';
+        $dataRequest = '';
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest);
+        return ($zeSocialBusinessResult);
+    }
+
+    public function getListBusinessType(){
+
+        $function = 'category/get_business_category';
+        $dataRequest = '';
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest);
+        return ($zeSocialBusinessResult);
     }
 
 }

@@ -52,7 +52,7 @@ app.config(function ($routeProvider) {
         .when('/business',
             {
                 controller: 'ngBusiness',
-                templateUrl: '/business/register-business'
+                templateUrl: '/business/business'
             })
         .when('/businessType',
             {
@@ -79,7 +79,12 @@ app.config(function ($routeProvider) {
                 controller: 'ngPromotion',
                 templateUrl: '/product/promotion'
             })
-        
+        .when('/list-all-business',
+        {
+            controller: 'ngPromotion',
+            templateUrl: '/business/list-all-business'
+        })
+
         
         .otherwise({ redirectTo: '/' });
 });
