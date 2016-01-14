@@ -81,7 +81,7 @@ app.config(function ($routeProvider) {
             })
         .when('/list-all-business',
         {
-            controller: 'ngPromotion',
+            controller: 'ngListAllBusiness',
             templateUrl: '/business/list-all-business'
         })
 

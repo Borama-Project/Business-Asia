@@ -171,6 +171,20 @@ app.controller('ngCategory', function ($scope,$http) {
     };
     $scope.list();
 
+    $scope.listAllBusiness = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-all-business-data',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.get_all_business = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.listAllBusiness();
+
     $scope.submit = function(){
         $http({
             method: 'POST',
@@ -297,4 +311,21 @@ app.controller('ngHome', function ($scope,$http) {
     function init() {
        console.log('ngHome');
     }
+});
+
+app.controller('ngListAllBusiness', function ($scope,$http) {
+
+    $scope.list = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-all-business-data',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.get_all_business = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.list();
 });

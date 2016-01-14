@@ -1,9 +1,9 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
+<div>
 
-	<div class="col-lg-3 appContent no-right">
+	<div class="col-lg-2 appContent no-right">
 		<div class="list-group">
 			  <a href="javascript:void(0)" class="list-group-item active">
 				Social Business
@@ -30,8 +30,8 @@
 		</div>
 	</div>
 
-	<div class="col-lg-9 appContent" >
-		<div class="col-lg-12"> 
+	<div class="col-lg-10 appContent" >
+		<div class="col-lg-12">
 			<div ng-view></div>
 		</div>
 	</div>

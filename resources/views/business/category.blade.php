@@ -10,8 +10,9 @@
 		<input type="text" class="form-control"  ng-model="globalVirable.categoryName" placeholder="Name">
 	</div>
 	<div class="form-group col-xs-6">
-	    <label for="exampleInputEmail1">Business</label>
-	    <input type="text" class="form-control" name="businessId"  ng-model="globalVirable.businessId" placeholder="Name">
+	    <select>
+			<option ng-repeat="businessId in get_all_business">@{{ BusinessId}}</option>
+		</select>
 	</div>
 	{{--<div class="form-group col-xs-6">--}}
 	    {{--<label for="exampleInputEmail1">OwnerID</label>--}}

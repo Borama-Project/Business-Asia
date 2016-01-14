@@ -55,7 +55,7 @@ class BusinessController extends Controller
         $method = 'POST';
         $dataRequest = array(
 
-            'accessKey'=>'NTY5MzY4YWE3ZjhiOWE0YjBkNDllZjMxMjAxNi0wMS0xMSAwODozMjo0MlNvY2lhbEJ1c2luZXNz',
+            'accessKey'=> Session::get('zeAccessKey'),
             'categoryName' => Input::get('categoryName'),
             'businessId'   =>Input::get('businessId')
 
@@ -130,4 +130,19 @@ class BusinessController extends Controller
         return ($zeSocialBusinessResult);
     }
 
+    public function getListAllBusiness(){
+        return view('business.listAllBusiness');
+    }
+
+    public function getListAllBusinessData(){
+
+        $function = 'business/get_all_business';
+        $dataRequest =  array(
+            'accessKey' => 'NTY4ZjgzMjE3ZjhiOWFjZjA5OGI0NTc1MjAxNi0wMS0wOCAwOTozNjozM1NvY2lhbEJ1c2luZXNz'
+        );
+        $method = 'POST';
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
+    }
 }
