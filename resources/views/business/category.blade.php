@@ -10,15 +10,11 @@
 		<input type="text" class="form-control"  ng-model="globalVirable.categoryName" placeholder="Name">
 	</div>
 	<div class="form-group col-xs-6">
-	    <select>
-			<option ng-repeat="businessId in get_all_business">@{{ BusinessId}}</option>
+		<label for="exampleInputEmail1">Business</label>
+	    <select ng-model="globalVirable.businessId">
+			<option ng-repeat="businessId in get_all_business" value="@{{businessId.businessId}}">@{{ businessId.head.name}}</option>
 		</select>
 	</div>
-	{{--<div class="form-group col-xs-6">--}}
-	    {{--<label for="exampleInputEmail1">OwnerID</label>--}}
-	    {{--<input type="text" class="form-control"  ng-model="globalVirable.userId" placeholder="Name">--}}
-	{{--</div>--}}
-
 
 	<div class="form-group col-xs-12">
 		<button type="submit" class="btn btn-default">Save</button>

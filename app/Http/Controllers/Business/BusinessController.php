@@ -47,22 +47,19 @@ class BusinessController extends Controller
 
     public function postSaveCategory( ){
 
-        $businessId   = Input::get('businessId');
-        $userId       = Input::get('userId');
-        $categoryName = Input::get('categoryName');
-
         $function = 'business/add_category';
         $method = 'POST';
         $dataRequest = array(
 
             'accessKey'=> Session::get('zeAccessKey'),
             'categoryName' => Input::get('categoryName'),
-            'businessId'   =>Input::get('businessId')
+            'businessId'   => Input::get('businessId')
 
         );
+        return $dataRequest;
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
-
+        return ($zeSocialBusinessResult);
 
     }
 
