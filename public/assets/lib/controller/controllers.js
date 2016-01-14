@@ -2,6 +2,9 @@
 //This controller retrieves data from the customersService and associates it with the $scope
 //The $scope is ultimately bound to the customers view
 
+app.controller('ngLog', function ($scope) {
+  console.log('ngLog');
+});
 app.controller('ngApp', [
     '$scope',
     '$timeout',

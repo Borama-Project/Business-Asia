@@ -4,7 +4,7 @@
 <div>
 
 	<div class="col-lg-2 appContent no-right">
-		<div class="list-group">
+		<div class="list-group" ng-controller="ngLog">
 			  <a href="javascript:void(0)" class="list-group-item active">
 				Social Business
 			  </a>
@@ -15,15 +15,19 @@
 			  <A ng-href="#/product" class="list-group-item">Add Product</A>
 			  <A ng-href="#/promotion" class="list-group-item">Promotion</A>
 			  <A ng-href="#/list-all-business" class="list-group-item" >List All Business</A>
-			  <A ng-href="/Auth/log-out" class="list-group-item">Log Out</A>
+			  <A href="/Auth/log-out" class="list-group-item" data-ng-click="logout()">Log Out</A>
+			  <!-- ng-href="" javascript:void(0)-->
 		  <?php
 
 			$value = Session::get('zeAccessKey');
-			        
+			      
 
 			if (Session::has('zeAccessKey'))
 			{	
-				var_dump($value);
+				$value = json_decode($value) ;
+				// echo $value->AccessKey;
+				// echo $value->ownerId;
+				var_dump ($value);
 			}
 			?>
 		  
