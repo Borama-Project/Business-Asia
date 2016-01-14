@@ -41,7 +41,9 @@ class AuthController extends Controller
       if (Session::has('zeAccessKey'))
       { 
         Session::flush();
+
       }
+      return Redirect::to('/Auth');
     }
     public function getInfo(){
       return view('form');
