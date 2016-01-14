@@ -2,18 +2,42 @@
 //This controller retrieves data from the customersService and associates it with the $scope
 //The $scope is ultimately bound to the customers view
 
-app.controller('ngLog', function ($scope) {
-  console.log('ngLog');
-});
+
+app.controller('ngLog', [
+    '$scope',
+    '$timeout',
+    '$http',
+    'Facebook',
+    function($scope, $timeout,$http, Facebook) {
+     
+      /**
+       * Logout
+       */
+      $scope.logout = function() {
+        Facebook.getLoginStatus(function(response) {
+          if (response.status == 'connected') {
+            userIsConnected = true;
+            Facebook.logout(function() {
+              $scope.$apply(function() {
+                $scope.user   = {};
+                $scope.logged = false;  
+              });
+            });
+          }
+        });
+        
+      }
+      
+    
+    }
+  ]);
 app.controller('ngApp', [
     '$scope',
     '$timeout',
     '$http',
     'Facebook',
     function($scope, $timeout,$http, Facebook) {
-       $scope.locationPath = function (newLocation) {
-          return $location.path(newLocation);
-        };
+      
       // Define user empty data :/
       $scope.user = {};
       $scope.userName ='';

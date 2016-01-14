@@ -97,9 +97,7 @@ class AuthController extends Controller
                       <div class="form-group col-xs-12">
                           <img src="../assets/img/f.png" data-ng-click="IntentLogin()" id="fbLogin">
                       </div>
-                      <div class="form-group col-xs-12">
-                          <img src="../assets/img/f.png" data-ng-click="logout()" id="fbLogin">
-                      </div>
+                      
                     </form>
                   </div>
                 </div>
