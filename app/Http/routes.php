@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-     return view('index');
-});
+// Route::get('/', function () {
+//      return view('index');
+// });
 
+
+Route::get('/', 'Users\AuthController@home');
 Route::controllers([
     'business' => 'Business\BusinessController',
     'product' => 'Product\ProductController',

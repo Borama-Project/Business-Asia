@@ -28,7 +28,7 @@ class BusinessController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('ZeAuth');
     }
 
     public function getIndex()

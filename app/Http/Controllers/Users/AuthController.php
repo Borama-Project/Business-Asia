@@ -19,7 +19,12 @@ class AuthController extends Controller
    public function __construct()
    {
        //parent::__construct();
-      $this->middleware('guest');
+      $this->middleware('ZeAuth');
+   }
+   public function home(){
+
+     return view('index');
+     
    }
 
     public function getIndex()
@@ -35,6 +40,7 @@ class AuthController extends Controller
       }
         
     }
+
     public function getLogOut(){
 
       $value = Session::get('zeAccessKey');
@@ -65,9 +71,14 @@ class AuthController extends Controller
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
 
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest,'post');
-
-        Session::put('zeAccessKey',json_decode($zeSocialBusinessResult)->data->accessKey);
-        return json_decode($zeSocialBusinessResult)->data->accessKey;
+        $zeSocialBusinessResult = json_decode($zeSocialBusinessResult);
+        $zeAccessKey = array(
+            'AccessKey'    => $zeSocialBusinessResult->data->accessKey,
+            'ownerId'  => $zeSocialBusinessResult->data->userId,
+        );
+        
+        Session::put('zeAccessKey',json_encode($zeAccessKey));
+        return json_encode($zeAccessKey);
 
     }
 
@@ -85,6 +96,9 @@ class AuthController extends Controller
                       </div>
                       <div class="form-group col-xs-12">
                           <img src="../assets/img/f.png" data-ng-click="IntentLogin()" id="fbLogin">
+                      </div>
+                      <div class="form-group col-xs-12">
+                          <img src="../assets/img/f.png" data-ng-click="logout()" id="fbLogin">
                       </div>
                     </form>
                   </div>
