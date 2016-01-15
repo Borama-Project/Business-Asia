@@ -34,8 +34,8 @@
     <script src="{{asset('/assets/lib/angular-facebook.js')}}"></script>
     <script src="{{asset('/assets/lib/app.js')}}"></script>
     <script src="{{asset('/assets/lib/controller/controllers.js')}}"></script>
-            <script src="{{asset('/assets/lib/ng-file-upload.min.js')}}"></script>
-            <script src="{{asset('/assets/lib/ng-file-upload-shim.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/ng-file-upload.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/ng-file-upload-shim.min.js')}}"></script>
 
     </body>
 </html>

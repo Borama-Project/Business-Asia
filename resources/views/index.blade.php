@@ -9,7 +9,7 @@
 				Social Business
 			  </a>
 			  <A ng-href="#/category" class="list-group-item">Add Category</A>
-			  <A ng-href="#/business" class="list-group-item">Register Business</A>
+			  <A ng-href="#/business" class="list-group-item">Business</A>
 			  <A ng-href="#/businessType" class="list-group-item">business Type</A>
 			  <A ng-href="#/businessTag" class="list-group-item">business Tag</A>
 			  <A ng-href="#/product" class="list-group-item">Add Product</A>
