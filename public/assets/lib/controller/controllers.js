@@ -223,7 +223,7 @@ app.controller('ngCategory', function ($scope,$http) {
     };
 });
 
-app.controller('ngBusiness', function ($scope,$http) {
+app.controller('ngBusiness', function ($scope,$http,Upload) {
 
     $scope.listBusinessTag = function(){
         $http({
@@ -255,19 +255,47 @@ app.controller('ngBusiness', function ($scope,$http) {
     // $scope.listBusinessType();
 
     $scope.submit = function(){
+        /*
         $http({
             method: 'POST',
             url:  '/business/register-business',
             data: $scope.globalVirable,
             dataType: "json"
         }).success(function(response) {
-            var success = response.code;
+            var success = response;
             console.log(success);
-            if(success == 1){
+            if(success != null){
                 $scope.success = 'You has create new business success!';
             }
         }).error(function(response) {
             console.log(response);
+        });
+        */
+        Upload.upload({
+            url: '/business/register-business',
+            data: $scope.globalVirable
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
+
+    // upload on file select or drop
+    $scope.upload = function (file) {
+        Upload.upload({
+            url: 'upload/url',
+            data: {file: file, 'username': $scope.username}
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
     };
 });

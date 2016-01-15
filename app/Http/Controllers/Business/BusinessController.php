@@ -86,21 +86,43 @@ class BusinessController extends Controller
 
     public function postRegisterBusiness()
     {
-        $function = 'business/register_business';
-        $dataRequest = array(
-            'accessKey' => Session::get('zeAccessKey'),
-            'name' => Input::get('name'),
-            'description' => Input::get('description'),
-            'phoneNumber' => Input::get('phoneNumber'),
-            'address' => Input::get('address'),
-            'email' => Input::get('email'),
-            'businessTag' => array(Input::get('businessTag')),
-            'businessType' => array([Input::get('businessType')]),
-        );
-        $method = 'POST';
-        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
-        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
-        return($zeSocialBusinessResult);
+//        $businessTag = Input::get('businessTag');
+//        $function = 'businessAdmin/register_business';
+//        $dataRequest = array(
+//            'authorId' => Session::get('zeAccessKey'),
+//            'name' => Input::get('name'),
+//            'description' => Input::get('description'),
+//            'phoneNumber' => Input::get('phoneNumber'),
+//            'address' => Input::get('address'),
+//            'email' => Input::get('email'),
+//            'latitute' =>Input::get('latitute'),
+//            'longitute' =>Input::get('longitute'),
+//
+//            'businessTagList' => ["1234","0987"],
+////            'businessType' => array([Input::get('businessType')]),
+//        );
+////        $dataRequest->businessTagList = array('businessTag1'=>$businessTag,'businessTag2'=> $businessTag);
+//        $method = 'POST';
+//        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+//        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+//        return $zeSocialBusinessResult;
+
+        $file       =       Input::file('file');
+        if($file != null){
+            $fileName   =       $file->getClientOriginalName();
+            $fileData   =       $file->getPathName();
+            $fileSize   =       $file->getClientSize();
+//            $field_post = array(
+//                'accessKey'         =>  $this->userSession->accessKey,
+//                'productId'         =>  $productId,
+//                'image'             =>  new \CurlFile($fileData, 'image/png', $fileName)
+//            );
+//            $url_post = $this -> constant['REST_FULL_URL'].'product/add_image_gallery';
+//            $result_sever   = $this -> Tool -> curlConnect($url_post,$field_post);
+            return $fileData;
+        }else{
+            return "none";
+        }
     }
 
 
