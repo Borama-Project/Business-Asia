@@ -17,6 +17,14 @@
 		<label for="exampleInputEmail1">Email</label>
 		<input type="email" class="form-control" id="" ng-model="globalVirable.email" placeholder="Email">
 	</div>
+	<div class="form-group col-xs-6">
+		<label for="exampleInputEmail1">Lat</label>
+		<input type="number" class="form-control" id="" ng-model="globalVirable.latitute" placeholder="">
+	</div>
+	<div class="form-group col-xs-6">
+		<label for="exampleInputEmail1">Lan</label>
+		<input type="number" class="form-control" id="" ng-model="globalVirable.longitute" placeholder="">
+	</div>
 	<div class="form-group col-xs-12">
 		<label for="exampleInputEmail1">Business Type</label>
 		<select class="form-control" ng-model="globalVirable.businessType">
@@ -28,7 +36,7 @@
 		<label for="exampleInputEmail1">Business Tag</label>
 		<select class="form-control" ng-model="globalVirable.businessTag">
 			<optgroup ng-repeat="businessTags in businessTag" label="@{{ businessTags.name }}">
-			 <option ng-repeat="tag in businessTags.tag">@{{ tag.name }}</option>
+			 <option ng-repeat="tag in businessTags.tag" value="@{{ tag.id }}">@{{ tag.name }}</option>
 			</optgroup>
 		</select>
 	</div>
@@ -40,6 +48,11 @@
 		<label for="exampleInputEmail1">Description</label>
 		<textarea class="form-control" name="searchBusiness" ng-model="globalVirable.description" placeholder="Discription"></textarea>
 	</div>
+	<div class="form-group col-xs-6">
+		<label for="exampleInputEmail1">Logo</label>
+		<input type="file" ngf-select ng-model="globalVirable.file" name="file">
+	</div>
+
 	<div class="form-group col-xs-6">
 		<button type="submit" class="btn btn-default">Submit</button>
 	</div>
