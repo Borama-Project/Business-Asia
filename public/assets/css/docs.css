@@ -28,3 +28,44 @@
 #fbLogin {
 	cursor: pointer;
 }
+
+
+
+.ngNonPadd{
+	margin-bottom: 0px;
+}
+.pad-top-10{
+	padding-top: 10px;
+}
+.pad-top-15{
+	padding-top: 15px;
+}
+.pad-top-20{
+	padding-top: 20px;
+}
+
+.mg-top-20{
+	margin-top: 20px;
+}
+.mg-top-25{
+	margin-top: 25px;
+}
+
+
+.ng-enter{
+	transition:0.75s;
+	opacity: 0;
+}
+.ng-enter-stagger{
+	transition-delay:0.1s;
+}
+.ng-enter-active{
+	opacity: 1;
+}
+.ng-leave{
+	transition:0.75s;
+	opacity: 1;
+}
+.ng-leave-active{
+	opacity: 0;
+}

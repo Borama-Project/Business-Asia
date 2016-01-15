@@ -238,7 +238,7 @@ app.controller('ngBusiness', function ($scope,$http) {
             console.log(response);
         });
     };
-    $scope.listBusinessTag();
+    // $scope.listBusinessTag();
 
     $scope.listBusinessType = function(){
         $http({
@@ -252,7 +252,7 @@ app.controller('ngBusiness', function ($scope,$http) {
             console.log(response);
         });
     };
-    $scope.listBusinessType();
+    // $scope.listBusinessType();
 
     $scope.submit = function(){
         $http({
@@ -351,5 +351,45 @@ app.controller('ngListAllBusiness', function ($scope,$http) {
             console.log(response);
         });
     };
-    $scope.list();
+    $scope.submit =  function(){
+      $data =[];
+      if($scope.Distance){
+          $data['distance(km)'] = $scope.Distance;
+      }
+      if($scope.Distance){
+          $data['latitude'] = $scope.Latitude;
+      }
+      if($scope.Distance){
+          $data['longitude'] = $scope.Longitude;
+      }
+      var doc= document.getElementsByName("moreInput");
+      for (var i = doc.length - 1; i >= 0; i--) {
+        if(doc[i].value){
+          $data[doc[i].id] = doc[i].value;
+        }
+        // http://www.toutjavascript.com/reference/reference.php?ref=getElementsByName&parent=7
+        // Things[i]
+        // document.getElementsByTagName("input")[3].name
+        // document.getElementsByTagName("input")[3].value
+        
+      };
+      console.log($data)
+      // console.log(document.getElementsByTagName("text"));
+    }
+    $scope.moreOptons = function(){
+      if(this.titleOpt == 'More Option'){
+        $scope.Options = [{'title':'ID','ngModel':'Businesss','holder':'Businesss ID'},
+                        {'title':'Name','ngModel':'Name','holder':'Name'},
+                        {'title':'Near By Type','ngModel':'NearByType','holder':'Near By Type'}
+                      ];
+        $scope.titleOpt = 'Hide Option';
+
+      }else{
+        $scope.Options = '';
+        $scope.titleOpt = 'More Option';
+      }
+      
+    }
+    $scope.titleOpt = 'More Option';
+    // $scope.list();
 });

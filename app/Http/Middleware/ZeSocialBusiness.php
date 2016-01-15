@@ -16,14 +16,12 @@ class ZeSocialBusiness
      */
     public function handle($request, Closure $next)
     {
-        
-        if ($this->check($request))
+        $result = $this->check($request);
+        if ($result=== true)
         {
-            // return $next($request);
             return $next($request);
         }
-        dd($request->server()['REDIRECT_URL']);
-        // return Redirect::to('/Auth');
+        return Redirect::to('/Auth');
     }
 
     public function check($request){
@@ -35,10 +33,9 @@ class ZeSocialBusiness
                 
                $result=true;
             }
-          
         }else{
-            if($request->server()['REDIRECT_URL'] =='/Auth' || $request->server()['REDIRECT_URL'] =='/' || $request->server()['REDIRECT_URL']='/Auth/admin-profile'){
-                return $result=true;
+            if($request->server()['REQUEST_URI'] =='/Auth' || $request->server()['REQUEST_URI']=='/Auth/admin-profile'){
+                $result= true;
             }
         }
 

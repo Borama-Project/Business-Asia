@@ -135,7 +135,9 @@ class BusinessController extends Controller
 
         $function = 'business/get_all_business';
         $dataRequest =  array(
-            'accessKey' => 'NTY4ZjgzMjE3ZjhiOWFjZjA5OGI0NTc1MjAxNi0wMS0wOCAwOTozNjozM1NvY2lhbEJ1c2luZXNz'
+            'accessKey' => 'NTY4ZjgzMjE3ZjhiOWFjZjA5OGI0NTc1MjAxNi0wMS0wOCAwOTozNjozM1NvY2lhbEJ1c2luZXNz',
+            'limit' =>15,
+            'offset' =>0
         );
         $method = 'POST';
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
