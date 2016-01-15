@@ -54,6 +54,12 @@ app.config(function ($routeProvider) {
                 controller: 'ngBusiness',
                 templateUrl: '/business'
             })
+        .when('/registerBusiness',
+            {
+                controller: 'ngRegisterBusiness',
+                templateUrl: '/business/register-business'
+            })
+        
         .when('/businessType',
             {
                 controller: 'ngBusinessType',

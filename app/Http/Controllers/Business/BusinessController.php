@@ -84,6 +84,10 @@ class BusinessController extends Controller
         return view('business.business');
     }
 
+    public function getRegisterBusiness()
+    {
+        return view('business.business');
+    }
     public function postRegisterBusiness()
     {
 //        $businessTag = Input::get('businessTag');

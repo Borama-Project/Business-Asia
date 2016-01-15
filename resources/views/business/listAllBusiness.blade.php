@@ -1,12 +1,10 @@
 <table class="table table-condensed">
     <thead>
-    
     <tr>
         <th colspan ="5" >
         
            <tbody>
                <tr>
-               
                    <td colspan ="5">
                     <form ng-submit="submit()">
                         
@@ -96,3 +94,23 @@
     </tbody>
 </table>
 
+<style>
+    
+.ng-enter{
+    transition:0.75s;
+    opacity: 0;
+}
+.ng-enter-stagger{
+    transition-delay:0.1s;
+}
+.ng-enter-active{
+    opacity: 1;
+}
+.ng-leave{
+    transition:0.75s;
+    opacity: 1;
+}
+.ng-leave-active{
+    opacity: 0;
+}
+</style>
