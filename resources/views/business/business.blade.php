@@ -1,4 +1,4 @@
-<div class="col-lg-12" ng-controller="ngRegisterBusiness"> 
+<div class="col-lg-12"> 
 <form ng-submit="submit()">
 	<div class="panel panel-info">
 	  <div class="panel-body">
