@@ -279,14 +279,14 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             url:  '/business/list-business-tag',
             dataType: "json"
         }).success(function(response) {
-            //console.log(response);
+            console.log(response);
             $scope.businessTag = response.data;
 
         }).error(function(response) {
             console.log(response);
         });
     };
-    // $scope.listBusinessTag();
+    $scope.listBusinessTag();
 
     $scope.listBusinessType = function(){
         $http({
@@ -294,42 +294,29 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             url:  '/business/list-business-type',
             dataType: "json"
         }).success(function(response) {
-            console.log(response);
+            //console.log(response);
             $scope.businessType = response.data;
         }).error(function(response) {
+            //console.log(response);
+        });
+    };
+    $scope.listBusinessType();
+
+    $scope.submit = function(){
+        Upload.upload({
+            method: 'POST',
+            url: '/business/register-business',
+            data: $scope.globalVirable,
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (response) {
             console.log(response);
         });
     };
-    // $scope.listBusinessType();
-
-    // $scope.submit = function(){
-    //     Upload.upload({
-    //         url: '/business/register-business',
-    //         data: $scope.globalVirable
-    //     }).then(function (resp) {
-    //         console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-    //     }, function (resp) {
-    //         console.log('Error status: ' + resp.status);
-    //     }, function (evt) {
-    //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-    //         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-    //     });
-    // };
-
-    // upload on file select or drop
-    $scope.upload = function (file) {
-        Upload.upload({
-            url: 'upload/url',
-            data: {file: file, 'username': $scope.username}
-        }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-        }, function (resp) {
-            console.log('Error status: ' + resp.status);
-        }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        });
-    };
+      
 });
 app.controller('ngBusinessType', function ($scope,$http) {
 

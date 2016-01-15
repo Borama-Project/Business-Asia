@@ -46,6 +46,16 @@ class ZeSocialBusinessModel
         }else{
             curl_setopt($ch, CURLOPT_POST, count($fields));
             curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars);
+            //file upload
+//            curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-type: multipart/form-data"));
+            curl_setopt($ch, CURLOPT_VERBOSE, 0);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_BINARYTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+
         }
         curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -55,6 +65,8 @@ class ZeSocialBusinessModel
         curl_close($ch);
         return $result;
     }
+
+
     public function curlConnect ($url,  $fields = array(), $method= null) {
 
         $respon = $this->curlResponse($url, $fields, $method);

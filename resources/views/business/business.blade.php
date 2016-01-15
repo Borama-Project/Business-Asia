@@ -27,14 +27,14 @@
 	</div>
 	<div class="form-group col-xs-12">
 		<label for="exampleInputEmail1">Business Type</label>
-		<select class="form-control" ng-model="globalVirable.businessType">
-			<option ng-repeat="businessTypes in businessType">@{{ businessTypes.name }}</option>
+		<select class="form-control" ng-model="globalVirable.businessTypeList">
+			<option ng-repeat="businessTypes in businessType" value="@{{ businessTypes.id }}">@{{ businessTypes.name }}</option>
 		</select>
 	</div>
 
 	<div class="form-group col-xs-12">
 		<label for="exampleInputEmail1">Business Tag</label>
-		<select class="form-control" ng-model="globalVirable.businessTag">
+		<select class="form-control" ng-model="globalVirable.businessTagList">
 			<optgroup ng-repeat="businessTags in businessTag" label="@{{ businessTags.name }}">
 			 <option ng-repeat="tag in businessTags.tag" value="@{{ tag.id }}">@{{ tag.name }}</option>
 			</optgroup>
@@ -50,7 +50,11 @@
 	</div>
 	<div class="form-group col-xs-6">
 		<label for="exampleInputEmail1">Logo</label>
-		<input type="file" ngf-select ng-model="globalVirable.file" name="file">
+		<input type="file" ngf-select ng-model="globalVirable.logo" name="logo">
+	</div>
+	<div class="form-group col-xs-6">
+		<label for="exampleInputEmail1">Cover</label>
+		<input type="file" ngf-select ng-model="globalVirable.cover" name="cover">
 	</div>
 
 	<div class="form-group col-xs-6">
