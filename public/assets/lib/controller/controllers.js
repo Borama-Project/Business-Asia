@@ -129,10 +129,7 @@ app.controller('ngApp', [
                     window.location = "http://asianbusiness.dev/";
                 })
                 .error(function (data, status, header, config) {
-                    $scope.ResponseDetails = "Data: " + data +
-                        "<hr />status: " + status +
-                        "<hr />headers: " + header +
-                        "<hr />config: " + config;
+                    
                 });
             });
             
@@ -337,51 +334,98 @@ app.controller('ngHome', function ($scope,$http) {
 
 app.controller('ngListAllBusiness', function ($scope,$http) {
 
-    $scope.list = function(){
+    // $scope.list = function(){
+    //     $http({
+    //         method: 'GET',
+    //         url:  '/business/list-all-business-data',
+    //         dataType: "json"
+    //     }).success(function(response) {
+    //         console.log(response);
+    //         $scope.get_all_business = response.data;
+    //     }).error(function(response) {
+    //         console.log(response);
+    //     });
+    // };
+    $scope.submit =  function(){
+      
+      // var datas = {};
+      var str = JSON.stringify($scope.app);
+      if(str != ''){
+        var dtRequest = str.slice(1,-1);;
+        var doc= document.getElementsByName("moreInput");
+        for (var i = doc.length - 1; i >= 0; i--) {
+          if(doc[i].value){
+             // console.log(i+'-'+doc.length);
+            // if(i == doc.length -1){
+            //   console.log(i);
+            //   cbs += '"'+doc[i].id+'":"'+doc[i].value+'"';
+            // }else{
+              dtRequest += ',"'+doc[i].id+'":"'+doc[i].value+'"';
+            // }
+          }
+        };
+        dtRequest = '{'+dtRequest+'}';
+        console.log(dtRequest);
         $http({
-            method: 'GET',
-            url:  '/business/list-all-business-data',
+            method: 'POST',
+            url:  '/business/search-business',
+            data: dtRequest,
             dataType: "json"
         }).success(function(response) {
             console.log(response);
-            $scope.get_all_business = response.data;
+            $scope.get_all_business = response.data.business;
         }).error(function(response) {
             console.log(response);
         });
-    };
-    $scope.submit =  function(){
-      $data =[];
-      if($scope.Distance){
-          $data['distance(km)'] = $scope.Distance;
       }
-      if($scope.Distance){
-          $data['latitude'] = $scope.Latitude;
-      }
-      if($scope.Distance){
-          $data['longitude'] = $scope.Longitude;
-      }
-      var doc= document.getElementsByName("moreInput");
-      for (var i = doc.length - 1; i >= 0; i--) {
-        if(doc[i].value){
-          $data[doc[i].id] = doc[i].value;
-        }
-        // http://www.toutjavascript.com/reference/reference.php?ref=getElementsByName&parent=7
-        // Things[i]
-        // document.getElementsByTagName("input")[3].name
-        // document.getElementsByTagName("input")[3].value
-        
-      };
-      console.log($data)
-      // console.log(document.getElementsByTagName("text"));
+
+      // $http({
+      //     method: 'POST',
+      //     url:  '/business/search-business',
+      //     data:{datas},
+      // }).success(function(response) {
+      //     console.log(response);
+      //     // $scope.get_all_business = response.data;
+      // }).error(function(response) {
+      //     console.log(response);
+      // });
+
+      // var datas = $.param({
+      //     distance: $scope.distance,
+      //     latitude: $scope.latitude,
+      //     longitude: $scope.longitude,
+      // });
+      // datas +=$.param({
+      //     distance: $scope.Distance,
+      //     latitude: $scope.Latitude,
+      //     longitude: $scope.longitude,
+      // });
+      // console.log(datas);
+  
+      // $http.post('/business/search-business', datas)
+      // .success(function (datas, status, headers) {
+          
+      //     console.log(datas);
+      // })
+      // .error(function (datas, status, header) {
+      //     $scope.ResponseDetails = "Data: " + datas +
+      //         "<hr />status: " + status +
+      //         "<hr />headers: " + header ;
+      // });
+      
+      // ft.push({'data':'data'});
+      
+      
+     
     }
     $scope.moreOptons = function(){
       if(this.titleOpt == 'More Option'){
-        $scope.Options = [{'title':'ID','ngModel':'Businesss','holder':'Businesss ID'},
-                        {'title':'Name','ngModel':'Name','holder':'Name'},
-                        {'title':'Near By Type','ngModel':'NearByType','holder':'Near By Type'}
+        $scope.Options = [{'title':'ID','ngModel':'tag','holder':'Businesss ID'},
+                        {'title':'Name','ngModel':'name','holder':'Name'},
+                        {'title':'Near By Type','ngModel':'nearbyType','holder':'Near By Type'}
                       ];
         $scope.titleOpt = 'Hide Option';
-
+        $scope.my = { favorite: 'unicorns' };
       }else{
         $scope.Options = '';
         $scope.titleOpt = 'More Option';

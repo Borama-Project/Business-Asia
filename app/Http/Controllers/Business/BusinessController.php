@@ -33,7 +33,7 @@ class BusinessController extends Controller
 
     public function getIndex()
     {
-        return view('business.viewCategory');
+        return view('business.index');
     }
 
     public function getList(){
@@ -173,5 +173,26 @@ class BusinessController extends Controller
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         return ($zeSocialBusinessResult);
+    }
+
+    public function postSearchBusiness(){
+
+        $zeAccessKey = Session::get('zeAccessKey');
+        $function = 'search/search';         
+
+        if (Session::has('zeAccessKey'))
+        {   
+            $zeAccessKey = json_decode($zeAccessKey) ;
+            $data = Input::all();
+            foreach (Input::all()as $key => $value) {
+                $dataRequest[$key]= $value;
+            }
+
+            $dataRequest['accessKey'] = $zeAccessKey->AccessKey;
+        }
+        $method = 'POST';
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return $zeSocialBusinessResult;
     }
 }

@@ -9,17 +9,18 @@
                
                    <td colspan ="5">
                     <form ng-submit="submit()">
+                        
                         <div class="form-group col-xs-4">
                             <label for="exampleInputName2">Distance</label>
-                            <input type="text" class="form-control" ng-model="Distance" name="Distance" placeholder="Distance(km)">
+                            <input type="text" class="form-control" ng-model="app.distance" name="Distance" placeholder="Distance(km)">
                         </div>
                         <div class="form-group col-xs-4">
                             <label for="exampleInputName2">Latitude</label>
-                            <input type="text" class="form-control" ng-model="Latitude" name="Latitude" placeholder="Latitude">
+                            <input type="text" class="form-control" ng-model="app.latitude" name="Latitude" placeholder="Latitude">
                         </div>
                         <div class="form-group col-xs-4">
                             <label for="exampleInputName2">Longitude</label>
-                            <input type="text" class="form-control" ng-model="Longitude" name="Longitude" placeholder="Longitude">
+                            <input type="text" class="form-control" ng-model="app.longitude" name="Longitude" placeholder="Longitude">
                         </div>
                         <div class="form-group col-xs-1">
                             <button type="submit" id="submit" class="btn btn-default">Search</button>
@@ -52,27 +53,27 @@
     <tr>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" name="moreInput" placeholder="Business Name">
+                <input type="text" class="form-control" name="" placeholder="Business Name">
             </div>
         </th>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" name="moreInput" placeholder="Phone Number">
+                <input type="text" class="form-control" name="" placeholder="Phone Number">
             </div>
         </th>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" name="moreInput" placeholder="Email">
+                <input type="text" class="form-control" name="" placeholder="Email">
             </div>
         </th>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" name="moreInput" placeholder="Address">
+                <input type="text" class="form-control" name="" placeholder="Address">
             </div>
         </th>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" name="moreInput" placeholder="Logo">
+                <input type="text" class="form-control" name="" placeholder="Logo">
             </div>
         </th>
 
