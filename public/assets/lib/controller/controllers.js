@@ -314,6 +314,10 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (response) {
             console.log(response);
+            if(response.code == 1){
+                $scope.success = 'sucess';
+                $scope.BusinessFormName.$setPristine();
+            }
         });
     };
       

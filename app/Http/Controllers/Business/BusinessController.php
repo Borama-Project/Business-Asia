@@ -104,6 +104,14 @@ class BusinessController extends Controller
         $authorId = json_decode(Session::get('zeAccessKey'));
         $btl      = array(Input::get('businessTagList'));
 
+        $btyl     = array(Input::get('businessTypeList'));
+        $strNullType = '';
+        foreach($btyl as $value){
+
+            $strNullType .= "[".$value."]";
+
+        }
+
         $str = '';
         foreach($btl as $key){
             if($str==''){
@@ -113,9 +121,9 @@ class BusinessController extends Controller
             }
         }
         $str = '['.$str.']';
-//return $str;
-//        return "['e43443']";
+
         $method   = 'POST';
+//        return $strNullType;
         $dataRequest = array(
             'authorId'          => $authorId->ownerId,
             'name'              => Input::get('name'),
@@ -127,11 +135,11 @@ class BusinessController extends Controller
             'longitute'         => Input::get('longitute'),
             'logo'              => new \CurlFile($fileData,'image/jpg', $fileName),
             'cover'             => new \CurlFile($coverData,'image/jpg',$coverName),
-            'businessTagList'   => $str
+            'businessTagList'   => $str,
+            'businessTypeList'  => $strNullType
         );
 
 //        return ($dataRequest);
-
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         return( $zeSocialBusinessResult);
