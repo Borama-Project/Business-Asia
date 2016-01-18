@@ -5,12 +5,9 @@
 	   	<h1>Business</h1>
 	  </div>
 </div>
-
-
 <div class="list-group col-lg-2" >
 	<A ng-href="#/registerBusiness" class="list-group-item">Register Business</A>
 </div>
-
 <table class="table table-condensed">
     <thead> 
     <tr>
@@ -52,7 +49,7 @@
         <th>Phone Number</th>
         <th>Email</th>
         <th>Address</th>
-        <th>Logo</th>
+        <th>Manage</th>
     </tr>
     <tr>
         <th>
@@ -76,9 +73,7 @@
             </div>
         </th>
         <th>
-            <div class="form-group">
-                <input type="text" class="form-control" name="" placeholder="Logo">
-            </div>
+            
         </th>
 
     </tr>
@@ -90,9 +85,11 @@
         <td >@{{ get_all_businesss.head.email }}</td>
         <td >@{{ get_all_businesss.head.address }}</td>
         <td >
-            <IMG width="40" height="40"
-                    ng-src="@{{ get_all_businesss.logo }}">
-            </IMG>
+        	<div class="row">
+			  <div class="col-md-3">View</div>
+			  <div class="col-md-6">ManageCatalog</div>
+			  <div class="col-md-3">Delete</div>
+			</div>
         </td>
     </tr>
     </tbody>
