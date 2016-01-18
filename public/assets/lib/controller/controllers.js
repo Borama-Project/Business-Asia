@@ -220,57 +220,114 @@ app.controller('ngCategory', function ($scope,$http) {
     };
 });
 
-app.controller('ngBusiness', function ($scope,$http,Upload) {
-    $scope.submit =  function(){
-      
-      // var datas = {};
-      var str = JSON.stringify($scope.app);
-      if(str != ''){
-        var dtRequest = str.slice(1,-1);;
-        var doc= document.getElementsByName("moreInput");
-        for (var i = doc.length - 1; i >= 0; i--) {
-          if(doc[i].value){
-             // console.log(i+'-'+doc.length);
-            // if(i == doc.length -1){
-            //   console.log(i);
-            //   cbs += '"'+doc[i].id+'":"'+doc[i].value+'"';
-            // }else{
-              dtRequest += ',"'+doc[i].id+'":"'+doc[i].value+'"';
-            // }
-          }
-        };
-        dtRequest = '{'+dtRequest+'}';
-        console.log(dtRequest);
-        $http({
-            method: 'POST',
-            url:  '/business/search-business',
-            data: dtRequest,
-            dataType: "json"
-        }).success(function(response) {
-            console.log(response);
-            $scope.get_all_business = response.data.business;
-        }).error(function(response) {
-            console.log(response);
-        });
-      }
+app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log) {
 
+  $scope.submit =  function(){
+    
+    var str = JSON.stringify($scope.app);
+    if(str != ''){
+      var dtRequest = str.slice(1,-1);;
+      var doc= document.getElementsByName("moreInput");
+      for (var i = doc.length - 1; i >= 0; i--) {
+        if(doc[i].value){
+          dtRequest += ',"'+doc[i].id+'":"'+doc[i].value+'"';
+        }
+      };
+      dtRequest = '{'+dtRequest+'}';
+      console.log(dtRequest);
+      $http({
+          method: 'POST',
+          url:  '/business/search-business',
+          data: dtRequest,
+          dataType: "json"
+      }).success(function(response) {
+          console.log(response);
+          $scope.get_all_business = response.data.business;
+      }).error(function(response) {
+          console.log(response);
+      });
     }
-    $scope.moreOptons = function(){
-      if(this.titleOpt == 'More Option'){
-        $scope.Options = [{'title':'ID','ngModel':'tag','holder':'Businesss ID'},
-                        {'title':'Name','ngModel':'name','holder':'Name'},
-                        {'title':'Near By Type','ngModel':'nearbyType','holder':'Near By Type'}
-                      ];
-        $scope.titleOpt = 'Hide Option';
-        $scope.my = { favorite: 'unicorns' };
-      }else{
-        $scope.Options = '';
-        $scope.titleOpt = 'More Option';
+
+  }
+  $scope.moreOptons = function(){
+    if(this.titleOpt == 'More Option'){
+      $scope.Options = [{'title':'ID','ngModel':'tag','holder':'Businesss ID'},
+                      {'title':'Name','ngModel':'name','holder':'Name'},
+                      {'title':'Near By Type','ngModel':'nearbyType','holder':'Near By Type'}
+                    ];
+      $scope.titleOpt = 'Hide Option';
+      $scope.my = { favorite: 'unicorns' };
+    }else{
+      $scope.Options = '';
+      $scope.titleOpt = 'More Option';
+    }
+    
+  }
+  $scope.titleOpt = 'More Option';
+
+  $scope.animationsEnabled = true;
+
+  $scope.deleteById = function (size) {
+    console.log(this.item.head.name);
+    $scope.name = this.item.head.name;
+    $scope.businessId = this.item.businessId;
+    var modalInstance = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'ModalContent',
+      controller: 'ModalInstanceDelete',
+      size: size,
+      resolve: {
+        title :function(){
+          return 'Delete';
+        }
+        ,contents :function(){
+          return 'Do you want to Delete Businesss name '+$scope.name;
+        },businessId:function(){
+          return $scope.businessId;
+        }
       }
-      
-    }
-    $scope.titleOpt = 'More Option';
+    });
+
+  };
+  $scope.close = function(e){
+    // $modalInstance.dismiss('cancel');
+  }
+
 });
+app.controller('ngViewBusiness', function ($scope,$http,$routeParams) {
+
+    // console.log($routeParams.businessId);
+
+    $scope.submit =  function(){
+      console.log($scope.item);
+      // $http({
+      //       method: 'POST',
+      //       url:  '/business/view-business',
+      //       data: dtRequest,
+      //       dataType: "json"
+      //   }).success(function(response) {
+      //       console.log(response);
+      //       $scope.get_all_business = response.data.business;
+      //   }).error(function(response) {
+      //       console.log(response);
+      //   });
+    }
+    $scope.init = function(){
+      $http({
+          method: 'POST',
+          url:  '/business/business-by-id',
+          data: {businessId:$routeParams.businessId},
+          dataType: "json"
+      }).success(function(response) {
+          console.log(response);
+          $scope.item = response.data[0];
+      }).error(function(response) {
+          console.log(response);
+      });
+    }
+    $scope.init();
+});
+
 
 app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
   $scope.listBusinessTag = function(){
@@ -389,7 +446,32 @@ app.controller('ngHome', function ($scope,$http) {
 });
 
 app.controller('ngListAllBusiness', function ($scope,$http) {
-
-    
     // $scope.list();
+});
+
+app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,title,contents,businessId) {
+  $scope.title= title;
+  $scope.contentTitle = contents;
+  $scope.businessId= businessId;
+  $scope.ok = function () {
+    $http({
+          method: 'POST',
+          url:  '/business/delete-business-by-id',
+          data: {businessId:$scope.businessId},
+          dataType: "json"
+      }).success(function(response) {
+          console.log(response.message);
+          // $scope.item = response.data[0];
+          $modalInstance.close();
+      }).error(function(response) {
+          console.log(response);
+      });
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+  $scope.close = function(e){
+    $modalInstance.dismiss('cancel');
+  }
 });

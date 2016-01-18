@@ -83,6 +83,38 @@ class BusinessController extends Controller
     {
         return view('business.business');
     }
+    public function getBusinessById()
+    {
+        return view('business.viewBusiness');
+
+    }
+
+    public function postBusinessById()
+    {
+        $method   = 'POST';
+        $function = 'businessAdmin/get_business_by_id';
+        $authorId = json_decode(Session::get('zeAccessKey'));
+        $dataRequest = array(
+            'businessId'      => Input::get('businessId'),
+            'accessKey'       => $authorId->AccessKey,
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return( $zeSocialBusinessResult);
+
+    }
+    public function postDeleteBusinessById(){
+        $method   = 'POST';
+        $function = 'businessAdmin/delete_business';
+        // $authorId = json_decode(Session::get('zeAccessKey'));
+        $dataRequest = array(
+            'businessId'      => Input::get('businessId'),
+            // 'accessKey'       => $authorId->AccessKey,
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return( $zeSocialBusinessResult);
+    }
 
     public function getRegisterBusiness()
     {
@@ -90,64 +122,58 @@ class BusinessController extends Controller
     }
     public function postRegisterBusiness()
     {
-//        $file           =       Input::file('logo');
-//        $cover          =       Input::file('cover');
-//        if ($file != null) {
-//            $fileName   =       $file->getClientOriginalName();
-//            $fileData   =       $file->getPathName();
-//        }
-//        if($cover != null){
-//            $coverName  = $cover->getClientOriginalName();
-//            $coverData  = $cover->getPathName();
-//        }
-//        $function = 'businessAdmin/register_business';
-//        $authorId = json_decode(Session::get('zeAccessKey'));
+        $file           =       Input::file('logo');
+        $cover          =       Input::file('cover');
+        if ($file != null) {
+            $fileName   =       $file->getClientOriginalName();
+            $fileData   =       $file->getPathName();
+        }
+        if($cover != null){
+            $coverName  = $cover->getClientOriginalName();
+            $coverData  = $cover->getPathName();
+        }
+        $function = 'businessAdmin/register_business';
+        $authorId = json_decode(Session::get('zeAccessKey'));
+        $btl      = array(Input::get('businessTagList'));
 
-        $btl      = (Input::post('dataTypeList'));
-//        $btyl     = (Input::post('dataTypeList'));
-//        foreach($btl as $va){
-//
-//            return $va;
-//        }
-        return json_encode($btl);
-//        $strNullType = '';
-//        foreach($btyl as $value){
-//
-//            $strNullType .= "[".$value."]";
-//
-//        }
-//
-//        $str = '';
-//        foreach($btl as $key){
-//            if($str==''){
-//                $str .='"'.$key.'"';
-//            }else{
-//                $str .=',"'.$key.'"';
-//            }
-//        }
-//        $str = '['.$str.']';
-//
-//        $method   = 'POST';
-////        return $strNullType;
-//        $dataRequest = array(
-//            'authorId'          => $authorId->ownerId,
-//            'name'              => Input::get('name'),
-//            'description'       => Input::get('description'),
-//            'phoneNumber'       => Input::get('phoneNumber'),
-//            'address'           => Input::get('address'),
-//            'email'             => Input::get('email'),
-//            'latitute'          => Input::get('latitute'),
-//            'longitute'         => Input::get('longitute'),
-//            'logo'              => new \CurlFile($fileData,'image/jpg', $fileName),
-//            'cover'             => new \CurlFile($coverData,'image/jpg',$coverName),
-//            'businessTagList'   => $str,
-//            'businessTypeList'  => $strNullType
-//        );
-//
-//        return ($dataRequest);
-//        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
-//        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
-//        return( $zeSocialBusinessResult);
+        $btyl     = array(Input::get('businessTypeList'));
+        $strNullType = '';
+        foreach($btyl as $value){
+
+            $strNullType .= "[".$value."]";
+
+        }
+
+        $str = '';
+        foreach($btl as $key){
+            if($str==''){
+                $str .='"'.$key.'"';
+            }else{
+                $str .=',"'.$key.'"';
+            }
+        }
+        $str = '['.$str.']';
+
+        $method   = 'POST';
+        $dataRequest = array(
+            'authorId'          => $authorId->ownerId,
+            'name'              => Input::get('name'),
+            'description'       => Input::get('description'),
+            'phoneNumber'       => Input::get('phoneNumber'),
+            'address'           => Input::get('address'),
+            'email'             => Input::get('email'),
+            'latitute'          => Input::get('latitute'),
+            'longitute'         => Input::get('longitute'),
+            'logo'              => new \CurlFile($fileData,'image/jpg', $fileName),
+            'cover'             => new \CurlFile($coverData,'image/jpg',$coverName),
+            'businessTagList'   => $str,
+            'businessTypeList'  => $strNullType
+        );
+
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return( $zeSocialBusinessResult);
+
     }
 
 
