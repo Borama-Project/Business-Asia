@@ -30,7 +30,7 @@
 				var_dump ($value);
 			}
 			?>
-			<p>{{csrf_token()}}</p>
+			<!-- <p>{{csrf_token()}}</p> -->
 		  
 		</div>
 	</div>

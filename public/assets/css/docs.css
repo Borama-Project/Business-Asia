@@ -3,10 +3,14 @@ body{
 }
 
 
+.pst {
+	cursor: pointer;
+}
+
 .appContent {
 	border: 1px solid #ddd;
 	min-height: 600px;
-	padding: 20px 0px;
+	padding-top: 20px ;
 	min-height: 676px;
 }
 .no-left{
@@ -25,8 +29,6 @@ body{
 	cursor: pointer;
 }
 
-
-
 .ngNonPadd{
 	margin-bottom: 0px;
 }
@@ -40,10 +42,12 @@ body{
 	padding-top: 20px;
 }
 
+.pad-lef-10{
+	padding-left: 10px;
+}
 .mg-top-20{
 	margin-top: 20px;
 }
 .mg-top-25{
 	margin-top: 25px;
 }
-

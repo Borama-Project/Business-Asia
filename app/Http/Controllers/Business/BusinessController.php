@@ -83,6 +83,38 @@ class BusinessController extends Controller
     {
         return view('business.business');
     }
+    public function getBusinessById()
+    {
+        return view('business.viewBusiness');
+
+    }
+
+    public function postBusinessById()
+    {
+        $method   = 'POST';
+        $function = 'businessAdmin/get_business_by_id';
+        $authorId = json_decode(Session::get('zeAccessKey'));
+        $dataRequest = array(
+            'businessId'      => Input::get('businessId'),
+            'accessKey'       => $authorId->AccessKey,
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return( $zeSocialBusinessResult);
+
+    }
+    public function postDeleteBusinessById(){
+        $method   = 'POST';
+        $function = 'businessAdmin/delete_business';
+        // $authorId = json_decode(Session::get('zeAccessKey'));
+        $dataRequest = array(
+            'businessId'      => Input::get('businessId'),
+            // 'accessKey'       => $authorId->AccessKey,
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return( $zeSocialBusinessResult);
+    }
 
     public function getRegisterBusiness()
     {
@@ -113,8 +145,6 @@ class BusinessController extends Controller
             }
         }
         $str = '['.$str.']';
-//return $str;
-//        return "['e43443']";
         $method   = 'POST';
         $dataRequest = array(
             'authorId'          => $authorId->ownerId,
@@ -129,9 +159,6 @@ class BusinessController extends Controller
             'cover'             => new \CurlFile($coverData,'image/jpg',$coverName),
             'businessTagList'   => $str
         );
-
-//        return ($dataRequest);
-
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         return( $zeSocialBusinessResult);

@@ -18,15 +18,15 @@
                     <form ng-submit="submit()">
                         <div class="form-group col-xs-4">
                             <label for="exampleInputName2">Distance</label>
-                            <input type="text" class="form-control" ng-model="app.distance" name="Distance" placeholder="Distance(km)">
+                            <input type="text" class="form-control" ng-model="app.distance" name="Distance" placeholder="Distance(km)" required="">
                         </div>
                         <div class="form-group col-xs-4">
                             <label for="exampleInputName2">Latitude</label>
-                            <input type="text" class="form-control" ng-model="app.latitude" name="Latitude" placeholder="Latitude">
+                            <input type="text" class="form-control" ng-model="app.latitude" name="Latitude" placeholder="Latitude" required="">
                         </div>
                         <div class="form-group col-xs-4">
                             <label for="exampleInputName2">Longitude</label>
-                            <input type="text" class="form-control" ng-model="app.longitude" name="Longitude" placeholder="Longitude">
+                            <input type="text" class="form-control" ng-model="app.longitude" name="Longitude" placeholder="Longitude" required="">
                         </div>
                         <div class="form-group col-xs-1">
                             <button type="submit" id="submit" class="btn btn-default">Search</button>
@@ -54,22 +54,22 @@
     <tr>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" name="" placeholder="Business Name">
+                <input type="text" class="form-control" ng-model="search.head.name" placeholder="Business Name">
             </div>
         </th>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" name="" placeholder="Phone Number">
+                <input type="text" class="form-control" ng-model="search.head.phoneNumber" placeholder="Phone Number">
             </div>
         </th>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" name="" placeholder="Email">
+                <input type="text" class="form-control" ng-model="search.head.email" placeholder="Email">
             </div>
         </th>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" name="" placeholder="Address">
+                <input type="text" class="form-control" ng-model="search.head.address" placeholder="Address">
             </div>
         </th>
         <th>
@@ -79,16 +79,24 @@
     </tr>
     </thead>
     <tbody>
-    <tr data-ng-repeat="get_all_businesss in get_all_business">
-        <td >@{{ get_all_businesss.head.name }}</td>
-        <td >@{{ get_all_businesss.head.phoneNumber }}</td>
-        <td >@{{ get_all_businesss.head.email }}</td>
-        <td >@{{ get_all_businesss.head.address }}</td>
+    <tr data-ng-repeat="item in get_all_business | filter:search:strict">
+        <td >@{{ item.head.name }}</td>
+        <td >@{{ item.head.phoneNumber }}</td>
+        <td >@{{ item.head.email }}</td>
+        <td >@{{ item.head.address }}</td>
         <td >
         	<div class="row">
-			  <div class="col-md-3">View</div>
-			  <div class="col-md-6">ManageCatalog</div>
-			  <div class="col-md-3">Delete</div>
+              <div class="col-xs-3">
+                    <A ng-href="#/business/@{{item.businessId}}">
+                        <button type="button" name="btnMore" class="btn btn-default" >View</button>
+                    </a>
+              </div>
+              <div class="col-xs-5">
+                  <button type="button" name="btnMore" class="btn btn-success" ng-click="viewBusiness()">Catalogue</button>
+              </div>
+              <div class="col-xs-4">
+                  <button type="button" name="btnMore" class="btn btn-danger" ng-click="deleteById('sm')">Delete</button>
+              </div>
 			</div>
         </td>
     </tr>
@@ -96,7 +104,6 @@
 </table>
 
 <style>
-    
 .ng-enter{
     transition:0.75s;
     opacity: 0;
@@ -115,5 +122,5 @@
     opacity: 0;
 }
 </style>
-</div>
 
+</div>
