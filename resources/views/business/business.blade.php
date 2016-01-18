@@ -1,3 +1,5 @@
+
+
 <div class="container">
 <form ng-submit="submit()" name="BusinessFormName">
 	<div class="panel panel-info">
@@ -27,18 +29,18 @@
 	</div>
 	<div class="form-group col-xs-6">
 		<label for="exampleInputEmail1">Business Type</label>
-		<select class="form-control" ng-model="globalVirable.businessTypeList" >
-			<option ng-repeat="businessTypes in businessType" value="@{{ businessTypes }}">@{{ businessTypes.name }}</option>
+		<select  id="typeList" multiple="multiple" ng-model="globalVirable.businessTypeList" class="tokenize-sample" placeholder="select" >
+			<option  ng-repeat="businessTypes in businessType" value="@{{ businessTypes.id  }}">@{{ businessTypes.name }}</option>
 		</select>
 	</div>
 
 	<div class="form-group col-xs-6">
 		<label for="exampleInputEmail1">Business Tag</label>
-		<select class="form-control" ng-model="globalVirable.businessTagList">
-			<optgroup ng-repeat="businessTags in businessTag" label="@{{ businessTags.name }}">
-			 <option ng-repeat="tag in businessTags.tag" value="@{{ tag.id }}"> @{{ tag.name }} </option>
-			</optgroup>
-		</select>
+	<select ng-model="globalVirable.businessTagList" id="tagList" multiple="multiple" class="tokenize-sample" name="select">
+		<optgroup ng-repeat="businessTags in businessTag" label="@{{ businessTags.name }}">
+			<option ng-repeat="tag in businessTags.tag" value="@{{ tag.id }}"> @{{ tag.name }} </option>
+		</optgroup>
+	</select>
 	</div>
 	<div class="form-group col-xs-12">
 		<label for="exampleInputEmail1">Address</label>
@@ -58,7 +60,7 @@
 	</div>
 
 	<div class="form-group col-xs-6">
-		<button type="submit" class="btn btn-default">Submit</button>
+		<button type="submit" id="clickBR" class="btn btn-default">Submit</button>
 	</div>
 
 	<div class="form-group col-xs-6">
@@ -66,11 +68,46 @@
 			<div class="alert alert-success">
 				<strong>Success!</strong> Business has been create.
 			</div>
+
+			<A ng-href="/#business">Back to business!</A>
 		</div>
 
 	</div>
+
+
 </form>
 
-
 </div>
+
+<script type="text/javascript">
+$('#tagList').tokenize({
+	displayDropdownOnFocus: true,
+	nbDropdownElements:10000000000000
+
+});
+
+$('#typeList').tokenize({
+	displayDropdownOnFocus: true,
+	nbDropdownElements:10000000000000
+
+});
+$(document).ready(function(){
+	$('#clickBR').click(function(){
+		var dataTypeList = $('#typeList').tokenize().toArray();
+		var dataTagList  = $('#tagList').tokenize().toArray();
+		console.log(dataTypeList);
+		$.ajax({
+			type: "POST",
+			url: 'http://asianbusiness.dev/business/register-business',
+			data:{dataTypeList:dataTypeList,dataTagList:dataTagList},
+			dataType: 'JSON'
+		}).success(function(res){
+
+		}).error(function(res){
+			console.log(res);
+		});
+	});
+
+});
+</script>
 
