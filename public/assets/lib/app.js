@@ -80,10 +80,20 @@ app.config(function ($routeProvider) {
                 controller: 'ngBusinessTag',
                 templateUrl: '/business/business-tag'
             })
-        .when('/product',
+        .when('/products',
             {
                 controller: 'ngProduct',
                 templateUrl: '/product'
+            })
+        .when('/products/product',
+            {
+                controller: 'ngAddProduct',
+                templateUrl: '/product/product'
+            })
+        .when('/products/product/:productId',
+            {
+                controller: 'ngGetProduct',
+                templateUrl: '/product/product-by-id'
             })
         .when('/promotion',
             {

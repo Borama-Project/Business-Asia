@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function getIndex()
     {
 
-        return view('product.product');
+        return view('product.index');
     }
 
     public function postSaveProduct(){
@@ -46,10 +46,46 @@ class ProductController extends Controller
         return ($zeSocialBusinessResult);
     }
 
+    public function getProductCondition(){
+        
+        $function = 'product/get_product_condition';
+        $dataRequest = '';
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest);
+        return ($zeSocialBusinessResult);
+    }
+    public function getProduct(){
+        return view('product.product');
+    }
+    public function postProduct(){
+        $function = 'businessAdmin/add_product';
+        $method = 'POST';
+        $dataRequest = array(
+
+            'name'=> Input::get('name'),
+            'productCategoryId' => Input::get('productCategoryId'),
+            'currency'   => Input::get('currency'),
+            'dateStart'   => Input::get('DateStart'),
+            'dateEnd'   => Input::get('DateEnd'),
+            'condition'   => Input::get('condition'),
+            'price'   => Input::get('price'),
+
+        );
+        // 1: Band New, 2: Best Price, 3: Second Hand, 4: Good Condition)
+       
+        // $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        // $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        // return ($zeSocialBusinessResult);
+        // return ;
+        return json_encode($dataRequest);
+    }
+
+    public function getProductById(){
+        return view('product.viewProduct');
+    }
     public function getPromotion(){
 
         return view('promotion.promotion');
     }
-
 
 }

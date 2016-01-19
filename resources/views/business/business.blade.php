@@ -36,11 +36,11 @@
 
 	<div class="form-group col-xs-6">
 		<label for="exampleInputEmail1">Business Tag</label>
-	<select ng-model="globalVirable.businessTagList" id="tagList" multiple="multiple" class="tokenize-sample" name="select">
-		<optgroup ng-repeat="businessTags in businessTag" label="@{{ businessTags.name }}">
-			<option ng-repeat="tag in businessTags.tag" value="@{{ tag.id }}"> @{{ tag.name }} </option>
-		</optgroup>
-	</select>
+		<select ng-model="globalVirable.businessTagList" id="tagList" multiple="multiple" class="tokenize-sample" name="select">
+			<optgroup ng-repeat="businessTags in businessTag" label="@{{ businessTags.name }}">
+				<option ng-repeat="tag in businessTags.tag" value="@{{ tag.id }}"> @{{ tag.name }} </option>
+			</optgroup>
+		</select>
 	</div>
 	<div class="form-group col-xs-12">
 		<label for="exampleInputEmail1">Address</label>

@@ -401,29 +401,83 @@ app.controller('ngBusinessTag', function ($scope,$http) {
 
 app.controller('ngProduct', function ($scope,$http) {
 
-    $scope.list = function(){
+    $scope.submit = function(){
+      // console.log($scope.app);
+      $http({
+          method: 'POST',
+          url:  '/product/product',
+          data: $scope.app,
+          dataType: "json"
+      }).success(function(response) {
+          console.log(response);
+          // $scope.item = response.data[0];
+      }).error(function(response) {
+          console.log(response);
+      });
+    };
+});
+app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
+
+    // $scope.submit = function(){
+    //   // console.log($scope.app);
+    //   $http({
+    //       method: 'POST',
+    //       url:  '/product/product',
+    //       data: $scope.app,
+    //       dataType: "json"
+    //   }).success(function(response) {
+    //       console.log(response);
+    //       // $scope.item = response.data[0];
+    //   }).error(function(response) {
+    //       console.log(response);
+    //   });
+    // };
+    console.log($routeParams.productId);
+});
+app.controller('ngAddProduct', function ($scope,$http) {
+    $scope.categorysList = function(){
         $http({
             method: 'GET',
-            url:  '/product/list',
+            url:  '/business/list',
             dataType: "json"
         }).success(function(response) {
             console.log(response);
-            $scope.products = response;
+            $scope.categorysLists = response.data;
         }).error(function(response) {
             console.log(response);
         });
     };
-    $scope.list();
+    $scope.conditionList = function(){
+        $http({
+            method: 'GET',
+            url:  '/product/product-condition',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.conditions = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.categorysList();
+    $scope.conditionList();
 
     $scope.submit = function(){
-
-        $http.get('C:/wamp/www/AsianBusiness/public/content.json').success(function(response) {
-            return response.data;
-        });
+      // console.log($scope.app);
+      $http({
+          method: 'POST',
+          url:  '/product/product',
+          data: $scope.app,
+          dataType: "json"
+      }).success(function(response) {
+          console.log(response);
+          // $scope.item = response.data[0];
+      }).error(function(response) {
+          console.log(response);
+      });
     };
 
 });
-
 app.controller('ngPromotion', function ($scope,$http) {
 
     //I like to have an init() for controllers that need to perform some initialization. Keeps things in
