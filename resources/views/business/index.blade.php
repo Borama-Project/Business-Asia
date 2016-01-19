@@ -6,7 +6,7 @@
 	  </div>
 </div>
 <div class="list-group col-lg-2" >
-	<A ng-href="#/registerBusiness" class="list-group-item">Register Business</A>
+	<A ng-href="#/business/register/Business" class="list-group-item">Register Business</A>
 </div>
 <table class="table table-condensed">
     <thead> 

@@ -395,26 +395,6 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
 
 });
 
-app.controller('ngBusinessType', function ($scope,$http) {
-
-    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
-    //one place...not required though especially in the simple example below
-    init();
-    function init() {
-       console.log('businessType');
-    }
-});
-
-app.controller('ngBusinessTag', function ($scope,$http) {
-
-    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
-    //one place...not required though especially in the simple example below
-    init();
-    function init() {
-        console.log('businessTag');
-    }
-});
-
 app.controller('ngProduct', function ($scope,$http) {
 
     $scope.submit = function(){
