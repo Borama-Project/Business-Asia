@@ -72,9 +72,9 @@
 		</div>
 	</div>
 
+
 	<div ng-dropdown-multiselect="" options="example1data" selected-model="example1model"></div>
-
-
+	
 	<div class="form-group col-xs-6">
 		<button type="submit" id="clickBR" class="btn btn-default">Submit</button>
 	</div>
