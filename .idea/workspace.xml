@@ -25,11 +25,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="business.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="business.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/business/business.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.26923" vertical-offset="0" max-vertical-offset="2023">
-              <caret line="31" column="15" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="15" />
+            <state vertical-scroll-proportion="0.37955347" vertical-offset="663" max-vertical-offset="3995">
+              <caret line="58" column="18" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/assets/lib/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="1819">
+              <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Downloads/angularjs-dropdown-multiselect-master/angularjs-dropdown-multiselect-master/pages/javascripts/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -50,65 +70,40 @@
       <file leaf-file-name="select_responsive.html" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Downloads/HemantNegi-jquery.sumoselect-v2.0.2-13-gfb6ad84/HemantNegi-jquery.sumoselect-fb6ad84/select_responsive.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.527273" vertical-offset="2421" max-vertical-offset="6324">
+            <state vertical-scroll-proportion="-18.038462" vertical-offset="2421" max-vertical-offset="6324">
               <caret line="170" column="149" selection-start-line="170" selection-start-column="69" selection-end-line="170" selection-end-column="149" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layout.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="layout.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/layout.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7525196" vertical-offset="246" max-vertical-offset="1139">
-              <caret line="54" column="30" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="30" />
+            <state vertical-scroll-proportion="-18.0" vertical-offset="246" max-vertical-offset="1139">
+              <caret line="42" column="78" selection-start-line="42" selection-start-column="78" selection-end-line="42" selection-end-column="78" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="favicon.ico" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/favicon.ico">
-          <provider selected="true" editor-type-id="images">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="controllers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/assets/lib/controller/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6324" max-vertical-offset="8160">
-              <caret line="390" column="0" selection-start-line="390" selection-start-column="0" selection-end-line="390" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2652" max-vertical-offset="8466">
+              <caret line="394" column="0" selection-start-line="394" selection-start-column="0" selection-end-line="394" selection-end-column="0" />
               <folding>
-                <marker date="1453117221111" expanded="true" signature="8441:9212" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="8616:8862" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="8607:8831" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="8978:9013" placeholder="{&quot;method&quot;: 'POST'...}" />
-                <marker date="1453117221111" expanded="true" signature="9042:9122" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="9149:9165" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="9883:10162" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="9872:9938" placeholder="{&quot;method&quot;: 'GET'...}" />
-                <marker date="1453117221111" expanded="true" signature="9967:10078" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="10105:10140" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="10803:11224" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="10817:11104" placeholder="{&quot;method&quot;: 'POST'...}" />
-                <marker date="1453117221111" expanded="true" signature="11134:11227" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="11491:11549" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="11856:12149" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="11947:12089" placeholder="{&quot;method&quot;: 'GET'...}" />
-                <marker date="1453117221111" expanded="true" signature="12127:12152" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="12368:12406" placeholder="{...}" />
-                <marker date="1453117221111" expanded="true" signature="12734:12757" placeholder="{...}" />
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
+      <file leaf-file-name="development_index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Downloads/dotansimha-angularjs-dropdown-multiselect-1.5.2-9-g8f751d8/dotansimha-angularjs-dropdown-multiselect-8f751d8/development_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.653847" vertical-offset="0" max-vertical-offset="833">
-              <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
+            <state vertical-scroll-proportion="-21.923077" vertical-offset="348" max-vertical-offset="1241">
+              <caret line="54" column="67" selection-start-line="54" selection-start-column="57" selection-end-line="54" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -127,14 +122,14 @@
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/resources/views/business/listAllBusiness.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/business/category.blade.php" />
-        <option value="$PROJECT_DIR$/public/assets/lib/app.js" />
         <option value="$PROJECT_DIR$/resources/views/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Models/ZeSocialBusinessModel.php" />
-        <option value="$PROJECT_DIR$/public/assets/lib/controller/controllers.js" />
         <option value="$USER_HOME$/Downloads/dropdown-check-list.1.4/doc/dropdownchecklist.html" />
-        <option value="$PROJECT_DIR$/resources/views/business/business.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Business/BusinessController.php" />
         <option value="$PROJECT_DIR$/resources/views/layout.blade.php" />
+        <option value="$PROJECT_DIR$/public/assets/lib/app.js" />
+        <option value="$PROJECT_DIR$/resources/views/business/business.blade.php" />
+        <option value="$PROJECT_DIR$/public/assets/lib/controller/controllers.js" />
       </list>
     </option>
   </component>
@@ -192,6 +187,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="AsianBusiness" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AsianBusiness" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AsianBusiness" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -286,6 +299,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AsianBusiness" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AsianBusiness" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -465,6 +500,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp\www\AsianBusiness\public\assets\js" />
       <recent name="C:\wamp\www\AsianBusiness\public\assets\lib" />
       <recent name="C:\wamp\www\AsianBusiness\public\assets\css" />
     </key>
@@ -490,15 +526,15 @@
       <BehatRunner />
       <method />
     </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
       <tasks />
       <pass-parent-envs>true</pass-parent-envs>
       <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="1">
@@ -531,7 +567,6 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -542,11 +577,12 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -566,9 +602,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -592,58 +628,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Business/BusinessController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="1377">
-          <caret line="31" column="26" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="26" />
-          <folding>
-            <element signature="e#49#61#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/lib/controller/controllers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2345" max-vertical-offset="4182">
-          <caret line="164" column="34" selection-start-line="164" selection-start-column="12" selection-end-line="164" selection-end-column="34" />
-          <folding>
-            <marker date="1453117221111" expanded="true" signature="8441:9212" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="8616:8862" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="8607:8831" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="8978:9013" placeholder="{&quot;method&quot;: 'POST'...}" />
-            <marker date="1453117221111" expanded="true" signature="9042:9122" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="9149:9165" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="9883:10162" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="9872:9938" placeholder="{&quot;method&quot;: 'GET'...}" />
-            <marker date="1453117221111" expanded="true" signature="9967:10078" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="10105:10140" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="10803:11224" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="10817:11104" placeholder="{&quot;method&quot;: 'POST'...}" />
-            <marker date="1453117221111" expanded="true" signature="11134:11227" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="11491:11549" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="11856:12149" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="11947:12089" placeholder="{&quot;method&quot;: 'GET'...}" />
-            <marker date="1453117221111" expanded="true" signature="12127:12152" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="12368:12406" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="12734:12757" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/business/category.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="680">
-          <caret line="27" column="41" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/lib/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1292">
-          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/business/category.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="561">
@@ -663,25 +647,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="237" max-vertical-offset="1156">
           <caret line="53" column="12" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
           <folding>
-            <marker date="1453117221111" expanded="true" signature="8441:9212" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="8616:8862" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="8607:8831" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="8978:9013" placeholder="{&quot;method&quot;: 'POST'...}" />
-            <marker date="1453117221111" expanded="true" signature="9042:9122" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="9149:9165" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="9883:10162" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="9872:9938" placeholder="{&quot;method&quot;: 'GET'...}" />
-            <marker date="1453117221111" expanded="true" signature="9967:10078" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="10105:10140" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="10803:11224" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="10817:11104" placeholder="{&quot;method&quot;: 'POST'...}" />
-            <marker date="1453117221111" expanded="true" signature="11134:11227" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="11491:11549" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="11856:12149" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="11947:12089" placeholder="{&quot;method&quot;: 'GET'...}" />
-            <marker date="1453117221111" expanded="true" signature="12127:12152" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="12368:12406" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="12734:12757" placeholder="{...}" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -885,13 +851,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/lib/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1632">
-          <caret line="22" column="81" selection-start-line="22" selection-start-column="69" selection-end-line="22" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/ZeSocialBusinessModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.115385" vertical-offset="535" max-vertical-offset="1428">
@@ -900,19 +859,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.653847" vertical-offset="0" max-vertical-offset="833">
-          <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/closet-9a39c653de9cd43fe1c3f8a1b33f14f160ba64cb/closet.git/application/back-modules/cms/controllers/cms.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.2844344" vertical-offset="1147" max-vertical-offset="2040">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -920,13 +870,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="919">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/favicon.ico">
-      <provider selected="true" editor-type-id="images">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/lib/jquery.sumoselect.js">
@@ -941,7 +885,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2951389" vertical-offset="0" max-vertical-offset="14722">
           <caret line="15" column="93" selection-start-line="15" selection-start-column="93" selection-end-line="15" selection-end-column="93" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -949,7 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2890">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -957,50 +899,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.08401977" vertical-offset="51" max-vertical-offset="14416">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/lib/controller/controllers.js">
+    <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6324" max-vertical-offset="8160">
-          <caret line="390" column="0" selection-start-line="390" selection-start-column="0" selection-end-line="390" selection-end-column="0" />
-          <folding>
-            <marker date="1453117221111" expanded="true" signature="8441:9212" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="8616:8862" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="8607:8831" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="8978:9013" placeholder="{&quot;method&quot;: 'POST'...}" />
-            <marker date="1453117221111" expanded="true" signature="9042:9122" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="9149:9165" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="9883:10162" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="9872:9938" placeholder="{&quot;method&quot;: 'GET'...}" />
-            <marker date="1453117221111" expanded="true" signature="9967:10078" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="10105:10140" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="10803:11224" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="10817:11104" placeholder="{&quot;method&quot;: 'POST'...}" />
-            <marker date="1453117221111" expanded="true" signature="11134:11227" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="11491:11549" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="11856:12149" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="11947:12089" placeholder="{&quot;method&quot;: 'GET'...}" />
-            <marker date="1453117221111" expanded="true" signature="12127:12152" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="12368:12406" placeholder="{...}" />
-            <marker date="1453117221111" expanded="true" signature="12734:12757" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/HemantNegi-jquery.sumoselect-v2.0.2-13-gfb6ad84/HemantNegi-jquery.sumoselect-fb6ad84/select_responsive.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.527273" vertical-offset="2421" max-vertical-offset="6324">
-          <caret line="170" column="149" selection-start-line="170" selection-start-column="69" selection-end-line="170" selection-end-column="149" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/business/business.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.26923" vertical-offset="0" max-vertical-offset="2023">
-          <caret line="31" column="15" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="15" />
+        <state vertical-scroll-proportion="-17.653847" vertical-offset="0" max-vertical-offset="833">
+          <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -1015,10 +920,92 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/js/angularjs-dropdown-multiselect.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5100">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1434166350000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1434166350000" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/HemantNegi-jquery.sumoselect-v2.0.2-13-gfb6ad84/HemantNegi-jquery.sumoselect-fb6ad84/select_responsive.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.038462" vertical-offset="2421" max-vertical-offset="6324">
+          <caret line="170" column="149" selection-start-line="170" selection-start-column="69" selection-end-line="170" selection-end-column="149" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/dotansimha-angularjs-dropdown-multiselect-1.5.2-9-g8f751d8/dotansimha-angularjs-dropdown-multiselect-8f751d8/development_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.923077" vertical-offset="348" max-vertical-offset="1241">
+          <caret line="54" column="67" selection-start-line="54" selection-start-column="57" selection-end-line="54" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/lib/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="1819">
+          <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/angularjs-dropdown-multiselect-master/angularjs-dropdown-multiselect-master/pages/javascripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="919">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/angularjs-dropdown-multiselect-master/angularjs-dropdown-multiselect-master/pages/javascripts/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="919">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/angularjs-dropdown-multiselect-master/angularjs-dropdown-multiselect-master/Gruntfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2125">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/lib/controller/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2652" max-vertical-offset="8466">
+          <caret line="394" column="0" selection-start-line="394" selection-start-column="0" selection-end-line="394" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/favicon.ico">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layout.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7525196" vertical-offset="246" max-vertical-offset="1139">
-          <caret line="54" column="30" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="30" />
+        <state vertical-scroll-proportion="-18.0" vertical-offset="246" max-vertical-offset="1139">
+          <caret line="42" column="78" selection-start-line="42" selection-start-column="78" selection-end-line="42" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/business/business.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37955347" vertical-offset="663" max-vertical-offset="3995">
+          <caret line="58" column="18" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
           <folding />
         </state>
       </provider>

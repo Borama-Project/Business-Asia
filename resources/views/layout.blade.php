@@ -40,7 +40,7 @@
     <script src="{{asset('/assets/lib/ng-file-upload.min.js')}}"></script>
     <script src="{{asset('/assets/lib/ng-file-upload-shim.min.js')}}"></script>
             <script src="{{asset('/assets/lib/jquery.tokenize.js')}}"></script>
-
+            <script src="{{asset('/assets/js/angularjs-dropdown-multiselect.js')}}"></script>
 
 <script type="text/ng-template" id="ModalContent">
     <div class="modal-header">

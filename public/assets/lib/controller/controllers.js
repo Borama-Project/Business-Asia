@@ -330,6 +330,20 @@ app.controller('ngViewBusiness', function ($scope,$http,$routeParams) {
 
 
 app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
+
+    $('.selected-items-box').bind('click', function(e){
+        e.stopPropagation();
+        $('.multiple-select-wrapper .list').toggle('slideDown');
+    });
+
+    $('.multiple-select-wrapper .list').bind('click', function(e){
+        e.stopPropagation();
+    });
+
+    $(document).bind('click', function(){
+        $('.multiple-select-wrapper .list').slideUp();
+    });
+
   $scope.listBusinessTag = function(){
         $http({
             method: 'GET',
@@ -351,7 +365,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             url:  '/business/list-business-type',
             dataType: "json"
         }).success(function(response) {
-            //console.log(response);
+            console.log(response);
             $scope.businessType = response.data;
         }).error(function(response) {
             //console.log(response);
@@ -360,6 +374,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
     $scope.listBusinessType();
 
     $scope.submit = function(){
+        console.log($scope.globalVirable);
         Upload.upload({
             method: 'POST',
             url: '/business/register-business',
@@ -377,8 +392,9 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             }
         });
     };
-      
+
 });
+
 app.controller('ngBusinessType', function ($scope,$http) {
 
     //I like to have an init() for controllers that need to perform some initialization. Keeps things in
