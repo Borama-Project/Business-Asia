@@ -59,26 +59,15 @@ app.config(function ($routeProvider) {
                 controller: 'ngViewBusiness',
                 templateUrl: '/business/business-by-id'
             })
-        .when('/registerBusiness',
+        .when('/business/register/Business',
             {
                 controller: 'ngRegisterBusiness',
                 templateUrl: '/business/register-business'
-            })
-        
-        .when('/businessType',
-            {
-                controller: 'ngBusinessType',
-                templateUrl: '/business/business-type'
             })
         .when('/mainCategory',
             {
                 controller: 'ngBusinessType',
                 templateUrl: '/mainCategory'
-            })
-        .when('/businessTag',
-            {
-                controller: 'ngBusinessTag',
-                templateUrl: '/business/business-tag'
             })
         .when('/products',
             {

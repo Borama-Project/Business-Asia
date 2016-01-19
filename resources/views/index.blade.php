@@ -10,8 +10,6 @@
 			  </a>
 			  <A ng-href="#/category" class="list-group-item">Add Category</A>
 			  <A ng-href="#/business" class="list-group-item">Business</A>
-			  <A ng-href="#/businessType" class="list-group-item">business Type</A>
-			  <A ng-href="#/businessTag" class="list-group-item">business Tag</A>
 			  <A ng-href="#/products" class="list-group-item">Add Product</A>
 			  <A ng-href="#/promotion" class="list-group-item">Promotion</A>
 			  <!-- <A ng-href="#/list-all-business" class="list-group-item" >List All Business</A> -->
