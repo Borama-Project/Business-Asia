@@ -475,6 +475,34 @@ app.controller('ngProduct', function ($scope,$http) {
         });
     };
     $scope.categorysList();
+    $scope.businessList = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-all-business-data',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response.data);
+            $scope.business = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.businessList();
+
+    $scope.change = function(){
+      // console.log(this);
+      $http({
+            url:  '/business/category',
+            method: 'POST',
+            data: {businessId:$scope.app.businessId},
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.category = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });  
+    }
 });
 app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 

@@ -68,6 +68,18 @@ class BusinessController extends Controller
         return view('business.category');
     }
 
+    public function postCategory(){
+        
+        $method   = 'POST';
+        $function = 'businessAdmin/get_category_by_business';
+        $dataRequest = array(
+            'businessId'      => Input::get('businessId')
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        // return(Input::get('businessId'));
+        return ($zeSocialBusinessResult);
+    }
     public function getBusinessType()
     {
         return view('business.businessType');
