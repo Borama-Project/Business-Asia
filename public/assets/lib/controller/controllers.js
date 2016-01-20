@@ -373,14 +373,61 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
     };
     $scope.listBusinessType();
 
-    $scope.submit = function(){
+    ////business type checkbox
+    //$scope.selection=[];
+    //// toggle selection for a given employee by name
+    //$scope.toggleSelection = function toggleSelection(tagId) {
+    //    var idx = $scope.selection.indexOf(tagId);
+    //
+    //    // is currently selected
+    //    if (idx > -1) {
+    //        $scope.selection.splice(idx, 1);
+    //    }
+    //    // is newly selected
+    //    else {
+    //        $scope.selection.push(tagId);
+    //    }
+    //    console.log($scope.selection);
+    //
+    //};
+    ////end business type checkbox
+    //business tag check box
+    $scope.selectionTag=[];
+    // toggle selection for a given employee by name
+    $scope.toggleSelectionTag = function toggleSelectionTag(tagId) {
+        var idx = $scope.selectionTag.indexOf(tagId);
 
-       console.log($scope.globalTag);
+        // is currently selected
+        if (idx > -1) {
+            $scope.selectionTag.splice(idx, 1);
+        }
+        // is newly selected
+        else {
+            $scope.selectionTag.push(tagId);
+        }
+        console.log($scope.selectionTag);
+
+    };
+    //end
+    $scope.submit = function
+        (){
 
         Upload.upload({
             method: 'POST',
             url: '/business/register-business',
-            data: $scope.globalVirable,
+            data: {
+                name:$scope.globalVirable.name,
+                phoneNumber:$scope.globalVirable.phoneNumber,
+                email:$scope.globalVirable.email,
+                latitute:$scope.globalVirable.latitute,
+                longitute:$scope.globalVirable.longitute,
+                address:$scope.globalVirable.address,
+                description:$scope.globalVirable.description,
+                logo:$scope.globalVirable.logo,
+                cover:$scope.globalVirable.cover,
+                businessTypeList:$scope.globalVirable.businessTypeList,
+                businessTagList:$scope.selectionTag
+            },
             dataType: "json",
             contentType: false,
             cache: false,
@@ -393,6 +440,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             }
         });
     };
+
 
 });
 

@@ -28,20 +28,31 @@
 	</div>
 	<div class="form-group col-xs-6">
 		<label>Business Type</label>
-		<div class="div-type-list">
-			<div ng-repeat="businessTypes in businessType">
-				<input type="checkbox"  ng-model="globalTag.businessTypeList"  id="@{{ businessTypes.id }}" value="@{{ businessTypes.id }}">@{{ businessTypes.name }}
-			</div>
-		</div>
+		{{--<div class="div-type-list">--}}
+			{{--<div ng-repeat="businessTypes in businessType">--}}
+				{{--<div class="action-checkbox">--}}
+					{{--<input id="@{{businessTypes}}" type="checkbox" value="@{{businessTypes}}" ng-checked="selection.indexOf(businessTypes) > -1" ng-click="toggleSelection(businessTypes)" />--}}
+					{{--@{{businessTypes.name}}--}}
+				{{--</div>--}}
+			{{--</div>--}}
+			<select ng-model="globalVirable.businessTypeList" class="form-control" >
+				<option ng-repeat="businessTypes in businessType" value="@{{businessTypes}}"> @{{businessTypes.name}}</option>
+			</select>
+		{{--</div>--}}
 	</div>
+
 
 	<div class="form-group col-xs-6">
 		<label for="exampleInputEmail1">Business Tag</label>
 		<div class="div-type-list">
-			<div  ng-repeat="businessTags in businessTag"><span class="blode-header">@{{ businessTags.name }}</span>
-				<div ng-repeat="tag in businessTags.tag">
-					<input type="checkbox"  ng-model="globalTag.businessTagList" value="@{{ tag.id }}">@{{ tag.name }}
+				<div  ng-repeat="businessTags in businessTag"><span class="blode-header">@{{ businessTags.name }}</span>
+					<div  ng-repeat="tag in businessTags.tag">
+						<input id="@{{tag.id}}" type="checkbox" value="@{{tag.id}}" ng-checked="selectionTage.indexOf(tags.id) > -1" ng-click="toggleSelectionTag(tag.id)" />
+						@{{tag.name}}
+					</div>
 				</div>
+			<div ng-repeat="name in selectionTag" class="selected-item">
+				@{{name}}
 			</div>
 		</div>
 
@@ -80,9 +91,23 @@
 	</div>
 
 
+		{{--<div ng-repeat="businessTypes in businessType">--}}
+			{{--<div class="action-checkbox">--}}
+				{{--<input id="@{{businessTypes.id}}" type="checkbox" value="@{{businessTypes.id}}" ng-checked="selection.indexOf(businessTypes.id) > -1" ng-click="toggleSelection(businessTypes.id)" />--}}
+				{{--@{{businessTypes.name}}--}}
+			{{--</div>--}}
+		{{--</div>--}}
+
+ {{--<div ng-repeat="name in selectionTag" class="selected-item">--}}
+	 {{--@{{name}}--}}
+ {{--</div>--}}
+
 </form>
 
 </div>
+
+
+
 
 <style>
 .div-type-list{

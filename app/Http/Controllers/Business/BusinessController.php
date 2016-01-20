@@ -134,26 +134,26 @@ class BusinessController extends Controller
         }
         $function = 'businessAdmin/register_business';
         $authorId = json_decode(Session::get('zeAccessKey'));
-        $btl      = array(Input::get('businessTagList'));
 
-        $btyl     = array(Input::get('businessTypeList'));
+        $businessTagList     = (Input::get('businessTagList'));
+        $businessTypeList     = array(Input::get('businessTypeList'));
+
         $strNullType = '';
-        foreach($btyl as $value){
-
+        foreach($businessTypeList as $value){
             $strNullType .= "[".$value."]";
-
         }
 
-        $str = '';
-        foreach($btl as $key){
-            if($str==''){
-                $str .='"'.$key.'"';
+//        business tag list foreach string
+        $strTag = '';
+        foreach($businessTagList as $key){
+            if($strTag==''){
+                $strTag .='"'.$key.'"';
             }else{
-                $str .=',"'.$key.'"';
+                $strTag .=',"'.$key.'"';
             }
         }
-        $str = '['.$str.']';
-
+        $str = '['.$strTag.']';
+//end
         $method   = 'POST';
         $dataRequest = array(
             'authorId'          => $authorId->ownerId,
@@ -170,6 +170,7 @@ class BusinessController extends Controller
             'businessTypeList'  => $strNullType
         );
 
+//        return ($dataRequest);
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         return( $zeSocialBusinessResult);
