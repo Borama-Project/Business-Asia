@@ -20,7 +20,7 @@
                     <form ng-submit="submit()">
                         <div class="form-group col-xs-4">
                             <label for="exampleInputName2">Product ID</label>
-                            <input type="text" class="form-control" ng-model="app.productId" name="Distance" placeholder="Product ID">
+                            <input type="text" class="form-control" ng-model="app.productId" name="productId" placeholder="Product ID">
                         </div>
                         <div class="form-group col-xs-4">
                             <label for="exampleInputName2">Product Category</label>
@@ -34,19 +34,19 @@
                             <label for="exampleInputName2">Business ID</label>
                             <!-- <input type="text" class="form-control" ng-model="app.businessId" name="Longitude" placeholder="Business ID"> -->
 
-                            <select ng-model="app.businessId" ng-change="change()" class="form-control" id="currency"  name="select" required >
+                            <select ng-model="app.businessId" ng-change="change()" class="form-control"   name="select" >
                                 <option value=""> </option>
                                 <option ng-repeat="item in business" value="@{{ item.businessId }}"> @{{ item.head.name }} </option>
                             </select>
                         </div>
                         <div class="form-group col-xs-4">
                             <label for="exampleInputName2">Promotion ID</label>
-                            <input type="text" class="form-control" ng-model="app.promotionId" name="Longitude" placeholder="Promotion ID">
+                            <input type="text" class="form-control" ng-model="app.promotionId" name="promotionId" placeholder="Promotion ID">
                         </div>
                         <div class="form-group col-xs-4">
                             <label for="exampleInputName2">Category</label>
                             <!-- <input type="text" class="form-control" ng-model="app.categoryId" name="Longitude" placeholder="Category"> -->
-                            <select ng-model="app.categoryId" class="form-control" id="currency"  name="select" >
+                            <select ng-model="app.categoryId" class="form-control"  name="select" >
                                 <option value=""> </option>
                                 <option ng-repeat="item in category" value="@{{ item.id }}"> @{{ item.name }} </option>
                             </select>
