@@ -12,7 +12,7 @@
 	</div>
 	<div class="form-group col-xs-6">
 	    <label for="exampleInputEmail1">Phone Number</label>
-	    <input type="number" class="form-control"  name="" ng-model="globalVirable.phoneNumber" placeholder="Name" required="true">
+	    <input type="number" class="form-control"  name="" ng-model="globalVirable.phoneNumber" placeholder="phone" required="true">
 	</div>
 	<div class="form-group col-xs-12">
 		<label for="exampleInputEmail1">Email</label>
@@ -28,17 +28,10 @@
 	</div>
 	<div class="form-group col-xs-6">
 		<label>Business Type</label>
-		{{--<div class="div-type-list">--}}
-			{{--<div ng-repeat="businessTypes in businessType">--}}
-				{{--<div class="action-checkbox">--}}
-					{{--<input id="@{{businessTypes}}" type="checkbox" value="@{{businessTypes}}" ng-checked="selection.indexOf(businessTypes) > -1" ng-click="toggleSelection(businessTypes)" />--}}
-					{{--@{{businessTypes.name}}--}}
-				{{--</div>--}}
-			{{--</div>--}}
 			<select ng-model="globalVirable.businessTypeList" class="form-control" >
 				<option ng-repeat="businessTypes in businessType" value="@{{businessTypes}}"> @{{businessTypes.name}}</option>
 			</select>
-		{{--</div>--}}
+
 	</div>
 
 
@@ -62,42 +55,53 @@
 		<label for="exampleInputEmail1">Description</label>
 		<textarea class="form-control" name="searchBusiness" ng-model="globalVirable.description" placeholder="Discription"></textarea>
 	</div>
-	<div class="form-group col-xs-6">
-		<label for="exampleInputEmail1">Company Logo</label>
-		<input type="file" ngf-select ng-model="globalVirable.logo" name="logo" required="true">
+	<div class="form-group col-xs-6 thumbnail">
+		<div class="col-xs-6 col-md-3">
+			<label for="exampleInputEmail1">Company Logo</label>
+			<a href="javascript:void(0)" class="thumbnail">
+				<img ng-src="/assets/img/img-photo-upload.png" width="150" height="150"  id="bFileUpload">
+				<input type="file" ngf-select ng-model="globalVirable.logo" name="logo" id="imgFileUpload" required="true" style="display: none">
+			</a>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<img ngf-src="globalVirable.logo" class="thumb" width="150" height="150">
+		</div>
+
 	</div>
-	<div class="form-group col-xs-6">
-		<label for="exampleInputEmail1">Cover</label>
-		<input type="file" ngf-select ng-model="globalVirable.cover" name="cover" required="true">
+	<div class="form-group col-xs-6 thumbnail">
+		<div class="col-xs-6 col-md-3">
+			<label for="exampleInputEmail1">Cover</label>
+			<a href="javascript:void(0)" class="thumbnail">
+				<img ng-src="/assets/img/img-photo-upload.png" width="150" height="150"  id="coverFileUpload">
+				<input type="file" ngf-select ng-model="globalVirable.cover" name="cover" id="imgCoverFileUpload" required="true" style="display: none">
+			</a>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<img ngf-src="globalVirable.cover" class="thumb" width="300" height="150">
+		</div>
 	</div>
 
 
-	<div class="form-group col-xs-6">
+	<div class="form-group col-xs-6 ">
 		<button type="submit" id="clickBR" class="btn btn-default">Submit</button>
 	</div>
 
 	<div class="form-group col-xs-6">
 		<div ng-if="success">
 			<div class="alert alert-success">
-				<strong>Success!</strong> Business has been create.
+				<strong>Success!</strong><span class="label label-success">@{{ businessName }}</span> Business has been create.
 			</div>
 
 			<A ng-href="/#business">Back to business!</A>
 		</div>
 
+		<div ng-if="errorSMS">
+			<div class="alert alert-danger" animate-show>
+				@{{ errorSMS }}
+			</div>
+		</div>
+
 	</div>
-
-
-		{{--<div ng-repeat="businessTypes in businessType">--}}
-			{{--<div class="action-checkbox">--}}
-				{{--<input id="@{{businessTypes.id}}" type="checkbox" value="@{{businessTypes.id}}" ng-checked="selection.indexOf(businessTypes.id) > -1" ng-click="toggleSelection(businessTypes.id)" />--}}
-				{{--@{{businessTypes.name}}--}}
-			{{--</div>--}}
-		{{--</div>--}}
-
- {{--<div ng-repeat="name in selectionTag" class="selected-item">--}}
-	 {{--@{{name}}--}}
- {{--</div>--}}
 
 </form>
 
@@ -120,5 +124,13 @@
 		font-size: 12px;
 	}
 </style>
+<script>
+	$( "#bFileUpload" ).on( "click", function() {
+		$( "#imgFileUpload" ).trigger( "click" );
+	});
+	$( "#coverFileUpload" ).on( "click", function() {
+		$( "#imgCoverFileUpload" ).trigger( "click" );
+	});
 
+</script>
 
