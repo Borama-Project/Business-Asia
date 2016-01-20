@@ -436,7 +436,11 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
         }).success(function (response) {
             console.log(response);
             if(response.code == 1){
+                $scope.globalVirable ='';
                 $scope.success = 'sucess';
+                $scope.businessName = response.data.head.name;
+            }else{
+                $scope.errorSMS = response.message.description;
             }
         });
     };
