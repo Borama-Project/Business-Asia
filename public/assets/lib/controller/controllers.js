@@ -374,7 +374,9 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
     $scope.listBusinessType();
 
     $scope.submit = function(){
-        console.log($scope.globalVirable);
+
+       console.log($scope.globalTag);
+
         Upload.upload({
             method: 'POST',
             url: '/business/register-business',
@@ -388,7 +390,6 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             console.log(response);
             if(response.code == 1){
                 $scope.success = 'sucess';
-                $scope.BusinessFormName.$setPristine();
             }
         });
     };
