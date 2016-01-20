@@ -460,7 +460,13 @@ app.controller('ngProduct', function ($scope,$http) {
       }).success(function(response) {
           console.log(response);
           $scope.results  = JSON.stringify(response.message);
-          $scope.Product = response.data;
+          if(response.data.length){
+            $scope.Product = response.data;
+          }else{
+            $scope.items = response.data;
+          }
+          
+          
       }).error(function(response) {
           console.log(response);
       });
@@ -501,7 +507,7 @@ app.controller('ngProduct', function ($scope,$http) {
             data: {businessId:$scope.app.businessId},
             dataType: "json"
         }).success(function(response) {
-            console.log(response);
+            // console.log(response);
             $scope.category = response.data;
         }).error(function(response) {
             console.log(response);

@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group col-xs-12">
                             <button type="submit" id="submit" class="btn btn-success">Search</button>
-                            <pre>@{{results}}</pre>
+                            <!-- <pre>@{{results}}</pre> -->
                         </div>
                     </form>
                    </td>
@@ -122,6 +122,28 @@
                   <button type="button" name="btnMore" class="btn btn-danger" ng-click="deleteById('sm')">Delete</button>
               </div> -->
 			</div>
+        </td>
+    </tr>
+    <tr>
+        <td >@{{ items.name }}</td>
+        <td >@{{ items.productCategoryId }}</td>
+        <td >@{{ items.businessId }}</td>
+        <td >@{{ items.businessId }}</td>
+        <td >@{{ items.price }}</td>
+        <td >
+            <div class="row">
+              <div class="col-xs-3">
+                    <A ng-href="#/products/product/@{{items.productId}}">
+                        <button type="button" name="btnMore" class="btn btn-default" >View</button>
+                    </a>
+              </div>
+              <!-- <div class="col-xs-5">
+                  <button type="button" name="btnMore" class="btn btn-success" ng-click="viewBusiness()">Catalogue</button>
+              </div>
+              <div class="col-xs-4">
+                  <button type="button" name="btnMore" class="btn btn-danger" ng-click="deleteById('sm')">Delete</button>
+              </div> -->
+            </div>
         </td>
     </tr>
     </tbody>

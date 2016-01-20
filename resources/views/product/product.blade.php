@@ -72,7 +72,8 @@
 			<div class="col-lg-6 pd-lef-0">
 				<label class="control-label pad-top-5 col-md-3">Business Tag</label>
 				<div class="col-md-6 mg-lef-10">
-					<select ng-model="app.listBusinessTag" id="tagList" multiple="multiple" class="form-group tokenize-sample" name="select">
+					
+					<select ng-model="app.listBusinessTag"  multiple="multiple" class="form-control" name="select">
 						<optgroup ng-repeat="businessTags in businessTag" label="@{{ businessTags.name }}">
 							<option ng-repeat="tag in businessTags.tag" value="@{{ tag.id }}"> @{{ tag.name }} </option>
 						</optgroup>
@@ -83,6 +84,7 @@
 			<div class="col-lg-6 pd-lef-5">
 				<label class="control-label  col-md-3">Add To Business</label>
 				<div class="col-md-6 pd-lef-5">
+
 					<select ng-model="app.businessId" class="form-control" id="currency"  name="select" required >
 						<option value=""> </option>
 						<option ng-repeat="item in business" value="@{{ item.businessId }}"> @{{ item.head.name }} </option>
@@ -119,7 +121,7 @@
 		<button type="submit" class="btn btn-default">Save</button>
 	</div>
 	<div class="form-group col-xs-12 pd-lef-0">
-		<!-- <pre></pre> -->
+		<!-- <pre>@{{results}}</pre> -->
 		<div class="alert alert-success">
 		  <strong>@{{results}}</strong> 
 		</div>

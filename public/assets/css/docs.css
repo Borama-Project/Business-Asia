@@ -29,6 +29,21 @@ body{
 	cursor: pointer;
 }
 
+
+.div-type-list{
+	width: 100%;
+	height: 150px;
+	border: 1px solid darkgray;
+	overflow: auto;
+	padding: 10px;
+}
+.blode-header{
+
+	color: crimson;
+	font-size: 12px;
+}
+
+/*----------------------padding-margin----------------------------------------*/
 .ngNonPadd{
 	margin-bottom: 0px;
 }
@@ -94,3 +109,5 @@ body{
 .mg-lef-10{
 	margin-left: 10px;
 }
+
+

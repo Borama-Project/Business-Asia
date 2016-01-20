@@ -1,5 +1,6 @@
 
-<div class="container">
+<!-- <div class="container"> -->
+<div class="col-lg-12"> 
 <form ng-submit="submit()" name="BusinessFormName">
 	<div class="panel panel-info">
 	  <div class="panel-body">
@@ -57,7 +58,7 @@
 	</div>
 	<div class="form-group col-xs-6 thumbnail">
 		<div class="col-xs-6 col-md-3">
-			<label for="exampleInputEmail1">Company Logo</label>
+			<label>Company Logo</label>
 			<a href="javascript:void(0)" class="thumbnail">
 				<img ng-src="/assets/img/img-photo-upload.png" width="150" height="150"  id="bFileUpload">
 				<input type="file" ngf-select ng-model="globalVirable.logo" name="logo" id="imgFileUpload" required="true" style="display: none">
@@ -70,7 +71,7 @@
 	</div>
 	<div class="form-group col-xs-6 thumbnail">
 		<div class="col-xs-6 col-md-3">
-			<label for="exampleInputEmail1">Cover</label>
+			<label>Cover</label>
 			<a href="javascript:void(0)" class="thumbnail">
 				<img ng-src="/assets/img/img-photo-upload.png" width="150" height="150"  id="coverFileUpload">
 				<input type="file" ngf-select ng-model="globalVirable.cover" name="cover" id="imgCoverFileUpload" required="true" style="display: none">
@@ -82,7 +83,7 @@
 	</div>
 
 
-	<div class="form-group col-xs-6 ">
+	<div class="form-group col-xs-12 ">
 		<button type="submit" id="clickBR" class="btn btn-default">Submit</button>
 	</div>
 
@@ -111,18 +112,7 @@
 
 
 <style>
-.div-type-list{
-	width: 100%;
-	height: 150px;
-	border: 1px solid darkgray;
-	overflow: auto;
-	padding: 10px;
-}
-	.blode-header{
 
-		color: crimson;
-		font-size: 12px;
-	}
 </style>
 <script>
 	$( "#bFileUpload" ).on( "click", function() {
