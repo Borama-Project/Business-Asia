@@ -55,9 +55,26 @@ class ProductController extends Controller
 
     public function postListProduct(){
         $method = 'POST';
-        $function = 'product/get_product';
+        $function = 'productAdmin/get_product';
         $res = Input::All();
-        var_dump($res);
+        $dataRequest = array();
+        $authorId = json_decode(Session::get('zeAccessKey'));
+        
+        foreach ($res as $key => $value) {
+            if($value != ''){
+                $dataRequest[$key] = $value;
+            }
+        }
+        if(sizeof($dataRequest)<= 0){
+            $dataRequest = array(
+                'accessKey'          => $authorId->AccessKey,
+            );
+        }
+
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
+        // return json_encode($dataRequest);
     }
     public function getProductCondition(){
         

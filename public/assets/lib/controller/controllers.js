@@ -447,19 +447,34 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
 app.controller('ngProduct', function ($scope,$http) {
 
     $scope.submit = function(){
-      console.log($scope.app);
-      // $http({
-      //     method: 'POST',
-      //     url:  '/product/product',
-      //     data: $scope.app,
-      //     dataType: "json"
-      // }).success(function(response) {
-      //     console.log(response);
-      //     // $scope.item = response.data[0];
-      // }).error(function(response) {
-      //     console.log(response);
-      // });
+      // console.log($scope.app);
+      $http({
+          method: 'POST',
+          url:  '/product/list-product',
+          data: $scope.app,
+          dataType: "json"
+      }).success(function(response) {
+          console.log(response);
+          $scope.results  = JSON.stringify(response.message);
+          $scope.Product = response.data;
+      }).error(function(response) {
+          console.log(response);
+      });
     };
+
+    $scope.categorysList = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.categorysLists = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.categorysList();
 });
 app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 
