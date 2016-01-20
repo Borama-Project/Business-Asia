@@ -32,7 +32,7 @@
 		  
 		</div>
 	</div>
-
+<growl-notifications></growl-notifications>
 	<div class="col-lg-10 appContent" >
 		<div class="col-lg-12">
 			<div ng-view></div>

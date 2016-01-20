@@ -7,7 +7,7 @@
 	</div>
 	<div class="form-group col-xs-6">
 	    <label>Product Title</label>
-	    <input type="text" class="form-control"  name="name" ng-model="app.name" placeholder="Name" required="required">
+	    <input type="text" class="form-control"  name="name" ng-model="app.name" placeholder="Name" autocomplete="off" required="required">
 	</div>
 	<!-- <div class="form-group col-xs-4">
 	    <label></label>
@@ -100,24 +100,14 @@
 	  <div class="col-xs-12 col-md-3">
 	    <a href="javascript:void(0)" class="thumbnail">
 	    	<img ng-src="/assets/img/img-photo-upload.png" width="171" height="180"  id="upload">
-	    	<input type="file" id="fileUpload"  ngf-select ng-model="app.file1" name="file1" required="true" style="display:none;">
+	    	<input type="file" id="fileUpload"  ngf-select ng-model="app.image" name="image" required="true" style="display:none;">
 	    </a>
 	  </div>
 	  <div class="col-xs-12 col-md-3">
-	    <a href="#" class="thumbnail">
-	    	<img ngf-src="app.file1" class="thumb" width="171" height="180">
-	    </a>
+	    <!-- <a href="#" class="thumbnail"> -->
+	    	<img ngf-src="app.image" class="thumb" width="171" height="180">
+	    <!-- </a> -->
 	  </div>
-	  <!-- <div class="col-xs-12 col-md-3">
-	    <a href="#" class="thumbnail">
-	    	<img ng-src="http://asianbusiness.dev/12294721_113992545634302_2273639989746865830_n.jpg" >
-	    </a>
-	  </div>
-	  <div class="col-xs-12 col-md-3">
-	    <a href="#" class="thumbnail">
-	    	<img ng-src="http://asianbusiness.dev/12294721_113992545634302_2273639989746865830_n.jpg" >
-	    </a>
-	  </div> -->
 	  
 	</div>
 	<div class="form-group col-xs-12 pd-lef-0">
@@ -128,7 +118,12 @@
 	<div class="form-group col-xs-12">
 		<button type="submit" class="btn btn-default">Save</button>
 	</div>
-  	
+	<div class="form-group col-xs-12 pd-lef-0">
+		<!-- <pre></pre> -->
+		<div class="alert alert-success">
+		  <strong>@{{results}}</strong> 
+		</div>
+	</div>
 </form>
 
 </div>

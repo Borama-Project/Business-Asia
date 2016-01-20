@@ -70,7 +70,7 @@ class ZeSocialBusinessModel
     public function curlConnect ($url,  $fields = array(), $method= null) {
 
         $respon = $this->curlResponse($url, $fields, $method);
-        if($respon == null){
+        if(json_decode($respon) == null){
             exit(view('errors.curl-data-error'));
         }
         return $respon;

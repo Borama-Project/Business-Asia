@@ -2,11 +2,14 @@
 
 <div class="panel panel-info">
 	  <div class="panel-body">
-	   	<h1>Business</h1>
+	   	<h3>Business</h3>
 	  </div>
 </div>
-<div class="list-group col-lg-2" >
-	<A ng-href="#/business/register/Business" class="list-group-item">Register Business</A>
+
+<div class="col-lg-12 pd-lef-10  pd-right-0 list-group-item">
+    <a ng-href="#/business/register/Business" >
+        <button type="button" name="btnMore" class="btn btn-success" >Register Business</button>
+    </a>
 </div>
 <table class="table table-condensed">
     <thead> 
@@ -103,24 +106,6 @@
     </tbody>
 </table>
 
-<style>
-.ng-enter{
-    transition:0.75s;
-    opacity: 0;
-}
-.ng-enter-stagger{
-    transition-delay:0.1s;
-}
-.ng-enter-active{
-    opacity: 1;
-}
-.ng-leave{
-    transition:0.75s;
-    opacity: 1;
-}
-.ng-leave-active{
-    opacity: 0;
-}
-</style>
+
 
 </div>
