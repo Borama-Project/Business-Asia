@@ -112,7 +112,7 @@
         	<div class="row">
               <div class="col-xs-3">
                     <A ng-href="#/products/product/@{{item.productId}}">
-                        <button type="button" name="btnMore" class="btn btn-default" >View</button>
+                        <!-- <button type="button" name="btnMore" class="btn btn-default" >View</button> -->
                     </a>
               </div>
               <!-- <div class="col-xs-5">
