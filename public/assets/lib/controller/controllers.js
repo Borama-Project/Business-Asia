@@ -405,7 +405,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
         else {
             $scope.selectionTag.push(tagId);
         }
-        console.log($scope.selectionTag);
+        //console.log($scope.selectionTag);
 
     };
     //end

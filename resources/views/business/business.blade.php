@@ -51,9 +51,6 @@
 						@{{tag.name}}
 					</div>
 				</div>
-			<div ng-repeat="name in selectionTag" class="selected-item">
-				@{{name}}
-			</div>
 		</div>
 
 	</div>
