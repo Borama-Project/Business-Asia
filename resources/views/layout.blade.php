@@ -18,9 +18,7 @@
 <link href="{{asset('/assets/css/bootstrap-responsive.css')}}" rel="stylesheet" />
 <link href="{{asset('/assets/css/bootstrap-responsive.min.css')}}" rel="stylesheet" />
 <!-- <link href="{{asset('/assets/css/bootstrap.min.css')}}" rel="stylesheet" /> -->
-<link href="{{asset('/assets/css/normalize.css')}}" rel="stylesheet" />
 <link href="{{asset('/assets/css/docs.css')}}" rel="stylesheet" />
-    <link href="{{asset('/assets/css/jquery.tokenize.css')}}" rel="stylesheet" />
 
 </head>
     <body>
@@ -39,8 +37,7 @@
     <script src="{{asset('/assets/lib/controller/controllers.js')}}"></script>
     <script src="{{asset('/assets/lib/ng-file-upload.min.js')}}"></script>
     <script src="{{asset('/assets/lib/ng-file-upload-shim.min.js')}}"></script>
-            <script src="{{asset('/assets/lib/jquery.tokenize.js')}}"></script>
-            <script src="{{asset('/assets/js/angularjs-dropdown-multiselect.js')}}"></script>
+
 
 <script type="text/ng-template" id="ModalContent">
     <div class="modal-header">
