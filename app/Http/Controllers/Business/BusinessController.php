@@ -205,12 +205,10 @@ class BusinessController extends Controller
     }
 
     public function getListAllBusinessData(){
-
+        $authorId = json_decode(Session::get('zeAccessKey'));
         $function = 'business/get_all_business';
         $dataRequest =  array(
-            'accessKey' => 'NTY4ZjgzMjE3ZjhiOWFjZjA5OGI0NTc1MjAxNi0wMS0wOCAwOTozNjozM1NvY2lhbEJ1c2luZXNz',
-            'limit' =>15,
-            'offset' =>0
+            'accessKey' => $authorId->AccessKey,
         );
         $method = 'POST';
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;

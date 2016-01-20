@@ -79,6 +79,11 @@ app.config(function ($routeProvider) {
                 controller: 'ngAddProduct',
                 templateUrl: '/product/product'
             })
+        .when('/products/product/select',
+            {
+                controller: 'nglistSelect',
+                templateUrl: '/product/select'
+            })
         .when('/products/product/:productId',
             {
                 controller: 'ngGetProduct',

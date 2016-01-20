@@ -38,14 +38,27 @@ class ProductController extends Controller
 
         $method = 'POST';
         $function = 'product/get_product';
-        $dataRequest = array(
-            'accessKey'    => 'NTY4ZjgzMjE3ZjhiOWFjZjA5OGI0NTc1MjAxNi0wMS0wOCAwOTozNjozM1NvY2lhbEJ1c2luZXNz',
-        );
+        if(Input::get('productId')){
+            $dataRequest = array(
+                'productId'    => 'NTY4ZjgzMjE3ZjhiOWFjZjA5OGI0NTc1MjAxNi0wMS0wOCAwOTozNjozM1NvY2lhbEJ1c2luZXNz',
+            );
+        }else{
+            $dataRequest = array(
+                'accessKey'    => 'NTY4ZjgzMjE3ZjhiOWFjZjA5OGI0NTc1MjAxNi0wMS0wOCAwOTozNjozM1NvY2lhbEJ1c2luZXNz',
+            );
+        }
+        
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         return ($zeSocialBusinessResult);
     }
 
+    public function postListProduct(){
+        $method = 'POST';
+        $function = 'product/get_product';
+        $res = Input::All();
+        var_dump($res);
+    }
     public function getProductCondition(){
         
         $function = 'product/get_product_condition';
@@ -58,7 +71,7 @@ class ProductController extends Controller
         return view('product.product');
     }
     public function postProduct(){
-        $function = 'businessAdmin/add_product';
+        $function = 'productAdmin/add_product';
         $method = 'POST';
         $dataRequest = array(
 
@@ -67,25 +80,51 @@ class ProductController extends Controller
             'currency'   => Input::get('currency'),
             'dateStart'   => Input::get('DateStart'),
             'dateEnd'   => Input::get('DateEnd'),
-            'condition'   => Input::get('condition'),
+            'condition'   => Input::get('conditions'),
             'price'   => Input::get('price'),
-
+            'description'   => Input::get('description'),
+            'listBusinessTag'   => json_encode(Input::get('listBusinessTag')),
+            'businessId'   => Input::get('businessId'),
         );
         // 1: Band New, 2: Best Price, 3: Second Hand, 4: Good Condition)
        
-        // $ZeSocialBusinessModel = new ZeSocialBusinessModel;
-        // $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
-        // return ($zeSocialBusinessResult);
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
         // return ;
-        return json_encode($dataRequest);
+        // return json_encode($dataRequest);
     }
 
+    public function postProductUpload(){
+        $function = 'productAdmin/add_image_gallery';
+        $file           =       Input::file('image');
+        if ($file != null) {
+            $fileName   =       $file->getClientOriginalName();
+            $fileData   =       $file->getPathName();
+        }
+        $method   = 'POST';
+        $productId = '569ef10f7f8b9aa4088b4568';
+        $dataRequest = array(
+            'productId'          => $productId,
+            'image'              => new \CurlFile($fileData,'image/jpg', $fileName),
+            'businessId'         => $businessId,
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
+        // return $fileName;
+    }
     public function getProductById(){
         return view('product.viewProduct');
     }
     public function getPromotion(){
 
         return view('promotion.promotion');
+    }
+
+    public function getSelect (){
+        // return 'sta';
+        return view('product.selectData');
     }
 
 }
