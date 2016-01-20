@@ -12,7 +12,7 @@
 			  <A ng-href="#/business" class="list-group-item">Business</A>
 			  <A ng-href="#/products" class="list-group-item">Add Product</A>
 			  <A ng-href="#/promotion" class="list-group-item">Promotion</A>
-			  <!-- <A ng-href="#/list-all-business" class="list-group-item" >List All Business</A> -->
+			  <A ng-href="#/products/product/select" class="list-group-item" >select</A>
 			  <A href="/Auth/log-out" class="list-group-item" data-ng-click="logout()">Log Out</A>
 			  <!-- ng-href="/Auth/log-out" javascript:void(0)-->
 		  <?php

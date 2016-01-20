@@ -479,7 +479,7 @@ app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
     // };
     console.log($routeParams.productId);
 });
-app.controller('ngAddProduct', function ($scope,$http) {
+app.controller('ngAddProduct', function ($scope,$http,Upload) {
     $scope.categorysList = function(){
         $http({
             method: 'GET',
@@ -505,22 +505,103 @@ app.controller('ngAddProduct', function ($scope,$http) {
         });
     };
     $scope.categorysList();
+    $scope.businessList = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-all-business-data',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response.data);
+            $scope.business = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.businessList();
     $scope.conditionList();
+    $scope.listBusinessTag = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-business-tag',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.businessTag = response.data;
+
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.listBusinessTag();
+
+    $scope.listBusinessType = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-business-type',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.businessType = response.data;
+        }).error(function(response) {
+            //console.log(response);
+        });
+    };
+    $scope.listBusinessType();
 
     $scope.submit = function(){
       // console.log($scope.app);
-      $http({
-          method: 'POST',
-          url:  '/product/product',
-          data: $scope.app,
-          dataType: "json"
-      }).success(function(response) {
-          console.log(response);
-          // $scope.item = response.data[0];
-      }).error(function(response) {
-          console.log(response);
-      });
+      // $http({
+      //     method: 'POST',
+      //     url:  '/product/product-upload',
+      //     data: $scope.app,
+      //     dataType: "json"
+      // }).success(function(response) {
+      //     console.log(response);
+      //     // $scope.Upload();
+      //     // $scope.item = response.data[0];
+      // }).error(function(response) {
+      //     console.log(response);
+      // });
+
+      Upload.upload({
+            method: 'POST',
+            url: '/product/product-upload',
+            data: $scope.app,
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (response) {
+            console.log(response);
+            if(response.code == 1){
+                $scope.success = 'sucess';
+                $scope.BusinessFormName.$setPristine();
+            }
+        });
     };
+    $scope.Upload = function(){
+      console.log($scope.picFile);
+      // $scope.picFile.push({'productId':'111111'});
+      // console.log(JSON.stringify($scope.picFile.file1));
+      // Upload.upload({
+      //       method: 'POST',
+      //       url: '/business/register-business',
+      //       data: $scope.globalVirable,
+      //       dataType: "json",
+      //       contentType: false,
+      //       cache: false,
+      //       processData: false,
+      //       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      //   }).success(function (response) {
+      //       console.log(response);
+      //       if(response.code == 1){
+      //           $scope.success = 'sucess';
+      //           $scope.BusinessFormName.$setPristine();
+      //       }
+      //   });
+
+    }
 
 });
 app.controller('ngPromotion', function ($scope,$http) {
@@ -544,8 +625,9 @@ app.controller('ngHome', function ($scope,$http) {
     }
 });
 
-app.controller('ngListAllBusiness', function ($scope,$http) {
+app.controller('nglistSelect', function ($scope,$http) {
     // $scope.list();
+    console.log('nglistSelect');
 });
 
 app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,title,contents,businessId) {

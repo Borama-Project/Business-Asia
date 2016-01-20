@@ -13,12 +13,12 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<!-- <link href="{{asset('/assets/css/bootstrap.css')}}" rel="stylesheet" /> -->
-
+ <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <link href="{{asset('/assets/css/bootstrap-responsive.css')}}" rel="stylesheet" />
 <link href="{{asset('/assets/css/bootstrap-responsive.min.css')}}" rel="stylesheet" />
-<!-- <link href="{{asset('/assets/css/bootstrap.min.css')}}" rel="stylesheet" /> -->
 <link href="{{asset('/assets/css/docs.css')}}" rel="stylesheet" />
+
+<link href="{{asset('/assets/css/jquery.tokenize.css')}}" rel="stylesheet" />
 
 </head>
     <body>
