@@ -454,16 +454,31 @@ app.controller('ngProduct', function ($scope,$http) {
       // console.log($scope.app);
       $http({
           method: 'POST',
-          url:  '/product/product',
+          url:  '/product/list-product',
           data: $scope.app,
           dataType: "json"
       }).success(function(response) {
           console.log(response);
-          // $scope.item = response.data[0];
+          $scope.results  = JSON.stringify(response.message);
+          $scope.Product = response.data;
       }).error(function(response) {
           console.log(response);
       });
     };
+
+    $scope.categorysList = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.categorysLists = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.categorysList();
 });
 app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 
@@ -481,7 +496,6 @@ app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
     //       console.log(response);
     //   });
     // };
-    console.log($routeParams.productId);
 });
 app.controller('ngAddProduct', function ($scope,$http,Upload) {
     $scope.categorysList = function(){
@@ -537,39 +551,10 @@ app.controller('ngAddProduct', function ($scope,$http,Upload) {
         });
     };
     $scope.listBusinessTag();
-
-    $scope.listBusinessType = function(){
-        $http({
-            method: 'GET',
-            url:  '/business/list-business-type',
-            dataType: "json"
-        }).success(function(response) {
-            console.log(response);
-            $scope.businessType = response.data;
-        }).error(function(response) {
-            //console.log(response);
-        });
-    };
-    $scope.listBusinessType();
-
     $scope.submit = function(){
-      // console.log($scope.app);
-      // $http({
-      //     method: 'POST',
-      //     url:  '/product/product-upload',
-      //     data: $scope.app,
-      //     dataType: "json"
-      // }).success(function(response) {
-      //     console.log(response);
-      //     // $scope.Upload();
-      //     // $scope.item = response.data[0];
-      // }).error(function(response) {
-      //     console.log(response);
-      // });
-
       Upload.upload({
             method: 'POST',
-            url: '/product/product-upload',
+            url: '/product/product',
             data: $scope.app,
             dataType: "json",
             contentType: false,
@@ -577,10 +562,11 @@ app.controller('ngAddProduct', function ($scope,$http,Upload) {
             processData: false,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (response) {
-            console.log(response);
+            // console.log();
+            $scope.app = '';
             if(response.code == 1){
-                $scope.success = 'sucess';
-                $scope.BusinessFormName.$setPristine();
+                $scope.results = response.message.description;
+                // $scope.BusinessFormName.$setPristine();
             }
         });
     };

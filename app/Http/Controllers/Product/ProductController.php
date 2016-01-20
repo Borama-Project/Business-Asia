@@ -55,9 +55,26 @@ class ProductController extends Controller
 
     public function postListProduct(){
         $method = 'POST';
-        $function = 'product/get_product';
+        $function = 'productAdmin/get_product';
         $res = Input::All();
-        var_dump($res);
+        $dataRequest = array();
+        $authorId = json_decode(Session::get('zeAccessKey'));
+        
+        foreach ($res as $key => $value) {
+            if($value != ''){
+                $dataRequest[$key] = $value;
+            }
+        }
+        if(sizeof($dataRequest)<= 0){
+            $dataRequest = array(
+                'accessKey'          => $authorId->AccessKey,
+            );
+        }
+
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
+        // return json_encode($dataRequest);
     }
     public function getProductCondition(){
         
@@ -86,24 +103,34 @@ class ProductController extends Controller
             'listBusinessTag'   => json_encode(Input::get('listBusinessTag')),
             'businessId'   => Input::get('businessId'),
         );
+        $file           =       Input::file('image');
         // 1: Band New, 2: Best Price, 3: Second Hand, 4: Good Condition)
        
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
-        return ($zeSocialBusinessResult);
-        // return ;
-        // return json_encode($dataRequest);
+        if(json_decode($zeSocialBusinessResult)->data != ''){
+            $jsonData = json_encode(json_decode($zeSocialBusinessResult)->data);
+            $jsonData = json_decode($jsonData);
+            $businessId = $jsonData->businessId;
+            $productId = $jsonData->productId;
+            // $jsonData = $zeSocialBusinessResult;
+            $result = $this->postProductUpload($productId,$businessId,$file);
+        }
+        
+        return $zeSocialBusinessResult;
+        
+        // return $zeSocialBusinessResult;
     }
 
-    public function postProductUpload(){
+    public function postProductUpload($productId,$businessId,$file){
         $function = 'productAdmin/add_image_gallery';
-        $file           =       Input::file('image');
+        // $file           =       Input::file('image');
         if ($file != null) {
             $fileName   =       $file->getClientOriginalName();
             $fileData   =       $file->getPathName();
         }
         $method   = 'POST';
-        $productId = '569ef10f7f8b9aa4088b4568';
+        // $productId = '569ef10f7f8b9aa4088b4568';
         $dataRequest = array(
             'productId'          => $productId,
             'image'              => new \CurlFile($fileData,'image/jpg', $fileName),
