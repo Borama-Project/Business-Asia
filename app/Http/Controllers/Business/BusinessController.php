@@ -226,7 +226,8 @@ class BusinessController extends Controller
         $method = 'POST';
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
-        return ($zeSocialBusinessResult);
+        return $zeSocialBusinessResult;
+
     }
 
     public function postSearchBusiness(){
