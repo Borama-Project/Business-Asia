@@ -20,7 +20,7 @@
 // 070 936575
   #######################################################################*/
 // http://www.mvtubes.com/the-guillotines-2012/
-var app = angular.module('ngApp', ['ngRoute','ngAnimate','facebook','ngFileUpload','ui.bootstrap'])
+var app = angular.module('ngApp', ['ngRoute','ngAnimate','facebook','ngFileUpload','ui.bootstrap','angularSpinner'])
  .config(['FacebookProvider',
     function(FacebookProvider) {
      var myAppId = '943056782397930';

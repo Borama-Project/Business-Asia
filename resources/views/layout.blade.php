@@ -22,7 +22,7 @@
 
 </head>
     <body>
-
+    <span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1"></span>
             @include('header')
             <div class="content-wrapper">
             @yield('content')
@@ -33,10 +33,12 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
     <script src="{{asset('/assets/lib/angular-facebook.js')}}"></script>
-    <script src="{{asset('/assets/lib/app.js')}}"></script>
-    <script src="{{asset('/assets/lib/controller/controllers.js')}}"></script>
+    <script src="{{asset('/assets/lib/angular-spinner.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/angular-spinner.js')}}"></script>
     <script src="{{asset('/assets/lib/ng-file-upload.min.js')}}"></script>
     <script src="{{asset('/assets/lib/ng-file-upload-shim.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/app.js')}}"></script>
+    <script src="{{asset('/assets/lib/controller/controllers.js')}}"></script>
 
 
 <script type="text/ng-template" id="ModalContent">
