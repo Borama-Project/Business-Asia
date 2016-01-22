@@ -500,7 +500,6 @@ app.controller('ngProduct', function ($scope,$http,usSpinnerService) {
     $scope.businessList();
 
     $scope.change = function(){
-      // console.log(this);
       $http({
             url:  '/business/category',
             method: 'POST',
