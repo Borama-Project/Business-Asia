@@ -47,25 +47,29 @@ class BusinessController extends Controller
 
     public function postSaveCategory( ){
 
-        $function = 'business/add_category';
+        $function = 'businessAdmin/add_category';
         $method = 'POST';
+        $accessKey = json_decode(Session::get('zeAccessKey'));
         $dataRequest = array(
 
-            'accessKey'=> Session::get('zeAccessKey'),
+            'accessKey'=> $accessKey->AccessKey,
             'categoryName' => Input::get('categoryName'),
             'businessId'   => Input::get('businessId')
 
         );
-        return $dataRequest;
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         return ($zeSocialBusinessResult);
 
     }
+    public function getAddCategory()
+    {
+        return view('business.addCategory');
+    }
 
     public function getCategory()
     {
-        return view('business.category');
+        return view('business.viewCategory');
     }
 
     public function postCategory(){
@@ -78,6 +82,17 @@ class BusinessController extends Controller
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         // return(Input::get('businessId'));
+        return ($zeSocialBusinessResult);
+    }
+    public function postGetBusinessById(){
+
+        $method   = 'POST';
+        $function = 'businessAdmin/get_category_by_business';
+        $dataRequest = array(
+            'businessId'      => Input::get('businessId')
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         return ($zeSocialBusinessResult);
     }
     public function getBusinessType()
@@ -218,6 +233,7 @@ class BusinessController extends Controller
     }
 
     public function getListAllBusinessData(){
+
         $authorId = json_decode(Session::get('zeAccessKey'));
         $function = 'business/get_all_business';
         $dataRequest =  array(

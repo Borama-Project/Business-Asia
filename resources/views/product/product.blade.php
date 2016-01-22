@@ -73,7 +73,7 @@
 				<label class="control-label pad-top-5 col-md-3">Business Tag</label>
 				<div class="col-md-6 mg-lef-10">
 					
-					<select ng-model="app.listBusinessTag"  multiple="multiple" class="form-control" name="select">
+					<select ng-model="app.listBusinessTag" class="form-control" name="select">
 						<optgroup ng-repeat="businessTags in businessTag" label="@{{ businessTags.name }}">
 							<option ng-repeat="tag in businessTags.tag" value="@{{ tag.id }}"> @{{ tag.name }} </option>
 						</optgroup>

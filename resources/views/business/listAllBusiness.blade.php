@@ -1,46 +1,6 @@
 <table class="table table-condensed">
     <thead>
     <tr>
-        <th colspan ="5" >
-        
-           <tbody>
-               <tr>
-                   <td colspan ="5">
-                    <form ng-submit="submit()">
-                        
-                        <div class="form-group col-xs-4">
-                            <label for="exampleInputName2">Distance</label>
-                            <input type="text" class="form-control" ng-model="app.distance" name="Distance" placeholder="Distance(km)">
-                        </div>
-                        <div class="form-group col-xs-4">
-                            <label for="exampleInputName2">Latitude</label>
-                            <input type="text" class="form-control" ng-model="app.latitude" name="Latitude" placeholder="Latitude">
-                        </div>
-                        <div class="form-group col-xs-4">
-                            <label for="exampleInputName2">Longitude</label>
-                            <input type="text" class="form-control" ng-model="app.longitude" name="Longitude" placeholder="Longitude">
-                        </div>
-                        <div class="form-group col-xs-1">
-                            <button type="submit" id="submit" class="btn btn-default">Search</button>
-                        </div>
-                        <div class="form-group col-xs-10">
-                            <button type="button" name="btnMore" class="btn btn-default" ng-click="moreOptons()">@{{titleOpt}}</button>
-                        </div>
-                        <div class="form-group col-xs-4" ng-repeat="option in Options">
-                            <label for="exampleInputName2">@{{ option.title }}</label>
-                            <input type="text" class="form-control" id="@{{ option.ngModel }}" name="moreInput" placeholder="@{{ option.holder }}">
-                        </div>
-                    </form>
-                   </td>
-                
-               </tr>
-              
-           </tbody>
-
-        
-        </th>
-    </tr>
-    <tr>
         <th>Business Name</th>
         <th>Phone Number</th>
         <th>Email</th>

@@ -12,47 +12,13 @@
     </a>
 </div>
 <table class="table table-condensed">
-    <thead> 
-    <tr>
-        <th colspan ="5" >
-           <tbody>
-               <tr>
-                   <td colspan ="5">
-                    <form ng-submit="submit()">
-                        <div class="form-group col-xs-4">
-                            <label for="exampleInputName2">Distance</label>
-                            <input type="text" class="form-control" ng-model="app.distance" name="Distance" placeholder="Distance(km)" required="">
-                        </div>
-                        <div class="form-group col-xs-4">
-                            <label for="exampleInputName2">Latitude</label>
-                            <input type="text" class="form-control" ng-model="app.latitude" name="Latitude" placeholder="Latitude" required="">
-                        </div>
-                        <div class="form-group col-xs-4">
-                            <label for="exampleInputName2">Longitude</label>
-                            <input type="text" class="form-control" ng-model="app.longitude" name="Longitude" placeholder="Longitude" required="">
-                        </div>
-                        <div class="form-group col-xs-1">
-                            <button type="submit" id="submit" class="btn btn-default">Search</button>
-                        </div>
-                        <div class="form-group col-xs-10">
-                            <button type="button" name="btnMore" class="btn btn-default" ng-click="moreOptons()">@{{titleOpt}}</button>
-                        </div>
-                        <div class="form-group col-xs-4" ng-repeat="option in Options">
-                            <label for="exampleInputName2">@{{ option.title }}</label>
-                            <input type="text" class="form-control" id="@{{ option.ngModel }}" name="moreInput" placeholder="@{{ option.holder }}">
-                        </div>
-                    </form>
-                   </td>
-               </tr>
-           </tbody>
-        </th>
-    </tr>
+    <thead>
     <tr>
         <th>Business Name</th>
         <th>Phone Number</th>
         <th>Email</th>
         <th>Address</th>
-        <th>Manage</th>
+        <th>Search</th>
     </tr>
     <tr>
         <th>
@@ -76,13 +42,15 @@
             </div>
         </th>
         <th>
-            
+            <div class="form-group">
+                <button type="submit" id="submit" class="btn btn-default">Search</button>
+            </div>
         </th>
 
     </tr>
     </thead>
     <tbody>
-    <tr data-ng-repeat="item in get_all_business | filter:search:strict">
+    <tr data-ng-repeat="item in get_all_business">
         <td >@{{ item.head.name }}</td>
         <td >@{{ item.head.phoneNumber }}</td>
         <td >@{{ item.head.email }}</td>
@@ -92,10 +60,12 @@
               <div class="col-xs-3">
                     <A ng-href="#/business/@{{item.businessId}}">
                         <button type="button" name="btnMore" class="btn btn-default" >View</button>
-                    </a>
+                    </A>
               </div>
               <div class="col-xs-5">
-                  <button type="button" name="btnMore" class="btn btn-success" ng-click="viewBusiness()">Catalogue</button>
+                  <A ng-href="#/category/@{{item.businessId}}">
+                     <button type="button" name="btnMore" class="btn btn-success">Category</button>
+                  </A>
               </div>
               <div class="col-xs-4">
                   <button type="button" name="btnMore" class="btn btn-danger" ng-click="deleteById('sm')">Delete</button>

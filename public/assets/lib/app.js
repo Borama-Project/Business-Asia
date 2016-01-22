@@ -35,11 +35,16 @@ app.config(function ($routeProvider) {
                 controller: 'ngHome',
                 templateUrl: '/Auth/admin-profile'
             })
-        .when('/category',
+        .when('/category/:businessId',
             {
                 controller: 'ngCategory',
                 templateUrl: '/business/category'
             })
+        .when('/category/add/category/:businessId',
+        {
+            controller: 'ngCategory',
+            templateUrl: '/business/add-category'
+        })
         .when('/business',
             {
                 controller: 'ngBusiness',

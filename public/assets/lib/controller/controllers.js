@@ -162,30 +162,14 @@ app.controller('ngApp', ['$scope','$timeout','$http','Facebook',
     }
   ]);
 
-app.controller('ngCategory', function ($scope,$http,Notification) {
 
-    $scope.list = function(){
+app.controller('ngCategory', function ($scope,$http,$routeParams) {
+    $scope.businessId = $routeParams.businessId;
+    $scope.getGetBusinessById = function(){
         $http({
-            method: 'GET',
-            url:  '/business/list',
-            dataType: "json"
-        }).success(function(response) {
-            if(response.code ==1){
-              $scope.categorys = response.data;
-            }else{
-              $scope.err = response.message.description;
-            }
-            
-        }).error(function(response) {
-            console.log(response);
-        });
-    };
-    $scope.list();
-
-    $scope.listAllBusiness = function(){
-        $http({
-            method: 'GET',
-            url:  '/business/list-all-business-data',
+            method: 'POST',
+            url:  '/business/get-business-by-id',
+            data:  {businessId:$routeParams.businessId},
             dataType: "json"
         }).success(function(response) {
             if(response.code ==1){
@@ -198,91 +182,23 @@ app.controller('ngCategory', function ($scope,$http,Notification) {
             console.log(response);
         });
     };
-    $scope.listAllBusiness();
+    $scope.getGetBusinessById();
 
     $scope.submit = function(){
         $http({
             method: 'POST',
             url:  '/business/save-category',
-            data: $scope.globalVirable,
+            data: {
+                categoryName:$scope.globalVirable.categoryName,
+                businessId:$routeParams.businessId
+            },
             dataType: "json"
         }).success(function(response) {
-            $scope.list();
+            $scope.globalVirable='';
+            $scope.getGetBusinessById();
         }).error(function(response) {
             console.log(response);
         });
-    };
-
-    $scope.primary = function() {
-        Notification('Primary notification');
-    };
-
-    $scope.error = function() {
-        Notification.error('Error notification');
-    };
-
-    $scope.success = function() {
-        Notification.success('Success notification');
-    };
-
-    $scope.info = function() {
-        Notification.info('Information notification');
-    };
-
-    $scope.warning = function() {
-        Notification.warning('Warning notification');
-    };
-
-    // ==
-
-    $scope.primaryTitle = function() {
-        Notification({message: 'Primary notification', title: 'Primary notification'});
-    };
-
-    // ==
-
-    $scope.errorTime = function() {
-        Notification.error({message: 'Error notification 1s', delay: 1000});
-    };
-    $scope.errorNoTime = function() {
-        Notification.error({message: 'Error notification (no timeout)', delay: null});
-    };
-
-    $scope.successTime = function() {
-        Notification.success({message: 'Success notification 20s', delay: 20000});
-    };
-
-    // ==
-
-    $scope.errorHtml = function() {
-        Notification.error({message: '<b>Error</b> <s>notification</s>', title: '<i>Html</i> <u>message</u>'});
-    };
-
-    $scope.successHtml = function() {
-        Notification.success({message: 'Success notification<br>Some other <b>content</b><br><a href="https://github.com/alexcrack/angular-ui-notification">This is a link</a><br><img src="https://angularjs.org/img/AngularJS-small.png">', title: 'Html content'});
-    };
-
-    // ==
-
-    $scope.TopLeft = function() {
-        Notification.success({message: 'Success Top Left', positionX: 'left'});
-    };
-
-    $scope.BottomRight = function() {
-        Notification.error({message: 'Error Bottom Right', positionY: 'bottom', positionX: 'right'});
-    };
-
-    $scope.BottomLeft = function() {
-        Notification.warning({message: 'warning Bottom Left', positionY: 'bottom', positionX: 'left'});
-    };
-    $scope.nTitle = "Title from other scope";
-    $scope.nClicksLog = [];
-    $scope.nClick = function() {
-        $scope.nClicksLog.push("Clicked");
-    };
-    $scope.nElements = ['one', 'two', 'three'];
-    $scope.customTemplateScope = function() {
-        Notification.primary({message: "Just message", templateUrl: "custom_template.htmls", scope: $scope});
     };
 });
 
@@ -320,6 +236,20 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
     }
 
   }
+    $scope.listAllBusiness = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-all-business-data',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.get_all_business = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.listAllBusiness();
+
   $scope.moreOptons = function(){
     if(this.titleOpt == 'More Option'){
       $scope.Options = [{'title':'ID','ngModel':'tag','holder':'Businesss ID'},
