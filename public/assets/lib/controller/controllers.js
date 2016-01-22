@@ -179,7 +179,22 @@ app.controller('ngApp', [
 app.controller('ngCategory', function ($scope,$http,$routeParams) {
 
     $scope.businessId = $routeParams.businessId;
-    $scope.getGetBusinessById = function(){
+    $scope.get_category_by_business_id = function(){
+        $http({
+            method: 'POST',
+            url:  '/business/get-category-by-business',
+            data:  {businessId:$routeParams.businessId},
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.get_category_by_business_id = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.get_category_by_business_id();
+
+    $scope.get_business_by_id = function(){
         $http({
             method: 'POST',
             url:  '/business/get-business-by-id',
@@ -187,12 +202,13 @@ app.controller('ngCategory', function ($scope,$http,$routeParams) {
             dataType: "json"
         }).success(function(response) {
             console.log(response);
-            $scope.get_all_business = response.data;
+            $scope.get_business_by_id = response.data;
         }).error(function(response) {
             console.log(response);
         });
     };
-    $scope.getGetBusinessById();
+    $scope.get_business_by_id();
+
 
     $scope.submit = function(){
         $http({
@@ -205,6 +221,7 @@ app.controller('ngCategory', function ($scope,$http,$routeParams) {
             dataType: "json"
         }).success(function(response) {
             $scope.globalVirable='';
+            window.history.back();
             $scope.getGetBusinessById();
         }).error(function(response) {
             console.log(response);

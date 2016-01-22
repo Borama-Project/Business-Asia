@@ -3,6 +3,7 @@
     <div class="panel panel-info">
         <div class="panel-body">
             <h3>Category</h3>
+            <div ng-repeat="businessName in get_business_by_id">@{{ businessName.head.name }}</div>
         </div>
     </div>
     <div class="col-lg-12 pd-lef-10  pd-right-0 list-group-item">
@@ -15,12 +16,12 @@
         <thead>
         <tr><th>N</th>
             <th>Name</th>
-
         </tr>
 
         </thead>
         <tbody>
-        <tr data-ng-repeat="item in get_all_business">
+
+        <tr data-ng-repeat="item in get_category_by_business_id">
             <td></td>
             <td >@{{ item.name }}</td>
             <td >
