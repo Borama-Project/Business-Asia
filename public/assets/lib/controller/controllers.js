@@ -176,26 +176,14 @@ app.controller('ngApp', [
     }
   ]);
 
-app.controller('ngCategory', function ($scope,$http) {
+app.controller('ngCategory', function ($scope,$http,$routeParams) {
 
-    $scope.list = function(){
+    $scope.businessId = $routeParams.businessId;
+    $scope.getGetBusinessById = function(){
         $http({
-            method: 'GET',
-            url:  '/business/list',
-            dataType: "json"
-        }).success(function(response) {
-            console.log(response);
-            $scope.categorys = response.data;
-        }).error(function(response) {
-            console.log(response);
-        });
-    };
-    $scope.list();
-
-    $scope.listAllBusiness = function(){
-        $http({
-            method: 'GET',
-            url:  '/business/list-all-business-data',
+            method: 'POST',
+            url:  '/business/get-business-by-id',
+            data:  {businessId:$routeParams.businessId},
             dataType: "json"
         }).success(function(response) {
             console.log(response);
@@ -204,20 +192,25 @@ app.controller('ngCategory', function ($scope,$http) {
             console.log(response);
         });
     };
-    $scope.listAllBusiness();
+    $scope.getGetBusinessById();
 
     $scope.submit = function(){
         $http({
             method: 'POST',
             url:  '/business/save-category',
-            data: $scope.globalVirable,
+            data: {
+                categoryName:$scope.globalVirable.categoryName,
+                businessId:$routeParams.businessId
+            },
             dataType: "json"
         }).success(function(response) {
-            $scope.list();
+            $scope.globalVirable='';
+            $scope.getGetBusinessById();
         }).error(function(response) {
             console.log(response);
         });
     };
+
 });
 
 app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log) {
@@ -249,6 +242,20 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log) {
     }
 
   }
+    $scope.listAllBusiness = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-all-business-data',
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.get_all_business = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.listAllBusiness();
+
   $scope.moreOptons = function(){
     if(this.titleOpt == 'More Option'){
       $scope.Options = [{'title':'ID','ngModel':'tag','holder':'Businesss ID'},
