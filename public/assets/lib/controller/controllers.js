@@ -258,7 +258,7 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
           if(response.code == 1){
             $scope.pagination = '';
             $scope.get_all_business = response.data;
-            $scope.pagination = Pagination.getNew(5);
+            $scope.pagination = Pagination.getNew(3);
               // $scope.pagination = Pagination.getNew(10);
               $scope.pagination.numPages = Math.ceil(response.data.length/$scope.pagination.perPage);
               console.log($scope.pagination.numPages);
