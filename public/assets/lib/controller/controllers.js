@@ -485,7 +485,7 @@ app.controller('ngProduct', function ($scope,$http) {
             url:  '/business/list',
             dataType: "json"
         }).success(function(response) {
-            console.log(response);
+            console.log(JSON.stringify(response));
             $scope.categorysLists = response.data;
         }).error(function(response) {
             console.log(response);

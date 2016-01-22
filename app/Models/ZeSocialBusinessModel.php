@@ -69,10 +69,10 @@ class ZeSocialBusinessModel
 
     public function curlConnect ($url,  $fields = array(), $method= null) {
 
-        $respon = $this->curlResponse($url, $fields, $method);
-        if(json_decode($respon) == null){
-            exit(view('errors.curl-data-error'));
+        $respon = json_decode($this->curlResponse($url, $fields, $method));
+        if($respon == null){
+            return('{"code": 0,"data": [{}],"message": {"code": 1,"description": "Server response error data"}}');
         }
-        return $respon;
+        return $this->curlResponse($url, $fields, $method);
     }
 }
