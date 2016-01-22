@@ -162,7 +162,7 @@ app.controller('ngApp', ['$scope','$timeout','$http','Facebook',
     }
   ]);
 
-app.controller('ngCategory', function ($scope,$http) {
+app.controller('ngCategory', function ($scope,$http,Notification) {
 
     $scope.list = function(){
         $http({
@@ -212,9 +212,81 @@ app.controller('ngCategory', function ($scope,$http) {
             console.log(response);
         });
     };
+
+    $scope.primary = function() {
+        Notification('Primary notification');
+    };
+
+    $scope.error = function() {
+        Notification.error('Error notification');
+    };
+
+    $scope.success = function() {
+        Notification.success('Success notification');
+    };
+
+    $scope.info = function() {
+        Notification.info('Information notification');
+    };
+
+    $scope.warning = function() {
+        Notification.warning('Warning notification');
+    };
+
+    // ==
+
+    $scope.primaryTitle = function() {
+        Notification({message: 'Primary notification', title: 'Primary notification'});
+    };
+
+    // ==
+
+    $scope.errorTime = function() {
+        Notification.error({message: 'Error notification 1s', delay: 1000});
+    };
+    $scope.errorNoTime = function() {
+        Notification.error({message: 'Error notification (no timeout)', delay: null});
+    };
+
+    $scope.successTime = function() {
+        Notification.success({message: 'Success notification 20s', delay: 20000});
+    };
+
+    // ==
+
+    $scope.errorHtml = function() {
+        Notification.error({message: '<b>Error</b> <s>notification</s>', title: '<i>Html</i> <u>message</u>'});
+    };
+
+    $scope.successHtml = function() {
+        Notification.success({message: 'Success notification<br>Some other <b>content</b><br><a href="https://github.com/alexcrack/angular-ui-notification">This is a link</a><br><img src="https://angularjs.org/img/AngularJS-small.png">', title: 'Html content'});
+    };
+
+    // ==
+
+    $scope.TopLeft = function() {
+        Notification.success({message: 'Success Top Left', positionX: 'left'});
+    };
+
+    $scope.BottomRight = function() {
+        Notification.error({message: 'Error Bottom Right', positionY: 'bottom', positionX: 'right'});
+    };
+
+    $scope.BottomLeft = function() {
+        Notification.warning({message: 'warning Bottom Left', positionY: 'bottom', positionX: 'left'});
+    };
+    $scope.nTitle = "Title from other scope";
+    $scope.nClicksLog = [];
+    $scope.nClick = function() {
+        $scope.nClicksLog.push("Clicked");
+    };
+    $scope.nElements = ['one', 'two', 'three'];
+    $scope.customTemplateScope = function() {
+        Notification.primary({message: "Just message", templateUrl: "custom_template.htmls", scope: $scope});
+    };
 });
 
-app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log) {
+app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinnerService) {
 
   $scope.submit =  function(){
     
@@ -228,7 +300,7 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log) {
         }
       };
       dtRequest = '{'+dtRequest+'}';
-      console.log(dtRequest);
+      usSpinnerService.spin('spinner-1');
       $http({
           method: 'POST',
           url:  '/business/search-business',
@@ -236,6 +308,7 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log) {
           dataType: "json"
       }).success(function(response) {
           if(response.code ==1){
+              usSpinnerService.stop('spinner-1');
               $scope.get_all_business = response.data.business;
             }else{
               $scope.err = response.message.description;
@@ -292,23 +365,9 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log) {
   }
 
 });
-app.controller('ngViewBusiness', function ($scope,$http,$routeParams) {
-
-    $scope.submit =  function(){
-      console.log($scope.item);
-      // $http({
-      //       method: 'POST',
-      //       url:  '/business/view-business',
-      //       data: dtRequest,
-      //       dataType: "json"
-      //   }).success(function(response) {
-      //       console.log(response);
-      //       $scope.get_all_business = response.data.business;
-      //   }).error(function(response) {
-      //       console.log(response);
-      //   });
-    }
+app.controller('ngViewBusiness', function ($scope,$http,$routeParams,usSpinnerService) {
     $scope.init = function(){
+      usSpinnerService.spin('spinner-1');
       $http({
           method: 'POST',
           url:  '/business/business-by-id',
@@ -317,10 +376,10 @@ app.controller('ngViewBusiness', function ($scope,$http,$routeParams) {
       }).success(function(response) {
           if(response.code ==1){
             $scope.item = response.data[0];
+            usSpinnerService.stop('spinner-1');
           }else{
-
+            $scope.err = response.message.description;
           }
-          
       }).error(function(response) {
           console.log(response);
       });
@@ -409,8 +468,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
 
     };
     //end
-    $scope.submit = function
-        (){
+    $scope.submit = function(){
 
         Upload.upload({
             method: 'POST',
@@ -650,9 +708,24 @@ app.controller('ngHome', function ($scope,$http) {
     }
 });
 
-app.controller('nglistSelect', function ($scope,$http) {
-    // $scope.list();
-    console.log('nglistSelect');
+app.controller('ngAuth', function ($scope,$http) {
+ 
+    $scope.submit = function(){
+      $http({
+          method: 'POST',
+          url:  '/Auth/login',
+          data:$scope.app,
+          dataType: "json"
+      }).success(function(response) {
+        if(response.code ===1){
+          window.location = "http://asianbusiness.dev/Auth";
+        }else{
+          $scope.err = response.message.description;
+        }
+      }).error(function(response) {
+          console.log(response);
+      });
+    }
 });
 
 app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,title,contents,businessId) {

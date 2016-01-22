@@ -127,7 +127,7 @@
 		<div class="panel-body pad-top-20">
 			<div class="form-group col-xs-12">
 				<label>Cover</label>
-				<p><img ng-src="@{{item.coverImage[0]}}" height="150" width="150">
+				<p><img ng-src="@{{item.coverImage[0]}}" height="150" width="150" title="coverImage">
 				</p>
 				
 			</div>

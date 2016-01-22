@@ -27,6 +27,18 @@
 				var_dump ($value);
 			}
 			?>
+			<?php
+
+            $value = Session::get("zelog");
+                  
+
+            if (Session::has("zelog"))
+            { 
+              $value = json_decode($value) ;
+              
+              var_dump ($value);
+            }
+            ?>
 			<!-- <p>{{csrf_token()}}</p> -->
 		  
 		</div>

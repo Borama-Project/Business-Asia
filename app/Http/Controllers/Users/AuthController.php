@@ -40,21 +40,6 @@ class AuthController extends Controller
       }
         
     }
-
-    public function getLogOut(){
-
-      $value = Session::get('zeAccessKey');
-      if (Session::has('zeAccessKey'))
-      { 
-        Session::flush();
-
-      }
-      return Redirect::to('/Auth');
-    }
-    public function getInfo(){
-      return view('form');
-
-    }
     public function postIndex(){
         $method = 'profile/login';
 
@@ -82,12 +67,21 @@ class AuthController extends Controller
 
     }
 
+    
+    public function getInfo(){
+      return view('form');
+
+    }
+    
+
     public function getAdminProfile(){
       if (Session::has('zeAccessKey'))
       {
           $html="";
       }else{
-        $html = '<div class="container" >
+        
+        if (Session::has('zelog')){
+          $html = '<div class="container" >
                 <div id="contentCenter" ng-controller="ngApp">
                   <div class="col-lg-12"> 
                     <form>
@@ -102,9 +96,71 @@ class AuthController extends Controller
                   </div>
                 </div>
               </div>';
+        }else{
+          $html = '<div class="container">
+                <div id="contentCenter" ng-controller="ngAuth">
+                  <div class="col-lg-12 pad-top-20 thumbnail"> 
+                    <form ng-submit="submit()">
+                      <div class="form-group col-xs-12">
+                        <label class="control-label col-lg-4 pad-top-5">User Name :</label>
+                        <div class="col-lg-8 pd-lef-0">
+                          <input type="text" class="form-control" ng-model="app.name" placeholder="User Name" required >
+                        </div>
+                      </div>
+                      <div class="form-group col-xs-12">
+                          <label class="control-label col-lg-4 pad-top-5">Password :</label>
+                          <div class="col-lg-8 pd-lef-0">
+                            <input type="Password" class="form-control" ng-model="app.Password" placeholder="xxxxxx" required >
+
+                          </div>
+                      </div>
+                      <?php
+
+                        $value = Session::get("zeAccessKey");
+                              
+
+                        if (Session::has("zeAccessKey"))
+                        { 
+                          $value = json_decode($value) ;
+                          
+                          var_dump ($value);
+                        }
+                        ?>
+                      <div class="form-group col-xs-12">
+                          <div class="col-lg-12 aling-r">
+                            <button type="submit" class="btn btn-default">Login</button>
+                          </div>
+                      </div>
+                      
+                    </form>
+                  </div>
+                </div>
+              </div>';
+        }
       }
       
         return $html;
         
+    }
+
+    public function postLogin(){
+      $dataRequest = Input::All();
+      if(Input::get('name') == 'ZeAdmin' && Input::get('Password')== 'ze8899!@'){
+        Session::put('zelog',json_encode($dataRequest));
+        return('{"code": 1,"data": [{}],"message": {"code": 1,"description": "Success"}}');
+      }else{
+        return('{"code": 0,"data": [{}],"message": {"code": 1,"description": "User and Password is incorrect..!"}}');
+      }
+
+    }
+    public function getLogOut(){
+
+      $value = Session::get('zeAccessKey');
+      if (Session::has('zeAccessKey'))
+      { 
+        Session::flush();
+
+      }
+      return Redirect::to('/Auth');
     }
 }

@@ -20,20 +20,11 @@
 // 070 936575
   #######################################################################*/
 // http://www.mvtubes.com/the-guillotines-2012/
-var app = angular.module('ngApp', ['ngRoute','ngAnimate','facebook','ngFileUpload','ui.bootstrap','angularSpinner'])
+var app = angular.module('ngApp', ['ngRoute','ngAnimate','facebook','ngFileUpload','ui.bootstrap','angularSpinner','ui-notification'])
  .config(['FacebookProvider',
     function(FacebookProvider) {
      var myAppId = '943056782397930';
-     
-     // You can set appId with setApp method
-     // FacebookProvider.setAppId('myAppId');
-     
-     /**
-      * After setting appId you need to initialize the module.
-      * You can pass the appId on the init method as a shortcut too.
-      */
      FacebookProvider.init(myAppId);
-     
     }
   ]);
 //This configures the routes and associates each route with a view and a controller

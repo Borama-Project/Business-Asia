@@ -21,7 +21,7 @@ body{
 }
 #contentCenter {
 	margin: 0 auto !important;
-	width: 200px;
+	width: 400px;
 	margin-top: 10% !important;
 	text-align: center;
 }
@@ -41,6 +41,10 @@ body{
 
 	color: crimson;
 	font-size: 12px;
+}
+
+.aling-r {
+	text-align: right;
 }
 
 /*----------------------padding-margin----------------------------------------*/
@@ -111,3 +115,28 @@ body{
 }
 
 
+/*----------------------------------angularjs animation style ----------------------------*/
+/* Include this file in your html if you are using the CSP mode. */
+
+@charset "UTF-8";
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
+.ng-cloak, .x-ng-cloak,
+.ng-hide {
+  display: none !important;
+}
+
+ng\:form {
+  display: block;
+}
+
+.ng-animate-block-transitions {
+  transition:0s all!important;
+  -webkit-transition:0s all!important;
+}
+
+/* show the element during a show/hide animation when the
+ * animation is ongoing, but the .ng-hide class is active */
+.ng-hide-add-active, .ng-hide-remove {
+  display: block!important;
+}
