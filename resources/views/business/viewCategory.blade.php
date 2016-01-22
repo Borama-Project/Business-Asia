@@ -16,18 +16,23 @@
         <thead>
         <tr><th>N</th>
             <th>Name</th>
+            <th></th>
+
         </tr>
 
         </thead>
         <tbody>
 
+
         <tr data-ng-repeat="item in get_category_by_business_id">
             <td></td>
+        <tr data-ng-repeat="item in get_business_by_id">
+            <td >@{{$index + 1}}</td>
             <td >@{{ item.name }}</td>
             <td >
                 <div class="row">
                     <div class="col-xs-3">
-                        <A ng-href="#/category/@{{item.businessId}}">
+                        <A ng-href="#/products/add/@{{item.id}}">
                             <button type="button" name="btnMore" class="btn btn-success">Product</button>
                         </A>
                     </div>

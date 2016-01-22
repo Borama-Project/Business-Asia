@@ -263,7 +263,7 @@ class BusinessController extends Controller
     public function postSearchBusiness(){
 
         $zeAccessKey = Session::get('zeAccessKey');
-        $function = 'search/search';         
+        $function = 'businessAdmin/search_business_admin';         
 
         if (Session::has('zeAccessKey'))
         {   

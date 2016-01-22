@@ -23,7 +23,7 @@
     <tr>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" ng-model="search.head.name" placeholder="Business Name">
+                <input type="text" class="form-control" ng-model="search.name" placeholder="Business Name">
             </div>
         </th>
         <th>
@@ -51,21 +51,26 @@
     </thead>
     <tbody>
     <tr data-ng-repeat="item in get_all_business">
-        <td >@{{ item.head.name }}</td>
+        <td >@{{ item.name }}</td>
         <td >@{{ item.head.phoneNumber }}</td>
         <td >@{{ item.head.email }}</td>
         <td >@{{ item.head.address }}</td>
         <td >
         	<div class="row">
+              <div class="col-xs-4">
+                  <A ng-href="#/category/@{{item.businessId}}">
+                     <button type="button" name="btnMore" class="btn btn-success">Category</button>
+                  </A>
+              </div>
               <div class="col-xs-3">
                     <A ng-href="#/business/@{{item.businessId}}">
                         <button type="button" name="btnMore" class="btn btn-default" >View</button>
                     </A>
               </div>
-              <div class="col-xs-5">
-                  <A ng-href="#/category/@{{item.businessId}}">
-                     <button type="button" name="btnMore" class="btn btn-success">Category</button>
-                  </A>
+              <div class="col-xs-3">
+                    <A ng-href="#/business/@{{item.businessId}}">
+                        <button type="button" name="btnMore" class="btn btn-default" >Edit</button>
+                    </A>
               </div>
               <div class="col-xs-4">
                   <button type="button" name="btnMore" class="btn btn-danger" ng-click="deleteById('sm')">Delete</button>

@@ -163,8 +163,9 @@ app.controller('ngApp', ['$scope','$timeout','$http','Facebook',
   ]);
 
 
-app.controller('ngCategory', function ($scope,$http,$routeParams) {
+app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerService) {
     $scope.businessId = $routeParams.businessId;
+
     $scope.get_category_by_business_id = function(){
         $http({
             method: 'POST',
@@ -181,14 +182,21 @@ app.controller('ngCategory', function ($scope,$http,$routeParams) {
     $scope.get_category_by_business_id();
 
     $scope.get_business_by_id = function(){
+    usSpinnerService.spin('spinner-1');
         $http({
             method: 'POST',
             url:  '/business/get-business-by-id',
             data:  {businessId:$routeParams.businessId},
             dataType: "json"
         }).success(function(response) {
-            console.log(response);
-            $scope.get_business_by_id = response.data;
+
+            if(response.code ==1){
+              $scope.get_business_by_id = response.data;
+              usSpinnerService.stop('spinner-1');
+            }else{
+              $scope.err = response.message.description;
+            }
+
         }).error(function(response) {
             console.log(response);
         });
@@ -542,98 +550,115 @@ app.controller('ngProduct', function ($scope,$http,usSpinnerService) {
 app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 
 });
-app.controller('ngAddProduct', function ($scope,$http,Upload) {
-    $scope.categorysList = function(){
-        $http({
-            method: 'GET',
-            url:  '/business/list',
-            dataType: "json"
-        }).success(function(response) {
-            if(response.code ==1){
-              $scope.categorysLists = response.data;
-            }else{
-              $scope.err = response.message.description;
+app.controller('ngAddProduct', function ($scope,$http,Upload,usSpinnerService) {
+  usSpinnerService.spin('spinner-1');
+  $scope.categorysList = function(callback){
+      $http({
+          method: 'GET',
+          url:  '/business/list',
+          dataType: "json"
+      }).success(function(response) {
+          if(response.code ==1){
+            $scope.categorysLists = response.data;
+            if(callback){
+              callback();
             }
-            
-        }).error(function(response) {
-            console.log(response);
-        });
-    };
-    $scope.conditionList = function(){
-        $http({
-            method: 'GET',
-            url:  '/product/product-condition',
-            dataType: "json"
-        }).success(function(response) {
-            if(response.code ==1){
-              $scope.conditions = response.data;
-            }else{
-              $scope.err = response.message.description;
+          }else{
+            $scope.err = response.message.description;
+            usSpinnerService.stop('spinner-1');
+          }
+          
+      }).error(function(response) {
+          console.log(response);
+      });
+  };
+  $scope.conditionList = function(callback){
+      $http({
+          method: 'GET',
+          url:  '/product/product-condition',
+          dataType: "json"
+      }).success(function(response) {
+          if(response.code ==1){
+            $scope.conditions = response.data;
+            if(callback){
+              callback();
             }
-        }).error(function(response) {
-            console.log(response);
-        });
-    };
-    $scope.categorysList();
-    $scope.businessList = function(){
-        $http({
-            method: 'GET',
-            url:  '/business/list-all-business-data',
-            dataType: "json"
-        }).success(function(response) {
-            if(response.code ==1){
-              $scope.business = response.data;
-            }else{
-              $scope.err = response.message.description;
+          }else{
+            $scope.err = response.message.description;
+          }
+      }).error(function(response) {
+          console.log(response);
+          usSpinnerService.stop('spinner-1');
+      });
+  };
+  $scope.listBusinessTag = function(callback){
+      $http({
+          method: 'GET',
+          url:  '/business/list-business-tag',
+          dataType: "json"
+      }).success(function(response) {
+          if(response.code ==1){
+            $scope.businessTag = response.data;
+            if(callback){
+              callback();
             }
-            
-        }).error(function(response) {
-            console.log(response);
-        });
-    };
-    $scope.businessList();
-    $scope.conditionList();
-    $scope.listBusinessTag = function(){
-        $http({
-            method: 'GET',
-            url:  '/business/list-business-tag',
-            dataType: "json"
-        }).success(function(response) {
-            if(response.code ==1){
-              $scope.businessTag = response.data;
-            }else{
-              $scope.err = response.message.description;
-            }
-        }).error(function(response) {
-            console.log(response);
-        });
-    };
-    $scope.listBusinessTag();
-    $scope.submit = function(){
-      Upload.upload({
-            method: 'POST',
-            url: '/product/product',
-            data: $scope.app,
-            dataType: "json",
-            contentType: false,
-            cache: false,
-            processData: false,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (response) {
-            // console.log();
-            $scope.app = '';
-            if(response.code == 1){
-                $scope.results = response.message.description;
-                // $scope.BusinessFormName.$setPristine();
-            }
-        });
-    };
+          }else{
+            $scope.err = response.message.description;
+            usSpinnerService.stop('spinner-1');
+          }
+      }).error(function(response) {
+          console.log(response);
+      });
+  };
+  $scope.businessList = function(){
+      $http({
+          method: 'GET',
+          url:  '/business/list-all-business-data',
+          dataType: "json"
+      }).success(function(response) {
+          if(response.code ==1){
+            $scope.business = response.data;
+            usSpinnerService.stop('spinner-1');
+          }else{
+            $scope.err = response.message.description;
+            usSpinnerService.stop('spinner-1');
+          }
+          
+      }).error(function(response) {
+          console.log(response);
+      });
+  };
+  $scope.listBusinessTag(function(){
+    $scope.conditionList(function(){
+      $scope.categorysList(function(){
+        $scope.businessList();
+      });
+    });
+  });
+  
+  $scope.submit = function(){
+    usSpinnerService.spin('spinner-1');
+    Upload.upload({
+          method: 'POST',
+          url: '/product/product',
+          data: $scope.app,
+          dataType: "json",
+          contentType: false,
+          cache: false,
+          processData: false,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).success(function (response) {
+          usSpinnerService.stop('spinner-1');
+          $scope.app = '';
+          if(response.code == 1){
+              $scope.results = response.message.description;
+              // $scope.BusinessFormName.$setPristine();
+          }
+      });
+  };
 
 });
 app.controller('ngPromotion', function ($scope,$http) {
-
-    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
-    //one place...not required though especially in the simple example below
     init();
     function init() {
         console.log('ngPromotion');
