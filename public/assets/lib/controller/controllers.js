@@ -233,7 +233,8 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
               console.log(response);
               usSpinnerService.stop('spinner-1');
               $scope.get_all_business = response.data;
-              $scope.pagination= pagination($scope.get_all_business,15,$scope.search);
+              $scope.pagination = Pagination.getNew(10);
+              $scope.pagination.numPages = Math.ceil(response.data.length/$scope.pagination.perPage);
 
             }else{
               $scope.err = response.message.description;
@@ -257,10 +258,8 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
           if(response.code == 1){
             $scope.pagination = '';
             $scope.get_all_business = response.data;
-            $scope.pagination = Pagination.getNew(3);
-              // $scope.pagination = Pagination.getNew(10);
-              $scope.pagination.numPages = Math.ceil(response.data.length/$scope.pagination.perPage);
-              console.log($scope.pagination.numPages);
+            $scope.pagination = Pagination.getNew(10);
+            $scope.pagination.numPages = Math.ceil(response.data.length/$scope.pagination.perPage);
           }
           
           usSpinnerService.stop('spinner-1');
@@ -502,7 +501,6 @@ app.controller('ngProduct', function ($scope,$http,usSpinnerService) {
     $scope.businessList();
 
     $scope.change = function(){
-      // console.log(this);
       $http({
             url:  '/business/category',
             method: 'POST',
@@ -693,29 +691,3 @@ app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,tit
     $modalInstance.dismiss('cancel');
   }
 });
-
-function pagination(data,pag,param){
-  // pagination are defaul with limite 15
-  var pagination = Array();
-  if(data !=''){
-    var length = data.length;
-    var pags = pag;
-
-    var pageD = length / pags;
-    var pageM = length % pags;
-    if(pageD > pageM){
-      pageM = ageM + 1;
-    }
-    var page ='';
-    for (var i = 0; i <=pageM -1 ; i++) {
-      if(page ==''){
-        page += '{"key":'+length+'-'+pageD+'}';
-      }else{
-        page += ',{"key":'+length+'-'+pageD+'}';
-      }
-      
-    };
-    pagination.push(page);
-  }
-  return pagination;
-}

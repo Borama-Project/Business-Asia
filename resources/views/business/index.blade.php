@@ -16,6 +16,7 @@
     
     <thead>
     <tr>
+        <th>Nº</th>
         <th>Business Name</th>
         <th>Phone Number</th>
         <th>Email</th>
@@ -23,6 +24,7 @@
         <th>Search</th>
     </tr>
     <tr>
+        <th></th>
         <th>
             <div class="form-group">
                 <input type="text" class="form-control" ng-model="search.name" placeholder="Business Name">
@@ -52,7 +54,8 @@
     </thead>
     
     <tbody>
-    <tr data-ng-repeat="item in get_all_business ">
+    <tr data-ng-repeat="item in get_all_business | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage">
+        <td >@{{ $index + 1 }}</td>
         <td >@{{ item.name }}</td>
         <td >@{{ item.head.phoneNumber }}</td>
         <td >@{{ item.head.email }}</td>
@@ -74,12 +77,13 @@
     </tr>
     <tr>
         <td colspan="5" align="center">
-            <nav>
-              <ul class="pagination">
-                <li data-ng-repeat="item in pagination"><a href="#">@{{ $index + 1}}</a></li>
-              </ul>
-            </nav>
-            
+            <ul class="pagination">
+                  <li><a href="" ng-click="pagination.prevPage()">&laquo;</a></li>
+                  <li ng-repeat="n in [] | range: pagination.numPages" ng-class="{active: n == pagination.page}">
+                  <a href="" ng-click="pagination.toPageId(n)">@{{n + 1}}</a>
+                  </li>
+                  <li><a href="" ng-click="pagination.nextPage()">&raquo;</a></li>
+            </ul>
         </td>
     </tr>
     </tbody>
