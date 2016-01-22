@@ -232,12 +232,13 @@ class BusinessController extends Controller
         return view('business.listAllBusiness');
     }
 
-    public function getListAllBusinessData(){
+    public function getListAllBusinessData($limit=10,$offset=0){
 
         $authorId = json_decode(Session::get('zeAccessKey'));
-        $function = 'business/get_all_business';
+        $function = 'businessAdmin/get_all_business';
         $dataRequest =  array(
-            'accessKey' => $authorId->AccessKey,
+            'limit' => $limit,
+            'offset' => $offset,
         );
         $method = 'POST';
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
@@ -246,7 +247,7 @@ class BusinessController extends Controller
 
     }
 
-    public function postSearchBusiness(){
+    public function postSearchBusiness($limit=15,$offset=0){
 
         $zeAccessKey = Session::get('zeAccessKey');
         $function = 'businessAdmin/search_business_admin';         
@@ -259,7 +260,7 @@ class BusinessController extends Controller
                 $dataRequest[$key]= $value;
             }
 
-            $dataRequest['accessKey'] = $zeAccessKey->AccessKey;
+            // $dataRequest['accessKey'] = $zeAccessKey->AccessKey;
         }
         $method = 'POST';
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
