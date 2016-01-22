@@ -184,7 +184,7 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
             data:  {businessId:$routeParams.businessId},
             dataType: "json"
         }).success(function(response) {
-
+            console.log(response);
             if(response.code ==1){
               $scope.get_business_by_id = response.data;
               usSpinnerService.stop('spinner-1');
@@ -304,6 +304,7 @@ app.controller('ngViewBusiness', function ($scope,$http,$routeParams,usSpinnerSe
           data: {businessId:$routeParams.businessId},
           dataType: "json"
       }).success(function(response) {
+          console.log(response);
           if(response.code ==1){
             $scope.item = response.data[0];
             usSpinnerService.stop('spinner-1');
