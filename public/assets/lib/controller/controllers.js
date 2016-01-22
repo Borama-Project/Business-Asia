@@ -218,7 +218,7 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
     };
 });
 
-app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinnerService) {
+app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinnerService,Pagination) {
 
   $scope.submit =  function(){
     if($scope.search){
@@ -235,6 +235,7 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
               usSpinnerService.stop('spinner-1');
               $scope.get_all_business = response.data;
               $scope.pagination= pagination($scope.get_all_business,15,$scope.search);
+
             }else{
               $scope.err = response.message.description;
             }
@@ -257,8 +258,10 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
           if(response.code == 1){
             $scope.pagination = '';
             $scope.get_all_business = response.data;
-            $scope.pagination= pagination($scope.get_all_business,15,$scope.search);
-            console.log($scope.pagination);
+            $scope.pagination = Pagination.getNew(5);
+              // $scope.pagination = Pagination.getNew(10);
+              $scope.pagination.numPages = Math.ceil(response.data.length/$scope.pagination.perPage);
+              console.log($scope.pagination.numPages);
           }
           
           usSpinnerService.stop('spinner-1');
@@ -703,9 +706,16 @@ function pagination(data,pag,param){
     if(pageD > pageM){
       pageM = ageM + 1;
     }
+    var page ='';
     for (var i = 0; i <=pageM -1 ; i++) {
-      pagination.push({'key':pageM});
+      if(page ==''){
+        page += '{"key":'+length+'-'+pageD+'}';
+      }else{
+        page += ',{"key":'+length+'-'+pageD+'}';
+      }
+      
     };
+    pagination.push(page);
   }
   return pagination;
 }

@@ -52,7 +52,7 @@
     </thead>
     
     <tbody>
-    <tr data-ng-repeat="item in get_all_business">
+    <tr data-ng-repeat="item in get_all_business ">
         <td >@{{ item.name }}</td>
         <td >@{{ item.head.phoneNumber }}</td>
         <td >@{{ item.head.email }}</td>
@@ -79,6 +79,7 @@
                 <li data-ng-repeat="item in pagination"><a href="#">@{{ $index + 1}}</a></li>
               </ul>
             </nav>
+            
         </td>
     </tr>
     </tbody>
