@@ -288,6 +288,8 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
           return 'Do you want to Delete Businesss name '+$scope.name;
         },businessId:function(){
           return $scope.businessId;
+        },scopes:function(){
+          return $scope;
         }
       }
     });
@@ -666,21 +668,27 @@ app.controller('ngAuth', function ($scope,$http) {
     }
 });
 
-app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,title,contents,businessId) {
+app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,title,contents,businessId,scopes) {
   $scope.title= title;
   $scope.contentTitle = contents;
   $scope.businessId= businessId;
+  $scope.scopes = scopes;
   $scope.ok = function () {
     $http({
-          method: 'POST',
-          url:  '/business/delete-business-by-id',
-          data: {businessId:$scope.businessId},
-          dataType: "json"
-      }).success(function(response) {
-          $modalInstance.close();
-      }).error(function(response) {
-          console.log(response);
-      });
+        method: 'POST',
+        url:  '/business/delete-business-by-id',
+        data: {businessId:$scope.businessId},
+        dataType: "json"
+    }).success(function(response) {
+        $modalInstance.close();
+        if($scope.scopes.search){
+          $scope.scopes.submit();
+        }else{
+          $scope.scopes.listAllBusiness();
+        }
+    }).error(function(response) {
+        console.log(response);
+    });
   };
 
   $scope.cancel = function () {
