@@ -22,7 +22,7 @@
 
 </head>
     <body>
-
+    <span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1"></span>
             @include('header')
             <div class="content-wrapper">
             @yield('content')
@@ -33,10 +33,13 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
     <script src="{{asset('/assets/lib/angular-facebook.js')}}"></script>
-    <script src="{{asset('/assets/lib/app.js')}}"></script>
-    <script src="{{asset('/assets/lib/controller/controllers.js')}}"></script>
+    <script src="{{asset('/assets/lib/angular-spinner.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/angular-spinner.js')}}"></script>
     <script src="{{asset('/assets/lib/ng-file-upload.min.js')}}"></script>
     <script src="{{asset('/assets/lib/ng-file-upload-shim.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/angular-ui-notification.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/app.js')}}"></script>
+    <script src="{{asset('/assets/lib/controller/controllers.js')}}"></script>
 
 
 <script type="text/ng-template" id="ModalContent">
@@ -53,6 +56,19 @@
         <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
     </div>
 </script>
-
+<script type="text/ng-template" id="custom_template.html">
+    <div class="ui-notification custom-template">
+        <h3>@{{nTitle}}</h3>
+        <div class="message" ng-bind-html="message"></div>
+        <div class="message">
+            <ul>
+                <li ng-repeat="el in nElements">@{{el}}</li>
+            </ul>
+        </div>
+        <div class="message">
+            <a class="btn btn-small btn-primary close-notification" ng-click="nClick()">Click me</a>
+        </div>
+    </div>
+</script>
     </body>
 </html>

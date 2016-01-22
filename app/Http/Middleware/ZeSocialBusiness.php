@@ -34,7 +34,7 @@ class ZeSocialBusiness
                $result=true;
             }
         }else{
-            if($request->server()['REQUEST_URI'] =='/Auth' || $request->server()['REQUEST_URI']=='/Auth/admin-profile'){
+            if($request->server()['REQUEST_URI'] =='/Auth' || $request->server()['REQUEST_URI']=='/Auth/admin-profile' || $request->server()['REQUEST_URI']=='/Auth/login'){
                 $result= true;
             }
         }

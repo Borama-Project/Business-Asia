@@ -3,16 +3,8 @@
 //The $scope is ultimately bound to the customers view
 
 
-app.controller('ngLog', [
-    '$scope',
-    '$timeout',
-    '$http',
-    'Facebook',
+app.controller('ngLog', ['$scope','$timeout','$http','Facebook',
     function($scope, $timeout,$http, Facebook) {
-     
-      /**
-       * Logout
-       */
       $scope.logout = function() {
         Facebook.getLoginStatus(function(response) {
           if (response.status == 'connected') {
@@ -27,15 +19,9 @@ app.controller('ngLog', [
         });
         
       }
-      
-    
     }
   ]);
-app.controller('ngApp', [
-    '$scope',
-    '$timeout',
-    '$http',
-    'Facebook',
+app.controller('ngApp', ['$scope','$timeout','$http','Facebook',
     function($scope, $timeout,$http, Facebook) {
       
       // Define user empty data :/
@@ -176,8 +162,8 @@ app.controller('ngApp', [
     }
   ]);
 
-app.controller('ngCategory', function ($scope,$http,$routeParams) {
 
+app.controller('ngCategory', function ($scope,$http,$routeParams) {
     $scope.businessId = $routeParams.businessId;
     $scope.get_category_by_business_id = function(){
         $http({
@@ -227,10 +213,9 @@ app.controller('ngCategory', function ($scope,$http,$routeParams) {
             console.log(response);
         });
     };
-
 });
 
-app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log) {
+app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinnerService) {
 
   $scope.submit =  function(){
     
@@ -244,15 +229,20 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log) {
         }
       };
       dtRequest = '{'+dtRequest+'}';
-      console.log(dtRequest);
+      usSpinnerService.spin('spinner-1');
       $http({
           method: 'POST',
           url:  '/business/search-business',
           data: dtRequest,
           dataType: "json"
       }).success(function(response) {
-          console.log(response);
-          $scope.get_all_business = response.data.business;
+          if(response.code ==1){
+              usSpinnerService.stop('spinner-1');
+              $scope.get_all_business = response.data.business;
+            }else{
+              $scope.err = response.message.description;
+            }
+          
       }).error(function(response) {
           console.log(response);
       });
@@ -318,33 +308,21 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log) {
   }
 
 });
-app.controller('ngViewBusiness', function ($scope,$http,$routeParams) {
-
-    // console.log($routeParams.businessId);
-
-    $scope.submit =  function(){
-      console.log($scope.item);
-      // $http({
-      //       method: 'POST',
-      //       url:  '/business/view-business',
-      //       data: dtRequest,
-      //       dataType: "json"
-      //   }).success(function(response) {
-      //       console.log(response);
-      //       $scope.get_all_business = response.data.business;
-      //   }).error(function(response) {
-      //       console.log(response);
-      //   });
-    }
+app.controller('ngViewBusiness', function ($scope,$http,$routeParams,usSpinnerService) {
     $scope.init = function(){
+      usSpinnerService.spin('spinner-1');
       $http({
           method: 'POST',
           url:  '/business/business-by-id',
           data: {businessId:$routeParams.businessId},
           dataType: "json"
       }).success(function(response) {
-          console.log(response);
-          $scope.item = response.data[0];
+          if(response.code ==1){
+            $scope.item = response.data[0];
+            usSpinnerService.stop('spinner-1');
+          }else{
+            $scope.err = response.message.description;
+          }
       }).error(function(response) {
           console.log(response);
       });
@@ -433,8 +411,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
 
     };
     //end
-    $scope.submit = function
-        (){
+    $scope.submit = function(){
 
         Upload.upload({
             method: 'POST',
@@ -472,24 +449,36 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
 
 });
 
-app.controller('ngProduct', function ($scope,$http) {
+app.controller('ngProduct', function ($scope,$http,usSpinnerService) {
 
     $scope.submit = function(){
-      // console.log($scope.app);
+       // if (!$scope.spinneractive) {
+            
+            
+       //    }
+       usSpinnerService.spin('spinner-1'); 
       $http({
           method: 'POST',
           url:  '/product/list-product',
           data: $scope.app,
           dataType: "json"
       }).success(function(response) {
-          console.log(response);
+        if(response.code ==1){
           $scope.results  = JSON.stringify(response.message);
           if(response.data.length){
+            usSpinnerService.stop('spinner-1');
             $scope.Product = response.data;
+            usSpinnerService.stop('spinner-1');
+            // if ($scope.spinneractive) {
+              
+            // }
+            // $scope.spinneractive = true;
           }else{
             $scope.items = response.data;
           }
-          
+        }else{
+
+        }
           
       }).error(function(response) {
           console.log(response);
@@ -502,8 +491,12 @@ app.controller('ngProduct', function ($scope,$http) {
             url:  '/business/list',
             dataType: "json"
         }).success(function(response) {
-            console.log(JSON.stringify(response));
+          if(response.code ==1){
             $scope.categorysLists = response.data;
+          }else{
+            $scope.err = response.message.description;
+          }
+            
         }).error(function(response) {
             console.log(response);
         });
@@ -515,8 +508,12 @@ app.controller('ngProduct', function ($scope,$http) {
             url:  '/business/list-all-business-data',
             dataType: "json"
         }).success(function(response) {
-            console.log(response.data);
-            $scope.business = response.data;
+            if(response.code ==1){
+              $scope.business = response.data;
+            }else{
+              $scope.err = response.message.description;
+            }
+            
         }).error(function(response) {
             console.log(response);
         });
@@ -531,8 +528,12 @@ app.controller('ngProduct', function ($scope,$http) {
             data: {businessId:$scope.app.businessId},
             dataType: "json"
         }).success(function(response) {
-            // console.log(response);
-            $scope.category = response.data;
+            if(response.code ==1){
+              $scope.category = response.data;
+            }else{
+              $scope.err = response.message.description;
+            }
+            
         }).error(function(response) {
             console.log(response);
         });  
@@ -540,20 +541,6 @@ app.controller('ngProduct', function ($scope,$http) {
 });
 app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 
-    // $scope.submit = function(){
-    //   // console.log($scope.app);
-    //   $http({
-    //       method: 'POST',
-    //       url:  '/product/product',
-    //       data: $scope.app,
-    //       dataType: "json"
-    //   }).success(function(response) {
-    //       console.log(response);
-    //       // $scope.item = response.data[0];
-    //   }).error(function(response) {
-    //       console.log(response);
-    //   });
-    // };
 });
 app.controller('ngAddProduct', function ($scope,$http,Upload) {
     $scope.categorysList = function(){
@@ -562,8 +549,12 @@ app.controller('ngAddProduct', function ($scope,$http,Upload) {
             url:  '/business/list',
             dataType: "json"
         }).success(function(response) {
-            console.log(response);
-            $scope.categorysLists = response.data;
+            if(response.code ==1){
+              $scope.categorysLists = response.data;
+            }else{
+              $scope.err = response.message.description;
+            }
+            
         }).error(function(response) {
             console.log(response);
         });
@@ -574,8 +565,11 @@ app.controller('ngAddProduct', function ($scope,$http,Upload) {
             url:  '/product/product-condition',
             dataType: "json"
         }).success(function(response) {
-            console.log(response);
-            $scope.conditions = response.data;
+            if(response.code ==1){
+              $scope.conditions = response.data;
+            }else{
+              $scope.err = response.message.description;
+            }
         }).error(function(response) {
             console.log(response);
         });
@@ -587,8 +581,12 @@ app.controller('ngAddProduct', function ($scope,$http,Upload) {
             url:  '/business/list-all-business-data',
             dataType: "json"
         }).success(function(response) {
-            console.log(response.data);
-            $scope.business = response.data;
+            if(response.code ==1){
+              $scope.business = response.data;
+            }else{
+              $scope.err = response.message.description;
+            }
+            
         }).error(function(response) {
             console.log(response);
         });
@@ -601,9 +599,11 @@ app.controller('ngAddProduct', function ($scope,$http,Upload) {
             url:  '/business/list-business-tag',
             dataType: "json"
         }).success(function(response) {
-            console.log(response);
-            $scope.businessTag = response.data;
-
+            if(response.code ==1){
+              $scope.businessTag = response.data;
+            }else{
+              $scope.err = response.message.description;
+            }
         }).error(function(response) {
             console.log(response);
         });
@@ -628,28 +628,6 @@ app.controller('ngAddProduct', function ($scope,$http,Upload) {
             }
         });
     };
-    $scope.Upload = function(){
-      console.log($scope.picFile);
-      // $scope.picFile.push({'productId':'111111'});
-      // console.log(JSON.stringify($scope.picFile.file1));
-      // Upload.upload({
-      //       method: 'POST',
-      //       url: '/business/register-business',
-      //       data: $scope.globalVirable,
-      //       dataType: "json",
-      //       contentType: false,
-      //       cache: false,
-      //       processData: false,
-      //       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      //   }).success(function (response) {
-      //       console.log(response);
-      //       if(response.code == 1){
-      //           $scope.success = 'sucess';
-      //           $scope.BusinessFormName.$setPristine();
-      //       }
-      //   });
-
-    }
 
 });
 app.controller('ngPromotion', function ($scope,$http) {
@@ -673,9 +651,24 @@ app.controller('ngHome', function ($scope,$http) {
     }
 });
 
-app.controller('nglistSelect', function ($scope,$http) {
-    // $scope.list();
-    console.log('nglistSelect');
+app.controller('ngAuth', function ($scope,$http) {
+ 
+    $scope.submit = function(){
+      $http({
+          method: 'POST',
+          url:  '/Auth/login',
+          data:$scope.app,
+          dataType: "json"
+      }).success(function(response) {
+        if(response.code ===1){
+          window.location = "http://asianbusiness.dev/Auth";
+        }else{
+          $scope.err = response.message.description;
+        }
+      }).error(function(response) {
+          console.log(response);
+      });
+    }
 });
 
 app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,title,contents,businessId) {
@@ -689,8 +682,6 @@ app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,tit
           data: {businessId:$scope.businessId},
           dataType: "json"
       }).success(function(response) {
-          console.log(response.message);
-          // $scope.item = response.data[0];
           $modalInstance.close();
       }).error(function(response) {
           console.log(response);

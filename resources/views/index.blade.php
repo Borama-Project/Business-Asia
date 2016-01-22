@@ -13,6 +13,31 @@
 			  <A href="/Auth/log-out" class="list-group-item" data-ng-click="logout()">Log Out</A>
 			  <!-- ng-href="/Auth/log-out" javascript:void(0)-->
 
+			$value = Session::get('zeAccessKey');
+			      
+
+			if (Session::has('zeAccessKey'))
+			{	
+				$value = json_decode($value) ;
+				// echo $value->AccessKey;
+				// echo $value->ownerId;
+				var_dump ($value);
+			}
+			?>
+			<?php
+
+            $value = Session::get("zelog");
+                  
+
+            if (Session::has("zelog"))
+            { 
+              $value = json_decode($value) ;
+              
+              var_dump ($value);
+            }
+            ?>
+			<!-- <p>{{csrf_token()}}</p> -->
+
 		  
 		</div>
 	</div>
