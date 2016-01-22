@@ -406,7 +406,8 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             method: 'POST',
             url: '/business/register-business',
             data: {
-                name:$scope.globalVirable.name,
+                locationname:$scope.globalVirable.locationname,
+                businessname:$scope.globalVirable.businessname,
                 phoneNumber:$scope.globalVirable.phoneNumber,
                 email:$scope.globalVirable.email,
                 latitute:$scope.globalVirable.latitute,

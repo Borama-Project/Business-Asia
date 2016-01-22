@@ -9,13 +9,17 @@
 	</div>
 	<div class="form-group col-xs-6">
 	    <label for="exampleInputEmail1">Business Name </label>
-	    <input type="text" class="form-control"  name="" ng-model="globalVirable.name" placeholder="businessName" required="true">
+	    <input type="text" class="form-control"  name="" ng-model="globalVirable.businessname" placeholder="businessName" required="true">
+	</div>
+	<div class="form-group col-xs-6">
+		<label for="exampleInputEmail1">Location Name </label>
+		<input type="text" class="form-control"  name="" ng-model="globalVirable.locationname" placeholder="businessName" required="true">
 	</div>
 	<div class="form-group col-xs-6">
 	    <label for="exampleInputEmail1">Phone Number</label>
 	    <input type="number" class="form-control"  name="" ng-model="globalVirable.phoneNumber" placeholder="phone" required="true">
 	</div>
-	<div class="form-group col-xs-12">
+	<div class="form-group col-xs-6">
 		<label for="exampleInputEmail1">Email</label>
 		<input type="email" class="form-control" id="" ng-model="globalVirable.email" placeholder="Email" required="true">
 	</div>

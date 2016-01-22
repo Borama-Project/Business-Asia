@@ -197,7 +197,8 @@ class BusinessController extends Controller
         $method   = 'POST';
         $dataRequest = array(
             'authorId'          => $authorId->ownerId,
-            'name'              => Input::get('name'),
+            'locationname'              => Input::get('locationname'),
+            'businessname'              => Input::get('businessname'),
             'description'       => Input::get('description'),
             'phoneNumber'       => Input::get('phoneNumber'),
             'address'           => Input::get('address'),
