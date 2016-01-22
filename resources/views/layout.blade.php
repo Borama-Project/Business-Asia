@@ -42,6 +42,8 @@
     <script src="{{asset('/assets/lib/ng-file-upload.min.js')}}"></script>
     <script src="{{asset('/assets/lib/ng-file-upload-shim.min.js')}}"></script>
     <script src="{{asset('/assets/lib/angular-ui-notification.min.js')}}"></script>
+    <script src="{{asset('/assets/lib/simplePagination.js')}}"></script>
+    
     <script src="{{asset('/assets/lib/app.js')}}"></script>
     <script src="{{asset('/assets/lib/controller/controllers.js')}}"></script>
     <script src="{{asset('/assets/js/kendo.all.min.js')}}"></script>

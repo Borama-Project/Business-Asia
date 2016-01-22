@@ -11,8 +11,7 @@
 			  <A ng-href="#/business" class="list-group-item">Business</A>
 			  <A ng-href="#/products" class="list-group-item">Add Product</A>
 			  <A href="/Auth/log-out" class="list-group-item" data-ng-click="logout()">Log Out</A>
-			  <!-- ng-href="/Auth/log-out" javascript:void(0)-->
-
+			<?php
 			$value = Session::get('zeAccessKey');
 			      
 

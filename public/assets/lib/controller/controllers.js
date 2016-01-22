@@ -1,7 +1,3 @@
-//-------------Facebook---------------
-//This controller retrieves data from the customersService and associates it with the $scope
-//The $scope is ultimately bound to the customers view
-
 
 app.controller('ngLog', ['$scope','$timeout','$http','Facebook',
     function($scope, $timeout,$http, Facebook) {
@@ -162,7 +158,6 @@ app.controller('ngApp', ['$scope','$timeout','$http','Facebook',
     }
   ]);
 
-
 app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerService) {
     $scope.businessId = $routeParams.businessId;
 
@@ -222,30 +217,24 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
     };
 });
 
-app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinnerService) {
+app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinnerService,Pagination) {
 
   $scope.submit =  function(){
-    
-    var str = JSON.stringify($scope.app);
-    if(str != ''){
-      var dtRequest = str.slice(1,-1);;
-      var doc= document.getElementsByName("moreInput");
-      for (var i = doc.length - 1; i >= 0; i--) {
-        if(doc[i].value){
-          dtRequest += ',"'+doc[i].id+'":"'+doc[i].value+'"';
-        }
-      };
-      dtRequest = '{'+dtRequest+'}';
+    if($scope.search){
+      console.log($scope.search);
       usSpinnerService.spin('spinner-1');
       $http({
           method: 'POST',
           url:  '/business/search-business',
-          data: dtRequest,
+          data: $scope.search,
           dataType: "json"
       }).success(function(response) {
           if(response.code ==1){
+              console.log(response);
               usSpinnerService.stop('spinner-1');
-              $scope.get_all_business = response.data.business;
+              $scope.get_all_business = response.data;
+              $scope.pagination= pagination($scope.get_all_business,15,$scope.search);
+
             }else{
               $scope.err = response.message.description;
             }
@@ -254,37 +243,32 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
           console.log(response);
       });
     }
-
-  }
-    $scope.listAllBusiness = function(){
-        $http({
-            method: 'GET',
-            url:  '/business/list-all-business-data',
-            dataType: "json"
-        }).success(function(response) {
-            console.log(response);
-            $scope.get_all_business = response.data;
-        }).error(function(response) {
-            console.log(response);
-        });
-    };
-    $scope.listAllBusiness();
-
-  $scope.moreOptons = function(){
-    if(this.titleOpt == 'More Option'){
-      $scope.Options = [{'title':'ID','ngModel':'tag','holder':'Businesss ID'},
-                      {'title':'Name','ngModel':'name','holder':'Name'},
-                      {'title':'Near By Type','ngModel':'nearbyType','holder':'Near By Type'}
-                    ];
-      $scope.titleOpt = 'Hide Option';
-      $scope.my = { favorite: 'unicorns' };
-    }else{
-      $scope.Options = '';
-      $scope.titleOpt = 'More Option';
-    }
     
   }
-  $scope.titleOpt = 'More Option';
+
+  $scope.listAllBusiness = function(){
+    usSpinnerService.spin('spinner-1');
+      $http({
+          method: 'GET',
+          url:  '/business/list-all-business-data',
+          dataType: "json"
+      }).success(function(response) {
+          // console.log(response);
+          if(response.code == 1){
+            $scope.pagination = '';
+            $scope.get_all_business = response.data;
+            $scope.pagination = Pagination.getNew(3);
+              // $scope.pagination = Pagination.getNew(10);
+              $scope.pagination.numPages = Math.ceil(response.data.length/$scope.pagination.perPage);
+              console.log($scope.pagination.numPages);
+          }
+          
+          usSpinnerService.stop('spinner-1');
+      }).error(function(response) {
+          console.log(response);
+      });
+  };
+  $scope.listAllBusiness();
 
   $scope.animationsEnabled = true;
 
@@ -310,9 +294,6 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
     });
 
   };
-  $scope.close = function(e){
-    // $modalInstance.dismiss('cancel');
-  }
 
 });
 app.controller('ngViewBusiness', function ($scope,$http,$routeParams,usSpinnerService) {
@@ -457,12 +438,8 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
 });
 
 app.controller('ngProduct', function ($scope,$http,usSpinnerService) {
-
+  
     $scope.submit = function(){
-       // if (!$scope.spinneractive) {
-            
-            
-       //    }
        usSpinnerService.spin('spinner-1'); 
       $http({
           method: 'POST',
@@ -476,10 +453,6 @@ app.controller('ngProduct', function ($scope,$http,usSpinnerService) {
             usSpinnerService.stop('spinner-1');
             $scope.Product = response.data;
             usSpinnerService.stop('spinner-1');
-            // if ($scope.spinneractive) {
-              
-            // }
-            // $scope.spinneractive = true;
           }else{
             $scope.items = response.data;
           }
@@ -719,3 +692,29 @@ app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,tit
     $modalInstance.dismiss('cancel');
   }
 });
+
+function pagination(data,pag,param){
+  // pagination are defaul with limite 15
+  var pagination = Array();
+  if(data !=''){
+    var length = data.length;
+    var pags = pag;
+
+    var pageD = length / pags;
+    var pageM = length % pags;
+    if(pageD > pageM){
+      pageM = ageM + 1;
+    }
+    var page ='';
+    for (var i = 0; i <=pageM -1 ; i++) {
+      if(page ==''){
+        page += '{"key":'+length+'-'+pageD+'}';
+      }else{
+        page += ',{"key":'+length+'-'+pageD+'}';
+      }
+      
+    };
+    pagination.push(page);
+  }
+  return pagination;
+}

@@ -11,7 +11,9 @@
         <button type="button" name="btnMore" class="btn btn-success" >Register Business</button>
     </a>
 </div>
+<form ng-submit="submit()">
 <table class="table table-condensed">
+    
     <thead>
     <tr>
         <th>Business Name</th>
@@ -28,59 +30,61 @@
         </th>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" ng-model="search.head.phoneNumber" placeholder="Phone Number">
+                <input type="text" class="form-control" ng-model="search.phoneNumber" placeholder="Phone Number">
             </div>
         </th>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" ng-model="search.head.email" placeholder="Email">
+                <input type="text" class="form-control" ng-model="search.email" placeholder="Email">
             </div>
         </th>
         <th>
             <div class="form-group">
-                <input type="text" class="form-control" ng-model="search.head.address" placeholder="Address">
+                <input type="text" class="form-control" ng-model="search.address" placeholder="Address">
             </div>
         </th>
-        <th>
+        <th width="280px" align="right">
             <div class="form-group">
                 <button type="submit" id="submit" class="btn btn-default">Search</button>
             </div>
         </th>
-
     </tr>
     </thead>
+    
     <tbody>
-    <tr data-ng-repeat="item in get_all_business">
+    <tr data-ng-repeat="item in get_all_business ">
         <td >@{{ item.name }}</td>
         <td >@{{ item.head.phoneNumber }}</td>
         <td >@{{ item.head.email }}</td>
         <td >@{{ item.head.address }}</td>
         <td >
-        	<div class="row">
-              <div class="col-xs-4">
-                  <A ng-href="#/category/@{{item.businessId}}">
-                     <button type="button" name="btnMore" class="btn btn-success">Category</button>
-                  </A>
+              <div class="col-xs-12 pd-lef-0 pd-right-0">
+                <A ng-href="#/category/@{{item.businessId}}">
+                    <button type="button" name="btnMore" class="btn btn-success">Category</button>
+                </A>
+                <A ng-href="#/business/@{{item.businessId}}">
+                    <button type="button" name="btnMore" class="btn btn-default" >View</button>
+                </A>
+                <A ng-href="#/business/edie/@{{item.businessId}}">
+                    <button type="button" name="btnMore" class="btn btn-default" >Edit</button>
+                </A>
+                <button type="button" name="btnMore" class="btn btn-danger" ng-click="deleteById('sm')">Delete</button>
               </div>
-              <div class="col-xs-3">
-                    <A ng-href="#/business/@{{item.businessId}}">
-                        <button type="button" name="btnMore" class="btn btn-default" >View</button>
-                    </A>
-              </div>
-              <div class="col-xs-3">
-                    <A ng-href="#/business/@{{item.businessId}}">
-                        <button type="button" name="btnMore" class="btn btn-default" >Edit</button>
-                    </A>
-              </div>
-              <div class="col-xs-4">
-                  <button type="button" name="btnMore" class="btn btn-danger" ng-click="deleteById('sm')">Delete</button>
-              </div>
-			</div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5" align="center">
+            <nav>
+              <ul class="pagination">
+                <li data-ng-repeat="item in pagination"><a href="#">@{{ $index + 1}}</a></li>
+              </ul>
+            </nav>
+            
         </td>
     </tr>
     </tbody>
 </table>
-
+</form>
 
 
 </div>
