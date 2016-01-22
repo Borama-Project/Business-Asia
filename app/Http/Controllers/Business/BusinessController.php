@@ -84,7 +84,7 @@ class BusinessController extends Controller
         // return(Input::get('businessId'));
         return ($zeSocialBusinessResult);
     }
-    public function postGetBusinessById(){
+    public function postGetCategoryByBusiness(){
 
         $method   = 'POST';
         $function = 'businessAdmin/get_category_by_business';
@@ -95,6 +95,19 @@ class BusinessController extends Controller
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         return ($zeSocialBusinessResult);
     }
+
+    public function postGetBusinessById(){
+
+        $method   = 'POST';
+        $function = 'businessAdmin/get_business_by_id';
+        $dataRequest = array(
+            'businessId'      => Input::get('businessId')
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
+    }
+
     public function getBusinessType()
     {
         return view('business.businessType');
@@ -232,7 +245,7 @@ class BusinessController extends Controller
         return view('business.listAllBusiness');
     }
 
-    public function getListAllBusinessData($limit=10,$offset=0){
+    public function getListAllBusinessData($limit=15,$offset=0){
 
         $authorId = json_decode(Session::get('zeAccessKey'));
         $function = 'businessAdmin/get_all_business';

@@ -8,13 +8,10 @@
 			  <a href="javascript:void(0)" class="list-group-item active">
 				Social Business
 			  </a>
-			  <A ng-href="#/category" class="list-group-item">Add Category</A>
 			  <A ng-href="#/business" class="list-group-item">Business</A>
 			  <A ng-href="#/products" class="list-group-item">Add Product</A>
-			  <A ng-href="#/promotion" class="list-group-item">Promotion</A>
 			  <A href="/Auth/log-out" class="list-group-item" data-ng-click="logout()">Log Out</A>
 			  <!-- ng-href="/Auth/log-out" javascript:void(0)-->
-		  <?php
 
 			$value = Session::get('zeAccessKey');
 			      
@@ -40,6 +37,7 @@
             }
             ?>
 			<!-- <p>{{csrf_token()}}</p> -->
+
 		  
 		</div>
 	</div>

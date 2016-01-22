@@ -160,26 +160,44 @@ app.controller('ngApp', ['$scope','$timeout','$http','Facebook',
 
 app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerService) {
     $scope.businessId = $routeParams.businessId;
+
+    $scope.get_category_by_business_id = function(){
+        $http({
+            method: 'POST',
+            url:  '/business/get-category-by-business',
+            data:  {businessId:$routeParams.businessId},
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.get_category_by_business_id = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.get_category_by_business_id();
+
+    $scope.get_business_by_id = function(){
     usSpinnerService.spin('spinner-1');
-    $scope.getGetBusinessById = function(){
         $http({
             method: 'POST',
             url:  '/business/get-business-by-id',
             data:  {businessId:$routeParams.businessId},
             dataType: "json"
         }).success(function(response) {
+
             if(response.code ==1){
               $scope.get_business_by_id = response.data;
               usSpinnerService.stop('spinner-1');
             }else{
               $scope.err = response.message.description;
             }
-            
+
         }).error(function(response) {
             console.log(response);
         });
     };
-    $scope.getGetBusinessById();
+    $scope.get_business_by_id();
+
 
     $scope.submit = function(){
         $http({
@@ -192,6 +210,7 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
             dataType: "json"
         }).success(function(response) {
             $scope.globalVirable='';
+            window.history.back();
             $scope.getGetBusinessById();
         }).error(function(response) {
             console.log(response);
