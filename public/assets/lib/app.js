@@ -43,11 +43,11 @@ app.config(function ($routeProvider) {
                 controller: 'ngBusinessType',
                 templateUrl: '/mainCategory'
             })
-        .when('/products',
+        .when('/products:',
             {
                 controller: 'ngProduct',
                 templateUrl: '/product'
-            })
+            }) 
         .when('/products/add/:categoryId',
             {
                 controller: 'ngAddProduct',
