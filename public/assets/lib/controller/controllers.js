@@ -176,7 +176,7 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
     };
     $scope.get_category_by_business_id();
 
-    $scope.get_business_by_id = function(){
+    $scope.get_business_by_id_fuc = function(){
     usSpinnerService.spin('spinner-1');
         $http({
             method: 'POST',
@@ -196,8 +196,7 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
             console.log(response);
         });
     };
-    $scope.get_business_by_id();
-
+    $scope.get_business_by_id_fuc();
 
     $scope.submit = function(){
         $http({
@@ -211,7 +210,7 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
         }).success(function(response) {
             $scope.globalVirable='';
             window.history.back();
-            $scope.getGetBusinessById();
+            $scope.get_business_by_id_fuc();
         }).error(function(response) {
             console.log(response);
         });

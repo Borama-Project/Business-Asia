@@ -20,6 +20,10 @@
 
 <link href="{{asset('/assets/css/jquery.tokenize.css')}}" rel="stylesheet" />
 
+    {{--calander--}}
+    <link href="{{asset('/assets/css/kendo.common.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/assets/css/kendo.uniform.min.css')}}" rel="stylesheet" />
+
 </head>
     <body>
     <span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1"></span>
@@ -42,6 +46,7 @@
     
     <script src="{{asset('/assets/lib/app.js')}}"></script>
     <script src="{{asset('/assets/lib/controller/controllers.js')}}"></script>
+    <script src="{{asset('/assets/js/kendo.all.min.js')}}"></script>
 
 
 <script type="text/ng-template" id="ModalContent">

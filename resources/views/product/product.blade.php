@@ -130,6 +130,8 @@
 
 </div>
 
+<input kendo-date-picker />
+
 <script>
 	$( "#upload" ).on( "click", function() {
 	    $( "#fileUpload" ).trigger( "click" );
