@@ -323,19 +323,6 @@ app.controller('ngViewBusiness', function ($scope,$http,$routeParams,usSpinnerSe
 
 app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
 
-    $('.selected-items-box').bind('click', function(e){
-        e.stopPropagation();
-        $('.multiple-select-wrapper .list').toggle('slideDown');
-    });
-
-    $('.multiple-select-wrapper .list').bind('click', function(e){
-        e.stopPropagation();
-    });
-
-    $(document).bind('click', function(){
-        $('.multiple-select-wrapper .list').slideUp();
-    });
-
   $scope.listBusinessTag = function(){
         $http({
             method: 'GET',
@@ -365,24 +352,6 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
     };
     $scope.listBusinessType();
 
-    ////business type checkbox
-    //$scope.selection=[];
-    //// toggle selection for a given employee by name
-    //$scope.toggleSelection = function toggleSelection(tagId) {
-    //    var idx = $scope.selection.indexOf(tagId);
-    //
-    //    // is currently selected
-    //    if (idx > -1) {
-    //        $scope.selection.splice(idx, 1);
-    //    }
-    //    // is newly selected
-    //    else {
-    //        $scope.selection.push(tagId);
-    //    }
-    //    console.log($scope.selection);
-    //
-    //};
-    ////end business type checkbox
     //business tag check box
     $scope.selectionTag=[];
     // toggle selection for a given employee by name
@@ -401,7 +370,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
 
     };
     //end
-    $scope.submit = function(){
+    $scope.submits = function(){
 
         Upload.upload({
             method: 'POST',
@@ -432,7 +401,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
                 $scope.success = 'sucess';
                 $scope.businessName = response.data.head.name;
             }else{
-                $scope.errorSMS = response.message.description;
+                $scope.errorSMS = response.message.description;  
             }
         });
     };

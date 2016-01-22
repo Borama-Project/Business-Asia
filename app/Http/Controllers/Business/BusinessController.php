@@ -178,27 +178,27 @@ class BusinessController extends Controller
         $businessTagList     = (Input::get('businessTagList'));
         $businessTypeList     = array(Input::get('businessTypeList'));
 
-        $strNullType = '';
-        foreach($businessTypeList as $value){
-            $strNullType .= "[".$value."]";
-        }
-
-//        business tag list foreach string
-        $strTag = '';
-        foreach($businessTagList as $key){
-            if($strTag==''){
-                $strTag .='"'.$key.'"';
-            }else{
-                $strTag .=',"'.$key.'"';
-            }
-        }
-        $str = '['.$strTag.']';
-//end
+//        $strNullType = '';
+//        foreach($businessTypeList as $value){
+//            $strNullType .= "[".$value."]";
+//        }
+//
+//        //  business tag list foreach string
+//        $strTag = '';
+//        foreach($businessTagList as $key){
+//            if($strTag==''){
+//                $strTag .='"'.$key.'"';
+//            }else{
+//                $strTag .=',"'.$key.'"';
+//            }
+//        }
+//        $str = '['.$strTag.']';
+        //end
         $method   = 'POST';
         $dataRequest = array(
             'authorId'          => $authorId->ownerId,
-            'locationname'              => Input::get('locationname'),
-            'businessname'              => Input::get('businessname'),
+            'locationname'      => Input::get('locationname'),
+            'businessname'      => Input::get('businessname'),
             'description'       => Input::get('description'),
             'phoneNumber'       => Input::get('phoneNumber'),
             'address'           => Input::get('address'),
@@ -207,17 +207,16 @@ class BusinessController extends Controller
             'longitute'         => Input::get('longitute'),
             'logo'              => new \CurlFile($fileData,'image/jpg', $fileName),
             'cover'             => new \CurlFile($coverData,'image/jpg',$coverName),
-            'businessTagList'   => $str,
-            'businessTypeList'  => $strNullType
+//            'businessTagList'   => $str,
+//            'businessTypeList'  => $strNullType
         );
 
 //        return ($dataRequest);
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
-        return( $zeSocialBusinessResult);
+        print_r( $zeSocialBusinessResult);
 
     }
-
 
     public function getBusinessTag(){
 
