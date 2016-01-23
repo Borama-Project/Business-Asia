@@ -65,9 +65,9 @@
                 <A ng-href="#/category/@{{item.businessId}}">
                     <button type="button" name="btnMore" class="btn btn-success">Category</button>
                 </A>
-                <A ng-href="#/business/@{{item.businessId}}">
-                    <button type="button" name="btnMore" class="btn btn-default" >View</button>
-                </A>
+                {{--<A ng-href="#/business/@{{item.businessId}}">--}}
+                    {{--<button type="button" name="btnMore" class="btn btn-default" >View</button>--}}
+                {{--</A>--}}
                 <A ng-href="#/business/edie/@{{item.businessId}}">
                     <button type="button" name="btnMore" class="btn btn-default" >Edit</button>
                 </A>
