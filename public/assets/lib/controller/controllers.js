@@ -491,8 +491,8 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,Upload,usSpin
         }
       };
       checkBox = ',listBusinessTag:['+checkBox+'],listBusinessTag:'+checkBox+',businessId:'+$routeParams.businessId+',categoryId:'+$routeParams.categoryId;
-      dtRequest = '{'+dtRequest+',"listBusinessTag":'+checkBox+'}';
-      console.log(dtRequest);
+      dtRequest = '{'+dtRequest+'}';
+      console.log(JSON.parse(dtRequest));
       // $scope.results =dtRequest;
     }
     usSpinnerService.spin('spinner-1');
