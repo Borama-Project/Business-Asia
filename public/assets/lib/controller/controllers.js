@@ -352,10 +352,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
     };
     $scope.listBusinessType();
 
-<<<<<<< HEAD
-=======
     //business tag check box
->>>>>>> bb7b5cbe01765281c8dba487b46ad2b3e632a942
     $scope.selectionTag=[];
     // toggle selection for a given employee by name
     $scope.toggleSelectionTag = function toggleSelectionTag(tagId) {

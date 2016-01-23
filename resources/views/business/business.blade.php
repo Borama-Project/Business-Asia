@@ -8,32 +8,21 @@
 	  </div>
 	</div>
 	<div class="col-md-12">
-		<div class="col-md-4"><label for="exampleInputEmail1">Business Name </label>
+		<div class="col-md-6"><label for="exampleInputEmail1">Business Name </label>
 			<input type="text" class="form-control"  name="" ng-model="globalVirable.businessname" placeholder="businessName" required="true"></div>
-		<div class="col-md-4">
-			<div class="col-md-3">
+		<div class="col-md-3">
 				<label>Logo</label>
 				<a href="javascript:void(0)" class="thumbnail">
 					<img ng-src="/assets/img/img-photo-upload.png" width="100" height="100"  id="bFileUpload">
 					<input type="file" ngf-select ng-model="globalVirable.logo" name="logo" id="imgFileUpload" required="true" style="display: none">
 				</a>
-			</div>
-			<div class="col-md-1">
-				<img ngf-src="globalVirable.logo" class="thumb" width="100" height="100">
-			</div>
 		</div>
-		<div class="col-md-4">
-			<div class="col-md-3">
+		<div class="col-md-3">
 				<label>Cover</label>
 				<a href="javascript:void(0)" class="thumbnail">
 					<img ng-src="/assets/img/img-photo-upload.png" width="100" height="100"  id="coverFileUpload">
 					<input type="file" ngf-select ng-model="globalVirable.cover" name="cover"  id="imgCoverFileUpload" required="true" style="display: none">
 				</a>
-			</div>
-			<div class="col-md-1">
-				<img ngf-src="globalVirable.cover" class="thumb" width="200" height="100">
-			</div>
-
 		</div>
 	</div>
 
@@ -43,10 +32,7 @@
 			<select ng-model="globalVirable.businessTypeList" class="form-control" >
 				<option ng-repeat="businessTypes in businessType" value="@{{businessTypes}}"> @{{businessTypes.name}}</option>
 			</select>
-			<div>
-				<label for="exampleInputEmail1">Location Name </label>
-				<input type="text" class="form-control"  name="" ng-model="globalVirable.locationname" placeholder="businessName" required="true">
-			</div>
+
 		</div>
 		<div class="col-md-6">
 			<label for="exampleInputEmail1">Business Tag</label>
@@ -81,7 +67,10 @@
 		<label for="exampleInputEmail1">Longitute</label>
 		<input type="number" class="form-control" id="" ng-model="globalVirable.longitute" placeholder="" required="true">
 	</div>
-
+	<div class="col-md-6">
+		<label for="exampleInputEmail1">Location Name </label>
+		<input type="text" class="form-control"  name="" ng-model="globalVirable.locationname" placeholder="businessName" required="true">
+	</div>
 	<div class="form-group col-xs-12">
 		<label for="exampleInputEmail1">Address</label>
 		<textarea class="form-control" name="searchBusiness" ng-model="globalVirable.address" placeholder="Address" required="true"></textarea>
@@ -121,5 +110,28 @@
 		$( "#imgCoverFileUpload" ).trigger( "click" );
 	});
 
+	$("#imgFileUpload").change(function () {
+		var input = this;
+		var reader = new FileReader();
+		var img = new Image();
+
+		reader.onload = function (e) {
+			img.src = e.target.result;
+			$('#bFileUpload').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	});
+
+	$("#imgCoverFileUpload").change(function () {
+		var input = this;
+		var reader = new FileReader();
+		var img = new Image();
+
+		reader.onload = function (e) {
+			img.src = e.target.result;
+			$('#coverFileUpload').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	});
 </script>
 
