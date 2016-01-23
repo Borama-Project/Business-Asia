@@ -490,34 +490,35 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,Upload,usSpin
           
         }
       };
+      console.log(dtRequest);
       checkBox = ',listBusinessTag:['+checkBox+'],listBusinessTag:'+checkBox+',businessId:'+$routeParams.businessId+',categoryId:'+$routeParams.categoryId;
-      dtRequest = '{'+dtRequest+'}';
-      console.log(JSON.parse(dtRequest));
+      dtRequest = '{'+checkBox+'}';
+      console.log(dtRequest);
       // $scope.results =dtRequest;
     }
     usSpinnerService.spin('spinner-1');
-    console.log($scope.app);
-      Upload.upload({
-          method: 'POST',
-          url: '/product/product',
-          data: dtRequest,
-          dataType: "json",
-          contentType: false,
-          cache: false,
-          processData: false,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      }).success(function (response) {
-          usSpinnerService.stop('spinner-1');
-          $scope.results = response;
-          console.log(response);
-          if(response.code == 1){
-              $scope.results = JSON.stringify(response);
-              $scope.app = '';
-              // $scope.BusinessFormName.$setPristine();
-          }else{
-            // $scope.results = response.message.description;
-          }
-      });
+    // console.log($scope.app);
+      // Upload.upload({
+      //     method: 'POST',
+      //     url: '/product/product',
+      //     data: dtRequest,
+      //     dataType: "json",
+      //     contentType: false,
+      //     cache: false,
+      //     processData: false,
+      //     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      // }).success(function (response) {
+      //     usSpinnerService.stop('spinner-1');
+      //     $scope.results = response;
+      //     console.log(response);
+      //     if(response.code == 1){
+      //         $scope.results = JSON.stringify(response);
+      //         $scope.app = '';
+      //         // $scope.BusinessFormName.$setPristine();
+      //     }else{
+      //       // $scope.results = response.message.description;
+      //     }
+      // });
     
   };
 
