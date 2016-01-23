@@ -90,36 +90,59 @@ class ProductController extends Controller
     public function postProduct(){
         $function = 'productAdmin/add_product';
         $method = 'POST';
-        // $dataRequest = array(
+        $listBusinessTag = explode(",", Input::get('listBusinessTag'));
+        $listBusinessTag = json_encode($listBusinessTag);
+        // $listBusinessTag = $listBusinessTag);
+        $categoryId = array(Input::get('categoryId'));
+        $currency = Input::get('currency');
+        if($currency == ''){
+            $currency = 1;
+        }
+        $dataRequest = array(
 
-        //     'name'=> Input::get('name'),
-        //     'productCategoryId' => Input::get('productCategoryId'),
-        //     'currency'   => Input::get('currency'),
-        //     'dateStart'   => Input::get('DateStart'),
-        //     'dateEnd'   => Input::get('DateEnd'),
-        //     'condition'   => Input::get('conditions'),
-        //     'price'   => Input::get('price'),
-        //     'description'   => Input::get('description'),
-        //     'listBusinessTag'   => json_encode(Input::get('listBusinessTag')),
-        //     'businessId'   => Input::get('businessId'),
-        // );
-        // $file           =       Input::file('image');
+            'name'=> Input::get('name'),
+            'productCategoryId' => Input::get('productCategoryId'),
+            'currency'   => $currency,
+            'dateStart'   => Input::get('dateStarts'),
+            'dateEnd'   => Input::get('dateEnds'),
+            'condition'   => Input::get('condition'),
+            'price'   => Input::get('price'),
+            'description'   => Input::get('description'),
+            'listBusinessTag'   => $listBusinessTag,
+            'categoryId' => $listBusinessTag,
+            'businessId'   => Input::get('businessId'),
+        );
+        
+        $file1           =       Input::file('image1');
+        $file2           =       Input::file('image2');
+        $file3           =       Input::file('image3');
+        $file4          =       Input::file('image4');
         // 1: Band New, 2: Best Price, 3: Second Hand, 4: Good Condition)
        
-        // $ZeSocialBusinessModel = new ZeSocialBusinessModel;
-        // $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
-        // if(json_decode($zeSocialBusinessResult)->data != ''){
-        //     $jsonData = json_encode(json_decode($zeSocialBusinessResult)->data);
-        //     $jsonData = json_decode($jsonData);
-        //     $businessId = $jsonData->businessId;
-        //     $productId = $jsonData->productId;
-        //     // $jsonData = $zeSocialBusinessResult;
-        //     $result = $this->postProductUpload($productId,$businessId,$file);
-        // }
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        if(json_decode($zeSocialBusinessResult)->data != ''){
+            $jsonData = json_encode(json_decode($zeSocialBusinessResult)->data);
+            $jsonData = json_decode($jsonData);
+            $businessId = $jsonData->businessId;
+            $productId = $jsonData->productId;
+            // $jsonData = $zeSocialBusinessResult;
+            if($file1){
+                $result = $this->postProductUpload($productId,$businessId,$file1);
+            }
+
+            if($file2){
+                $result = $this->postProductUpload($productId,$businessId,$file2);
+            }
+            if($file3){
+                $result = $this->postProductUpload($productId,$businessId,$file3);
+            }if($file4){
+                $result = $this->postProductUpload($productId,$businessId,$file4);
+            }
+            
+        }
+        return $zeSocialBusinessResult;
         
-        // return $zeSocialBusinessResult;
-        
-        return json_encode(Input::All());
     }
 
     public function postProductUpload($productId,$businessId,$file){
@@ -139,7 +162,6 @@ class ProductController extends Controller
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         return ($zeSocialBusinessResult);
-        // return $fileName;
     }
     public function getProductById(){
         return view('product.viewProduct');

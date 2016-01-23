@@ -35,7 +35,7 @@
               var_dump ($value);
             }
             ?>
-			{{csrf_token()}}
+			<!-- {{csrf_token()}} -->
 
 
 		</div>

@@ -331,7 +331,6 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
         }).success(function(response) {
             console.log(response);
             $scope.businessTag = response.data;
-
         }).error(function(response) {
             console.log(response);
         });
@@ -352,10 +351,6 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
     };
     $scope.listBusinessType();
 
-<<<<<<< HEAD
-=======
-    //business tag check box
->>>>>>> bb7b5cbe01765281c8dba487b46ad2b3e632a942
     $scope.selectionTag=[];
     // toggle selection for a given employee by name
     $scope.toggleSelectionTag = function toggleSelectionTag(tagId) {
@@ -370,7 +365,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             $scope.selectionTag.push(tagId);
         }
     };
-    //end
+    
     $scope.submits = function(){
 
         Upload.upload({
@@ -465,52 +460,75 @@ app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 });
 app.controller('ngAddProduct', function ($scope,$http,$routeParams,Upload,usSpinnerService) {
   // $scope.app = {categoryid:$routeParams.categoryId};
-  console.log($scope.scbus)
+  // console.log($scope.scbus)
+  $scope.inputFile=[];
+  $scope.ngTrigger = function(fname){
+    // console.log(fname);
+    $( "#"+ fname).trigger( "click" );
+  }
+  $scope.app = {image:{file1:'/assets/img/img-photo-upload.png',
+                file2:'/assets/img/img-photo-upload.png',
+                file3:'/assets/img/img-photo-upload.png',
+                file4:'/assets/img/img-photo-upload.png'}}
+  // $scope.inputFile.push({'file':'<img ngf-src="app.image.file" class="thumb" width="171" height="180">'});
+  // console.log($scope.inputFile);
+
   $scope.submit = function(){
-    var str = JSON.stringify($scope.app);
-    if(str !=''){
-      var dtRequest = str.slice(1,-1);
-      var checkBox = '';
+      // check image
+      // var dtRequest = str.slice(1,-1);
+      var listBusinessTag = '';
       var doc= document.getElementsByName("ngCheck");
       for (var i = doc.length - 1; i >= 0; i--) {
         if(doc[i].checked == true){
-          if(checkBox != ''){
-            checkBox += ',"'+doc[i].value+'"';
+          if(listBusinessTag != ''){
+            listBusinessTag += ','+doc[i].value;
           }else{
-            checkBox += '"'+doc[i].value+'"';
+            listBusinessTag += doc[i].value;
           }
           
         }
       };
-      console.log(dtRequest);
-      checkBox = ',listBusinessTag:['+checkBox+'],listBusinessTag:'+checkBox+',businessId:'+$routeParams.businessId+',categoryId:'+$routeParams.categoryId;
-      dtRequest = '{'+checkBox+'}';
-      console.log(dtRequest);
-      // $scope.results =dtRequest;
-    }
+      // checkBox = '"listBusinessTag":"'+checkBox+'","businessId":"'+$routeParams.businessId+'","categoryId":"'+$routeParams.categoryId+'",'+dtRequest;
+      // console.log(checkBox);
+      // dtRequest = '{'+dtRequest+'}';
+    
     usSpinnerService.spin('spinner-1');
-    // console.log($scope.app);
-      // Upload.upload({
-      //     method: 'POST',
-      //     url: '/product/product',
-      //     data: dtRequest,
-      //     dataType: "json",
-      //     contentType: false,
-      //     cache: false,
-      //     processData: false,
-      //     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      // }).success(function (response) {
-      //     usSpinnerService.stop('spinner-1');
-      //     $scope.results = response;
-      //     console.log(response);
-      //     if(response.code == 1){
-      //         $scope.results = JSON.stringify(response);
-      //         $scope.app = '';
-      //         // $scope.BusinessFormName.$setPristine();
-      //     }else{
-      //       // $scope.results = response.message.description;
-      //     }
-      // });
+    console.log($scope.app.dateEnds);
+      Upload.upload({
+          method: 'POST',
+          url: '/product/product',
+          data: {name:$scope.app.name,productCategoryId:$scope.app.productCategoryId,currency:$scope.app.currency,
+            dateStarts:$scope.app.dateStarts,dateEnds:$scope.app.dateEnds,condition:$scope.app.condition,price:$scope.app.price,image1:$scope.app.image.file1,
+            image2:$scope.app.image.file2,image3:$scope.app.image.file3,image4:$scope.app.image.file4,
+          description:$scope.app.description,listBusinessTag:listBusinessTag,categoryId:$routeParams.categoryId,businessId:$routeParams.businessId},
+          dataType: "json",
+          contentType: false,
+          cache: false,
+          processData: false,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).success(function (response) {
+          usSpinnerService.stop('spinner-1');
+          // $scope.results = response;
+          $scope.results = JSON.stringify(response);
+          console.log(response);
+          if(response.code == 1){
+              $scope.results = JSON.stringify(response);
+              // $scope.app = '';
+              $scope.app = {image:{file1:'/assets/img/img-photo-upload.png',
+                file2:'/assets/img/img-photo-upload.png',
+                file3:'/assets/img/img-photo-upload.png',
+                file4:'/assets/img/img-photo-upload.png'}}
+                var doc= document.getElementsByName("ngCheck");
+                for (var i = doc.length - 1; i >= 0; i--) {
+                  if(doc[i].checked == true){
+                    doc[i].checked = false;
+                  }
+                };
+              // $scope.BusinessFormName.$setPristine();
+          }else{
+            // $scope.results = response.message.description;
+          }
+      });
     
   };
 
