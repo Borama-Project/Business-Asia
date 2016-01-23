@@ -374,7 +374,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
 
         Upload.upload({
             method: 'POST',
-            url: '/business/register-business',
+            url: '/business/register-business-fuc',
             data: {
                 locationname:$scope.globalVirable.locationname,
                 businessname:$scope.globalVirable.businessname,
@@ -401,7 +401,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
                 $scope.success = 'sucess';
                 $scope.businessName = response.data.head.name;
             }else{
-                $scope.errorSMS = response.message.description;  
+                $scope.errorSMS = response.message.description;
             }
         });
     };

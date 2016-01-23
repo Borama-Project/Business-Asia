@@ -73,7 +73,7 @@ class BusinessController extends Controller
     }
 
     public function postCategory(){
-        
+
         $method   = 'POST';
         $function = 'businessAdmin/get_category_by_business';
         $dataRequest = array(
@@ -160,7 +160,7 @@ class BusinessController extends Controller
     {
         return view('business.business');
     }
-    public function postRegisterBusiness()
+    public function postRegisterBusinessFuc()
     {
         $file           =       Input::file('logo');
         $cover          =       Input::file('cover');
@@ -178,21 +178,21 @@ class BusinessController extends Controller
         $businessTagList     = (Input::get('businessTagList'));
         $businessTypeList     = array(Input::get('businessTypeList'));
 
-//        $strNullType = '';
-//        foreach($businessTypeList as $value){
-//            $strNullType .= "[".$value."]";
-//        }
-//
-//        //  business tag list foreach string
-//        $strTag = '';
-//        foreach($businessTagList as $key){
-//            if($strTag==''){
-//                $strTag .='"'.$key.'"';
-//            }else{
-//                $strTag .=',"'.$key.'"';
-//            }
-//        }
-//        $str = '['.$strTag.']';
+        $strNullType = '';
+        foreach($businessTypeList as $value){
+            $strNullType .= "[".$value."]";
+        }
+
+        //  business tag list foreach string
+        $strTag = '';
+        foreach($businessTagList as $key){
+            if($strTag==''){
+                $strTag .='"'.$key.'"';
+            }else{
+                $strTag .=',"'.$key.'"';
+            }
+        }
+        $str = '['.$strTag.']';
         //end
         $method   = 'POST';
         $dataRequest = array(
@@ -207,14 +207,14 @@ class BusinessController extends Controller
             'longitute'         => Input::get('longitute'),
             'logo'              => new \CurlFile($fileData,'image/jpg', $fileName),
             'cover'             => new \CurlFile($coverData,'image/jpg',$coverName),
-//            'businessTagList'   => $str,
-//            'businessTypeList'  => $strNullType
+            'businessTagList'   => $str,
+            'businessTypeList'  => $strNullType
         );
 
 //        return ($dataRequest);
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
-        print_r( $zeSocialBusinessResult);
+         return ( $zeSocialBusinessResult);
 
     }
 
@@ -263,10 +263,10 @@ class BusinessController extends Controller
     public function postSearchBusiness($limit=15,$offset=0){
 
         $zeAccessKey = Session::get('zeAccessKey');
-        $function = 'businessAdmin/search_business_admin';         
+        $function = 'businessAdmin/search_business_admin';
 
         if (Session::has('zeAccessKey'))
-        {   
+        {
             $zeAccessKey = json_decode($zeAccessKey) ;
             $data = Input::all();
             foreach (Input::all()as $key => $value) {

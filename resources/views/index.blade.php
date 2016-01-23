@@ -13,10 +13,10 @@
 			  <A href="/Auth/log-out" class="list-group-item" data-ng-click="logout()">Log Out</A>
 			<?php
 			$value = Session::get('zeAccessKey');
-			      
+
 
 			if (Session::has('zeAccessKey'))
-			{	
+			{
 				$value = json_decode($value) ;
 				// echo $value->AccessKey;
 				// echo $value->ownerId;
@@ -26,18 +26,18 @@
 			<?php
 
             $value = Session::get("zelog");
-                  
+
 
             if (Session::has("zelog"))
-            { 
+            {
               $value = json_decode($value) ;
-              
+
               var_dump ($value);
             }
             ?>
 			{{csrf_token()}}
 
-		  
+
 		</div>
 	</div>
 <growl-notifications></growl-notifications>
