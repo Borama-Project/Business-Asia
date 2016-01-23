@@ -73,7 +73,7 @@ class BusinessController extends Controller
     }
 
     public function postCategory(){
-        
+
         $method   = 'POST';
         $function = 'businessAdmin/get_category_by_business';
         $dataRequest = array(
@@ -160,7 +160,7 @@ class BusinessController extends Controller
     {
         return view('business.business');
     }
-    public function postRegisterBusiness()
+    public function postRegisterBusinessFuc()
     {
         $file           =       Input::file('logo');
         $cover          =       Input::file('cover');
@@ -183,7 +183,7 @@ class BusinessController extends Controller
             $strNullType .= "[".$value."]";
         }
 
-//        business tag list foreach string
+        //  business tag list foreach string
         $strTag = '';
         foreach($businessTagList as $key){
             if($strTag==''){
@@ -193,12 +193,12 @@ class BusinessController extends Controller
             }
         }
         $str = '['.$strTag.']';
-//end
+        //end
         $method   = 'POST';
         $dataRequest = array(
             'authorId'          => $authorId->ownerId,
-            'locationname'              => Input::get('locationname'),
-            'businessname'              => Input::get('businessname'),
+            'locationname'      => Input::get('locationname'),
+            'businessname'      => Input::get('businessname'),
             'description'       => Input::get('description'),
             'phoneNumber'       => Input::get('phoneNumber'),
             'address'           => Input::get('address'),
@@ -214,10 +214,9 @@ class BusinessController extends Controller
 //        return ($dataRequest);
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
-        return( $zeSocialBusinessResult);
+         return ( $zeSocialBusinessResult);
 
     }
-
 
     public function getBusinessTag(){
 
@@ -264,10 +263,10 @@ class BusinessController extends Controller
     public function postSearchBusiness($limit=15,$offset=0){
 
         $zeAccessKey = Session::get('zeAccessKey');
-        $function = 'businessAdmin/search_business_admin';         
+        $function = 'businessAdmin/search_business_admin';
 
         if (Session::has('zeAccessKey'))
-        {   
+        {
             $zeAccessKey = json_decode($zeAccessKey) ;
             $data = Input::all();
             foreach (Input::all()as $key => $value) {

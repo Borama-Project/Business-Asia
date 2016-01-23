@@ -47,12 +47,9 @@ class ZeSocialBusinessModel
             curl_setopt($ch, CURLOPT_POST, count($fields));
             curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars);
             //file upload
-//            curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-type: multipart/form-data"));
             curl_setopt($ch, CURLOPT_VERBOSE, 0);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_BINARYTRANSFER, TRUE);
-            curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 
@@ -69,10 +66,10 @@ class ZeSocialBusinessModel
 
     public function curlConnect ($url,  $fields = array(), $method= null) {
 
-        $respon = json_decode($this->curlResponse($url, $fields, $method));
-        if($respon == null){
+        $response = $this->curlResponse($url, $fields, $method);
+        if(json_decode($response) == null){
             return('{"code": 0,"data": [{}],"message": {"code": 1,"description": "Server response error data"}}');
         }
-        return $this->curlResponse($url, $fields, $method);
+        return $response;
     }
 }

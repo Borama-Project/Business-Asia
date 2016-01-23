@@ -184,7 +184,7 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
             data:  {businessId:$routeParams.businessId},
             dataType: "json"
         }).success(function(response) {
-
+            console.log(response);
             if(response.code ==1){
               $scope.get_business_by_id = response.data;
               usSpinnerService.stop('spinner-1');
@@ -306,6 +306,7 @@ app.controller('ngViewBusiness', function ($scope,$http,$routeParams,usSpinnerSe
           data: {businessId:$routeParams.businessId},
           dataType: "json"
       }).success(function(response) {
+          console.log(response);
           if(response.code ==1){
             $scope.item = response.data[0];
             usSpinnerService.stop('spinner-1');
@@ -321,19 +322,6 @@ app.controller('ngViewBusiness', function ($scope,$http,$routeParams,usSpinnerSe
 
 
 app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
-
-    $('.selected-items-box').bind('click', function(e){
-        e.stopPropagation();
-        $('.multiple-select-wrapper .list').toggle('slideDown');
-    });
-
-    $('.multiple-select-wrapper .list').bind('click', function(e){
-        e.stopPropagation();
-    });
-
-    $(document).bind('click', function(){
-        $('.multiple-select-wrapper .list').slideUp();
-    });
 
   $scope.listBusinessTag = function(){
         $http({
@@ -364,6 +352,10 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
     };
     $scope.listBusinessType();
 
+<<<<<<< HEAD
+=======
+    //business tag check box
+>>>>>>> bb7b5cbe01765281c8dba487b46ad2b3e632a942
     $scope.selectionTag=[];
     // toggle selection for a given employee by name
     $scope.toggleSelectionTag = function toggleSelectionTag(tagId) {
@@ -379,11 +371,11 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
         }
     };
     //end
-    $scope.submit = function(){
+    $scope.submits = function(){
 
         Upload.upload({
             method: 'POST',
-            url: '/business/register-business',
+            url: '/business/register-business-fuc',
             data: {
                 locationname:$scope.globalVirable.locationname,
                 businessname:$scope.globalVirable.businessname,

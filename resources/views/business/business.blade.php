@@ -1,7 +1,7 @@
 
 <!-- <div class="container"> -->
 <div class="col-lg-12"> 
-<form ng-submit="submit()" name="BusinessFormName">
+<form ng-submit="submits()">
 	<div class="panel panel-info">
 	  <div class="panel-body">
 	    Business Register

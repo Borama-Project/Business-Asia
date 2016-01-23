@@ -3,7 +3,7 @@
     <div class="panel panel-info">
         <div class="panel-body">
             <h3>Category</h3>
-            <div ng-repeat="businessName in get_business_by_id">Business Name > @{{ businessName.head.name }}</div>
+            <div ng-repeat="businessName in get_business_by_id"> <A ng-href="#/business">Business</A> > @{{ businessName.name }}</div>
         </div>
     </div>
     <div class="col-lg-12 pd-lef-10  pd-right-0 list-group-item">
