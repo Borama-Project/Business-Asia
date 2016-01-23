@@ -113,12 +113,6 @@
 
 </div>
 
-
-
-
-<style>
-
-</style>
 <script>
 	$( "#bFileUpload" ).on( "click", function() {
 		$( "#imgFileUpload" ).trigger( "click" );

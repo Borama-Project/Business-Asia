@@ -6,14 +6,9 @@
 	  </div>
 	</div>
 	<div class="form-group col-xs-6">
-	    <label>Product Title</label>
+	    <label>Product Title </label>
 	    <input type="text" class="form-control"  name="name" ng-model="app.name" placeholder="Name" autocomplete="off" required="required">
 	</div>
-	<!-- <div class="form-group col-xs-4">
-	    <label></label>
-	    <input type="text" class="form-control"  name="name" ng-model="app.bame" placeholder="Name">
-	</div> -->
-
 	<div class="form-group col-xs-6">
 		<label>Product Category</label>
 		<select ng-model="app.productCategoryId" class="form-control" id="tagList"  name="select" required>
@@ -53,46 +48,49 @@
 			<div class="col-lg-6 pd-lef-0">
 				<label class="control-label pad-top-5 col-md-3">Start Date</label>
 				<div class="col-md-6 mg-lef-10">
-					<input class="form-control" ng-model="app.DateStart" type="date" name="DateStart" required >
+					<!-- <input class="form-control" ng-model="app.DateStart" type="date" name="DateStart" required > -->
+					<input kendo-date-picker ng-model="app.DateStart"  k-format="'yyyy-MM-dd'" style="width: 100%;" required />
 					
 				</div>
 			</div>
 			<div class="col-lg-6 pd-lef-5">
 				<label class="control-label pad-top-5 col-md-3">Start Date</label>
 				<div class="col-md-6 pd-lef-5">
-					<input class="form-control" ng-model="app.DateEnd" type="date" placeholder="y-m-d" name="DateEnd" required >
+					<!-- <input class="form-control" ng-model="app.DateEnd" type="date" placeholder="y-m-d" name="DateEnd" required > -->
+					<input kendo-date-picker ng-model="app.DateEnd"  k-format="'yyyy-MM-dd'" style="width: 100%;" required />
 					
 				</div>
 			</div>
 		</div>
 		
 	</div>
-	<div class="form-group col-lg-12 pd-lef-0">
+	<div class="form-group col-lg-6 pd-lef-0">
 		<div class="form-group pd-lef-0">
 			<div class="col-lg-6 pd-lef-0">
-				<label class="control-label pad-top-5 col-md-3">Business Tag</label>
+				<label class="control-label pad-top-5 col-md-4">Business Tag</label>
 				<div class="col-md-6 mg-lef-10">
 					
 					<select ng-model="app.listBusinessTag" class="form-control" name="select">
-						<optgroup ng-repeat="businessTags in businessTag" label="@{{ businessTags.name }}">
+						<optgroup ng-repeat="businessTags in listBusinessTag" label="@{{ businessTags.name }}">
 							<option ng-repeat="tag in businessTags.tag" value="@{{ tag.id }}"> @{{ tag.name }} </option>
 						</optgroup>
-					</select>
-					
-				</div>
-			</div>
-			<div class="col-lg-6 pd-lef-5">
-				<label class="control-label  col-md-3">Add To Business</label>
-				<div class="col-md-6 pd-lef-5">
-
-					<select ng-model="app.businessId" class="form-control" id="currency"  name="select" required >
-						<option value=""> </option>
-						<option ng-repeat="item in business" value="@{{ item.businessId }}"> @{{ item.head.name }} </option>
 					</select>
 				</div>
 			</div>
 		</div>
 		
+	</div>
+	<div class="form-group col-xs-6">
+		<label for="exampleInputEmail1">Business Tag</label>
+		<div class="div-type-list">
+				<div  ng-repeat="businessTags in businessTag"><span class="blode-header">@{{ businessTags.name }}</span>
+					<div  ng-repeat="tag in businessTags.tag">
+						<input id="@{{tag.id}}" type="checkbox" name="ngCheck" value="@{{tag.id}}" ng-checked="selectionTage.indexOf(tags.id) > -1" ng-click="toggleSelectionTag(tag.id)" />
+						@{{tag.name}}
+					</div>
+				</div>
+		</div>
+
 	</div>
 	<div class="form-group col-xs-12">
 	    <label>Product Gallery</label>
@@ -130,10 +128,18 @@
 
 </div>
 
-<input kendo-date-picker />
-
 <script>
 	$( "#upload" ).on( "click", function() {
 	    $( "#fileUpload" ).trigger( "click" );
 	});
 </script>
+<script>
+	$( "#bFileUpload" ).on( "click", function() {
+		$( "#imgFileUpload" ).trigger( "click" );
+	});
+	$( "#coverFileUpload" ).on( "click", function() {
+		$( "#imgCoverFileUpload" ).trigger( "click" );
+	});
+
+</script>
+

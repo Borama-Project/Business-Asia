@@ -1,4 +1,4 @@
-﻿var app = angular.module('ngApp', ['ngRoute','ngAnimate','facebook','ngFileUpload','ui.bootstrap','simplePagination','angularSpinner','ui-notification'])
+﻿var app = angular.module('ngApp', ['kendo.directives','ngRoute','ngAnimate','facebook','ngFileUpload','ui.bootstrap','simplePagination','angularSpinner','ui-notification'])
  .config(['FacebookProvider',
     function(FacebookProvider) {
      var myAppId = '943056782397930';
@@ -43,12 +43,17 @@ app.config(function ($routeProvider) {
                 controller: 'ngBusinessType',
                 templateUrl: '/mainCategory'
             })
-        .when('/products:',
+        // .when('/products/',
+        //     {
+        //         controller: 'ngProduct',
+        //         templateUrl: '/product'
+        //     }) 
+        .when('/products/list/:categoryId/business/:businessId',
             {
                 controller: 'ngProduct',
                 templateUrl: '/product'
-            }) 
-        .when('/products/add/:categoryId',
+            })
+        .when('/products/add/:categoryId/business/:businessId',
             {
                 controller: 'ngAddProduct',
                 templateUrl: '/product/product'

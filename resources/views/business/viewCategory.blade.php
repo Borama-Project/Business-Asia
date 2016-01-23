@@ -30,7 +30,7 @@
             <td >
                 <div class="row">
                     <div class="col-xs-3">
-                        <A ng-href="#/products/@{{item.id}}">
+                        <A ng-href="#/products/list/@{{item.id}}/business/@{{businessId}}">
                             <button type="button" name="btnMore" class="btn btn-success">Product</button>
                         </A>
                     </div>
