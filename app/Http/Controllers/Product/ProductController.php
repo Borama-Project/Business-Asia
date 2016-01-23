@@ -90,36 +90,36 @@ class ProductController extends Controller
     public function postProduct(){
         $function = 'productAdmin/add_product';
         $method = 'POST';
-        $dataRequest = array(
+        // $dataRequest = array(
 
-            'name'=> Input::get('name'),
-            'productCategoryId' => Input::get('productCategoryId'),
-            'currency'   => Input::get('currency'),
-            'dateStart'   => Input::get('DateStart'),
-            'dateEnd'   => Input::get('DateEnd'),
-            'condition'   => Input::get('conditions'),
-            'price'   => Input::get('price'),
-            'description'   => Input::get('description'),
-            'listBusinessTag'   => json_encode(Input::get('listBusinessTag')),
-            'businessId'   => Input::get('businessId'),
-        );
-        $file           =       Input::file('image');
+        //     'name'=> Input::get('name'),
+        //     'productCategoryId' => Input::get('productCategoryId'),
+        //     'currency'   => Input::get('currency'),
+        //     'dateStart'   => Input::get('DateStart'),
+        //     'dateEnd'   => Input::get('DateEnd'),
+        //     'condition'   => Input::get('conditions'),
+        //     'price'   => Input::get('price'),
+        //     'description'   => Input::get('description'),
+        //     'listBusinessTag'   => json_encode(Input::get('listBusinessTag')),
+        //     'businessId'   => Input::get('businessId'),
+        // );
+        // $file           =       Input::file('image');
         // 1: Band New, 2: Best Price, 3: Second Hand, 4: Good Condition)
        
-        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
-        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
-        if(json_decode($zeSocialBusinessResult)->data != ''){
-            $jsonData = json_encode(json_decode($zeSocialBusinessResult)->data);
-            $jsonData = json_decode($jsonData);
-            $businessId = $jsonData->businessId;
-            $productId = $jsonData->productId;
-            // $jsonData = $zeSocialBusinessResult;
-            $result = $this->postProductUpload($productId,$businessId,$file);
-        }
-        
-        return $zeSocialBusinessResult;
+        // $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        // $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        // if(json_decode($zeSocialBusinessResult)->data != ''){
+        //     $jsonData = json_encode(json_decode($zeSocialBusinessResult)->data);
+        //     $jsonData = json_decode($jsonData);
+        //     $businessId = $jsonData->businessId;
+        //     $productId = $jsonData->productId;
+        //     // $jsonData = $zeSocialBusinessResult;
+        //     $result = $this->postProductUpload($productId,$businessId,$file);
+        // }
         
         // return $zeSocialBusinessResult;
+        
+        return json_encode(Input::All());
     }
 
     public function postProductUpload($productId,$businessId,$file){

@@ -359,45 +359,24 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             console.log(response);
             $scope.businessType = response.data;
         }).error(function(response) {
-            //console.log(response);
+            
         });
     };
     $scope.listBusinessType();
 
-    ////business type checkbox
-    //$scope.selection=[];
-    //// toggle selection for a given employee by name
-    //$scope.toggleSelection = function toggleSelection(tagId) {
-    //    var idx = $scope.selection.indexOf(tagId);
-    //
-    //    // is currently selected
-    //    if (idx > -1) {
-    //        $scope.selection.splice(idx, 1);
-    //    }
-    //    // is newly selected
-    //    else {
-    //        $scope.selection.push(tagId);
-    //    }
-    //    console.log($scope.selection);
-    //
-    //};
-    ////end business type checkbox
-    //business tag check box
     $scope.selectionTag=[];
     // toggle selection for a given employee by name
     $scope.toggleSelectionTag = function toggleSelectionTag(tagId) {
         var idx = $scope.selectionTag.indexOf(tagId);
 
-        // is currently selected
+        
         if (idx > -1) {
             $scope.selectionTag.splice(idx, 1);
         }
-        // is newly selected
+        
         else {
             $scope.selectionTag.push(tagId);
         }
-        //console.log($scope.selectionTag);
-
     };
     //end
     $scope.submit = function(){
@@ -435,12 +414,12 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             }
         });
     };
-
-
 });
 
-app.controller('ngProduct', function ($scope,$http,usSpinnerService) {
-  
+app.controller('ngProduct', function ($scope,$http,$routeParams,usSpinnerService) {
+  $scope.businessId = $routeParams.businessId;
+  $scope.categoryId = $routeParams.categoryId;
+  console.log($scope);
     $scope.submit = function(){
        usSpinnerService.spin('spinner-1'); 
       $http({
@@ -467,82 +446,100 @@ app.controller('ngProduct', function ($scope,$http,usSpinnerService) {
       });
     };
 
-    $scope.categorysList = function(){
+    // $scope.categorysList();
+    $scope.productList = function(){
         $http({
-            method: 'GET',
-            url:  '/business/list',
-            dataType: "json"
-        }).success(function(response) {
-          if(response.code ==1){
-            $scope.categorysLists = response.data;
-          }else{
-            $scope.err = response.message.description;
-          }
-            
-        }).error(function(response) {
-            console.log(response);
-        });
-    };
-    $scope.categorysList();
-    $scope.businessList = function(){
-        $http({
-            method: 'GET',
-            url:  '/business/list-all-business-data',
-            dataType: "json"
-        }).success(function(response) {
-            if(response.code ==1){
-              $scope.business = response.data;
-            }else{
-              $scope.err = response.message.description;
-            }
-            
-        }).error(function(response) {
-            console.log(response);
-        });
-    };
-    $scope.businessList();
-
-    $scope.change = function(){
-      $http({
-            url:  '/business/category',
             method: 'POST',
-            data: {businessId:$scope.app.businessId},
+            url:  '/product/list-product',
+            data:{categoryId:$scope.categoryId,businessId:$scope.businessId},
             dataType: "json"
         }).success(function(response) {
             if(response.code ==1){
-              $scope.category = response.data;
+              $scope.Products = response.data;
+              $scope.results = response.message.description;
             }else{
-              $scope.err = response.message.description;
+              $scope.results = response.message.description;
             }
             
         }).error(function(response) {
             console.log(response);
-        });  
-    }
+        });
+    };
+    $scope.productList();
+
 });
 app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 
 });
-app.controller('ngAddProduct', function ($scope,$http,Upload,usSpinnerService) {
-  usSpinnerService.spin('spinner-1');
+app.controller('ngAddProduct', function ($scope,$http,$routeParams,Upload,usSpinnerService) {
+  // $scope.app = {categoryid:$routeParams.categoryId};
+  console.log($scope.scbus)
+  $scope.submit = function(){
+    var str = JSON.stringify($scope.app);
+    if(str !=''){
+      var dtRequest = str.slice(1,-1);
+      var checkBox = '';
+      var doc= document.getElementsByName("ngCheck");
+      for (var i = doc.length - 1; i >= 0; i--) {
+        if(doc[i].checked == true){
+          if(checkBox != ''){
+            checkBox += ',"'+doc[i].value+'"';
+          }else{
+            checkBox += '"'+doc[i].value+'"';
+          }
+          
+        }
+      };
+      checkBox = ',listBusinessTag:['+checkBox+'],listBusinessTag:'+checkBox+',businessId:'+$routeParams.businessId+',categoryId:'+$routeParams.categoryId;
+      dtRequest = '{'+dtRequest+',"listBusinessTag":'+checkBox+'}';
+      console.log(dtRequest);
+      // $scope.results =dtRequest;
+    }
+    usSpinnerService.spin('spinner-1');
+    console.log($scope.app);
+      Upload.upload({
+          method: 'POST',
+          url: '/product/product',
+          data: dtRequest,
+          dataType: "json",
+          contentType: false,
+          cache: false,
+          processData: false,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).success(function (response) {
+          usSpinnerService.stop('spinner-1');
+          $scope.results = response;
+          console.log(response);
+          if(response.code == 1){
+              $scope.results = JSON.stringify(response);
+              $scope.app = '';
+              // $scope.BusinessFormName.$setPristine();
+          }else{
+            // $scope.results = response.message.description;
+          }
+      });
+    
+  };
+
   $scope.categorysList = function(callback){
       $http({
           method: 'GET',
           url:  '/business/list',
           dataType: "json"
       }).success(function(response) {
+          console.log(response);
           if(response.code ==1){
+            usSpinnerService.stop('spinner-1');
             $scope.categorysLists = response.data;
+            $scope.results = response.message.description;
             if(callback){
               callback();
             }
           }else{
             $scope.err = response.message.description;
-            usSpinnerService.stop('spinner-1');
           }
-          
       }).error(function(response) {
-          console.log(response);
+          
       });
   };
   $scope.conditionList = function(callback){
@@ -564,72 +561,44 @@ app.controller('ngAddProduct', function ($scope,$http,Upload,usSpinnerService) {
           usSpinnerService.stop('spinner-1');
       });
   };
-  $scope.listBusinessTag = function(callback){
-      $http({
+
+  $scope.businessTag = function(){
+    $http({
           method: 'GET',
           url:  '/business/list-business-tag',
           dataType: "json"
       }).success(function(response) {
+          console.log(response);
           if(response.code ==1){
+            usSpinnerService.stop('spinner-1');
             $scope.businessTag = response.data;
-            if(callback){
-              callback();
-            }
+            $scope.results = response.message.description;
+            usSpinnerService.stop('spinner-1');
           }else{
             $scope.err = response.message.description;
-            usSpinnerService.stop('spinner-1');
           }
       }).error(function(response) {
-          console.log(response);
-      });
-  };
-  $scope.businessList = function(){
-      $http({
-          method: 'GET',
-          url:  '/business/list-all-business-data',
-          dataType: "json"
-      }).success(function(response) {
-          if(response.code ==1){
-            $scope.business = response.data;
-            usSpinnerService.stop('spinner-1');
-          }else{
-            $scope.err = response.message.description;
-            usSpinnerService.stop('spinner-1');
-          }
           
-      }).error(function(response) {
-          console.log(response);
       });
-  };
-  $scope.listBusinessTag(function(){
+  }
+    
+  $scope.categorysList(function(){
+    usSpinnerService.spin('spinner-1');
     $scope.conditionList(function(){
-      $scope.categorysList(function(){
-        $scope.businessList();
-      });
+      
+      $scope.businessTag();
     });
   });
-  
-  $scope.submit = function(){
-    usSpinnerService.spin('spinner-1');
-    Upload.upload({
-          method: 'POST',
-          url: '/product/product',
-          data: $scope.app,
-          dataType: "json",
-          contentType: false,
-          cache: false,
-          processData: false,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      }).success(function (response) {
-          usSpinnerService.stop('spinner-1');
-          $scope.app = '';
-          if(response.code == 1){
-              $scope.results = response.message.description;
-              // $scope.BusinessFormName.$setPristine();
-          }
-      });
+  $scope.monthSelectorOptions = {
+    start: "year",
+    depth: "year"
   };
-
+  $scope.getType = function(x) {
+    return typeof x;
+  };
+  $scope.isDate = function(x) {
+    return x instanceof Date;
+  };
 });
 app.controller('ngPromotion', function ($scope,$http) {
     init();
@@ -645,7 +614,7 @@ app.controller('ngHome', function ($scope,$http) {
     //one place...not required though especially in the simple example below
     init();
     function init() {
-       console.log('ngHome');
+       // console.log('ngHome');
     }
 });
 
@@ -658,7 +627,9 @@ app.controller('ngAuth', function ($scope,$http) {
           data:$scope.app,
           dataType: "json"
       }).success(function(response) {
+        console.log(response);
         if(response.code ===1){
+
           window.location = "http://asianbusiness.dev/Auth";
         }else{
           $scope.err = response.message.description;
