@@ -23,6 +23,11 @@ app.config(function ($routeProvider) {
             controller: 'ngCategory',
             templateUrl: '/business/add-category'
         })
+        .when('/category/edit/:categoryId/business/:businessId',
+        {
+            controller: 'ngCategory',
+            templateUrl: '/business/edit-category'
+        })
         .when('/business',
             {
                 controller: 'ngBusiness',
@@ -38,6 +43,11 @@ app.config(function ($routeProvider) {
                 controller: 'ngRegisterBusiness',
                 templateUrl: '/business/register-business'
             })
+        .when('/business/edit/Business/:businessId',
+        {
+            controller: 'ngEditBusiness',
+            templateUrl: '/business/edit-business'
+        })
         .when('/mainCategory',
             {
                 controller: 'ngBusinessType',

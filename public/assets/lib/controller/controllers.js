@@ -158,8 +158,9 @@ app.controller('ngApp', ['$scope','$timeout','$http','Facebook',
     }
   ]);
 
-app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerService) {
+app.controller('ngCategory', function ($scope,$modal,$http,$routeParams,usSpinnerService) {
     $scope.businessId = $routeParams.businessId;
+    $scope.categoryId = $routeParams.categoryId;
 
     $scope.get_category_by_business_id = function(){
         $http({
@@ -168,7 +169,7 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
             data:  {businessId:$routeParams.businessId},
             dataType: "json"
         }).success(function(response) {
-            console.log(response);
+            //console.log(response);
             $scope.get_category_by_business_id = response.data;
         }).error(function(response) {
             console.log(response);
@@ -184,7 +185,7 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
             data:  {businessId:$routeParams.businessId},
             dataType: "json"
         }).success(function(response) {
-            console.log(response);
+            //console.log(response);
             if(response.code ==1){
               $scope.get_business_by_id = response.data;
               usSpinnerService.stop('spinner-1');
@@ -214,6 +215,50 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
         }).error(function(response) {
             console.log(response);
         });
+    };
+
+    $scope.submitEdit = function(){
+        $http({
+            method: 'POST',
+            url:  '/business/edit-category',
+            data: {
+                newCategoryName:$scope.globalVirable.newCategoryName,
+                businessId:$routeParams.businessId,
+                categoryId:$routeParams.categoryId
+            },
+            dataType: "json"
+        }).success(function(response) {
+            $scope.globalVirable='';
+            window.history.back();
+            $scope.get_business_by_id_fuc();
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.deleteCategoryById = function (size) {
+        console.log(this.item.head.name);
+        $scope.name = this.item.head.name;
+        $scope.businessId = this.item.businessId;
+        var modalInstance = $modal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'ModalContent',
+            controller: 'ModalInstanceDelete',
+            size: size,
+            resolve: {
+                title :function(){
+                    return 'Delete';
+                }
+                ,contents :function(){
+                    return 'Do you want to Delete Businesss name '+$scope.name;
+                },businessId:function(){
+                    return $scope.businessId;
+                },scopes:function(){
+                    return $scope;
+                }
+            }
+        });
+
     };
 });
 
@@ -401,6 +446,68 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             }
         });
     };
+});
+
+app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
+    $scope.businessId = $routeParams.businessId;
+
+    $scope.listBusinessTag = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-business-tag',
+            dataType: "json"
+        }).success(function(response) {
+            //console.log(response);
+            $scope.businessTag = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.listBusinessTag();
+
+    $scope.listBusinessType = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-business-type',
+            dataType: "json"
+        }).success(function(response) {
+            //console.log(response);
+            $scope.businessType = response.data;
+        }).error(function(response) {
+
+        });
+    };
+    $scope.listBusinessType();
+
+    $scope.get_business_by_id = function(){
+        $http({
+            method: 'POST',
+            url:  '/business/business-by-id',
+            data:{businessId:$scope.businessId},
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response.data);
+            $scope.globalVirable = {
+                businessname:response.data[0].name,
+                description:response.data[0].description,
+                phoneNumber:response.data[0].head.phoneNumber,
+                longitute:response.data[0].head.loc.lon,
+                latitute:response.data[0].head.loc.lat,
+                email:response.data[0].head.email,
+                locationname:response.data[0].head.name,
+                address:response.data[0].head.address,
+                businessTypesSelected:response.data[0].businessType[0].name,
+                logo:response.data[0].logo,
+                cover:response.data[0].coverImage[0]
+
+            };
+
+        }).error(function(response) {
+
+        });
+    };
+    $scope.get_business_by_id();
+
 });
 
 app.controller('ngProduct', function ($scope,$http,$routeParams,usSpinnerService) {

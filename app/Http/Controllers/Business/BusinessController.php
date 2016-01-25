@@ -62,14 +62,36 @@ class BusinessController extends Controller
         return ($zeSocialBusinessResult);
 
     }
+    public function getCategory()
+    {
+        return view('business.viewCategory');
+    }
+    public function getEditCategory()
+    {
+        return view('business.EditCategory');
+    }
+
     public function getAddCategory()
     {
         return view('business.addCategory');
     }
-
-    public function getCategory()
+    public function postEditCategory()
     {
-        return view('business.viewCategory');
+        $function = 'businessAdmin/update_category';
+        $method = 'POST';
+        $accessKey = json_decode(Session::get('zeAccessKey'));
+        $dataRequest = array(
+
+            'accessKey'=> $accessKey->AccessKey,
+            'newCategoryName' => Input::get('newCategoryName'),
+            'businessId'   => Input::get('businessId'),
+            'categoryId'   => Input::get('categoryId')
+
+        );
+//        return $dataRequest;
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
     }
 
     public function postCategory(){
@@ -279,5 +301,9 @@ class BusinessController extends Controller
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         return $zeSocialBusinessResult;
+    }
+
+    public function getEditBusiness(){
+        return view('business.editBusiness');
     }
 }
