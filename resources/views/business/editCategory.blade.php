@@ -7,7 +7,7 @@
         </div>
         <div class="form-group col-xs-6">
             <label for="exampleInputEmail1">Category Name</label>
-            <input type="text" class="form-control"  ng-model="globalVirable.newCategoryName" placeholder="Name" required="">
+            <input type="text" class="form-control"  ng-model="globalVirable.categoryName" placeholder="Name" required="">
         </div>
         <div class="form-group col-xs-12">
             <button type="submit" class="btn btn-default">Save</button>

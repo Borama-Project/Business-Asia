@@ -161,8 +161,7 @@ app.controller('ngApp', ['$scope','$timeout','$http','Facebook',
 app.controller('ngCategory', function ($scope,$modal,$http,$routeParams,usSpinnerService) {
     $scope.businessId = $routeParams.businessId;
     $scope.categoryId = $routeParams.categoryId;
-
-    $scope.get_category_by_business_id = function(){
+    $scope.get_category_by_business_id_fun = function(){
         $http({
             method: 'POST',
             url:  '/business/get-category-by-business',
@@ -175,7 +174,27 @@ app.controller('ngCategory', function ($scope,$modal,$http,$routeParams,usSpinne
             console.log(response);
         });
     };
-    $scope.get_category_by_business_id();
+    $scope.get_category_by_business_id_fun();
+
+    $scope.get_category_by_id_fuc = function(){
+        $http({
+            method: 'POST',
+            url:  '/business/get-category-by-id',
+            data:  {
+                businessId:$routeParams.businessId,
+                categoryId:$routeParams.categoryId
+            },
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.globalVirable={
+                categoryName : response.data.name
+            }
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.get_category_by_id_fuc();
 
     $scope.get_business_by_id_fuc = function(){
     usSpinnerService.spin('spinner-1');
@@ -222,7 +241,7 @@ app.controller('ngCategory', function ($scope,$modal,$http,$routeParams,usSpinne
             method: 'POST',
             url:  '/business/edit-category',
             data: {
-                newCategoryName:$scope.globalVirable.newCategoryName,
+                categoryName:$scope.globalVirable.categoryName,
                 businessId:$routeParams.businessId,
                 categoryId:$routeParams.categoryId
             },
@@ -237,23 +256,28 @@ app.controller('ngCategory', function ($scope,$modal,$http,$routeParams,usSpinne
     };
 
     $scope.deleteCategoryById = function (size) {
-        console.log(this.item.head.name);
-        $scope.name = this.item.head.name;
-        $scope.businessId = this.item.businessId;
+        //console.log(this.item);
+        $scope.name = this.item.name;
+       $scope.businessId = $routeParams.businessId;
+        $scope.categoeyId = this.item.id;
         var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'ModalContent',
-            controller: 'ModalInstanceDelete',
+            templateUrl: 'deleteCategory',
+            controller: 'ModalInstanceDeleteCategory',
             size: size,
             resolve: {
                 title :function(){
                     return 'Delete';
                 }
                 ,contents :function(){
-                    return 'Do you want to Delete Businesss name '+$scope.name;
+                    return 'Do you want to Delete Category name '+$scope.name;
                 },businessId:function(){
                     return $scope.businessId;
-                },scopes:function(){
+                }
+                ,categoryId:function(){
+                    return $scope.categoeyId;
+                }
+                ,scopes:function(){
                     return $scope;
                 }
             }
@@ -787,4 +811,38 @@ app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,tit
   $scope.close = function(e){
     $modalInstance.dismiss('cancel');
   }
+});
+
+
+app.controller('ModalInstanceDeleteCategory', function ($scope,$http, $modalInstance,title,contents,businessId,categoryId,scopes) {
+    $scope.title= title;
+    $scope.contentTitle = contents;
+    $scope.businessId= businessId;
+    $scope.categoryId=categoryId;
+    console.log($scope.scopes = scopes);
+    $scope.ok = function () {
+        $http({
+            method: 'POST',
+            url:  '/business/delete-category',
+            data: {
+                businessId:$scope.businessId,
+                categoryId:$scope.categoryId
+            },
+            dataType: "json"
+        }).success(function(response) {
+            $modalInstance.close();
+            $scope.scopes.get_category_by_business_id_fun();
+
+            console.log(response)
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+    $scope.close = function(e){
+        $modalInstance.dismiss('cancel');
+    }
 });
