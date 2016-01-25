@@ -406,32 +406,30 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
 app.controller('ngProduct', function ($scope,$http,$routeParams,usSpinnerService) {
   $scope.businessId = $routeParams.businessId;
   $scope.categoryId = $routeParams.categoryId;
-  console.log($scope);
-    $scope.submit = function(){
-       usSpinnerService.spin('spinner-1'); 
-      $http({
-          method: 'POST',
-          url:  '/product/list-product',
-          data: $scope.app,
-          dataType: "json"
-      }).success(function(response) {
-        if(response.code ==1){
-          $scope.results  = JSON.stringify(response.message);
-          if(response.data.length){
-            usSpinnerService.stop('spinner-1');
-            $scope.Product = response.data;
-            usSpinnerService.stop('spinner-1');
-          }else{
-            $scope.items = response.data;
-          }
+  $scope.submit = function(){
+     usSpinnerService.spin('spinner-1'); 
+    $http({
+        method: 'POST',
+        url:  '/product/list-product',
+        data: $scope.app,
+        dataType: "json"
+    }).success(function(response) {
+      if(response.code ==1){
+        $scope.results  = JSON.stringify(response.message);
+        if(response.data.length){
+          $scope.Product = response.data;
+          usSpinnerService.stop('spinner-1');
         }else{
-
+          $scope.items = response.data;
         }
-          
-      }).error(function(response) {
-          console.log(response);
-      });
-    };
+      }else{
+
+      }
+        
+    }).error(function(response) {
+        console.log(response);
+    });
+  };
 
     // $scope.categorysList();
     $scope.productList = function(){
@@ -441,6 +439,7 @@ app.controller('ngProduct', function ($scope,$http,$routeParams,usSpinnerService
             data:{categoryId:$scope.categoryId,businessId:$scope.businessId},
             dataType: "json"
         }).success(function(response) {
+          console.log(response);
             if(response.code ==1){
               $scope.Products = response.data;
               $scope.results = response.message.description;
@@ -457,80 +456,52 @@ app.controller('ngProduct', function ($scope,$http,$routeParams,usSpinnerService
 });
 app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 
+
+
 });
-app.controller('ngAddProduct', function ($scope,$http,$routeParams,Upload,usSpinnerService) {
+app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,usSpinnerService) {
   // $scope.app = {categoryid:$routeParams.categoryId};
   // console.log($scope.scbus)
+
+  $scope.modernBrowsers = [
+        { 
+            icon: '<img src="https://cdn1.iconfinder.com/data/icons/fatcow/32/opera.png" />',                         
+            name: 'Opera',              
+            maker: 'Opera Software',        
+            ticked: true    
+        },
+        { 
+            icon: '<img  src="https://cdn1.iconfinder.com/data/icons/fatcow/32/internet_explorer.png" />',             
+            name: 'Internet Explorer',  
+            maker: 'Microsoft',
+            ticked: false   
+        },
+        { 
+            icon: '<img  src="https://cdn1.iconfinder.com/data/icons/humano2/32x32/apps/firefox-icon.png" />',         
+            name: 'Firefox',            
+            maker: 'Mozilla Foundation',    
+            ticked: true    
+        },
+        { 
+            icon: '<img  src="https://cdn1.iconfinder.com/data/icons/fatcow/32x32/safari_browser.png" />',             
+            name: 'Safari',             
+            maker: 'Apple',                 
+            ticked: false   
+        },
+        { 
+            icon: '<img  src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/32/chrome.png" />',  
+            name: 'Chrome',             
+            maker: 'Google',                
+            ticked: true    
+        }    
+    ];
+
+  $scope.webBrowsersGrouped = [];
   $scope.inputFile=[];
   $scope.ngTrigger = function(fname){
     // console.log(fname);
     $( "#"+ fname).trigger( "click" );
   }
-  $scope.app = {image:{file1:'/assets/img/img-photo-upload.png',
-                file2:'/assets/img/img-photo-upload.png',
-                file3:'/assets/img/img-photo-upload.png',
-                file4:'/assets/img/img-photo-upload.png'}}
-  // $scope.inputFile.push({'file':'<img ngf-src="app.image.file" class="thumb" width="171" height="180">'});
-  // console.log($scope.inputFile);
-
-  $scope.submit = function(){
-      // check image
-      // var dtRequest = str.slice(1,-1);
-      var listBusinessTag = '';
-      var doc= document.getElementsByName("ngCheck");
-      for (var i = doc.length - 1; i >= 0; i--) {
-        if(doc[i].checked == true){
-          if(listBusinessTag != ''){
-            listBusinessTag += ','+doc[i].value;
-          }else{
-            listBusinessTag += doc[i].value;
-          }
-          
-        }
-      };
-      // checkBox = '"listBusinessTag":"'+checkBox+'","businessId":"'+$routeParams.businessId+'","categoryId":"'+$routeParams.categoryId+'",'+dtRequest;
-      // console.log(checkBox);
-      // dtRequest = '{'+dtRequest+'}';
-    
-    usSpinnerService.spin('spinner-1');
-    console.log($scope.app.dateEnds);
-      Upload.upload({
-          method: 'POST',
-          url: '/product/product',
-          data: {name:$scope.app.name,productCategoryId:$scope.app.productCategoryId,currency:$scope.app.currency,
-            dateStarts:$scope.app.dateStarts,dateEnds:$scope.app.dateEnds,condition:$scope.app.condition,price:$scope.app.price,image1:$scope.app.image.file1,
-            image2:$scope.app.image.file2,image3:$scope.app.image.file3,image4:$scope.app.image.file4,
-          description:$scope.app.description,listBusinessTag:listBusinessTag,categoryId:$routeParams.categoryId,businessId:$routeParams.businessId},
-          dataType: "json",
-          contentType: false,
-          cache: false,
-          processData: false,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      }).success(function (response) {
-          usSpinnerService.stop('spinner-1');
-          // $scope.results = response;
-          $scope.results = JSON.stringify(response);
-          console.log(response);
-          if(response.code == 1){
-              $scope.results = JSON.stringify(response);
-              // $scope.app = '';
-              $scope.app = {image:{file1:'/assets/img/img-photo-upload.png',
-                file2:'/assets/img/img-photo-upload.png',
-                file3:'/assets/img/img-photo-upload.png',
-                file4:'/assets/img/img-photo-upload.png'}}
-                var doc= document.getElementsByName("ngCheck");
-                for (var i = doc.length - 1; i >= 0; i--) {
-                  if(doc[i].checked == true){
-                    doc[i].checked = false;
-                  }
-                };
-              // $scope.BusinessFormName.$setPristine();
-          }else{
-            // $scope.results = response.message.description;
-          }
-      });
-    
-  };
 
   $scope.categorysList = function(callback){
       $http({
@@ -573,16 +544,29 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,Upload,usSpin
       });
   };
 
-  $scope.businessTag = function(){
+  $scope.businessTags = function(){
     $http({
           method: 'GET',
           url:  '/business/list-business-tag',
           dataType: "json"
       }).success(function(response) {
-          console.log(response);
+          
           if(response.code ==1){
             usSpinnerService.stop('spinner-1');
             $scope.businessTag = response.data;
+            console.log($scope.businessTag);
+            $.each($scope.businessTag,function(keys,tags){
+              $scope.webBrowsersGrouped.push({name:'<strong>'+tags.name+'</strong>',msGroup: true});
+              $.each(tags.tag,function(key,tag){
+                $scope.webBrowsersGrouped.push({ 
+                  icon: '<img  src="'+$sce.trustAsResourceUrl(tag.icon)+'" />',      
+                  name: tag.name, 
+                  id: tag.id, 
+                  ticked: false    
+              });
+              });
+              $scope.webBrowsersGrouped.push({msGroup: false});
+            });
             $scope.results = response.message.description;
             usSpinnerService.stop('spinner-1');
           }else{
@@ -592,14 +576,74 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,Upload,usSpin
           
       });
   }
+  $scope.app = {image:{file1:'/assets/img/img-photo-upload.png',
+                file2:'/assets/img/img-photo-upload.png',
+                file3:'/assets/img/img-photo-upload.png',
+                file4:'/assets/img/img-photo-upload.png'}}
+  $scope.submit = function(){
+      
+    var businessTag = this.webBrowsersGrouped;
+    var listBusinessTag = '';
+    $.each(businessTag,function(ke, tag){
+       // console.log(tag);
+      if(listBusinessTag !=''){
+        if(tag.ticked){
+          listBusinessTag +=','+tag.id;
+        }
+      }else{
+        if(tag.ticked){
+          listBusinessTag +=''+tag.id;
+        }
+      }
+    });
+    if(listBusinessTag!=''){
+      usSpinnerService.spin('spinner-1');
+      Upload.upload({
+          method: 'POST',
+          url: '/product/product',
+          data: {name:$scope.app.name,productCategoryId:$scope.app.productCategoryId,currency:$scope.app.currency,
+            dateStarts:$scope.app.dateStarts,dateEnds:$scope.app.dateEnds,condition:$scope.app.condition,price:$scope.app.price,image1:$scope.app.image.file1,
+            image2:$scope.app.image.file2,image3:$scope.app.image.file3,image4:$scope.app.image.file4,
+          description:$scope.app.description,listBusinessTag:listBusinessTag,categoryId:$routeParams.categoryId,businessId:$routeParams.businessId},
+          dataType: "json",
+          contentType: false,
+          cache: false,
+          processData: false,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).success(function (response) {
+          console.log(this);
+          usSpinnerService.stop('spinner-1');
+          // $scope.results = response;
+          $scope.results = JSON.stringify(response);
+          console.log(response);
+          if(response.code == 1){
+              $scope.results = JSON.stringify(response);
+              // $scope.app = '';
+              // $scope.app = {image:{file1:'/assets/img/img-photo-upload.png',
+              //   file2:'/assets/img/img-photo-upload.png',
+              //   file3:'/assets/img/img-photo-upload.png',
+              //   file4:'/assets/img/img-photo-upload.png'}}
+              
+          }else{
+            // $scope.results = response.message.description;
+          }
+      });
+    }else{
+      $scope.results = 'please select business Tag to add product';
+    }
+    
+    
+  };
+
+  
     
   $scope.categorysList(function(){
     usSpinnerService.spin('spinner-1');
     $scope.conditionList(function(){
-      
-      $scope.businessTag();
+      $scope.businessTags();
     });
   });
+  
   $scope.monthSelectorOptions = {
     start: "year",
     depth: "year"
