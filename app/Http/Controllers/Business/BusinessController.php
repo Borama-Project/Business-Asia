@@ -62,16 +62,51 @@ class BusinessController extends Controller
         return ($zeSocialBusinessResult);
 
     }
-    public function getAddCategory()
-    {
-        return view('business.addCategory');
-    }
-
     public function getCategory()
     {
         return view('business.viewCategory');
     }
+    public function getEditCategory()
+    {
+        return view('business.EditCategory');
+    }
 
+    public function getAddCategory()
+    {
+        return view('business.addCategory');
+    }
+    public function postEditCategory()
+    {
+        $function = 'businessAdmin/update_category';
+        $method = 'POST';
+        $accessKey = json_decode(Session::get('zeAccessKey'));
+        $dataRequest = array(
+
+            'accessKey'=> $accessKey->AccessKey,
+            'newCategoryName' => Input::get('categoryName'),
+            'businessId'   => Input::get('businessId'),
+            'categoryId'   => Input::get('categoryId')
+
+        );
+//        return $dataRequest;
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
+    }
+
+    public function postGetCategoryById()
+    {
+        $function = 'businessAdmin/get_category_by_id';
+        $method = 'POST';
+        $dataRequest = array(
+            'businessId'   => Input::get('businessId'),
+            'categoryId'   => Input::get('categoryId')
+
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
+    }
     public function postCategory(){
 
         $method   = 'POST';
@@ -82,6 +117,19 @@ class BusinessController extends Controller
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         // return(Input::get('businessId'));
+        return ($zeSocialBusinessResult);
+    }
+    public function postDeleteCategory(){
+
+        $method   = 'POST';
+        $function = 'businessAdmin/remove_category';
+        $dataRequest = array(
+            'businessId'      => Input::get('businessId'),
+            'categoryId'      => Input::get('categoryId')
+        );
+//        return $dataRequest;
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         return ($zeSocialBusinessResult);
     }
     public function postGetCategoryByBusiness(){
@@ -279,5 +327,9 @@ class BusinessController extends Controller
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
         return $zeSocialBusinessResult;
+    }
+
+    public function getEditBusiness(){
+        return view('business.editBusiness');
     }
 }

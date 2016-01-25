@@ -158,23 +158,43 @@ app.controller('ngApp', ['$scope','$timeout','$http','Facebook',
     }
   ]);
 
-app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerService) {
+app.controller('ngCategory', function ($scope,$modal,$http,$routeParams,usSpinnerService) {
     $scope.businessId = $routeParams.businessId;
-
-    $scope.get_category_by_business_id = function(){
+    $scope.categoryId = $routeParams.categoryId;
+    $scope.get_category_by_business_id_fun = function(){
         $http({
             method: 'POST',
             url:  '/business/get-category-by-business',
             data:  {businessId:$routeParams.businessId},
             dataType: "json"
         }).success(function(response) {
-            console.log(response);
+            //console.log(response);
             $scope.get_category_by_business_id = response.data;
         }).error(function(response) {
             console.log(response);
         });
     };
-    $scope.get_category_by_business_id();
+    $scope.get_category_by_business_id_fun();
+
+    $scope.get_category_by_id_fuc = function(){
+        $http({
+            method: 'POST',
+            url:  '/business/get-category-by-id',
+            data:  {
+                businessId:$routeParams.businessId,
+                categoryId:$routeParams.categoryId
+            },
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response);
+            $scope.globalVirable={
+                categoryName : response.data.name
+            }
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.get_category_by_id_fuc();
 
     $scope.get_business_by_id_fuc = function(){
     usSpinnerService.spin('spinner-1');
@@ -184,7 +204,7 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
             data:  {businessId:$routeParams.businessId},
             dataType: "json"
         }).success(function(response) {
-            console.log(response);
+            //console.log(response);
             if(response.code ==1){
               $scope.get_business_by_id = response.data;
               usSpinnerService.stop('spinner-1');
@@ -214,6 +234,55 @@ app.controller('ngCategory', function ($scope,$http,$routeParams,usSpinnerServic
         }).error(function(response) {
             console.log(response);
         });
+    };
+
+    $scope.submitEdit = function(){
+        $http({
+            method: 'POST',
+            url:  '/business/edit-category',
+            data: {
+                categoryName:$scope.globalVirable.categoryName,
+                businessId:$routeParams.businessId,
+                categoryId:$routeParams.categoryId
+            },
+            dataType: "json"
+        }).success(function(response) {
+            $scope.globalVirable='';
+            window.history.back();
+            $scope.get_business_by_id_fuc();
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.deleteCategoryById = function (size) {
+        //console.log(this.item);
+        $scope.name = this.item.name;
+       $scope.businessId = $routeParams.businessId;
+        $scope.categoeyId = this.item.id;
+        var modalInstance = $modal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'deleteCategory',
+            controller: 'ModalInstanceDeleteCategory',
+            size: size,
+            resolve: {
+                title :function(){
+                    return 'Delete';
+                }
+                ,contents :function(){
+                    return 'Do you want to Delete Category name '+$scope.name;
+                },businessId:function(){
+                    return $scope.businessId;
+                }
+                ,categoryId:function(){
+                    return $scope.categoeyId;
+                }
+                ,scopes:function(){
+                    return $scope;
+                }
+            }
+        });
+
     };
 });
 
@@ -401,6 +470,68 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             }
         });
     };
+});
+
+app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
+    $scope.businessId = $routeParams.businessId;
+
+    $scope.listBusinessTag = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-business-tag',
+            dataType: "json"
+        }).success(function(response) {
+            //console.log(response);
+            $scope.businessTag = response.data;
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+    $scope.listBusinessTag();
+
+    $scope.listBusinessType = function(){
+        $http({
+            method: 'GET',
+            url:  '/business/list-business-type',
+            dataType: "json"
+        }).success(function(response) {
+            //console.log(response);
+            $scope.businessType = response.data;
+        }).error(function(response) {
+
+        });
+    };
+    $scope.listBusinessType();
+
+    $scope.get_business_by_id = function(){
+        $http({
+            method: 'POST',
+            url:  '/business/business-by-id',
+            data:{businessId:$scope.businessId},
+            dataType: "json"
+        }).success(function(response) {
+            console.log(response.data);
+            $scope.globalVirable = {
+                businessname:response.data[0].name,
+                description:response.data[0].description,
+                phoneNumber:response.data[0].head.phoneNumber,
+                longitute:response.data[0].head.loc.lon,
+                latitute:response.data[0].head.loc.lat,
+                email:response.data[0].head.email,
+                locationname:response.data[0].head.name,
+                address:response.data[0].head.address,
+                businessTypesSelected:response.data[0].businessType[0].name,
+                logo:response.data[0].logo,
+                cover:response.data[0].coverImage[0]
+
+            };
+
+        }).error(function(response) {
+
+        });
+    };
+    $scope.get_business_by_id();
+
 });
 
 app.controller('ngProduct', function ($scope,$http,$routeParams,usSpinnerService) {
@@ -724,4 +855,38 @@ app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,tit
   $scope.close = function(e){
     $modalInstance.dismiss('cancel');
   }
+});
+
+
+app.controller('ModalInstanceDeleteCategory', function ($scope,$http, $modalInstance,title,contents,businessId,categoryId,scopes) {
+    $scope.title= title;
+    $scope.contentTitle = contents;
+    $scope.businessId= businessId;
+    $scope.categoryId=categoryId;
+    console.log($scope.scopes = scopes);
+    $scope.ok = function () {
+        $http({
+            method: 'POST',
+            url:  '/business/delete-category',
+            data: {
+                businessId:$scope.businessId,
+                categoryId:$scope.categoryId
+            },
+            dataType: "json"
+        }).success(function(response) {
+            $modalInstance.close();
+            $scope.scopes.get_category_by_business_id_fun();
+
+            console.log(response)
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+    $scope.close = function(e){
+        $modalInstance.dismiss('cancel');
+    }
 });

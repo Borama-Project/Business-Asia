@@ -68,7 +68,7 @@
                 {{--<A ng-href="#/business/@{{item.businessId}}">--}}
                     {{--<button type="button" name="btnMore" class="btn btn-default" >View</button>--}}
                 {{--</A>--}}
-                <A ng-href="#/business/edie/@{{item.businessId}}">
+                <A ng-href="#/business/edit/Business/@{{item.businessId}}">
                     <button type="button" name="btnMore" class="btn btn-default" >Edit</button>
                 </A>
                 <button type="button" name="btnMore" class="btn btn-danger" ng-click="deleteById('sm')">Delete</button>

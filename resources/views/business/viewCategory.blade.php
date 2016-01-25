@@ -35,10 +35,12 @@
                         </A>
                     </div>
                     <div class="col-xs-3">
-                        <button type="button" name="btnMore" class="btn btn-warning" ng-click="deleteById('sm')">Edit</button>
+                        <A ng-href="#/category/edit/@{{item.id}}/business/@{{businessId}}">
+                           <button type="button" name="btnMore" class="btn btn-warning" ng-click="deleteById('sm')">Edit</button>
+                        </A>
                     </div>
                     <div class="col-xs-3">
-                        <button type="button" name="btnMore" class="btn btn-danger" ng-click="deleteById('sm')">Delete</button>
+                        <button type="button" name="btnMore" class="btn btn-danger" ng-click="deleteCategoryById('sm')">Delete</button>
                     </div>
                 </div>
             </td>
