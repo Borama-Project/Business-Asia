@@ -14,14 +14,14 @@
 				<label>Logo</label>
 				<a href="javascript:void(0)" class="thumbnail">
 					<img ng-src="/assets/img/img-photo-upload.png" width="100" height="100"  id="bFileUpload">
-					<input type="file" ngf-select ng-model="globalVirable.logo" name="logo" id="imgFileUpload" required="true" style="display: none">
+					<input type="file" ngf-select ng-model="globalVirable.logo" name="logo" id="imgFileUpload"   style="display: none">
 				</a>
 		</div>
 		<div class="col-md-3">
 				<label>Cover</label>
 				<a href="javascript:void(0)" class="thumbnail">
 					<img ng-src="/assets/img/img-photo-upload.png" width="100" height="100"  id="coverFileUpload">
-					<input type="file" ngf-select ng-model="globalVirable.cover" name="cover"  id="imgCoverFileUpload" required="true" style="display: none">
+					<input type="file" ngf-select ng-model="globalVirable.cover" name="cover"  id="imgCoverFileUpload"  style="display: none">
 				</a>
 		</div>
 	</div>
