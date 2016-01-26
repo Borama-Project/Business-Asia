@@ -10,6 +10,11 @@
     <a ng-href="#/business/register/Business" >
         <button type="button" name="btnMore" class="btn btn-primary btn-xs" >Register Business</button>
     </a>
+    <!-- <div class="form-group col-xs-12 pd-lef-0">
+        <div class="alert alert-success">
+          <strong>@{{results}}</strong> 
+        </div>
+    </div> -->
 </div>
 <form ng-submit="submit()">
 <table class="table table-condensed">
@@ -45,9 +50,10 @@
                 <input type="text" class="form-control" ng-model="search.address" placeholder="Address">
             </div>
         </th>
-        <th width="280px" align="right">
+        <th width="180px" align="right">
             <div class="form-group">
                 <button type="submit" id="submit" class="btn btn-default">Search</button>
+                <button type="button" name="btnMore" class="btn btn-default" ng-click="listAllBusiness()" >Reload</button>
             </div>
         </th>
     </tr>

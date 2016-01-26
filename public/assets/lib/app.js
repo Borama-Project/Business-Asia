@@ -68,7 +68,7 @@ app.config(function ($routeProvider) {
                 controller: 'ngAddProduct',
                 templateUrl: '/product/product'
             })
-        .when('/products/product/:productId',
+        .when('/products/product/:productId/:categoryId/:businessId',
             {
                 controller: 'ngAddProduct',
                 templateUrl: '/product/product-by-id'
