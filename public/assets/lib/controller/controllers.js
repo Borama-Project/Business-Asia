@@ -593,41 +593,52 @@ app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,usSpinnerService) {
   // $scope.app = {categoryid:$routeParams.categoryId};
   // console.log($scope.scbus)
+  $scope.app = {image:{file1:'/assets/img/img-photo-upload.png',
+                file2:'/assets/img/img-photo-upload.png',
+                file3:'/assets/img/img-photo-upload.png',
+                file4:'/assets/img/img-photo-upload.png'}}
+  $scope.productId = $routeParams.productId;
+  $scope.loadProductbyId = function(){
+    if($scope.productId != '') {
+      $http({
+          method: 'POST',
+          url:  '/product/list',
+          data: {productId:$scope.productId},
+          dataType: "json"
+      }).success(function(response) {
+        console.log(response);
+        $scope.app = {businessName:response.businessName,
+          price:response.price,dateStarts:response.publishDate.dateStart,
+          dateEnds:response.publishDate.dateEnds,condition:response
+        }
+        // if(response.code ==1){
+        //   $scope.results  = JSON.stringify(response.message);
+        //   if(response.data.length){
+        //     $scope.Product = response.data;
+        //     usSpinnerService.stop('spinner-1');
+        //   }else{
+        //     $scope.items = response.data;
+        //   }
+        // }else{
 
-  $scope.modernBrowsers = [
-        { 
-            icon: '<img src="https://cdn1.iconfinder.com/data/icons/fatcow/32/opera.png" />',                         
-            name: 'Opera',              
-            maker: 'Opera Software',        
-            ticked: true    
-        },
-        { 
-            icon: '<img  src="https://cdn1.iconfinder.com/data/icons/fatcow/32/internet_explorer.png" />',             
-            name: 'Internet Explorer',  
-            maker: 'Microsoft',
-            ticked: false   
-        },
-        { 
-            icon: '<img  src="https://cdn1.iconfinder.com/data/icons/humano2/32x32/apps/firefox-icon.png" />',         
-            name: 'Firefox',            
-            maker: 'Mozilla Foundation',    
-            ticked: true    
-        },
-        { 
-            icon: '<img  src="https://cdn1.iconfinder.com/data/icons/fatcow/32x32/safari_browser.png" />',             
-            name: 'Safari',             
-            maker: 'Apple',                 
-            ticked: false   
-        },
-        { 
-            icon: '<img  src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/32/chrome.png" />',  
-            name: 'Chrome',             
-            maker: 'Google',                
-            ticked: true    
-        }    
-    ];
+        // }
+          
+      }).error(function(response) {
+          console.log(response);
+      });
+    }
+  }
 
-  $scope.webBrowsersGrouped = [];
+  $scope.webBrowsersGrouped = [{
+        name: '<strong>Modern Web Browsers</strong>',
+        msGroup: true
+    },
+    { 
+        icon: '',                         
+        name: '',              
+        maker: '',        
+        ticked: true
+    }];
   $scope.inputFile=[];
   $scope.ngTrigger = function(fname){
     // console.log(fname);
@@ -640,7 +651,6 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
           url:  '/business/list',
           dataType: "json"
       }).success(function(response) {
-          console.log(response);
           if(response.code ==1){
             usSpinnerService.stop('spinner-1');
             $scope.categorysLists = response.data;
@@ -661,6 +671,7 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
           url:  '/product/product-condition',
           dataType: "json"
       }).success(function(response) {
+        console.log(response);
           if(response.code ==1){
             $scope.conditions = response.data;
             if(callback){
@@ -685,7 +696,7 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
           if(response.code ==1){
             usSpinnerService.stop('spinner-1');
             $scope.businessTag = response.data;
-            console.log($scope.businessTag);
+            $scope.webBrowsersGrouped = [];
             $.each($scope.businessTag,function(keys,tags){
               $scope.webBrowsersGrouped.push({name:'<strong>'+tags.name+'</strong>',msGroup: true});
               $.each(tags.tag,function(key,tag){
@@ -707,10 +718,7 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
           
       });
   }
-  $scope.app = {image:{file1:'/assets/img/img-photo-upload.png',
-                file2:'/assets/img/img-photo-upload.png',
-                file3:'/assets/img/img-photo-upload.png',
-                file4:'/assets/img/img-photo-upload.png'}}
+  
   $scope.submit = function(){
       
     var businessTag = this.webBrowsersGrouped;

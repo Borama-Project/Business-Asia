@@ -37,10 +37,10 @@ class ProductController extends Controller
     public function getList(){
 
         $method = 'POST';
-        $function = 'product/get_product';
+        $function = 'productAdmin/get_product';
         if(Input::get('productId')){
             $dataRequest = array(
-                'productId'    => 'NTY4ZjgzMjE3ZjhiOWFjZjA5OGI0NTc1MjAxNi0wMS0wOCAwOTozNjozM1NvY2lhbEJ1c2luZXNz',
+                'productId'    => Input::get('productId'),
             );
         }else{
             $dataRequest = array(

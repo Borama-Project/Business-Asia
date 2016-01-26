@@ -70,9 +70,10 @@ app.config(function ($routeProvider) {
             })
         .when('/products/product/:productId',
             {
-                controller: 'ngGetProduct',
+                controller: 'ngAddProduct',
                 templateUrl: '/product/product-by-id'
             })
+        
         .when('/promotion',
             {
                 controller: 'ngPromotion',
