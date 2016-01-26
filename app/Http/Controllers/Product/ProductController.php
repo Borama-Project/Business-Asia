@@ -90,9 +90,11 @@ class ProductController extends Controller
     public function postProduct(){
         $function = 'productAdmin/add_product';
         $method = 'POST';
-        $listBusinessTag = explode(",", Input::get('listBusinessTag'));
-        $listBusinessTag = json_encode($listBusinessTag);
-        // $listBusinessTag = $listBusinessTag);
+        if(Input::get('listBusinessTag') !=''){
+            $listBusinessTag = explode(",", Input::get('listBusinessTag'));
+            $listBusinessTag = json_encode($listBusinessTag);
+        }
+       
         $categoryId = array(Input::get('categoryId'));
         $currency = Input::get('currency');
         if($currency == ''){
@@ -109,7 +111,7 @@ class ProductController extends Controller
             'price'   => Input::get('price'),
             'description'   => Input::get('description'),
             'listBusinessTag'   => $listBusinessTag,
-            'categoryId' => $listBusinessTag,
+            'listCategoryId' => json_encode($categoryId),
             'businessId'   => Input::get('businessId'),
         );
         
@@ -175,5 +177,9 @@ class ProductController extends Controller
         // return 'sta';
         return view('product.selectData');
     }
+    public function getUpdateProduct(){
+
+    }
+    
 
 }
