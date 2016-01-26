@@ -34,16 +34,14 @@
 			</select>
 
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6" >
 			<label for="exampleInputEmail1">Business Tag</label>
-			<div class="div-type-list">
-				<div  ng-repeat="businessTags in businessTag"><span class="blode-header">@{{ businessTags.name }}</span>
-					<div  ng-repeat="tag in businessTags.tag">
-						<input id="@{{tag.id}}" type="checkbox" value="@{{tag.id}}" ng-checked="selectionTage.indexOf(tags.id) > -1" ng-click="toggleSelectionTag(tag.id)" />
-						@{{tag.name}}
-					</div>
-				</div>
-			</div>
+				<select  class="form-control" ng-model="globalVirable.businessTagList">
+					<optgroup ng-repeat="businessTags in businessTag" label="@{{businessTags.name }}">
+						<option ng-repeat="tag in businessTags.tag" value="@{{tag.id}}">@{{tag.name}}</option>
+					</optgroup>
+				</select>
+
 		</div>
 	</div>
 

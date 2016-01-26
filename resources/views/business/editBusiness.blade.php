@@ -13,38 +13,37 @@
             <div class="col-md-3">
                 <label>Logo</label>
                 <a href="javascript:void(0)" class="thumbnail">
-                    <img ng-src="@{{ globalVirable.logo }}" width="100" height="100"  id="bFileUpload1">
-                    <input type="file" ngf-select ng-model="globalVirable.logo" name="logo" id="imgFileUpload1" required="true" style="display: none">
+                    <img ng-src="@{{globalVirable.logoEdit}}" width="100" height="100"  id="imgLogo" ng-click="">
+                    <input type="file" ngf-select ng-model="globalVirable.logo" name="logo" id="inputFileLogo"   style="display: none">
                 </a>
             </div>
-            <div class="col-md-3">
-                <label>Cover</label>
-                <a href="javascript:void(0)" class="thumbnail">
-                    <img ng-src="@{{ globalVirable.cover }}" width="100" height="100"  id="coverFileUpload">
-                    <input type="file" ngf-select ng-model="globalVirable.cover" name="cover"  id="imgCoverFileUpload" required="true" style="display: none">
-                </a>
-            </div>
+            {{--<div class="col-md-3">--}}
+                {{--<label>Cover</label>--}}
+                {{--<a href="javascript:void(0)" class="thumbnail">--}}
+                    {{--<img ng-src="@{{ globalVirable.coverEdit }}" width="100" height="100"  id="imgCover">--}}
+                    {{--<input type="file" ngf-select ng-model="globalVirable.cover" name="cover"  id="inputFileCover"   style="display: none">--}}
+                {{--</a>--}}
+            {{--</div>--}}
         </div>
 
         <div class="col-md-12">
-            <div class="col-md-6">
-                <label>Business Type</label>
-                <select ng-model="globalVirable.businessTypeList" class="form-control" >
-                    <option value="2" selected="selected"> @{{globalVirable.businessTypesSelected}}</option>
-                    <option ng-repeat="businessTypes in businessType" ng-selected="businessTypesSelected" value="@{{businessTypes}}"> @{{businessTypes.name}}</option>
-                </select>
+            {{--<div class="col-md-6">--}}
+                {{--<label>Business Type</label>--}}
+                {{--<select ng-model="globalVirable.businessTypeList" class="form-control" >--}}
+                    {{--<option value="@{{ businessTypesSelected }}">@{{ businessTypesSelected }}</option>--}}
+                    {{--<option ng-repeat="businessTypes in businessType" ng-selected="businessTypesSelected" value="@{{businessTypes}}"> @{{businessTypes.name}}</option>--}}
+                {{--</select>--}}
 
-            </div>
+            {{--</div>--}}
             <div class="col-md-6">
                 <label for="exampleInputEmail1">Business Tag</label>
-                <div class="div-type-list">
-                    <div  ng-repeat="businessTags in businessTag"><span class="blode-header">@{{ businessTags.name }}</span>
-                        <div  ng-repeat="tag in businessTags.tag">
-                            <input id="@{{tag.id}}" type="checkbox" value="@{{tag.id}}" ng-checked="selectionTage.indexOf(tags.id) > -1" ng-click="toggleSelectionTag(tag.id)" />
-                            @{{tag.name}}
-                        </div>
-                    </div>
-                </div>
+
+                    <select  class="form-control" ng-model="globalVirable.businessTagList">
+                        <optgroup ng-repeat="businessTags in businessTag" label="@{{businessTags.name }}">
+                            <option ng-repeat="tag in businessTags.tag" value="@{{tag.id}}">@{{tag.name}}</option>
+                        </optgroup>
+                    </select>
+
             </div>
         </div>
 
@@ -85,7 +84,7 @@
         <div class="form-group col-xs-6">
             <div ng-if="success">
                 <div class="alert alert-success">
-                    <strong>Success!</strong><span class="label label-success">@{{ businessName }}</span> Business has been create.
+                    <strong>Success!</strong><span class="label label-success">@{{ businessName }}</span> Business has been update.
                 </div>
 
                 <A ng-href="/#business">Back to business!</A>
@@ -104,33 +103,33 @@
 </div>
 
 <script>
-    $( "#bFileUpload1" ).on( "click", function() {
-        $( "#imgFileUpload1" ).trigger( "click" );
+    $( "#imgLogo" ).on( "click", function() {
+        $( "#inputFileLogo" ).trigger( "click" );
     });
-    $( "#coverFileUpload" ).on( "click", function() {
-        $( "#imgCoverFileUpload" ).trigger( "click" );
+    $( "#imgCover" ).on( "click", function() {
+        $( "#inputFileCover" ).trigger( "click" );
     });
 
-    $("#imgFileUpload1").change(function () {
+    $("#inputFileLogo").change(function () {
         var input = this;
         var reader = new FileReader();
         var img = new Image();
 
         reader.onload = function (e) {
             img.src = e.target.result;
-            $('#bFileUpload1').attr('ng-src', e.target.result);
+            $('#imgLogo').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     });
 
-    $("#imgCoverFileUpload").change(function () {
+    $("#inputFileCover").change(function () {
         var input = this;
         var reader = new FileReader();
         var img = new Image();
 
         reader.onload = function (e) {
             img.src = e.target.result;
-            $('#coverFileUpload').attr('src', e.target.result);
+            $('#imgCover').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     });
