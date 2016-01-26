@@ -205,7 +205,7 @@ class ProductController extends Controller
         // return $result;
         // return json_encode($dataRequest);
     }
-
+    public function getProductUpload($productId,$businessId,$file){}
     public function postProductUpload($productId,$businessId,$file){
         $function = 'productAdmin/add_image_gallery';
         if ($file != null) {

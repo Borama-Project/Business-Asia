@@ -783,35 +783,35 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
               // }
           });
       }else{
-        // Upload.upload({
-        //     method: 'POST',
-        //     url: '/product/product',
-        //     data: {name:$scope.app.name,productCategoryId:$scope.app.productCategoryId,currency:$scope.app.currency,
-        //       dateStarts:$scope.app.dateStarts,dateEnds:$scope.app.dateEnds,condition:$scope.app.condition,price:$scope.app.price,image1:$scope.app.file0,
-        //       image2:$scope.app.file1,image3:$scope.app.file2,image4:$scope.app.file3,
-        //     description:$scope.app.description,listBusinessTag:listBusinessTag,categoryId:$routeParams.categoryId,businessId:$routeParams.businessId},
-        //     dataType: "json",
-        //     contentType: false,
-        //     cache: false,
-        //     processData: false,
-        //     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        // }).success(function (response) {
-        //     console.log(this);
-        //     usSpinnerService.stop('spinner-1');
-        //     $scope.results = JSON.stringify(response);
-        //     console.log(response);
-        //     if(response.code == 1){
-        //         $scope.results = response.message.description;
-        //         $scope.app = '';
-        //         $scope.app = {file0:'/assets/img/img-photo-upload.png',
-        //           file1:'/assets/img/img-photo-upload.png',
-        //           file2:'/assets/img/img-photo-upload.png',
-        //           file3:'/assets/img/img-photo-upload.png'}
+        Upload.upload({
+            method: 'POST',
+            url: '/product/product',
+            data: {name:$scope.app.name,productCategoryId:$scope.app.productCategoryId,currency:$scope.app.currency,
+              dateStarts:$scope.app.dateStarts,dateEnds:$scope.app.dateEnds,condition:$scope.app.condition,price:$scope.app.price,image1:$scope.app.file0,
+              image2:$scope.app.file1,image3:$scope.app.file2,image4:$scope.app.file3,
+            description:$scope.app.description,listBusinessTag:listBusinessTag,categoryId:$routeParams.categoryId,businessId:$routeParams.businessId},
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (response) {
+            console.log(this);
+            usSpinnerService.stop('spinner-1');
+            $scope.results = JSON.stringify(response);
+            console.log(response);
+            if(response.code == 1){
+                $scope.results = response.message.description;
+                $scope.app = '';
+                $scope.app = {file0:'/assets/img/img-photo-upload.png',
+                  file1:'/assets/img/img-photo-upload.png',
+                  file2:'/assets/img/img-photo-upload.png',
+                  file3:'/assets/img/img-photo-upload.png'}
                 
-        //     }else{
-        //       $scope.results = response.message.description;
-        //     }
-        // });
+            }else{
+              $scope.results = response.message.description;
+            }
+        });
       }
       
       
