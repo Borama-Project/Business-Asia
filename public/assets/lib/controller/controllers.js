@@ -452,7 +452,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
                 logo:$scope.globalVirable.logo,
                 cover:$scope.globalVirable.cover,
                 businessTypeList:$scope.globalVirable.businessTypeList,
-                businessTagList:$scope.selectionTag
+                businessTagList:$scope.globalVirable.businessTagList
             },
             dataType: "json",
             contentType: false,
@@ -511,6 +511,16 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
             dataType: "json"
         }).success(function(response) {
             console.log(response.data);
+            var logos = response.data[0].logo;
+            var cover = response.data[0].coverImage[0];
+            if(logos == ''){
+                var logos = '/assets/img/img-photo-upload.png';
+            }
+            if(cover == null){
+                var covers = '/assets/img/img-photo-upload.png';
+            }else{
+                var covers = response.data[0].coverImage[0];
+            }
             $scope.globalVirable = {
                 businessname:response.data[0].name,
                 description:response.data[0].description,
@@ -521,8 +531,8 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
                 locationname:response.data[0].head.name,
                 address:response.data[0].head.address,
                 businessTypesSelected:response.data[0].businessType[0].name,
-                logo:response.data[0].logo,
-                cover:response.data[0].coverImage[0]
+                logoEdit:logos,
+                coverEdit:covers
 
             };
 
@@ -532,6 +542,56 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
     };
     $scope.get_business_by_id();
 
+    $scope.selectionTag=[];
+    // toggle selection for a given employee by name
+    $scope.toggleSelectionTag = function toggleSelectionTag(tagId) {
+        var idx = $scope.selectionTag.indexOf(tagId);
+
+
+        if (idx > -1) {
+            $scope.selectionTag.splice(idx, 1);
+        }
+
+        else {
+            $scope.selectionTag.push(tagId);
+        }
+    };
+
+    $scope.submits = function(){
+
+        Upload.upload({
+            method: 'POST',
+            url: '/business/edit-business-fuc',
+            data: {
+                businessId:$scope.businessId,
+                locationname:$scope.globalVirable.locationname,
+                businessname:$scope.globalVirable.businessname,
+                phoneNumber:$scope.globalVirable.phoneNumber,
+                email:$scope.globalVirable.email,
+                latitute:$scope.globalVirable.latitute,
+                longitute:$scope.globalVirable.longitute,
+                address:$scope.globalVirable.address,
+                description:$scope.globalVirable.description,
+                logo:$scope.globalVirable.logo,
+                //cover:$scope.globalVirable.cover,
+                businessTypeList:$scope.globalVirable.businessTypeList,
+                businessTagList:$scope.globalVirable.businessTagList
+            },
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (response) {
+            console.log(response);
+            if(response.code == 1){
+                $scope.success = 'sucess';
+                $scope.businessName = response.data.name;
+            }else{
+                $scope.errorSMS = response.message.description;
+            }
+        });
+    };
 });
 
 app.controller('ngProduct', function ($scope,$http,$routeParams,usSpinnerService) {

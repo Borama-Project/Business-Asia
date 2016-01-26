@@ -223,12 +223,12 @@ class BusinessController extends Controller
         $function = 'businessAdmin/register_business';
         $authorId = json_decode(Session::get('zeAccessKey'));
 
-        $businessTagList     = (Input::get('businessTagList'));
+        $businessTagList     = array(Input::get('businessTagList'));
         $businessTypeList     = array(Input::get('businessTypeList'));
-
+//return $businessTagList;
         $strNullType = '';
         foreach($businessTypeList as $value){
-            $strNullType .= "[".$value."]";
+             $strNullType .= "[".$value."]";
         }
 
         //  business tag list foreach string
@@ -346,5 +346,83 @@ class BusinessController extends Controller
 
     public function getEditBusiness(){
         return view('business.editBusiness');
+    }
+
+    public function postEditBusinessFuc(){
+
+        $file           =       Input::file('logo');
+//        $cover          =       Input::file('cover');
+        if ($file != null) {
+            $fileName   =       $file->getClientOriginalName();
+            $fileData   =       $file->getPathName();
+        }
+//        if($cover != null){
+//            $coverName  = $cover->getClientOriginalName();
+//            $coverData  = $cover->getPathName();
+//        }
+        $functionLocation = 'businessAdmin/update_geo_location';
+        $functionBusiness = 'businessAdmin/update_business';
+        $functionUpdateLogo = 'businessAdmin/update_logo';
+
+        $businessTagList     = array(Input::get('businessTagList'));
+//        $businessTypeList     = array(Input::get('businessTypeList'));
+
+//        $strNullType = '';
+//        foreach($businessTypeList as $value){
+//            $strNullType .= "[".$value."]";
+//        }
+
+        //  business tag list foreach string
+        $strTag = '';
+        foreach($businessTagList as $key){
+            if($strTag==''){
+                $strTag .='"'.$key.'"';
+            }else{
+                $strTag .=',"'.$key.'"';
+            }
+        }
+        $str = '['.$strTag.']';
+        //end
+        $method   = 'POST';
+
+        $dataLocation = array(
+
+                'businessId' => Input::get('businessId'),
+                'name' => Input::get('locationname'),
+                'phoneNumber' => Input::get('phoneNumber'),
+                'address' => Input::get('address'),
+                'email' => Input::get('email'),
+                'latitude' => Input::get('latitute'),
+                'longitude' => Input::get('longitute'),
+
+        );
+
+
+        $dataBusiness = array(
+                'businessId' => Input::get('businessId'),
+                'name' => Input::get('businessname'),
+                'description' => Input::get('description'),
+                'listBusinessTag' => $str,
+//                'businessTypeList' => $strNullType
+        );
+        if($file == null){
+            $dataLogo= array(
+
+            );
+        }else{
+            $dataLogo= array(
+                'businessId' => Input::get('businessId'),
+                'image' => new \CurlFile($fileData, 'image/jpg', $fileName),
+            );
+        }
+
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($functionLocation,$dataLocation,$method);
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($functionBusiness,$dataBusiness,$method);
+        if($file != null){
+            $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($functionUpdateLogo,$dataLogo,$method);
+        }
+
+        return ( $zeSocialBusinessResult);
     }
 }
