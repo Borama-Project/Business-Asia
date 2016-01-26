@@ -79,7 +79,7 @@
 		</div>
 		<div class="col-lg-6">
 			<label class="control-label col-lg-3">Condition</label>
-			<div class="col-lg-8 pd-right-28">
+			<div class="col-lg-8">
 				<select ng-model="app.condition" class="form-control" id="conditions"  name="select" required >
 					<option value=""></option>
 					<option ng-repeat="item in conditions" value="@{{ item.conditionId }}"> @{{ item.name }} </option>
