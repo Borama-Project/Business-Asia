@@ -10,7 +10,7 @@
 		<input type="text" class="form-control"  ng-model="globalVirable.categoryName" placeholder="Name" required="">
 	</div>
 	<div class="form-group col-xs-12">
-		<button type="submit" class="btn btn-default">Save</button>
+		<button type="submit" class="btn btn-primary btn-sm">Save</button>
 	</div>
 
 </form>

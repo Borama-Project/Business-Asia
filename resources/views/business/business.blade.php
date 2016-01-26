@@ -78,7 +78,10 @@
 
 
 	<div class="form-group col-xs-12 ">
-		<button type="submit" id="clickBR" class="btn btn-default">Submit</button>
+		<button type="submit" id="clickBR" class="btn btn-primary btn-sm">Submit</button>
+		<A ng-href="#/business">
+			<button type="submit" class="btn btn-default btn-sm">Cancel</button>
+		</A>
 	</div>
 
 	<div class="form-group col-xs-6">
