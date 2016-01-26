@@ -341,8 +341,8 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
   $scope.animationsEnabled = true;
 
   $scope.deleteById = function (size) {
-    console.log(this.item.head.name);
-    $scope.name = this.item.head.name;
+    //console.log(this.item);
+    $scope.name = this.item.name;
     $scope.businessId = this.item.businessId;
     var modalInstance = $modal.open({
       animation: $scope.animationsEnabled,

@@ -243,22 +243,37 @@ class BusinessController extends Controller
         $str = '['.$strTag.']';
         //end
         $method   = 'POST';
-        $dataRequest = array(
-            'authorId'          => $authorId->ownerId,
-            'locationname'      => Input::get('locationname'),
-            'businessname'      => Input::get('businessname'),
-            'description'       => Input::get('description'),
-            'phoneNumber'       => Input::get('phoneNumber'),
-            'address'           => Input::get('address'),
-            'email'             => Input::get('email'),
-            'latitute'          => Input::get('latitute'),
-            'longitute'         => Input::get('longitute'),
-            'logo'              => new \CurlFile($fileData,'image/jpg', $fileName),
-            'cover'             => new \CurlFile($coverData,'image/jpg',$coverName),
-            'businessTagList'   => $str,
-            'businessTypeList'  => $strNullType
-        );
-
+        if($file == null && $cover==null){
+            $dataRequest = array(
+                'authorId'          => $authorId->ownerId,
+                'locationname'      => Input::get('locationname'),
+                'businessname'      => Input::get('businessname'),
+                'description'       => Input::get('description'),
+                'phoneNumber'       => Input::get('phoneNumber'),
+                'address'           => Input::get('address'),
+                'email'             => Input::get('email'),
+                'latitute'          => Input::get('latitute'),
+                'longitute'         => Input::get('longitute'),
+                'businessTagList'   => $str,
+                'businessTypeList'  => $strNullType
+            );
+        }else {
+            $dataRequest = array(
+                'authorId' => $authorId->ownerId,
+                'locationname' => Input::get('locationname'),
+                'businessname' => Input::get('businessname'),
+                'description' => Input::get('description'),
+                'phoneNumber' => Input::get('phoneNumber'),
+                'address' => Input::get('address'),
+                'email' => Input::get('email'),
+                'latitute' => Input::get('latitute'),
+                'longitute' => Input::get('longitute'),
+                'logo' => new \CurlFile($fileData, 'image/jpg', $fileName),
+                'cover' => new \CurlFile($coverData, 'image/jpg', $coverName),
+                'businessTagList' => $str,
+                'businessTypeList' => $strNullType
+            );
+        }
 //        return ($dataRequest);
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);

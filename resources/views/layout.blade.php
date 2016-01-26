@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="ngApp">
 <head>
-<title></title>
+<title>Zeo</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -60,8 +60,8 @@
     </p>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary btn-xs" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-default btn-xs" type="button" ng-click="cancel()">Cancel</button>
     </div>
 </script>
 
@@ -75,8 +75,8 @@
             </p>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary btn-xs" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-default btn-xs" type="button" ng-click="cancel()">Cancel</button>
         </div>
     </script>
 <script type="text/ng-template" id="custom_template.html">

@@ -8,7 +8,7 @@
 
 <div class="col-lg-12 pd-lef-10  pd-right-0 list-group-item">
     <a ng-href="#/business/register/Business" >
-        <button type="button" name="btnMore" class="btn btn-success" >Register Business</button>
+        <button type="button" name="btnMore" class="btn btn-primary btn-xs" >Register Business</button>
     </a>
 </div>
 <form ng-submit="submit()">
@@ -63,15 +63,15 @@
         <td >
               <div class="col-xs-12 pd-lef-0 pd-right-0">
                 <A ng-href="#/category/@{{item.businessId}}">
-                    <button type="button" name="btnMore" class="btn btn-success">Category</button>
+                    <button type="button" name="btnMore" class="btn btn-success btn-xs">Category</button>
                 </A>
                 {{--<A ng-href="#/business/@{{item.businessId}}">--}}
                     {{--<button type="button" name="btnMore" class="btn btn-default" >View</button>--}}
                 {{--</A>--}}
                 <A ng-href="#/business/edit/Business/@{{item.businessId}}">
-                    <button type="button" name="btnMore" class="btn btn-default" >Edit</button>
+                    <button type="button" name="btnMore" class="btn btn-default btn-xs" >Edit</button>
                 </A>
-                <button type="button" name="btnMore" class="btn btn-danger" ng-click="deleteById('sm')">Delete</button>
+                <button type="button" name="btnMore" class="btn btn-danger btn-xs" ng-click="deleteById('sm')">Delete</button>
               </div>
         </td>
     </tr>
