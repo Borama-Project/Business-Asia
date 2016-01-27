@@ -642,6 +642,7 @@ console.log(response.data[0].businessType[0].id)
 app.controller('ngProduct', function ($scope,$http,$routeParams,$modal,usSpinnerService) {
   $scope.businessId = $routeParams.businessId;
   $scope.categoryId = $routeParams.categoryId;
+
   usSpinnerService.spin('spinner-1'); 
   $scope.get_category_by_id_fuc = function(){
         $http({

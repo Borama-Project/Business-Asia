@@ -21,9 +21,9 @@
     <tr>
         <th>Nº</th>
         <th>Product Name</th>
-        <th>ProductCategoryId</th>
         <th>Business Name</th>
         <th>price</th>
+        <th>ProductCategoryId</th>
         <th >Manage</th>
     </tr>
     </thead>
@@ -31,9 +31,9 @@
     <tr data-ng-repeat="item in Products | filter:search:strict">
         <td >@{{ $index +1 }}</td>
         <td >@{{ item.name }}</td>
-        <td >@{{ item.productCategoryId }}</td>
         <td >@{{ item.businessName }}</td>
-        <td >@{{ item.price }}</td>
+        <td >@{{ item.price }} </td>
+        <td >@{{ item.productCategoryId }}</td>
         <td width="100px">
         	<div class="row">
               <div class="col-xs-4">
