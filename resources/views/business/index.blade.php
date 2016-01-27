@@ -2,7 +2,7 @@
 
 <div class="panel panel-info">
 	  <div class="panel-body">
-	   	<h3>Business</h3>
+	   	Business
 	  </div>
 </div>
 
