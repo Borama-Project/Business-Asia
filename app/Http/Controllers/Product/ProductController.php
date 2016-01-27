@@ -147,7 +147,9 @@ class ProductController extends Controller
         // return json_encode($dataRequest);
         
     }
+    public function getUpdateProduct(){
 
+    }
     public function postUpdateProduct(){
         $function = 'productAdmin/update_product';
         $method = 'POST';
@@ -184,28 +186,71 @@ class ProductController extends Controller
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
 
-        if(Input::get('productId')){
-            $businessId = Input::get('businessId');
-            $productId = Input::get('productId');
-            if($file1){
-                $result = $this->postProductUpload($productId,$businessId,$file1);
-            }
+        // if(Input::get('productId')){
+        //     $businessId = Input::get('businessId');
+        //     $productId = Input::get('productId');
+        //     if($file1){
+        //         $result = $this->postProductUpload($productId,$businessId,$file1);
+        //     }
 
-            if($file2){
-                $result = $this->postProductUpload($productId,$businessId,$file2);
-            }
-            if($file3){
-                $result = $this->postProductUpload($productId,$businessId,$file3);
-            }if($file4){
-                $result = $this->postProductUpload($productId,$businessId,$file4);
-            }
+        //     if($file2){
+        //         $result = $this->postProductUpload($productId,$businessId,$file2);
+        //     }
+        //     if($file3){
+        //         $result = $this->postProductUpload($productId,$businessId,$file3);
+        //     }if($file4){
+        //         $result = $this->postProductUpload($productId,$businessId,$file4);
+        //     }
             
-        }
+        // }
         return $zeSocialBusinessResult;
         // return $result;
         // return json_encode($dataRequest);
     }
-    public function getProductUpload($productId,$businessId,$file){}
+    public function getDeleteProductById(){
+
+    }
+    public function postProductGallery(){
+        $file           =       Input::file('image');
+        $productId = Input::get('productId');
+        $businessId = Input::get('businessId');
+        // if ($file != null) {
+        //     $fileName   =       $file->getClientOriginalName();
+        //     $fileData   =       $file->getPathName();
+        // }
+        $result = $this->postProductUpload($productId,$businessId,$file);
+        return $result;
+    }
+    public function postDeleteProductById(){
+        $method   = 'POST';
+        $function = 'productAdmin/remove_product';
+        $dataRequest = array(
+            'productId'      => Input::get('productId'),
+            'businessId'      => Input::get('businessId'),
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return( $zeSocialBusinessResult);
+        // return json_encode($dataRequest);
+    }
+    public function postDeleteGallery(){
+        $method   = 'POST';
+        $function = 'productAdmin/remove_image_gallery';
+        $dataRequest = array(
+            'productId'      => Input::get('productId'),
+            'imageUrl'      => Input::get('imageUrl'),
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return( $zeSocialBusinessResult);
+        // return json_encode($dataRequest);
+    }
+    
+    
+
+    public function getProductUpload($productId,$businessId,$file){
+
+    }
     public function postProductUpload($productId,$businessId,$file){
         $function = 'productAdmin/add_image_gallery';
         if ($file != null) {
@@ -235,9 +280,7 @@ class ProductController extends Controller
         // return 'sta';
         return view('product.selectData');
     }
-    public function getUpdateProduct(){
-
-    }
+    
     
 
 }

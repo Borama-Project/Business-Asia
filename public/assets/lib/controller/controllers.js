@@ -371,6 +371,8 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
           return 'Do you want to Delete Businesss name '+$scope.name;
         },businessId:function(){
           return $scope.businessId;
+        },productId:function(){
+          return '';
         },scopes:function(){
           return $scope;
         }
@@ -608,10 +610,10 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
     };
 });
 
-app.controller('ngProduct', function ($scope,$http,$routeParams,usSpinnerService) {
+app.controller('ngProduct', function ($scope,$http,$routeParams,$modal,usSpinnerService) {
   $scope.businessId = $routeParams.businessId;
   $scope.categoryId = $routeParams.categoryId;
-  console.log(this);
+  usSpinnerService.spin('spinner-1'); 
   $scope.get_category_by_id_fuc = function(){
         $http({
             method: 'POST',
@@ -632,7 +634,7 @@ app.controller('ngProduct', function ($scope,$http,$routeParams,usSpinnerService
     };
   $scope.get_category_by_id_fuc();
   $scope.submit = function(){
-     usSpinnerService.spin('spinner-1'); 
+    usSpinnerService.spin('spinner-1'); 
     $http({
         method: 'POST',
         url:  '/product/list-product',
@@ -656,29 +658,53 @@ app.controller('ngProduct', function ($scope,$http,$routeParams,usSpinnerService
     });
   };
 
-    // $scope.categorysList();
-    $scope.productList = function(){
-        $http({
-            method: 'POST',
-            url:  '/product/list-product',
-            data:{categoryId:$scope.categoryId,businessId:$scope.businessId},
-            dataType: "json"
-        }).success(function(response) {
+  $scope.productList = function(){
+      $http({
+          method: 'POST',
+          url:  '/product/list-product',
+          data:{categoryId:$scope.categoryId,businessId:$scope.businessId},
+          dataType: "json"
+      }).success(function(response) {
+        console.log(response);
+          if(response.code ==1){
+            usSpinnerService.stop('spinner-1');
+            $scope.Products = response.data;
+            $scope.results = response.message.description;
+          }else{
+            $scope.results = response.message.description;
+          }
+          
+      }).error(function(response) {
           console.log(response);
-            if(response.code ==1){
-              $scope.Products = response.data;
-              $scope.results = response.message.description;
-            }else{
-              $scope.results = response.message.description;
-            }
-            
-        }).error(function(response) {
-            console.log(response);
-        });
-    };
-    $scope.productList();
+      });
+  };
+  $scope.productList();
 
-    $scope.getCat
+  $scope.deleteById = function (size) {
+    $scope.name = this.item.name;
+    $scope.productId = this.item.productId;
+    var modalInstance = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'ModalContent',
+      controller: 'ModalInstanceDelete',
+      size: size,
+      resolve: {
+        title :function(){
+          return 'Delete';
+        }
+        ,contents :function(){
+          return 'Do you want to Delete Product : '+$scope.name;
+        },businessId:function(){
+          return $scope.businessId;
+        },productId:function(){
+          return $scope.productId;
+        },scopes:function(){
+          return $scope;
+        }
+      }
+    });
+
+  };
 });
 app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 
@@ -734,16 +760,6 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
       });
   }
   
-  $scope.webBrowsersGrouped = [{
-        name: '<strong>Modern Web Browsers</strong>',
-        msGroup: true
-    },
-    { 
-        icon: '',                         
-        name: '',              
-        maker: '',        
-        ticked: true
-    }];
   $scope.inputFile=[];
   $scope.ngTrigger = function(fname){
     $( "#"+ fname).trigger( "click" );
@@ -814,10 +830,10 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
   $scope.submit = function(){
       
     var listBusinessTag = $scope.app.listBusinessTag;
-    console.log($scope.response.imageGallery);
     if(listBusinessTag!=''){
       usSpinnerService.spin('spinner-1');
-      if($scope.productId !=''){
+      if($scope.productId){
+        console.log($scope.productId+' update');
           Upload.upload({
               method: 'POST',
               url: '/product/update-product',
@@ -843,6 +859,7 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
               // }
           });
       }else{
+        // console.log('insert');
         Upload.upload({
             method: 'POST',
             url: '/product/product',
@@ -859,7 +876,7 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
             console.log(this);
             usSpinnerService.stop('spinner-1');
             $scope.results = JSON.stringify(response);
-            console.log(response);
+            
             if(response.code == 1){
                 $scope.results = response.message.description;
                 $scope.app = '';
@@ -867,7 +884,7 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
                   file1:'/assets/img/img-photo-upload.png',
                   file2:'/assets/img/img-photo-upload.png',
                   file3:'/assets/img/img-photo-upload.png'}
-                
+                window.history.back();
             }else{
               $scope.results = response.message.description;
             }
@@ -890,6 +907,63 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
       });
     });
   
+  $scope.upload = function(fthis){
+    $( "#"+ fthis).trigger( "click" );
+    $scope.results='upload';
+  }
+  $scope.uploadFile = function(fthis){
+    var fname = 'file'+fthis;
+    $scope.url = $scope.app[fname];
+    console.log($scope.url);
+     if($scope.url != '/assets/img/img-photo-upload.png'){
+      usSpinnerService.spin('spinner-1');
+        Upload.upload({
+            method: 'POST',
+            url: '/product/product-gallery',
+            data: {productId:$scope.productId,businessId:$scope.businessId,image:$scope.url},
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (response) {
+            $http({
+              method: 'POST',
+              url:  '/product/delete-gallery',
+              data: {productId:$scope.productId,imageUrl:$scope.response.imageGallery[fthis]},
+              dataType: "json"
+            }).success(function(response) {
+                usSpinnerService.stop('spinner-1');
+            }).error(function(response) {
+               
+                console.log(response);
+            });
+        });
+      
+    }
+  }
+  $scope.delete = function(fthis){
+    $scope.productId = this.productId;
+    $scope.businessId = this.businessId;
+    var url = $scope.app[fthis];
+    $scope.results=url;
+    if(url != '/assets/img/img-photo-upload.png'){
+       
+        $http({
+          method: 'POST',
+          url:  '/product/delete-gallery',
+          data: {productId:$scope.productId,imageUrl:url},
+          dataType: "json"
+        }).success(function(response) {
+            $scope.results = JSON.stringify(response);
+            $scope.app[fthis] = '/assets/img/img-photo-upload.png';
+        }).error(function(response) {
+           $scope.app[fthis] = '/assets/img/img-photo-upload.png';
+            console.log(response);
+        });
+    }
+    
+  }
   $scope.monthSelectorOptions = {
     start: "year",
     depth: "year"
@@ -941,11 +1015,13 @@ app.controller('ngAuth', function ($scope,$http) {
     }
 });
 
-app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,title,contents,businessId,scopes) {
+app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,title,contents,businessId,productId,scopes) {
   $scope.title= title;
   $scope.contentTitle = contents;
   $scope.businessId= businessId;
   $scope.scopes = scopes;
+  $scope.productId = productId;
+  
   $scope.ok = function () {
     // validation function
     var fdata= false;
@@ -956,21 +1032,37 @@ app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,tit
         }
       });
     }
-    $http({
-        method: 'POST',
-        url:  '/business/delete-business-by-id',
-        data: {businessId:$scope.businessId},
-        dataType: "json"
-    }).success(function(response) {
-        $modalInstance.close();
-        if(fdata === true){
-          $scope.scopes.submit();
-        }else{
-          $scope.scopes.listAllBusiness();
-        }
-    }).error(function(response) {
-        console.log(response);
-    });
+    if($scope.productId !=''){
+      console.log($scope.scopes);
+        $http({
+          method: 'POST',
+          url:  '/product/delete-product-by-id',
+          data: {productId:$scope.productId,businessId:$scope.businessId},
+          dataType: "json"
+        }).success(function(response) {
+            $modalInstance.close();
+            $scope.scopes.productList();
+        }).error(function(response) {
+            console.log(response);
+        });
+    }else{
+        $http({
+          method: 'POST',
+          url:  '/business/delete-business-by-id',
+          data: {businessId:$scope.businessId},
+          dataType: "json"
+        }).success(function(response) {
+            $modalInstance.close();
+            if(fdata === true){
+              $scope.scopes.submit();
+            }else{
+              $scope.scopes.listAllBusiness();
+            }
+        }).error(function(response) {
+            console.log(response);
+        });
+    }
+    
   };
 
   $scope.cancel = function () {

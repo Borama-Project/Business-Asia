@@ -68,7 +68,7 @@ class ZeSocialBusinessModel
 
         $response = $this->curlResponse($url, $fields, $method);
         if(json_decode($response) == null){
-            return('{"code": 0,"data": [{}],"message": {"code": 1,"description": "Server response error data"}}');
+            return('{"code": 0,"data": [{}],"message": {"code": 1,"description": "Server error on data response "}}');
         }
         return $response;
     }

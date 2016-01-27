@@ -120,7 +120,9 @@
 
 	<div class="form-group col-xs-12">
 		<button type="submit" class="btn btn-default">Save</button>
-		
+		<a ng-href="#/products/list/@{{categoryids}}/business/@{{businessId}}">
+		<button type="submit" class="btn btn-default">Cancel</button>
+		</a>
 	</div>
 	<div class="form-group col-xs-12 pd-lef-0">
 		<!-- <pre>@{{results}}</pre> -->
@@ -128,7 +130,6 @@
 		  <strong>@{{results}}</strong> 
 		  
 		</div>
-		<a ng-href="#/products/list/@{{categoryids}}/business/@{{businessId}}">Back to Category</a>
 	</div>
 </form>
 

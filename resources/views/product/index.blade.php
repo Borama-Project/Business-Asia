@@ -42,7 +42,7 @@
                     </a>
               </div>
               <div class="col-xs-5">
-                  <button type="button" name="btnMore" class="btn btn-danger  btn-xs" ng-click="deleteById('sm')">Delete</button>
+                  <button type="button" name="@{{ item.id }}" class="btn btn-danger  btn-xs" ng-click="deleteById('sm')">Delete</button>
               </div>
 			</div>
         </td>
@@ -51,3 +51,17 @@
     </tbody>
 </table>
 </div>
+<script type="text/ng-template" id="ModalContentProduct">
+    <div class="modal-header">
+        <h3 class="modal-title">@{{title}} !</h3>
+    </div>
+    <div class="modal-body">
+    <p>
+        @{{contentTitle}}
+    </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary btn-xs" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-default btn-xs" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

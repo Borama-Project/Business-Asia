@@ -47,6 +47,22 @@ body{
 	text-align: right;
 }
 
+.thumbnail {
+    cursor:default;
+}
+.pointer {
+    cursor:pointer;
+}
+.ngDelete{
+    position: absolute; 
+    right:10px; top:10px;
+}
+.ngUpload{
+    position: absolute; top:160px;
+}
+.relative{
+    position: relative;
+}
 /*----------------------padding-margin----------------------------------------*/
 .ngNonPadd{
 	margin-bottom: 0px;

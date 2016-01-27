@@ -87,27 +87,35 @@
 	</div>
 	<div class="form-group col-xs-12 thumbnail pad-top-20">
 	  <div class="col-xs-12 col-md-3">
-	    <a href="javascript:void(0)" class="thumbnail">
-	    	<img ngf-src="app.file0" ng-click="ngTrigger('fileUpload0')"  class="thumb" width="171" height="180">
-	    	<input type="file" id="fileUpload0"  ngf-select ng-model="app.file1" name="image"  style="display:none;">
+	    <a href="javascript:void(0)" class="thumbnail relative" >
+	    	<img ngf-src="app.file0" ng-click=""  class="thumb" width="171" height="180">
+	    	<i class="glyphicon glyphicon-remove-circle pointer ngDelete" ng-click="delete('file0')"></i>
+	    	<i class="glyphicon glyphicon-camera pointer ngUpload" ng-click="upload('fileUpload0')"></i>
+	    	<input type="file"  ng-change="uploadFile('0')" id="fileUpload0"  ngf-select ng-model="app.file0" name="image"  style="display:none;">
 	    </a>
 	  </div>
 	  <div class="col-xs-12 col-md-3">
-	    <a href="javascript:void(0)" class="thumbnail">
-	    	<img ngf-src="app.file1" ng-click="ngTrigger('fileUpload1')" class="thumb" width="171" height="180">
-	    	<input type="file" id="fileUpload1"  ngf-select ng-model="app.file1" name="image"  style="display:none;">
+	    <a href="javascript:void(0)" class="thumbnail relative">
+	    	<img ngf-src="app.file1" ng-click="" class="thumb" width="171" height="180">
+	    	<i class="glyphicon glyphicon-remove-circle pointer ngDelete" ng-click="delete('file1')"></i>
+	    	<i class="glyphicon glyphicon-camera pointer ngUpload" ng-click="upload('fileUpload1')"></i>
+	    	<input type="file"  ng-change="uploadFile('1')" id="fileUpload1"  ngf-select ng-model="app.file1" name="image"  style="display:none;">
 	    </a>
 	  </div>
 	  <div class="col-xs-12 col-md-3">
-	    <a href="javascript:void(0)" class="thumbnail">
-	    	<img ngf-src="app.file2" ng-click="ngTrigger('fileUpload2')" class="thumb" width="171" height="180">
-	    	<input type="file" id="fileUpload2"  ngf-select ng-model="app.file2" name="image"  style="display:none;">
+	    <a href="javascript:void(0)" class="thumbnail relative">
+	    	<img ngf-src="app.file2" ng-click="" class="thumb" width="171" height="180">
+	    	<i class="glyphicon glyphicon-remove-circle pointer ngDelete" ng-click="delete('file2')"></i>
+	    	<i class="glyphicon glyphicon-camera pointer ngUpload" ng-click="upload('fileUpload2')"></i>
+	    	<input type="file"  ng-change="uploadFile('2')" id="fileUpload2"  ngf-select ng-model="app.file2" name="image"  style="display:none;">
 	    </a>
 	  </div>
 	  <div class="col-xs-12 col-md-3">
-	    <a href="javascript:void(0)" class="thumbnail">
-	    	<img ngf-src="app.file3" ng-click="ngTrigger('fileUpload3')" class="thumb" width="171" height="180">
-	    	<input type="file" id="fileUpload3" ngf-select ng-model="app.file3" name="image"  style="display:none;">
+	    <a href="javascript:void(0)" class="thumbnail relative">
+	    	<img ngf-src="app.file3" ng-click="" class="thumb" width="171" height="180">
+<i class="glyphicon glyphicon-remove-circle pointer ngDelete" ng-click="delete('file3')"></i>
+	    	<i class="glyphicon glyphicon-camera pointer ngUpload" ng-click="upload('fileUpload3')"></i>
+	    	<input type="file"  ng-change="uploadFile('3')" id="fileUpload3"  ngf-select ng-model="app.file3" name="image"  style="display:none;">
 	    </a>
 	  </div>
 	  
@@ -129,9 +137,3 @@
 </form>
 
 </div>
-
-<script>
-	$( "#upload" ).on( "click", function() {
-	    $( "#fileUpload" ).trigger( "click" );
-	});
-</script>
