@@ -11,9 +11,15 @@
 	</div>
 	<div class="form-group col-xs-12">
 		<button type="submit" class="btn btn-primary btn-sm">Save</button>
+		<button onclick="goBack()" type="submit" class="btn btn-default btn-sm">Cancel</button>
 	</div>
 
 </form>
 
 </div>
 
+<script>
+	function goBack() {
+		window.history.back();
+	}
+</script>

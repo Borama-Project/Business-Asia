@@ -27,14 +27,14 @@
         </div>
 
         <div class="col-md-12">
-            {{--<div class="col-md-6">--}}
-                {{--<label>Business Type</label>--}}
-                {{--<select ng-model="globalVirable.businessTypeList" class="form-control" >--}}
-                    {{--<option value="@{{ businessTypesSelected }}">@{{ businessTypesSelected }}</option>--}}
-                    {{--<option ng-repeat="businessTypes in businessType" ng-selected="businessTypesSelected" value="@{{businessTypes}}"> @{{businessTypes.name}}</option>--}}
-                {{--</select>--}}
+            <div class="col-md-6">
+                <label>Business Type</label>
+                <select ng-model="globalVirable.businessTypesList" class="form-control" >
+                    <option ng-repeat="businessTypes in businessType" value="@{{businessTypes.id}}">@{{ businessTypes.name}}</option>
+                </select>
+            </div>
 
-            {{--</div>--}}
+
             <div class="col-md-6">
                 <label for="exampleInputEmail1">Business Tag</label>
 
@@ -43,7 +43,6 @@
                             <option ng-repeat="tag in businessTags.tag" value="@{{tag.id}}">@{{tag.name}}</option>
                         </optgroup>
                     </select>
-
             </div>
         </div>
 
@@ -78,7 +77,10 @@
 
 
         <div class="form-group col-xs-12 ">
-            <button type="submit" id="clickBR" class="btn btn-default">Submit</button>
+            <button type="submit" id="clickBR" class="btn btn-primary btn-sm">Save</button>
+            <A ng-href="#/business">
+                <button  class="btn btn-default btn-sm">Cancel</button>
+            </A>
         </div>
 
         <div class="form-group col-xs-6">
