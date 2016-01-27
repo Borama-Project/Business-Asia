@@ -524,7 +524,7 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
             data:{businessId:$scope.businessId},
             dataType: "json"
         }).success(function(response) {
-            console.log(response.data);
+            console.log(response.data );
             var logos = response.data[0].logo;
             var cover = response.data[0].coverImage[0];
             if(logos == ''){
@@ -535,6 +535,12 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
             }else{
                 var covers = response.data[0].coverImage[0];
             }
+            var businessTagGlobla = response.data[0].businessTag[0];
+            if(businessTagGlobla == null){
+                businessTagGlobla = '';
+            }else{
+                businessTagGlobla = response.data[0].businessTag[0].id;
+            }
             $scope.globalVirable = {
                 businessname:response.data[0].name,
                 description:response.data[0].description,
@@ -544,12 +550,13 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
                 email:response.data[0].head.email,
                 locationname:response.data[0].head.name,
                 address:response.data[0].head.address,
-                businessTypesSelected:response.data[0].businessType[0].name,
+                businessTagList:businessTagGlobla,
+                businessTypesList:response.data[0].businessType[0].id,
                 logoEdit:logos,
                 coverEdit:covers
 
             };
-
+console.log(response.data[0].businessType[0].id)
         }).error(function(response) {
 
         });
@@ -588,7 +595,7 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
                 description:$scope.globalVirable.description,
                 logo:$scope.globalVirable.logo,
                 //cover:$scope.globalVirable.cover,
-                businessTypeList:$scope.globalVirable.businessTypeList,
+                businessTypesList:$scope.globalVirable.businessTypesList,
                 businessTagList:$scope.globalVirable.businessTagList
             },
             dataType: "json",
@@ -708,7 +715,7 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
           $scope.apps = {name:response.businessName,
             price:response.price,dateStart:response.publishDate.dateStart,
             dateEnd:response.publishDate.dateEnd,condition:response.condition,description:response.description,productId:response.productId,
-            productCategoryId:response.productCategoryId,listBusinessTag:response.businessTag[0].id,currency:response.currency,
+            productCategoryId:response.productCategoryId,listBusinessTag:response.businessTag[0].id,currency:response.currency
           }
           console.log($scope.apps);
           var appResult = JSON.stringify($scope.apps).slice(1,-1);
