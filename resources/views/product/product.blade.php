@@ -3,6 +3,7 @@
 	<div class="panel panel-info">
 	  <div class="panel-body">
 		<h3>Add Products</h3>
+
 	  </div>
 	</div>
 	<div class="form-group col-lg-12 pd-lef-0">
@@ -63,23 +64,16 @@
 	<div class="col-lg-12 pd-lef-0">
 		<div class="form-group col-xs-6 pd-lef-0">
 			<label>Business Tag</label>
-			<div
-			    isteven-multi-select
-			    input-model="webBrowsersGrouped"
-			    output-model="outputBrowsers"
-			    button-label="icon name"
-			    item-label="icon name"
-			    tick-property="ticked"
-			    group-property="msGroup"
-			    ng-model ="app.select"
-			>
-			</div>
-
+			<select ng-model="app.listBusinessTag" class="form-control" name="select" id="mySelect" required>
+				<optgroup ng-repeat="businessTags in listBusinessTag" label="@{{ businessTags.name }}">
+					<option ng-repeat="tag in businessTags.tag"  value="@{{ tag.id }}"> @{{ tag.name }} </option>
+				</optgroup>
+			</select>
 
 		</div>
 		<div class="col-lg-6">
 			<label class="control-label col-lg-3">Condition</label>
-			<div class="col-lg-8">
+			<div class="col-lg-6 pd-lef-5">
 				<select ng-model="app.condition" class="form-control" id="conditions"  name="select" required >
 					<option value=""></option>
 					<option ng-repeat="item in conditions" value="@{{ item.conditionId }}"> @{{ item.name }} </option>
@@ -98,26 +92,26 @@
 	<div class="form-group col-xs-12 thumbnail pad-top-20">
 	  <div class="col-xs-12 col-md-3">
 	    <a href="javascript:void(0)" class="thumbnail">
-	    	<img ngf-src="app.image.file1" ng-click="ngTrigger('fileUpload1')" dt-name="fileUpload1" class="thumb" width="171" height="180">
-	    	<input type="file" id="fileUpload1"  ngf-select ng-model="app.image.file1" name="image"  style="display:none;">
+	    	<img ngf-src="app.file0" ng-click="ngTrigger('fileUpload0')" dt-name="fileUpload0" class="thumb" width="171" height="180">
+	    	<input type="file" id="fileUpload0"  ngf-select ng-model="app.file0" name="image"  style="display:none;">
 	    </a>
 	  </div>
 	  <div class="col-xs-12 col-md-3">
 	    <a href="javascript:void(0)" class="thumbnail">
-	    	<img ngf-src="app.image.file2" ng-click="ngTrigger('fileUpload2')" class="thumb" width="171" height="180">
-	    	<input type="file" id="fileUpload2"  ngf-select ng-model="app.image.file2" name="image"  style="display:none;">
+	    	<img ngf-src="app.file1" ng-click="ngTrigger('fileUpload1')" class="thumb" width="171" height="180">
+	    	<input type="file" id="fileUpload1"  ngf-select ng-model="app.file1" name="image"  style="display:none;">
 	    </a>
 	  </div>
 	  <div class="col-xs-12 col-md-3">
 	    <a href="javascript:void(0)" class="thumbnail">
-	    	<img ngf-src="app.image.file3" ng-click="ngTrigger('fileUpload3')" class="thumb" width="171" height="180">
-	    	<input type="file" id="fileUpload3"  ngf-select ng-model="app.image.file3" name="image"  style="display:none;">
+	    	<img ngf-src="app.file2" ng-click="ngTrigger('fileUpload2')" class="thumb" width="171" height="180">
+	    	<input type="file" id="fileUpload2"  ngf-select ng-model="app.file2" name="image"  style="display:none;">
 	    </a>
 	  </div>
 	  <div class="col-xs-12 col-md-3">
 	    <a href="javascript:void(0)" class="thumbnail">
-	    	<img ngf-src="app.image.file4" ng-click="ngTrigger('fileUpload4')" class="thumb" width="171" height="180">
-	    	<input type="file" id="fileUpload4" name="fileUpload4" ngf-select ng-model="app.image.file4" name="image"  style="display:none;">
+	    	<img ngf-src="app.file3" ng-click="ngTrigger('fileUpload3')" class="thumb" width="171" height="180">
+	    	<input type="file" id="fileUpload43" name="fileUpload4" ngf-select ng-model="app.file3" name="image"  style="display:none;">
 	    </a>
 	  </div>
 	  
@@ -134,6 +128,7 @@
 		  <strong>@{{results}}</strong> 
 		  
 		</div>
+		<a ng-href="#/products/list/@{{categoryids}}/business/@{{businessId}}">Back to Category</a>
 	</div>
 </form>
 

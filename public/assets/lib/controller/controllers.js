@@ -289,9 +289,19 @@ app.controller('ngCategory', function ($scope,$modal,$http,$routeParams,usSpinne
 app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinnerService,Pagination) {
 
   $scope.submit =  function(){
+    var fdata= false;
+    usSpinnerService.spin('spinner-1');
     if($scope.search){
-      console.log($scope.search);
-      usSpinnerService.spin('spinner-1');
+      $.each($scope.search,function(key, value){
+        if(value !=''){
+          fdata= true;
+          console.log(key);
+          return false;
+        }
+      });
+    }
+    if(fdata === true){
+
       $http({
           method: 'POST',
           url:  '/business/search-business',
@@ -312,6 +322,9 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
       }).error(function(response) {
           console.log(response);
       });
+    }else{
+      $scope.results = 'Search can\'t null (BusinessName,Phone Number, Email, Address)';
+      usSpinnerService.stop('spinner-1');
     }
     
   }
@@ -326,6 +339,7 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
           // console.log(response);
           if(response.code == 1){
             $scope.pagination = '';
+            $scope.search ='';
             $scope.get_all_business = response.data;
             $scope.pagination = Pagination.getNew(10);
             $scope.pagination.numPages = Math.ceil(response.data.length/$scope.pagination.perPage);
@@ -597,6 +611,26 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
 app.controller('ngProduct', function ($scope,$http,$routeParams,usSpinnerService) {
   $scope.businessId = $routeParams.businessId;
   $scope.categoryId = $routeParams.categoryId;
+  console.log(this);
+  $scope.get_category_by_id_fuc = function(){
+        $http({
+            method: 'POST',
+            url:  '/business/get-category-by-id',
+            data:  {
+                businessId:$routeParams.businessId,
+                categoryId:$routeParams.categoryId
+            },
+            dataType: "json"
+        }).success(function(response) {
+            if(response.code ==1){
+              $scope.app=response.data;
+            }
+            console.log($scope.app);
+        }).error(function(response) {
+            console.log(response);
+        });
+    };
+  $scope.get_category_by_id_fuc();
   $scope.submit = function(){
      usSpinnerService.spin('spinner-1'); 
     $http({
@@ -644,6 +678,7 @@ app.controller('ngProduct', function ($scope,$http,$routeParams,usSpinnerService
     };
     $scope.productList();
 
+    $scope.getCat
 });
 app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 
@@ -651,44 +686,54 @@ app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 
 });
 app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,usSpinnerService) {
-  // $scope.app = {categoryid:$routeParams.categoryId};
-  // console.log($scope.scbus)
-  $scope.app = {image:{file1:'/assets/img/img-photo-upload.png',
+  $scope.categoryids =$routeParams.categoryId;
+  $scope.businessId =$routeParams.businessId;
+  $scope.currencys = [{id:'1',name:'USD'},{id:'2',name:'Riels'}];
+  $scope.app = {file0:'/assets/img/img-photo-upload.png',
+                file1:'/assets/img/img-photo-upload.png',
                 file2:'/assets/img/img-photo-upload.png',
-                file3:'/assets/img/img-photo-upload.png',
-                file4:'/assets/img/img-photo-upload.png'}}
+                file3:'/assets/img/img-photo-upload.png'}
   $scope.productId = $routeParams.productId;
   $scope.loadProductbyId = function(){
-    if($scope.productId != '') {
-      $http({
+    $http({
           method: 'POST',
-          url:  '/product/list',
+          url:  '/product/list-product',
           data: {productId:$scope.productId},
           dataType: "json"
       }).success(function(response) {
-        console.log(response);
-        $scope.app = {businessName:response.businessName,
-          price:response.price,dateStarts:response.publishDate.dateStart,
-          dateEnds:response.publishDate.dateEnds,condition:response
-        }
-        // if(response.code ==1){
-        //   $scope.results  = JSON.stringify(response.message);
-        //   if(response.data.length){
-        //     $scope.Product = response.data;
-        //     usSpinnerService.stop('spinner-1');
-        //   }else{
-        //     $scope.items = response.data;
-        //   }
-        // }else{
+        if(response.code ==1){
+          response = response.data;
+          console.log(response);
+          $scope.response = response;
+          $scope.apps = {name:response.businessName,
+            price:response.price,dateStart:response.publishDate.dateStart,
+            dateEnd:response.publishDate.dateEnd,condition:response.condition,description:response.description,productId:response.productId,
+            productCategoryId:response.productCategoryId,listBusinessTag:response.businessTag[0].id,currency:response.currency,
+          }
+          console.log($scope.apps);
+          var appResult = JSON.stringify($scope.apps).slice(1,-1);
+          var imageGallery = response.imageGallery;
+          var imgLen = imageGallery.length;
+          for (var i = 0; i < 4; i++) {
+            if(i < imgLen){
+              url = imageGallery[i];
+            }else{
+              url = "/assets/img/img-photo-upload.png";
+            }
+            appResult += ',"file'+i+'":"'+url+'"';
+          };
+          appResult = '{'+appResult+'}';
+          $scope.app = JSON.parse(appResult);
+          usSpinnerService.stop('spinner-1');
+        }else{
 
-        // }
+        }
           
       }).error(function(response) {
           console.log(response);
       });
-    }
   }
-
+  
   $scope.webBrowsersGrouped = [{
         name: '<strong>Modern Web Browsers</strong>',
         msGroup: true
@@ -701,7 +746,6 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
     }];
   $scope.inputFile=[];
   $scope.ngTrigger = function(fname){
-    // console.log(fname);
     $( "#"+ fname).trigger( "click" );
   }
 
@@ -731,7 +775,7 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
           url:  '/product/product-condition',
           dataType: "json"
       }).success(function(response) {
-        console.log(response);
+        // console.log(response);
           if(response.code ==1){
             $scope.conditions = response.data;
             if(callback){
@@ -752,25 +796,13 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
           url:  '/business/list-business-tag',
           dataType: "json"
       }).success(function(response) {
-          
           if(response.code ==1){
             usSpinnerService.stop('spinner-1');
-            $scope.businessTag = response.data;
-            $scope.webBrowsersGrouped = [];
-            $.each($scope.businessTag,function(keys,tags){
-              $scope.webBrowsersGrouped.push({name:'<strong>'+tags.name+'</strong>',msGroup: true});
-              $.each(tags.tag,function(key,tag){
-                $scope.webBrowsersGrouped.push({ 
-                  icon: '<img  src="'+$sce.trustAsResourceUrl(tag.icon)+'" />',      
-                  name: tag.name, 
-                  id: tag.id, 
-                  ticked: false    
-              });
-              });
-              $scope.webBrowsersGrouped.push({msGroup: false});
-            });
+            $scope.listBusinessTag = response.data;
+            console.log($scope.listBusinessTag);
             $scope.results = response.message.description;
             usSpinnerService.stop('spinner-1');
+            document.getElementById("mySelect").selectedIndex = "4";
           }else{
             $scope.err = response.message.description;
           }
@@ -781,67 +813,82 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
   
   $scope.submit = function(){
       
-    var businessTag = this.webBrowsersGrouped;
-    var listBusinessTag = '';
-    $.each(businessTag,function(ke, tag){
-       // console.log(tag);
-      if(listBusinessTag !=''){
-        if(tag.ticked){
-          listBusinessTag +=','+tag.id;
-        }
-      }else{
-        if(tag.ticked){
-          listBusinessTag +=''+tag.id;
-        }
-      }
-    });
+    var listBusinessTag = $scope.app.listBusinessTag;
+    console.log($scope.response.imageGallery);
     if(listBusinessTag!=''){
       usSpinnerService.spin('spinner-1');
-      Upload.upload({
-          method: 'POST',
-          url: '/product/product',
-          data: {name:$scope.app.name,productCategoryId:$scope.app.productCategoryId,currency:$scope.app.currency,
-            dateStarts:$scope.app.dateStarts,dateEnds:$scope.app.dateEnds,condition:$scope.app.condition,price:$scope.app.price,image1:$scope.app.image.file1,
-            image2:$scope.app.image.file2,image3:$scope.app.image.file3,image4:$scope.app.image.file4,
-          description:$scope.app.description,listBusinessTag:listBusinessTag,categoryId:$routeParams.categoryId,businessId:$routeParams.businessId},
-          dataType: "json",
-          contentType: false,
-          cache: false,
-          processData: false,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      }).success(function (response) {
-          console.log(this);
-          usSpinnerService.stop('spinner-1');
-          // $scope.results = response;
-          $scope.results = JSON.stringify(response);
-          console.log(response);
-          if(response.code == 1){
+      if($scope.productId !=''){
+          Upload.upload({
+              method: 'POST',
+              url: '/product/update-product',
+              data: {name:$scope.app.name,productCategoryId:$scope.app.productCategoryId,currency:$scope.app.currency,
+                dateStart:$scope.app.dateStart,dateEnd:$scope.app.dateEnd,condition:$scope.app.condition,price:$scope.app.price,image1:$scope.app.file0,
+                image2:$scope.app.file1,image3:$scope.app.file2,image4:$scope.app.file3,productId:$scope.productId,
+              description:$scope.app.description,listBusinessTag:listBusinessTag,categoryId:$routeParams.categoryId,businessId:$routeParams.businessId},
+              dataType: "json",
+              contentType: false,
+              cache: false,
+              processData: false,
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          }).success(function (response) {
+              console.log(this);
+              usSpinnerService.stop('spinner-1');
               $scope.results = JSON.stringify(response);
-              // $scope.app = '';
-              // $scope.app = {image:{file1:'/assets/img/img-photo-upload.png',
-              //   file2:'/assets/img/img-photo-upload.png',
-              //   file3:'/assets/img/img-photo-upload.png',
-              //   file4:'/assets/img/img-photo-upload.png'}}
-              
-          }else{
-            // $scope.results = response.message.description;
-          }
-      });
+              console.log(response);
+              // if(response.code == 1){
+              //     $scope.results = response.message.description;
+                  
+              // }else{
+              //   $scope.results = response.message.description;
+              // }
+          });
+      }else{
+        Upload.upload({
+            method: 'POST',
+            url: '/product/product',
+            data: {name:$scope.app.name,productCategoryId:$scope.app.productCategoryId,currency:$scope.app.currency,
+              dateStarts:$scope.app.dateStarts,dateEnds:$scope.app.dateEnds,condition:$scope.app.condition,price:$scope.app.price,image1:$scope.app.file0,
+              image2:$scope.app.file1,image3:$scope.app.file2,image4:$scope.app.file3,
+            description:$scope.app.description,listBusinessTag:listBusinessTag,categoryId:$routeParams.categoryId,businessId:$routeParams.businessId},
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (response) {
+            console.log(this);
+            usSpinnerService.stop('spinner-1');
+            $scope.results = JSON.stringify(response);
+            console.log(response);
+            if(response.code == 1){
+                $scope.results = response.message.description;
+                $scope.app = '';
+                $scope.app = {file0:'/assets/img/img-photo-upload.png',
+                  file1:'/assets/img/img-photo-upload.png',
+                  file2:'/assets/img/img-photo-upload.png',
+                  file3:'/assets/img/img-photo-upload.png'}
+                
+            }else{
+              $scope.results = response.message.description;
+            }
+        });
+      }
+      
+      
     }else{
       $scope.results = 'please select business Tag to add product';
     }
-    
-    
   };
-
   
-    
   $scope.categorysList(function(){
-    usSpinnerService.spin('spinner-1');
-    $scope.conditionList(function(){
-      $scope.businessTags();
+      usSpinnerService.spin('spinner-1');
+      $scope.conditionList(function(){
+        $scope.businessTags();
+        if($scope.productId != '') {
+          $scope.loadProductbyId();
+        }
+      });
     });
-  });
   
   $scope.monthSelectorOptions = {
     start: "year",
@@ -900,6 +947,15 @@ app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,tit
   $scope.businessId= businessId;
   $scope.scopes = scopes;
   $scope.ok = function () {
+    // validation function
+    var fdata= false;
+    if($scope.scopes.search){
+      $.each($scope.scopes.search,function(key, value){
+        if(value !=''){
+          fdata= true;
+        }
+      });
+    }
     $http({
         method: 'POST',
         url:  '/business/delete-business-by-id',
@@ -907,7 +963,7 @@ app.controller('ModalInstanceDelete', function ($scope,$http, $modalInstance,tit
         dataType: "json"
     }).success(function(response) {
         $modalInstance.close();
-        if($scope.scopes.search){
+        if(fdata === true){
           $scope.scopes.submit();
         }else{
           $scope.scopes.listAllBusiness();

@@ -25,21 +25,21 @@
 
 
         <tr data-ng-repeat="item in get_category_by_business_id">
-            <td >@{{$index + 1}}</td>
-            <td >@{{ item.name }}</td>
-            <td >
+            <td width="20%">@{{$index + 1}}</td>
+            <td width="60%">@{{ item.name }}</td>
+            <td width="20%">
                 <div class="row">
-                    <div class="col-xs-1">
+                    <div class="col-xs-4">
                         <A ng-href="#/products/list/@{{item.id}}/business/@{{businessId}}">
                             <button type="button" name="btnMore" class="btn btn-success btn-xs">Product</button>
                         </A>
                     </div>
-                    <div class="col-xs-1">
+                    <div class="col-xs-3">
                         <A ng-href="#/category/edit/@{{item.id}}/business/@{{businessId}}">
                            <button type="button" name="btnMore" class="btn btn-warning btn-xs" ng-click="deleteById('sm')">Edit</button>
                         </A>
                     </div>
-                    <div class="col-xs-1">
+                    <div class="col-xs-5">
                         <button type="button" name="btnMore" class="btn btn-danger btn-xs" ng-click="deleteCategoryById('sm')">Delete</button>
                     </div>
                 </div>
