@@ -129,10 +129,10 @@
 	</div>
 	<div class="form-group col-xs-12 pd-lef-0">
 		<!-- <pre>@{{results}}</pre> -->
-		<div class="alert alert-success">
+		<!-- <div class="alert alert-success">
 		  <strong>@{{results}}</strong> 
 		  
-		</div>
+		</div> -->
 		
 	</div>
 </form>
