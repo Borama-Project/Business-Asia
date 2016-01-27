@@ -367,7 +367,7 @@ class BusinessController extends Controller
         $businessTagList     = array(Input::get('businessTagList'));
         $businessTypeList     = (Input::get('businessTypeList'));
         $businessTypeListArray = '[{"id":"'.$businessTypeList['id'].'","name":"'.$businessTypeList['name'].'"}]';
-        
+
         //  business tag list foreach string
         $strTag = '';
         foreach($businessTagList as $key){

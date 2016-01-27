@@ -34,15 +34,15 @@
                             <button type="button" name="btnMore" class="btn btn-success btn-xs">Product</button>
                         </A>
                     </div>
+                        <div class="col-xs-3">
+                            <A ng-href="#/category/edit/@{{item.id}}/business/@{{businessId}}">
+                               <button type="button" name="btnMore" class="btn btn-warning btn-xs" ng-click="deleteById('sm')">Edit</button>
+                            </A>
+                        </div>
+                        <div class="col-xs-5">
+                            <button type="button" name="btnMore" class="btn btn-danger btn-xs" ng-click="deleteCategoryById('sm')">Delete</button>
+                        </div>
 
-                    <div class="col-xs-3">
-                        <A ng-href="#/category/edit/@{{item.id}}/business/@{{businessId}}">
-                           <button type="button" name="btnMore" class="btn btn-warning btn-xs" ng-click="deleteById('sm')">Edit</button>
-                        </A>
-                    </div>
-                    <div class="col-xs-5">
-                        <button type="button" name="btnMore" class="btn btn-danger btn-xs" ng-click="deleteCategoryById('sm')">Delete</button>
-                    </div>
                 </div>
             </td>
         </tr>
