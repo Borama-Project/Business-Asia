@@ -365,13 +365,9 @@ class BusinessController extends Controller
         $functionUpdateLogo = 'businessAdmin/update_logo';
 
         $businessTagList     = array(Input::get('businessTagList'));
-        $businessTypeList     = array(Input::get('businessTypeList'));
-
-        $strNullType = '';
-        foreach($businessTypeList as $value){
-            $strNullType .= "[".$value."]";
-        }
-
+        $businessTypeList     = (Input::get('businessTypeList'));
+        $businessTypeListArray = '[{"id":"'.$businessTypeList['id'].'","name":"'.$businessTypeList['name'].'"}]';
+        
         //  business tag list foreach string
         $strTag = '';
         foreach($businessTagList as $key){
@@ -403,8 +399,10 @@ class BusinessController extends Controller
                 'name' => Input::get('businessname'),
                 'description' => Input::get('description'),
                 'listBusinessTag' => $str,
-                'businessTypeList' => $strNullType
+                'bussinessType' => $businessTypeListArray
         );
+
+//        return $dataBusiness;
         if($file == null){
             $dataLogo= array(
 

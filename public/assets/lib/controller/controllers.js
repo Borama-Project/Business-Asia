@@ -580,6 +580,28 @@ console.log(response.data[0].businessType[0].id)
 
     $scope.submits = function(){
 
+        $scope.listBusinessType = function(){
+            $http({
+                method: 'GET',
+                url:  '/business/list-business-type',
+                dataType: "json"
+            }).success(function(response) {
+                //console.log(response);
+                $scope.businessType = response.data;
+            }).error(function(response) {
+
+            });
+        };
+        //console.log($scope.businessType.id);
+        var businessTypeListForEach ='';
+        angular.forEach($scope.businessType, function(value, key) {
+            console.log(value['id']);
+            if(value['id'] == $scope.globalVirable.businessTypesList){
+                 businessTypeListForEach = value;
+                console.log(value);
+            }
+
+        });
         Upload.upload({
             method: 'POST',
             url: '/business/edit-business-fuc',
@@ -595,7 +617,7 @@ console.log(response.data[0].businessType[0].id)
                 description:$scope.globalVirable.description,
                 logo:$scope.globalVirable.logo,
                 //cover:$scope.globalVirable.cover,
-                businessTypesList:$scope.globalVirable.businessTypesList,
+                businessTypeList:businessTypeListForEach,
                 businessTagList:$scope.globalVirable.businessTagList
             },
             dataType: "json",
