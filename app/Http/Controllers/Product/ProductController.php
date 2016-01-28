@@ -281,6 +281,9 @@ class ProductController extends Controller
         return view('product.selectData');
     }
     
+    public function getManage(){
+        return view('product.manage');
+    }
     
 
 }
