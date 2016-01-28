@@ -44,7 +44,14 @@ class BusinessController extends Controller
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest);
         return ($zeSocialBusinessResult);
     }
+    public function getListProductCategory(){
 
+        $function = 'category/get_product_category';
+        $dataRequest = '';
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest);
+        return ($zeSocialBusinessResult);
+    }
     public function postSaveCategory( ){
 
         $function = 'businessAdmin/add_category';

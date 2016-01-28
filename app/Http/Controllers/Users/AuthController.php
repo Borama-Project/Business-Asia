@@ -55,7 +55,7 @@ class AuthController extends Controller
         
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
 
-        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest,'post');
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($method,$dataRequest,'POST');
         $zeSocialBusinessResult = json_decode($zeSocialBusinessResult);
         $zeAccessKey = array(
             'AccessKey'    => $zeSocialBusinessResult->data->accessKey,
@@ -63,7 +63,7 @@ class AuthController extends Controller
         );
         
         Session::put('zeAccessKey',json_encode($zeAccessKey));
-        return json_encode($zeAccessKey);
+        return json_encode($dataRequest);
 
     }
 

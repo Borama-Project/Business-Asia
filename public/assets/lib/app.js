@@ -53,11 +53,7 @@ app.config(function ($routeProvider) {
                 controller: 'ngBusinessType',
                 templateUrl: '/mainCategory'
             })
-        // .when('/products/',
-        //     {
-        //         controller: 'ngProduct',
-        //         templateUrl: '/product'
-        //     }) 
+        
         .when('/products/list/:categoryId/business/:businessId',
             {
                 controller: 'ngProduct',
@@ -84,5 +80,10 @@ app.config(function ($routeProvider) {
             controller: 'ngListAllBusiness',
             templateUrl: '/business/list-all-business'
         })
+        .when('/manage/',
+            {
+                controller: 'ngManage',
+                templateUrl: '/product/manage'
+            }) 
         .otherwise({ redirectTo: '/' });
 });

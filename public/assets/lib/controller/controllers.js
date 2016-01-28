@@ -108,7 +108,7 @@ app.controller('ngApp', ['$scope','$timeout','$http','Facebook',
                 .success(function (data, status, headers, config) {
                     
                     console.log(data);
-                    window.location = "http://asianbusiness.dev/";
+                    window.location = "/";
                 })
                 .error(function (data, status, header, config) {
                     
@@ -738,8 +738,6 @@ app.controller('ngProduct', function ($scope,$http,$routeParams,$modal,usSpinner
 });
 app.controller('ngGetProduct', function ($scope,$http,$routeParams) {
 
-
-
 });
 app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,usSpinnerService) {
   $scope.categoryids =$routeParams.categoryId;
@@ -798,7 +796,7 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
   $scope.categorysList = function(callback){
       $http({
           method: 'GET',
-          url:  '/business/list',
+          url:  '/business/list-product-category',
           dataType: "json"
       }).success(function(response) {
           if(response.code ==1){
@@ -1004,6 +1002,12 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
   $scope.isDate = function(x) {
     return x instanceof Date;
   };
+});
+app.controller('ngManage', function ($scope,$http) {
+    init();
+    function init() {
+        console.log('ngManage');
+    }
 });
 app.controller('ngPromotion', function ($scope,$http) {
     init();
