@@ -930,7 +930,7 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
       $scope.conditionList(function(){
         $scope.businessTags();
         if($scope.productId != '') {
-          $scope.loadProductbyId();
+          // $scope.loadProductbyId();
         }
       });
     });
@@ -1003,11 +1003,34 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
     return x instanceof Date;
   };
 });
-app.controller('ngManage', function ($scope,$http) {
-    init();
-    function init() {
-        console.log('ngManage');
+app.controller('ngManage', function ($scope,$http,usSpinnerService) {
+  $scope.selectCategory = [{id:'1',name:'Most popular'},
+      {id:'2',name:'New this Week'},
+      {id:'3',name:'New this Month'},
+      {id:'4',name:'Brand new'}
+  ];
+    $scope.categorysList = function(){
+      usSpinnerService.spin('spinner-1');
+      $http({
+          method: 'GET',
+          url:  'business/list-product-category',
+          dataType: "json"
+      }).success(function(response) {
+          if(response.code ==1){
+            $scope.categorysLists = response.data;
+            usSpinnerService.stop('spinner-1');
+            console.log($scope.categorysLists);
+          }else{
+            $scope.err = response.message.description;
+          }
+      }).error(function(response) {
+          
+      });
     }
+    $scope.categorysList();
+    
+    // $scope.search = $scope.categorysLists;
+    
 });
 app.controller('ngPromotion', function ($scope,$http) {
     init();

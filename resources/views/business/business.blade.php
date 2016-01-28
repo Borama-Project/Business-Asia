@@ -4,7 +4,7 @@
 <form ng-submit="submits()">
 	<div class="panel panel-info">
 	  <div class="panel-body">
-	    Business Register
+	    <h3>Business Register</h3>
 	  </div>
 	</div>
 	<div class="col-md-12">

@@ -69,7 +69,6 @@
 					<option ng-repeat="tag in businessTags.tag"  value="@{{ tag.id }}"> @{{ tag.name }} </option>
 				</optgroup>
 			</select>
-
 		</div>
 		<div class="col-lg-6">
 			<label class="control-label col-lg-3">Condition</label>

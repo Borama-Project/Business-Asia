@@ -1,7 +1,7 @@
 <div class="col-lg-12"> 
 	<div class="panel panel-info">
 	  <div class="panel-body">
-	   <div>Products</div>
+	   <h3>Products</h3>
       <a ng-href="#/business">Business</a> >
         <a ng-href="#/category/@{{businessId}}">Category</a> 
 	  </div>

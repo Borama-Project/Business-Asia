@@ -1,4 +1,4 @@
-﻿var app = angular.module('ngApp', ['kendo.directives','service','isteven-multi-select','ngRoute','ngAnimate','facebook','ngFileUpload','ui.bootstrap','simplePagination','angularSpinner','ui-notification'])
+﻿var app = angular.module('ngApp', ['kendo.directives','isteven-multi-select','ngRoute','ngAnimate','facebook','ngFileUpload','ui.bootstrap','simplePagination','angularSpinner','ui-notification'])
  .config(['FacebookProvider',
     function(FacebookProvider) {
      var myAppId = '943056782397930';

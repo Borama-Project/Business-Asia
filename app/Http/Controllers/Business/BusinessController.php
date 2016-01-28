@@ -295,7 +295,7 @@ class BusinessController extends Controller
 
     public function getListBusinessTag(){
 
-        $function = 'businessTag/get_all_business_tags';
+        $function = 'businessTag/get_all_business_tags_for_admin';
         $dataRequest = '';
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest);
