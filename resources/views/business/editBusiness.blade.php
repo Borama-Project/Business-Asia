@@ -4,7 +4,7 @@
     <form ng-submit="submits()">
         <div class="panel panel-info">
             <div class="panel-body">
-                Business Register
+                Edit Business
             </div>
         </div>
         <div class="col-md-12">
@@ -17,13 +17,13 @@
                     <input type="file" ngf-select ng-model="globalVirable.logo" name="logo" id="inputFileLogo"   style="display: none">
                 </a>
             </div>
-            {{--<div class="col-md-3">--}}
-                {{--<label>Cover</label>--}}
-                {{--<a href="javascript:void(0)" class="thumbnail">--}}
-                    {{--<img ng-src="@{{ globalVirable.coverEdit }}" width="100" height="100"  id="imgCover">--}}
-                    {{--<input type="file" ngf-select ng-model="globalVirable.cover" name="cover"  id="inputFileCover"   style="display: none">--}}
-                {{--</a>--}}
-            {{--</div>--}}
+            <div class="col-md-3">
+                <label>Cover</label>
+                <a href="javascript:void(0)" class="thumbnail">
+                    <img ng-src="@{{ globalVirable.coverEdit }}" width="100" height="100"  id="imgCover">
+                    <input type="file" ngf-select ng-model="globalVirable.cover" name="cover"  id="inputFileCover"   style="display: none">
+                </a>
+            </div>
         </div>
 
         <div class="col-md-12">

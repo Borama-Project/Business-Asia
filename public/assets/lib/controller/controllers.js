@@ -528,14 +528,14 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
         }).success(function(response) {
             console.log(response.data );
             var logos = response.data[0].logo;
-            var cover = response.data[0].coverImage[0];
+             $scope.cover = response.data[0].coverImage[0];
             if(logos == ''){
                 var logos = '/assets/img/img-photo-upload.png';
             }
-            if(cover == null){
-                var covers = '/assets/img/img-photo-upload.png';
+            if($scope.cover == null){
+                $scope.cover = '/assets/img/img-photo-upload.png';
             }else{
-                var covers = response.data[0].coverImage[0];
+                $scope.cover = response.data[0].coverImage[0];
             }
             var businessTagGlobla = response.data[0].businessTag[0];
             if(businessTagGlobla == null){
@@ -555,10 +555,10 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
                 businessTagList:businessTagGlobla,
                 businessTypesList:response.data[0].businessType[0].id,
                 logoEdit:logos,
-                coverEdit:covers
+                coverEdit:$scope.cover
 
             };
-console.log(response.data[0].businessType[0].id)
+
         }).error(function(response) {
 
         });
@@ -605,6 +605,7 @@ console.log(response.data[0].businessType[0].id)
 
         });
         Upload.upload({
+
             method: 'POST',
             url: '/business/edit-business-fuc',
             data: {
@@ -618,7 +619,8 @@ console.log(response.data[0].businessType[0].id)
                 address:$scope.globalVirable.address,
                 description:$scope.globalVirable.description,
                 logo:$scope.globalVirable.logo,
-                //cover:$scope.globalVirable.cover,
+                cover:$scope.globalVirable.cover,
+                oldCover:$scope.cover,
                 businessTypeList:businessTypeListForEach,
                 businessTagList:$scope.globalVirable.businessTagList
             },
@@ -628,7 +630,6 @@ console.log(response.data[0].businessType[0].id)
             processData: false,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (response) {
-            console.log(response);
             if(response.code == 1){
                 $scope.success = 'sucess';
                 $scope.businessName = response.data.name;
