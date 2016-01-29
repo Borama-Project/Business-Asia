@@ -1166,7 +1166,6 @@ app.controller('ngManage', function ($scope,$http,$modal,usSpinnerService,Pagina
     });
   }
   $scope.searchList();
-
 });
 app.controller('ngPromotion', function ($scope,$http) {
     init();

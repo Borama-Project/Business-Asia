@@ -298,7 +298,7 @@ class ProductController extends Controller
     public function postEditorChoice(){
         
         $function = 'editorChoice/add_editor_choice';
-        $authorId = json_decode(Session::get('zeAdmin'));
+        $authorId = json_decode(Session::get('zeAccessKey'));
         $method   = 'POST';
         $dataRequest = array(
             'accessKey'          => $authorId->AccessKey,
@@ -313,7 +313,7 @@ class ProductController extends Controller
 
     public function postAllEditList(){
         $function = 'editorChoice/get_all_editor';
-        $authorId = json_decode(Session::get('zeAdmin'));
+        $authorId = json_decode(Session::get('zeAccessKey'));
         $method   = 'POST';
         $dataRequest = array(
             'accessKey'          => $authorId->AccessKey,
@@ -324,7 +324,7 @@ class ProductController extends Controller
     }
     public function postDeleteEditChoice(){
         $function = 'editorChoice/delete_editor_choice';
-        $authorId = json_decode(Session::get('zeAdmin'));
+        $authorId = json_decode(Session::get('zeAccessKey'));
         $method   = 'POST';
         $dataRequest = array(
             'accessKey'          => $authorId->AccessKey,
