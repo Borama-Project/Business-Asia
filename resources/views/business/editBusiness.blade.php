@@ -7,7 +7,7 @@
                 Edit Business
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 in-padding">
             <div class="col-md-6"><label for="exampleInputEmail1">Business Name </label>
                 <input type="text" class="form-control"  ng-model="globalVirable.businessname" placeholder="businessName" required="true"></div>
             <div class="col-md-3">
@@ -26,10 +26,10 @@
             </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12 in-padding" >
             <div class="col-md-6">
                 <label>Business Type</label>
-                <select ng-model="globalVirable.businessTypesList" class="form-control" >
+                <select ng-model="globalVirable.businessTypesList" class="form-control"  required="true">
                     <option ng-repeat="businessTypes in businessType" value="@{{businessTypes.id}}">@{{ businessTypes.name}}</option>
                 </select>
             </div>
@@ -92,7 +92,7 @@
                 <A ng-href="/#business">Back to business!</A>
             </div>
 
-            <div ng-if="errorSMS">
+            <div ng-if="errorSMS" id="errorSMS">
                 <div class="alert alert-danger" animate-show>
                     @{{ errorSMS }}
                 </div>
