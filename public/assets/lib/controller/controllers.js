@@ -486,6 +486,8 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
         }).success(function (response) {
             console.log(response);
             $scope.defaultImage = '/assets/img/img-photo-upload.png';
+            $('#bFileUpload').attr('src', $scope.defaultImage);
+            $('#coverFileUpload').attr('src', $scope.defaultImage);
             if(response.code == 1){
                 $scope.globalVirable ='';
                 $scope.success = 'sucess';

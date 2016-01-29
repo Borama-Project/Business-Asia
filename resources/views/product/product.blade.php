@@ -97,7 +97,7 @@
 	  </div>
 	  <div class="col-xs-12 col-md-3">
 	    <a href="javascript:void(0)" class="thumbnail">
-	    	<img ngf-src="app.file1" ng-click="ngTrigger('fileUpload1')" class="thumb" width="171" height="180">
+	    	<img ng-src="app.file1" ng-click="ngTrigger('fileUpload1')" class="thumb" width="171" height="180">
 	    	<input type="file" id="fileUpload1"  ngf-select ng-model="app.file1" name="image"  style="display:none;">
 	    </a>
 	  </div>
