@@ -21,7 +21,6 @@ Route::controllers([
     'business' => 'Business\BusinessController',
     'product' => 'Product\ProductController',
     'Auth' => 'Users\AuthController',
-    'Admin' => 'Users\AdminController',
     'home' => 'Users\UsersController',
 ]);
 

@@ -76,9 +76,7 @@ class AuthController extends Controller
       {
           $html="";
       }else{
-        
-        if (Session::has('zeAdmin')){
-          $html = '<div class="container" >
+        $html = '<div class="container" >
                 <div id="contentCenter" ng-controller="ngApp">
                   <div class="col-lg-12"> 
                     <form>
@@ -93,70 +91,6 @@ class AuthController extends Controller
                   </div>
                 </div>
               </div>';
-        }else{
-          $html = '<div class="container">
-                <div id="contentCenter" ng-controller="ngAuth">
-                  <div class="col-lg-12 pad-top-20 thumbnail"> 
-                    <form ng-submit="submit()">
-                      <div class="form-group col-xs-12">
-                        <img src="../assets/img/logo.png">
-                    </div>
-                      <div class="form-group col-xs-12">
-                        <label class="control-label col-lg-4 pad-top-5">User Name :</label>
-                        <div class="col-lg-8 pd-lef-0">
-                          <input type="text" class="form-control" name="userName" ng-model="app.name" placeholder="User Name" required >
-                        </div>
-                      </div>
-                      <div class="form-group col-xs-12">
-                          <label class="control-label col-lg-4 pad-top-5">Password :</label>
-                          <div class="col-lg-8 pd-lef-0">
-                            <input type="Password" class="form-control" ng-model="app.Password" name="password" placeholder="Password" required >
-
-                          </div>
-                      </div>
-                      {{results}}
-                      <div class="form-group col-xs-12">
-                          <div class="col-lg-12 aling-r">
-                            <button type="submit" class="btn btn-default">Login</button>
-                          </div>
-                      </div>
-                      
-                    </form>
-                  </div>
-                </div>
-              </div>';
-        }
-        // $html = '<div class="container">
-        //         <div id="contentCenter" ng-controller="ngAuth">
-        //           <div class="col-lg-12 pad-top-20 thumbnail"> 
-        //             <form ng-submit="submit()">
-        //               <div class="form-group col-xs-12">
-        //                 <img src="../assets/img/logo.png">
-        //             </div>
-        //               <div class="form-group col-xs-12">
-        //                 <label class="control-label col-lg-4 pad-top-5">User Name :</label>
-        //                 <div class="col-lg-8 pd-lef-0">
-        //                   <input type="text" class="form-control" name="userName" ng-model="app.name" placeholder="User Name" required >
-        //                 </div>
-        //               </div>
-        //               <div class="form-group col-xs-12">
-        //                   <label class="control-label col-lg-4 pad-top-5">Password :</label>
-        //                   <div class="col-lg-8 pd-lef-0">
-        //                     <input type="Password" class="form-control" ng-model="app.Password" name="password" placeholder="Password" required >
-
-        //                   </div>
-        //               </div>
-        //               {{results}}
-        //               <div class="form-group col-xs-12">
-        //                   <div class="col-lg-12 aling-r">
-        //                     <button type="submit" class="btn btn-default">Login</button>
-        //                   </div>
-        //               </div>
-                      
-        //             </form>
-        //           </div>
-        //         </div>
-        //       </div>';
       }
       
         return $html;

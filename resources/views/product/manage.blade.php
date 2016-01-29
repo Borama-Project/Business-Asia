@@ -9,12 +9,6 @@
 	<div class="col-lg-12 pd-lef-10  pd-right-0 list-group-item">
     <form ng-submit="submit()">
         <div class="form-group col-lg-3 pd-lef-0">
-            <select ng-model="app.selectType" class="form-control" id="tagList"  name="select">
-                <option value=""> Select Type</option>
-                <option ng-repeat="item in categorysLists" value="@{{ item.id }}"> @{{ item.name }} </option>
-            </select>
-        </div>
-        <div class="form-group col-lg-3 pd-lef-0">
             <select ng-model="app.selectCategory" class="form-control" id="tagList"  name="select">
                 <option value="">Select Category </option>
                 <option ng-repeat="item in selectCategory" value="@{{ item.id }}"> @{{ item.name }} </option>

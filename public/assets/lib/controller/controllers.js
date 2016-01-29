@@ -1310,6 +1310,7 @@ app.controller('ModalInstancelstProduct', function ($scope,$http, $modalInstance
 
     $scope.ok = function () {
       console.log($scope.scopes);
+      $scope.scopes.ngAdd();
         // $http({
         //     method: 'POST',
         //     url:  '/business/delete-category',
