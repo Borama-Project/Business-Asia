@@ -1136,6 +1136,34 @@ app.controller('ngManage', function ($scope,$http,$modal,usSpinnerService,Pagina
         console.log(response);
     });
   }
+  $scope.ngAdd = function(){
+    $http({
+        method: 'POST',
+        url:  '/product/editor-choice',
+        data: this.item,
+        dataType: "json"
+    }).success(function(response) {
+      console.log(response);
+      
+    }).error(function(response) {
+        console.log(response);
+    });
+  }
+  $scope.searchList = function(){
+    $http({
+        method: 'POST',
+        url:  '/product/all-edit-list',
+        data: this.item,
+        dataType: "json"
+    }).success(function(response) {
+      console.log(response);
+      
+    }).error(function(response) {
+        console.log(response);
+    });
+  }
+  $scope.searchList();
+
 });
 app.controller('ngPromotion', function ($scope,$http) {
     init();

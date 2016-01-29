@@ -67,13 +67,10 @@ class AuthController extends Controller
 
     }
 
-    
     public function getInfo(){
       return view('form');
 
     }
-    
-
     public function getAdminProfile(){
       if (Session::has('zeAccessKey'))
       {
