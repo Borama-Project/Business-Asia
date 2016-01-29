@@ -630,6 +630,7 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
             processData: false,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (response) {
+            console.log(response)
             if(response.code == 1){
                 $scope.success = 'sucess';
                 $scope.businessName = response.data.name;
