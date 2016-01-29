@@ -62,6 +62,13 @@ body{
 .relative{
     position: relative;
 }
+.search-list {
+    min-height: 410px;
+    height: auto;
+}
+.md-9 {
+    width: 97%;
+}
 /*----------------------padding-margin----------------------------------------*/
 .ngNonPadd{
 	margin-bottom: 0px;

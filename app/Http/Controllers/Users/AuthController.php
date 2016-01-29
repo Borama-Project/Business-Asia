@@ -63,7 +63,7 @@ class AuthController extends Controller
         );
         
         Session::put('zeAccessKey',json_encode($zeAccessKey));
-        return json_encode($dataRequest);
+        return json_encode($zeSocialBusinessResult);
 
     }
 
@@ -80,7 +80,7 @@ class AuthController extends Controller
           $html="";
       }else{
         
-        if (Session::has('zelog')){
+        if (Session::has('zeAdmin')){
           $html = '<div class="container" >
                 <div id="contentCenter" ng-controller="ngApp">
                   <div class="col-lg-12"> 
@@ -102,30 +102,22 @@ class AuthController extends Controller
                   <div class="col-lg-12 pad-top-20 thumbnail"> 
                     <form ng-submit="submit()">
                       <div class="form-group col-xs-12">
+                        <img src="../assets/img/logo.png">
+                    </div>
+                      <div class="form-group col-xs-12">
                         <label class="control-label col-lg-4 pad-top-5">User Name :</label>
                         <div class="col-lg-8 pd-lef-0">
-                          <input type="text" class="form-control" ng-model="app.name" placeholder="User Name" required >
+                          <input type="text" class="form-control" name="userName" ng-model="app.name" placeholder="User Name" required >
                         </div>
                       </div>
                       <div class="form-group col-xs-12">
                           <label class="control-label col-lg-4 pad-top-5">Password :</label>
                           <div class="col-lg-8 pd-lef-0">
-                            <input type="Password" class="form-control" ng-model="app.Password" placeholder="xxxxxx" required >
+                            <input type="Password" class="form-control" ng-model="app.Password" name="password" placeholder="Password" required >
 
                           </div>
                       </div>
-                      <?php
-
-                        $value = Session::get("zeAccessKey");
-                              
-
-                        if (Session::has("zeAccessKey"))
-                        { 
-                          $value = json_decode($value) ;
-                          
-                          var_dump ($value);
-                        }
-                        ?>
+                      {{results}}
                       <div class="form-group col-xs-12">
                           <div class="col-lg-12 aling-r">
                             <button type="submit" class="btn btn-default">Login</button>
@@ -137,6 +129,37 @@ class AuthController extends Controller
                 </div>
               </div>';
         }
+        // $html = '<div class="container">
+        //         <div id="contentCenter" ng-controller="ngAuth">
+        //           <div class="col-lg-12 pad-top-20 thumbnail"> 
+        //             <form ng-submit="submit()">
+        //               <div class="form-group col-xs-12">
+        //                 <img src="../assets/img/logo.png">
+        //             </div>
+        //               <div class="form-group col-xs-12">
+        //                 <label class="control-label col-lg-4 pad-top-5">User Name :</label>
+        //                 <div class="col-lg-8 pd-lef-0">
+        //                   <input type="text" class="form-control" name="userName" ng-model="app.name" placeholder="User Name" required >
+        //                 </div>
+        //               </div>
+        //               <div class="form-group col-xs-12">
+        //                   <label class="control-label col-lg-4 pad-top-5">Password :</label>
+        //                   <div class="col-lg-8 pd-lef-0">
+        //                     <input type="Password" class="form-control" ng-model="app.Password" name="password" placeholder="Password" required >
+
+        //                   </div>
+        //               </div>
+        //               {{results}}
+        //               <div class="form-group col-xs-12">
+        //                   <div class="col-lg-12 aling-r">
+        //                     <button type="submit" class="btn btn-default">Login</button>
+        //                   </div>
+        //               </div>
+                      
+        //             </form>
+        //           </div>
+        //         </div>
+        //       </div>';
       }
       
         return $html;
@@ -144,14 +167,28 @@ class AuthController extends Controller
     }
 
     public function postLogin(){
-      $dataRequest = Input::All();
-      if(Input::get('name') == 'ZeAdmin' && Input::get('Password')== 'ze8899!@'){
-        Session::put('zelog',json_encode($dataRequest));
-        return('{"code": 1,"data": [{}],"message": {"code": 1,"description": "Success"}}');
-      }else{
-        return('{"code": 0,"data": [{}],"message": {"code": 1,"description": "User and Password is incorrect..!"}}');
-      }
-
+      // $dataRequest = Input::All();
+      // if(Input::get('name') == 'ZeAdmin' && Input::get('Password')== 'ze8899!@'){
+      //   Session::put('zelog',json_encode($dataRequest));
+      //   return('{"code": 1,"data": [{}],"message": {"code": 1,"description": "Success"}}');
+      // }else{
+      //   return('{"code": 0,"data": [{}],"message": {"code": 1,"description": "User and Password is incorrect..!"}}');
+      // }
+      $function = 'adminUser/admin_log';
+        $method   = 'POST';
+        $dataRequest = array(
+            'userName'          => Input::get('name'),
+            'password'          => Input::get('Password'),
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        $zeSocialBusinessResult = json_decode($zeSocialBusinessResult);
+        $zeAccessKey = array(
+            'AccessKey'    => $zeSocialBusinessResult->data->accessKey,
+            'ownerId'  => $zeSocialBusinessResult->data->userId,
+        );
+        // return ($zeSocialBusinessResult);
+        return json_encode($zeAccessKey);
     }
     public function getLogOut(){
 

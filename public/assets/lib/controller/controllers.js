@@ -106,9 +106,11 @@ app.controller('ngApp', ['$scope','$timeout','$http','Facebook',
 
                 $http.post('/Auth', data, config)
                 .success(function (data, status, headers, config) {
+                    if(data.code===1){
+                      window.location = "/";
+                    }
+                    // console.log(data);
                     
-                    console.log(data);
-                    window.location = "/";
                 })
                 .error(function (data, status, header, config) {
                     
@@ -312,8 +314,12 @@ app.controller('ngBusiness', function ($scope,$http,$modal,Upload,$log,usSpinner
               console.log(response);
               usSpinnerService.stop('spinner-1');
               $scope.get_all_business = response.data;
+              $scope.length = response.data.length;
+              if(response.data.length <= 0){
+                $scope.length =0;
+              }
               $scope.pagination = Pagination.getNew(10);
-              $scope.pagination.numPages = Math.ceil(response.data.length/$scope.pagination.perPage);
+              $scope.pagination.numPages = Math.ceil($scope.length/$scope.pagination.perPage);
 
             }else{
               $scope.err = response.message.description;
@@ -766,7 +772,6 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
             dateEnd:response.publishDate.dateEnd,condition:response.condition,description:response.description,productId:response.productId,
             productCategoryId:response.productCategoryId,listBusinessTag:response.businessTag[0].id,currency:response.currency
           }
-          console.log($scope.apps);
           var appResult = JSON.stringify($scope.apps).slice(1,-1);
           var imageGallery = response.imageGallery;
           var imgLen = imageGallery.length;
@@ -932,7 +937,7 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
       $scope.conditionList(function(){
         $scope.businessTags();
         if($scope.productId != '') {
-          // $scope.loadProductbyId();
+          $scope.loadProductbyId();
         }
       });
     });
@@ -1005,34 +1010,132 @@ app.controller('ngAddProduct', function ($scope,$http,$routeParams,$sce,Upload,u
     return x instanceof Date;
   };
 });
-app.controller('ngManage', function ($scope,$http,usSpinnerService) {
+app.controller('ngManage', function ($scope,$http,$modal,usSpinnerService,Pagination) {
   $scope.selectCategory = [{id:'1',name:'Most popular'},
       {id:'2',name:'New this Week'},
       {id:'3',name:'New this Month'},
       {id:'4',name:'Brand new'}
   ];
-    $scope.categorysList = function(){
-      usSpinnerService.spin('spinner-1');
+
+  $scope.categorysList = function(callback){
+    $http({
+        method: 'GET',
+        url:  'business/list-product-category',
+        dataType: "json"
+    }).success(function(response) {
+        if(response.code ==1){
+          $scope.categorysLists = response.data;
+          if(callback){
+              callback();
+            }
+        }else{
+          $scope.err = response.message.description;
+        }
+    }).error(function(response) {
+        
+    });
+  }
+
+  $scope.conditionList = function(callback){
       $http({
           method: 'GET',
-          url:  'business/list-product-category',
+          url:  '/product/product-condition',
           dataType: "json"
       }).success(function(response) {
           if(response.code ==1){
-            $scope.categorysLists = response.data;
-            usSpinnerService.stop('spinner-1');
-            console.log($scope.categorysLists);
+            $scope.conditions = response.data;
+            console.log($scope.conditions);
+            if(callback){
+              callback();
+            }
+          }else{
+            $scope.err = response.message.description;
+          }
+      }).error(function(response) {
+          console.log(response);
+          usSpinnerService.stop('spinner-1');
+      });
+  };
+
+  $scope.businessTags = function(){
+    $http({
+          method: 'GET',
+          url:  '/business/list-business-tag',
+          dataType: "json"
+      }).success(function(response) {
+          if(response.code ==1){
+            $scope.listBusinessTag = response.data;
+            console.log($scope.listBusinessTag);
           }else{
             $scope.err = response.message.description;
           }
       }).error(function(response) {
           
       });
-    }
-    $scope.categorysList();
+  }
+  
+   $scope.categorysList(function(){
+    $scope.conditionList(function(){
+      $scope.businessTags();
+    });
+  });
     
-    // $scope.search = $scope.categorysLists;
-    
+  $scope.submit = function(){
+    $http({
+        method: 'POST',
+        url:  '/product/most-popular',
+        data:$scope.app,
+        dataType: "json"
+    }).success(function(response) {
+      console.log(response);
+      $scope.Products = response.data;
+      $scope.length = response.data.length;
+      if(response.data.length <= 0){
+        $scope.length =0;
+      }
+      $scope.pagination = Pagination.getNew(6);
+      $scope.pagination.numPages = Math.ceil($scope.length/$scope.pagination.perPage);
+      // $scope.results = JSON.stringify(response);
+    }).error(function(response) {
+        console.log(response);
+    });
+  }
+  $scope.ngView = function(){
+    $scope.productId = this.item.productId;
+    usSpinnerService.spin('spinner-1'); 
+    $http({
+        method: 'POST',
+        url:  '/product/list-product',
+        data: {productId:$scope.productId},
+        dataType: "json"
+    }).success(function(response) {
+      if(response.code ==1){
+        usSpinnerService.stop('spinner-1');
+        $scope.response = response.data;
+        // $scope.name= response.businessName;
+        // $scope.app = {name:response.businessName}
+        
+        var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'ModalProductList',
+        controller: 'ModalInstancelstProduct',
+        size: '',
+        resolve: {
+          title :function(){
+            return 'Add Product list';
+          }
+          ,scopes:function(){
+            return $scope;
+          },ngScrope:function(){
+            return $scope.response;
+          }
+        }
+      });
+      }
+    }).error(function(response) {
+        console.log(response);
+    });
+  }
 });
 app.controller('ngPromotion', function ($scope,$http) {
     init();
@@ -1057,16 +1160,16 @@ app.controller('ngAuth', function ($scope,$http) {
     $scope.submit = function(){
       $http({
           method: 'POST',
-          url:  '/Auth/login',
+          url:  '/Admin/login',
           data:$scope.app,
           dataType: "json"
       }).success(function(response) {
         console.log(response);
         if(response.code ===1){
 
-          window.location = "http://asianbusiness.dev/Auth";
+          window.location = "/Auth";
         }else{
-          $scope.err = response.message.description;
+          // $scope.err = response.message.description;
         }
       }).error(function(response) {
           console.log(response);
@@ -1156,6 +1259,45 @@ app.controller('ModalInstanceDeleteCategory', function ($scope,$http, $modalInst
         }).error(function(response) {
             console.log(response);
         });
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+    $scope.close = function(e){
+        $modalInstance.dismiss('cancel');
+    }
+});
+
+
+app.controller('ModalInstancelstProduct', function ($scope,$http, $modalInstance,title,ngScrope,scopes) {
+    $scope.title= title;
+    $scope.scopes = scopes;
+    $scope.ngScrope = ngScrope;
+    $scope.listBusinessTag = $scope.scopes.listBusinessTag;
+    $scope.conditions = $scope.scopes.conditions;
+    $scope.categorysLists = $scope.scopes.categorysLists;
+    $scope.currencys = [{id:'1',name:'USD'},{id:'2',name:'Riels'}];
+    $scope.app = $scope.ngScrope;
+
+    $scope.ok = function () {
+      console.log($scope.scopes);
+        // $http({
+        //     method: 'POST',
+        //     url:  '/business/delete-category',
+        //     data: {
+        //         businessId:$scope.businessId,
+        //         categoryId:$scope.categoryId
+        //     },
+        //     dataType: "json"
+        // }).success(function(response) {
+        //     $modalInstance.close();
+        //     $scope.scopes.get_category_by_business_id_fun();
+
+        //     console.log(response)
+        // }).error(function(response) {
+        //     console.log(response);
+        // });
     };
 
     $scope.cancel = function () {
