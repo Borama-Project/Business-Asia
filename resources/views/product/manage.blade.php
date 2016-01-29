@@ -79,6 +79,7 @@
     </div>
     
     
+    </div>
 </div>
 <script type="text/ng-template" id="ModalProductList">
     <div class="modal-header">

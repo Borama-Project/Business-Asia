@@ -13,14 +13,14 @@
 		<div class="col-md-3">
 				<label>Logo</label>
 				<a href="javascript:void(0)" class="thumbnail">
-					<img ng-src="/assets/img/img-photo-upload.png" width="100" height="100"  id="bFileUpload">
+					<img ng-src="@{{ defaultImage }}" width="100" height="100"  id="bFileUpload">
 					<input type="file" ngf-select ng-model="globalVirable.logo" name="logo" id="imgFileUpload"   style="display: none">
 				</a>
 		</div>
 		<div class="col-md-3">
 				<label>Cover</label>
 				<a href="javascript:void(0)" class="thumbnail">
-					<img ng-src="/assets/img/img-photo-upload.png" width="100" height="100"  id="coverFileUpload">
+					<img ng-src="@{{ defaultImage }}" width="100" height="100"  id="coverFileUpload">
 					<input type="file" ngf-select ng-model="globalVirable.cover" name="cover"  id="imgCoverFileUpload"  style="display: none">
 				</a>
 		</div>
@@ -59,11 +59,11 @@
 	</div>
 	<div class="form-group col-xs-6">
 		<label for="exampleInputEmail1">Latitute</label>
-		<input type="number" class="form-control" id="" ng-model="globalVirable.latitute" placeholder="" required="true">
+		<input type="number" class="form-control" id="" ng-model="globalVirable.latitute" placeholder="" required="true" max="90" min="-90" >
 	</div>
 	<div class="form-group col-xs-6">
 		<label for="exampleInputEmail1">Longitute</label>
-		<input type="number" class="form-control" id="" ng-model="globalVirable.longitute" placeholder="" required="true">
+		<input type="number" class="form-control" id="" ng-model="globalVirable.longitute" placeholder="" required="true"  max="180" min="-180">
 	</div>
 	<div class="col-md-6">
 		<label for="exampleInputEmail1">Location Name </label>
@@ -121,6 +121,7 @@
 			$('#bFileUpload').attr('src', e.target.result);
 		}
 		reader.readAsDataURL(input.files[0]);
+
 	});
 
 	$("#imgCoverFileUpload").change(function () {
