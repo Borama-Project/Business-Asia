@@ -358,18 +358,20 @@ class BusinessController extends Controller
     public function postEditBusinessFuc(){
 
         $file           =       Input::file('logo');
-//        $cover          =       Input::file('cover');
+        $cover          =       Input::file('cover');
         if ($file != null) {
             $fileName   =       $file->getClientOriginalName();
             $fileData   =       $file->getPathName();
         }
-//        if($cover != null){
-//            $coverName  = $cover->getClientOriginalName();
-//            $coverData  = $cover->getPathName();
-//        }
+        if($cover != null){
+            $coverName  = $cover->getClientOriginalName();
+            $coverData  = $cover->getPathName();
+        }
         $functionLocation = 'businessAdmin/update_geo_location';
         $functionBusiness = 'businessAdmin/update_business';
         $functionUpdateLogo = 'businessAdmin/update_logo';
+        $functionRemoveCover = 'businessAdmin/remove_cover_image';
+        $functionAddCover = 'businessAdmin/add_cover_image';
 
         $businessTagList     = array(Input::get('businessTagList'));
         $businessTypeList     = (Input::get('businessTypeList'));
@@ -421,11 +423,28 @@ class BusinessController extends Controller
             );
         }
 
+        if($cover != null){
+
+            $dataCover= array(
+                'businessId' => Input::get('businessId'),
+                'image' => new \CurlFile($coverData, 'image/jpg', $coverName),
+            );
+
+            $dataRemoveCover = array(
+                'businessId' => Input::get('businessId'),
+                'url' => Input::get('oldCover'),
+            );
+        }
+
         $ZeSocialBusinessModel = new ZeSocialBusinessModel;
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($functionLocation,$dataLocation,$method);
         $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($functionBusiness,$dataBusiness,$method);
         if($file != null){
             $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($functionUpdateLogo,$dataLogo,$method);
+        }
+        if($cover != null){
+            $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($functionAddCover,$dataCover,$method);
+            $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($functionRemoveCover,$dataRemoveCover,$method);
         }
 
         return ( $zeSocialBusinessResult);

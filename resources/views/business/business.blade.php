@@ -4,7 +4,7 @@
 <form ng-submit="submits()">
 	<div class="panel panel-info">
 	  <div class="panel-body">
-	    <h3>Business Register</h3>
+	    Business Register
 	  </div>
 	</div>
 	<div class="col-md-12">
@@ -51,7 +51,7 @@
 	</div>
 	<div class="form-group col-xs-6">
 	    <label for="exampleInputEmail1">Phone Number</label>
-	    <input type="number" class="form-control"  name="" ng-model="globalVirable.phoneNumber" placeholder="phone" required="true">
+	    <input type="text" class="form-control"  name="" ng-model="globalVirable.phoneNumber" placeholder="phone" required="true">
 	</div>
 	<div class="form-group col-xs-6">
 		<label for="exampleInputEmail1">Email</label>
