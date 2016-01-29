@@ -414,6 +414,8 @@ app.controller('ngViewBusiness', function ($scope,$http,$routeParams,usSpinnerSe
 
 app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
 
+    $scope.defaultImage = '/assets/img/img-photo-upload.png';
+
   $scope.listBusinessTag = function(){
         $http({
             method: 'GET',
@@ -483,6 +485,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (response) {
             console.log(response);
+            $scope.defaultImage = '/assets/img/img-photo-upload.png';
             if(response.code == 1){
                 $scope.globalVirable ='';
                 $scope.success = 'sucess';
