@@ -11,7 +11,13 @@
 			  <A ng-href="#/business" class="list-group-item">Business</A>
 			  <A ng-href="#/manage" class="list-group-item">Manage Fix Product</A>
 			  <A href="/Auth/log-out" class="list-group-item" data-ng-click="logout()">Log Out</A>
+			  <?php
 
+			   $authorId = json_decode(Session::get('zeAccessKey'));
+			   var_dump($authorId);
+			   $authorAdmin = json_decode(Session::get('zeAdmin'));
+			   var_dump($authorAdmin);
+			  ?>
 
 		</div>
 	</div>

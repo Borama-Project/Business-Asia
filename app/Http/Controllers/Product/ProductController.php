@@ -246,8 +246,6 @@ class ProductController extends Controller
         // return json_encode($dataRequest);
     }
     
-    
-
     public function getProductUpload($productId,$businessId,$file){
 
     }
@@ -277,7 +275,6 @@ class ProductController extends Controller
     }
 
     public function getSelect (){
-        // return 'sta';
         return view('product.selectData');
     }
     
@@ -285,5 +282,58 @@ class ProductController extends Controller
         return view('product.manage');
     }
     
+    public function postMostPopular(){
+        
+        $method   = 'POST';
+        $function = 'productAdmin/get_most_popular';
+        $dataRequest = array(
+            'limit'      => Input::get('limit'),
+            'offset'      => Input::get('offset'),
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return( $zeSocialBusinessResult);
+    }
 
+    public function postEditorChoice(){
+        
+        $function = 'editorChoice/add_editor_choice';
+        $authorId = json_decode(Session::get('zeAccessKey'));
+        $method   = 'POST';
+        $dataRequest = array(
+            'accessKey'          => $authorId->AccessKey,
+            'productId'          => Input::get('productId'),
+            'type'         => Input::get('type'),
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
+    }
+
+    public function postAllEditList(){
+        $function = 'editorChoice/get_all_editor';
+        $authorId = json_decode(Session::get('zeAccessKey'));
+        $method   = 'POST';
+        $dataRequest = array(
+            'accessKey'          => $authorId->AccessKey,
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
+    }
+    public function postDeleteEditChoice(){
+        $function = 'editorChoice/delete_editor_choice';
+        $authorId = json_decode(Session::get('zeAccessKey'));
+        $method   = 'POST';
+        $dataRequest = array(
+            'accessKey'          => $authorId->AccessKey,
+            'editorChoiceId'     => Input::get('editorChoiceId'),
+            
+        );
+        $ZeSocialBusinessModel = new ZeSocialBusinessModel;
+        $zeSocialBusinessResult = $ZeSocialBusinessModel->zeSocialRequest($function,$dataRequest,$method);
+        return ($zeSocialBusinessResult);
+    }
+
+    
 }
