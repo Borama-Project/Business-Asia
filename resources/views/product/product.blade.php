@@ -118,9 +118,9 @@
 	
 
 	<div class="form-group col-xs-12">
-		<button type="submit" class="btn btn-default">Save</button>
+		<button type="submit" class="btn btn-primary btn-sm">Save</button>
 		<a ng-href="#/products/list/@{{categoryids}}/business/@{{businessId}}">
-		<button type="submit" class="btn btn-default">Cancel</button>
+		<button type="submit" class="btn btn-default btn-sm">Cancel</button>
 		</a>
 	</div>
 	<div class="form-group col-xs-12 pd-lef-0">
