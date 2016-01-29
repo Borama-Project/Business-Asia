@@ -69,7 +69,11 @@
         </table>
     </div>
     <div class="col-lg-4 pd-lef-10  pd-right-0 list-group-item search-list">
-        <h3>Search List</h3>
+        <h4>Selected List</h4>
+        <div  class="form-group col-lg-12" ng-repeat="selectList in selectLists">
+            <img ng-src="@{{ selectList.product.imageGallery[0] }}" width="70" height="70">
+            <span>@{{selectList.product.name}}</span>
+        </div>
     </div>
     
     

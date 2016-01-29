@@ -40,41 +40,41 @@
 	<div class="form-group col-lg-12 pd-lef-0">
 		<div class="form-group pd-lef-0">
 			<div class="col-xs-6 pd-lef-0">
-				<label class="control-label col-lg-5 pd-lef-0">Start Date</label>
-				<div class="col-lg-6 pd-lef-5">
+				
+				<div class="col-lg-6 pd-lef-0">
+				<label>Start Date</label>
 					<input kendo-date-picker ng-model="app.dateStart"  k-format="'yyyy-MM-dd'" style="width: 100%;" required />
 					
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<label class="control-label pad-top-5 col-md-3">End Date</label>
-				<div class="col-md-6 pd-lef-5">
-					
-					<input kendo-date-picker ng-model="app.dateEnd"  k-format="'yyyy-MM-dd'" style="width: 100%;" required />
-					
-				</div>
+				<div class="col-lg-6 pd-lef-15">
+				<label>End Date</label>
+				<input kendo-date-picker ng-model="app.dateEnd"  k-format="'yyyy-MM-dd'" style="width: 100%;" required />
+				</div>	
 			</div>
 		</div>
 		
 	</div>
-	<div class="col-lg-12 pd-lef-0">
-		<div class="form-group col-xs-6 pd-lef-0">
-			<label class="control-label col-lg-5 pd-lef-0">Business Tag</label>
-			<div class="col-lg-6 pd-lef-5">
-				<select ng-model="app.listBusinessTag" class="form-control" name="select" id="mySelect" required>
-					<optgroup ng-repeat="businessTags in listBusinessTag" label="@{{ businessTags.name }}">
-						<option ng-repeat="tag in businessTags.tag"  value="@{{ tag.id }}"> @{{ tag.name }} </option>
-					</optgroup>
-				</select>
-			</div>
+	<div class="form-group col-lg-12 pd-lef-0">
+		<div class="col-lg-6 pd-lef-0">
+			<label>Business Tag</label>
+			<select ng-model="app.listBusinessTag" class="form-control" name="select" id="mySelect" required>
+				<optgroup ng-repeat="businessTags in listBusinessTag" label="@{{ businessTags.name }}">
+					<option ng-repeat="tag in businessTags.tag"  value="@{{ tag.id }}"> @{{ tag.name }} </option>
+				</optgroup>
+			</select>
 		</div>
-		<div class="col-lg-6">
-			<label class="control-label col-lg-3">Condition</label>
-			<div class="col-lg-6 pd-lef-5">
-				<select ng-model="app.condition" class="form-control" id="conditions"  name="select" required >
-					<option ng-repeat="item in conditions"  value="@{{ item.conditionId }}"> @{{ item.name }} </option>
-				</select>
+		<div class="col-xs-6 pd-lef-15">
+			<div class="col-lg-12">
+				<div class="col-lg-6 pd-lef-0">
+					<label>Condition</label>
+					<select ng-model="app.condition" class="form-control" id="conditions"  name="select" required >
+						<option ng-repeat="item in conditions"  value="@{{ item.conditionId }}"> @{{ item.name }} </option>
+					</select>
+				</div>	
 			</div>
+			
 		</div>
 	</div>
 	<div class="form-group col-xs-12 pd-lef-0">

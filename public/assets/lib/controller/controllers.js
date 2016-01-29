@@ -1172,7 +1172,9 @@ app.controller('ngManage', function ($scope,$http,$modal,usSpinnerService,Pagina
         dataType: "json"
     }).success(function(response) {
       console.log(response);
-      
+      if(response.code ==1){
+        $scope.selectLists = response.data;
+      }
     }).error(function(response) {
         console.log(response);
     });
