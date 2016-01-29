@@ -7,7 +7,7 @@
 	    Business Register
 	  </div>
 	</div>
-	<div class="col-md-12">
+	<div class="col-md-12 in-padding">
 		<div class="col-md-6"><label for="exampleInputEmail1">Business Name </label>
 			<input type="text" class="form-control"  name="" ng-model="globalVirable.businessname" placeholder="businessName" required="true"></div>
 		<div class="col-md-3">
@@ -26,7 +26,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-12">
+	<div class="col-md-12 in-padding">
 		<div class="col-md-6">
 			<label>Business Type</label>
 			<select ng-model="globalVirable.businessTypeList" class="form-control" >
@@ -102,6 +102,7 @@
 </form>
 
 </div>
+
 
 <script>
 	$( "#bFileUpload" ).on( "click", function() {

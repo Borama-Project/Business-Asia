@@ -467,3 +467,9 @@ ng\:form {
     max-height: 22px;
     max-width:22px;
 }
+
+/*register business style*/
+.in-padding{
+
+    padding: 0;
+}

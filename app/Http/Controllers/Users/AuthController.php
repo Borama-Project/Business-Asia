@@ -76,21 +76,21 @@ class AuthController extends Controller
       {
           $html="";
       }else{
-        $html = '<div class="container" >
-                <div id="contentCenter" ng-controller="ngApp">
-                  <div class="col-lg-12"> 
-                    <form>
-                      <div class="form-group col-xs-12">
-                          <img src="../assets/img/logo.png">
-                      </div>
-                      <div class="form-group col-xs-12">
-                          <img src="../assets/img/f.png" data-ng-click="IntentLogin()" id="fbLogin">
-                      </div>
-                      
-                    </form>
+      $html = '<div class="container" >
+            <div id="contentCenter" ng-controller="ngApp">
+              <div class="col-lg-12">
+                <form>
+                  <div class="form-group col-xs-12">
+                      <img src="../assets/img/logo.png">
                   </div>
-                </div>
-              </div>';
+                  <div class="form-group col-xs-12">
+                      <img src="../assets/img/f.png" data-ng-click="IntentLogin()" id="fbLogin">
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>';
       }
       
         return $html;
