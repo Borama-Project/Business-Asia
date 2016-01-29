@@ -1168,7 +1168,6 @@ app.controller('ngManage', function ($scope,$http,$modal,usSpinnerService,Pagina
     });
   }
   $scope.searchList();
-
 });
 app.controller('ngPromotion', function ($scope,$http) {
     init();
@@ -1315,6 +1314,7 @@ app.controller('ModalInstancelstProduct', function ($scope,$http, $modalInstance
 
     $scope.ok = function () {
       console.log($scope.scopes);
+      $scope.scopes.ngAdd();
         // $http({
         //     method: 'POST',
         //     url:  '/business/delete-category',

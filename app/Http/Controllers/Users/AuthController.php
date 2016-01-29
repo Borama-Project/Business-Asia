@@ -76,7 +76,6 @@ class AuthController extends Controller
       {
           $html="";
       }else{
-
       $html = '<div class="container" >
             <div id="contentCenter" ng-controller="ngApp">
               <div class="col-lg-12">
