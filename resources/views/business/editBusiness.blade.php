@@ -60,11 +60,11 @@
         </div>
         <div class="form-group col-xs-6">
             <label for="exampleInputEmail1">Latitute</label>
-            <input type="text" class="form-control" id="" ng-model="globalVirable.latitute" placeholder="" required="true">
+            <input type="text" class="form-control" id="" ng-model="globalVirable.latitute" placeholder="" required="true"  max="90" min="-90">
         </div>
         <div class="form-group col-xs-6">
             <label for="exampleInputEmail1">Longitute</label>
-            <input type="text" class="form-control" id="" ng-model="globalVirable.longitute" placeholder="" required="true">
+            <input type="text" class="form-control" id="" ng-model="globalVirable.longitute" placeholder="" required="true" max="180" min="-180">
         </div>
         <div class="col-md-6">
             <label for="exampleInputEmail1">Location Name </label>
