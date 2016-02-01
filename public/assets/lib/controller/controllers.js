@@ -492,6 +492,7 @@ app.controller('ngRegisterBusiness', function ($scope,$http,Upload){
                 $scope.globalVirable ='';
                 $scope.success = 'sucess';
                 $scope.businessName = response.data.head.name;
+                $('#reErroeSMS').hide();
             }else{
                 $scope.errorSMS = response.message.description;
             }
@@ -554,6 +555,14 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
             }else{
                 businessTagGlobla = response.data[0].businessTag[0].id;
             }
+
+            var businessTypeGlobal = response.data[0].businessType[0];
+
+            if(businessTypeGlobal == null){
+                businessTypeGlobal='';
+            }else{
+                businessTypeGlobal = response.data[0].businessType[0].id
+            }
             $scope.globalVirable = {
                 businessname:response.data[0].name,
                 description:response.data[0].description,
@@ -564,7 +573,7 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
                 locationname:response.data[0].head.name,
                 address:response.data[0].head.address,
                 businessTagList:businessTagGlobla,
-                businessTypesList:response.data[0].businessType[0].id,
+                businessTypesList:businessTypeGlobal,
                 logoEdit:logos,
                 coverEdit:$scope.cover
 
@@ -645,6 +654,7 @@ app.controller('ngEditBusiness', function ($scope,$http,Upload,$routeParams){
             if(response.code == 1){
                 $scope.success = 'sucess';
                 $scope.businessName = response.data.name;
+                $('#errorSMS').hide();
             }else{
                 $scope.errorSMS = response.message.description;
             }

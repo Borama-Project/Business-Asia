@@ -374,6 +374,7 @@ class BusinessController extends Controller
         $functionAddCover = 'businessAdmin/add_cover_image';
 
         $businessTagList     = array(Input::get('businessTagList'));
+        //return $businessTagList;
         $businessTypeList     = (Input::get('businessTypeList'));
         $businessTypeListArray = '[{"id":"'.$businessTypeList['id'].'","name":"'.$businessTypeList['name'].'"}]';
 
@@ -402,14 +403,24 @@ class BusinessController extends Controller
 
         );
 
-
-        $dataBusiness = array(
+        if($businessTagList == [""]){
+            $dataBusiness = array(
+                'businessId' => Input::get('businessId'),
+                'name' => Input::get('businessname'),
+                'description' => Input::get('description'),
+                'bussinessType' => $businessTypeListArray
+            );
+        }else{
+            $dataBusiness = array(
                 'businessId' => Input::get('businessId'),
                 'name' => Input::get('businessname'),
                 'description' => Input::get('description'),
                 'listBusinessTag' => $str,
                 'bussinessType' => $businessTypeListArray
-        );
+            );
+        }
+
+
 
 //        return $dataBusiness;
         if($file == null){

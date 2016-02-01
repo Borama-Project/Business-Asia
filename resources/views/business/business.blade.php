@@ -91,7 +91,7 @@
 			<A ng-href="/#business">Back to business!</A>
 		</div>
 
-		<div ng-if="errorSMS">
+		<div ng-if="errorSMS" id="reErroeSMS">
 			<div class="alert alert-danger" animate-show>
 				@{{ errorSMS }}
 			</div>
